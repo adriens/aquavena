@@ -184,29 +184,25 @@ function formatDate(dateStr: string): string {
               )}
 
               {tarifs.length > 0 && (
-                <details class="rounded-2xl border-2 border-amber-200 bg-white">
-                  <summary class="px-5 py-4 text-lg font-bold text-gray-800 hover:bg-amber-50 rounded-2xl">
-                    <i class="fa-solid fa-tag mr-2 text-amber-600"></i>Voir les tarifs
-                  </summary>
-                  <div class="px-5 pb-5">
-                    <table class="w-full text-base mt-3">
-                      <thead>
-                        <tr class="border-b-2 border-amber-200">
-                          <th class="text-left py-2 text-gray-700 font-bold">Formule</th>
-                          <th class="text-right py-2 text-gray-700 font-bold">TTC (XPF)</th>
+                <div class="rounded-2xl border-2 border-amber-200 bg-white px-5 py-4">
+                  <h4 class="text-lg font-bold text-gray-800 mb-3"><i class="fa-solid fa-tag mr-2 text-amber-600"></i>Tarifs</h4>
+                  <table class="w-full text-base">
+                    <thead>
+                      <tr class="border-b-2 border-amber-200">
+                        <th class="text-left py-2 text-gray-700 font-bold">Formule</th>
+                        <th class="text-right py-2 text-gray-700 font-bold">TTC (XPF)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {tarifs.map((t: any) => (
+                        <tr class="border-b border-amber-100">
+                          <td class="py-2 text-gray-800 leading-relaxed">{t.label}</td>
+                          <td class="py-2 text-right font-bold text-teal-700">{t.price_ttc.toLocaleString('fr-FR')} XPF</td>
                         </tr>
-                      </thead>
-                      <tbody>
-                        {tarifs.map((t: any) => (
-                          <tr class="border-b border-amber-100">
-                            <td class="py-2 text-gray-800 leading-relaxed">{t.label}</td>
-                            <td class="py-2 text-right font-bold text-teal-700">{t.price_ttc.toLocaleString('fr-FR')} XPF</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </details>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               )}
             </div>
           ) : (
