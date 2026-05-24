@@ -26,9 +26,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage   = "https://github.com/adriens/aquavena-sdk"
-Repository = "https://github.com/adriens/aquavena-sdk"
-Issues     = "https://github.com/adriens/aquavena-sdk/issues"
+Homepage   = "https://github.com/adriens/aquavena"
+Repository = "https://github.com/adriens/aquavena"
+Issues     = "https://github.com/adriens/aquavena/issues"
 
 [project.scripts]
 aquavena = "aquavena_sdk.cli:main"

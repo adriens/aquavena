@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   site: 'https://adriens.github.io',
-  base: '/aquavena-sdk',
+  base: '/aquavena',
   output: 'static',
   integrations: [tailwind()],
 });
