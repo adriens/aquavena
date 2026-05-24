@@ -17,26 +17,26 @@ const genLabel: string = (generated_at as string).slice(0, 16).replace('T', ' ')
     .tabs { scrollbar-width: none; -ms-overflow-style: none; }
   </style>
 </head>
-<body class="min-h-screen bg-gray-50 text-gray-900">
+<body class="min-h-screen bg-gray-50 text-gray-900 text-lg">
 
   <!-- Header -->
   <header class="sticky top-0 z-50 bg-teal-700 text-white shadow-md">
-    <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+    <div class="mx-auto flex max-w-4xl items-center justify-between px-5 py-4">
       <div>
-        <p class="text-base font-bold leading-tight">Aquavena</p>
-        <p class="text-xs text-teal-200">Menus de la semaine</p>
+        <p class="text-2xl font-bold leading-tight">Aquavena</p>
+        <p class="text-base text-teal-200">Menus de la semaine</p>
       </div>
-      <p class="font-mono text-xs text-teal-100">{genLabel}</p>
+      <p class="font-mono text-sm text-teal-100 text-right">{genLabel}</p>
     </div>
   </header>
 
   <!-- Regime tabs -->
-  <nav class="tabs sticky top-14 z-40 overflow-x-auto border-b bg-white shadow-sm">
+  <nav class="tabs sticky top-16 z-40 overflow-x-auto border-b-2 bg-white shadow-sm">
     <div class="flex min-w-max">
       {regimes.map((r: any) => (
         <button
           data-slug={r.slug}
-          class="tab-btn border-b-2 border-transparent px-4 py-3 text-sm font-medium whitespace-nowrap text-gray-600 transition-colors hover:border-teal-500 hover:text-teal-700"
+          class="tab-btn border-b-4 border-transparent px-5 py-4 text-base font-semibold whitespace-nowrap text-gray-600 transition-colors hover:border-teal-500 hover:text-teal-700"
         >
           {r.name}
         </button>
@@ -45,19 +45,19 @@ const genLabel: string = (generated_at as string).slice(0, 16).replace('T', ' ')
   </nav>
 
   <!-- Content panels -->
-  <main class="mx-auto max-w-5xl px-3 py-5">
+  <main class="mx-auto max-w-4xl px-4 py-6">
     {regimes.map((r: any) => {
       const days: any[] = r.menu?.days ?? [];
       const boissons: string[] = days[0]?.boissons ?? [];
       return (
         <section data-panel={r.slug} class="regime-panel hidden">
           {r.menu?.description && (
-            <p class="mb-4 text-sm italic text-gray-500">{r.menu.description}</p>
+            <p class="mb-5 text-base italic text-gray-500 leading-relaxed">{r.menu.description}</p>
           )}
 
           {days.length > 0 ? (
             <div>
-              <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <div class="grid gap-5 lg:grid-cols-2">
                 {days.map((day: any) => {
                   const isToday = day.date === today;
                   const isPast  = day.date < today;
@@ -68,22 +68,22 @@ const genLabel: string = (generated_at as string).slice(0, 16).replace('T', ' ')
                     <div
                       data-today={isToday ? 'true' : 'false'}
                       class={[
-                        'overflow-hidden rounded-xl border bg-white',
-                        isToday ? 'border-teal-400 shadow-md ring-2 ring-teal-300' : '',
-                        isPast  ? 'border-gray-100 opacity-50' : 'border-gray-200 shadow-sm',
+                        'overflow-hidden rounded-2xl border-2 bg-white',
+                        isToday ? 'border-teal-400 shadow-lg ring-4 ring-teal-200' : '',
+                        isPast  ? 'border-gray-100 opacity-40' : 'border-gray-200 shadow-sm',
                       ].join(' ')}
                     >
                       <!-- Card header -->
-                      <div class={`flex items-center justify-between px-3 py-2 ${isToday ? 'bg-teal-600 text-white' : 'bg-gray-50 text-gray-500'}`}>
-                        <span class="font-mono text-sm font-semibold">{day.date}</span>
-                        <div class="flex items-center gap-1.5">
+                      <div class={`flex items-center justify-between px-5 py-3 ${isToday ? 'bg-teal-600 text-white' : 'bg-gray-100 text-gray-600'}`}>
+                        <span class="font-mono text-xl font-bold">{day.date}</span>
+                        <div class="flex items-center gap-2">
                           {isToday && (
-                            <span class="rounded-full bg-white px-2 py-0.5 text-xs font-bold text-teal-700">
+                            <span class="rounded-full bg-white px-3 py-1 text-sm font-bold text-teal-700">
                               Aujourd'hui
                             </span>
                           )}
                           {day.formule && (
-                            <span class={`text-xs ${isToday ? 'text-teal-100' : 'text-gray-400'}`}>
+                            <span class={`text-sm font-medium ${isToday ? 'text-teal-100' : 'text-gray-400'}`}>
                               {day.formule}
                             </span>
                           )}
@@ -91,38 +91,38 @@ const genLabel: string = (generated_at as string).slice(0, 16).replace('T', ' ')
                       </div>
 
                       <!-- Card body -->
-                      <div class="space-y-2 p-3">
+                      <div class="space-y-3 p-5">
                         {midi.map((d: any) => (
-                          <div class="flex items-start gap-2">
-                            <span class="mt-0.5 shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">
+                          <div class="flex items-start gap-3">
+                            <span class="mt-0.5 shrink-0 rounded-full bg-green-100 px-3 py-1 text-sm font-bold text-green-800">
                               Midi
                             </span>
-                            <span class="text-sm leading-snug text-gray-800">{d.description}</span>
+                            <span class="text-lg leading-relaxed text-gray-900">{d.description}</span>
                           </div>
                         ))}
                         {soir.map((d: any) => (
-                          <div class="flex items-start gap-2">
-                            <span class="mt-0.5 shrink-0 rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700">
+                          <div class="flex items-start gap-3">
+                            <span class="mt-0.5 shrink-0 rounded-full bg-indigo-100 px-3 py-1 text-sm font-bold text-indigo-800">
                               Soir
                             </span>
-                            <span class="text-sm leading-snug text-gray-800">{d.description}</span>
+                            <span class="text-lg leading-relaxed text-gray-900">{d.description}</span>
                           </div>
                         ))}
                         {gourmet.map((d: any) => (
-                          <div class="flex items-start gap-2">
-                            <span class="mt-0.5 shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700">
+                          <div class="flex items-start gap-3">
+                            <span class="mt-0.5 shrink-0 rounded-full bg-amber-100 px-3 py-1 text-sm font-bold text-amber-800">
                               ★ Gourmet
                             </span>
-                            <span class="text-sm leading-snug text-gray-800">{d.description}</span>
+                            <span class="text-lg leading-relaxed text-gray-900">{d.description}</span>
                           </div>
                         ))}
                         {day.supplements?.length > 0 && (
-                          <div class="mt-2 border-t border-gray-100 pt-2">
-                            <p class="mb-1 text-xs font-semibold uppercase tracking-wide text-gray-400">
+                          <div class="mt-3 border-t-2 border-gray-100 pt-3">
+                            <p class="mb-2 text-sm font-bold uppercase tracking-wide text-gray-400">
                               Suppléments
                             </p>
                             {day.supplements.map((s: string) => (
-                              <p class="text-xs text-gray-500">{s}</p>
+                              <p class="text-base text-gray-600 leading-relaxed">{s}</p>
                             ))}
                           </div>
                         )}
@@ -133,27 +133,27 @@ const genLabel: string = (generated_at as string).slice(0, 16).replace('T', ' ')
               </div>
 
               {boissons.length > 0 && (
-                <div class="mt-5 rounded-xl border border-sky-100 bg-sky-50 p-3">
-                  <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-sky-600">
+                <div class="mt-6 rounded-2xl border-2 border-sky-100 bg-sky-50 p-5">
+                  <p class="mb-3 text-base font-bold uppercase tracking-wide text-sky-700">
                     Boissons incluses
                   </p>
-                  <div class="flex flex-wrap gap-2">
+                  <div class="flex flex-wrap gap-3">
                     {boissons.map((b: string) => (
-                      <span class="rounded-full bg-sky-100 px-2.5 py-1 text-xs text-sky-700">{b}</span>
+                      <span class="rounded-full bg-sky-100 px-4 py-2 text-base font-medium text-sky-800">{b}</span>
                     ))}
                   </div>
                 </div>
               )}
             </div>
           ) : (
-            <p class="py-16 text-center text-gray-400">Aucun menu disponible.</p>
+            <p class="py-16 text-center text-xl text-gray-400">Aucun menu disponible.</p>
           )}
         </section>
       );
     })}
   </main>
 
-  <footer class="mt-10 border-t py-5 text-center text-xs text-gray-400">
+  <footer class="mt-12 border-t-2 py-6 text-center text-base text-gray-400">
     <a href="https://www.aquavena.nc" target="_blank" rel="noopener noreferrer" class="hover:text-teal-600">
       aquavena.nc
     </a>
