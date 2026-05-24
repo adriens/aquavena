@@ -48,6 +48,28 @@
   <main class="mx-auto max-w-2xl px-4 py-8 space-y-8">
 
     <section class="card rounded-2xl border-2 p-6 space-y-3"
+      data-speech="Score d'accessibilité. Score AIM : 10 sur 10. Score obtenu avec l'outil AIM, Accessibility Insights for the Web, de Microsoft. Aucune erreur WAVE détectée. Structure, contraste, navigation au clavier et compatibilité lecteur d'écran sont validés.">
+      <h2 class="flex items-center justify-between text-2xl font-bold" style="color: var(--text-main)">
+        <span><i class="fa-solid fa-trophy mr-2 text-amber-500"></i>Score d'accessibilité</span>
+        <button class="speak-btn rounded-lg bg-teal-600 px-3 py-1 text-sm font-bold text-white hover:bg-teal-700" aria-label="Lire cette section à voix haute">
+          <i class="fa-solid fa-volume-high mr-1"></i>Lire
+        </button>
+      </h2>
+      <div class="flex items-center gap-4 flex-wrap">
+        <div class="rounded-2xl bg-teal-600 px-8 py-4 text-center text-white shadow">
+          <div class="text-5xl font-bold">10</div>
+          <div class="text-sm">sur 10</div>
+          <div class="text-xs text-teal-100 mt-1">Score AIM</div>
+        </div>
+        <p class="flex-1 text-base" style="color: var(--text-muted)">
+          Score obtenu avec l'outil <strong>AIM (Accessibility Insights for the Web)</strong> de Microsoft.
+          Aucune erreur WAVE détectée. Structure, contraste, navigation au clavier et
+          compatibilité lecteur d'écran sont validés.
+        </p>
+      </div>
+    </section>
+
+    <section class="card rounded-2xl border-2 p-6 space-y-3"
       data-speech="Pourquoi ce site ? Aquavena est un service de livraison de repas diététiques en Nouvelle-Calédonie. Leurs menus de la semaine sont publiés sur leur site, mais la mise en page n'est pas adaptée aux personnes ayant des difficultés visuelles. Ce site a été créé pour permettre à une personne malvoyante de consulter facilement les menus de la semaine, de les lire ou de les écouter, de manière autonome, sur téléphone, tablette ou ordinateur.">
       <h2 class="flex items-center justify-between text-2xl font-bold" style="color: var(--text-main)">
         <span><i class="fa-solid fa-circle-question mr-2 text-teal-600"></i>Pourquoi ce site ?</span>
@@ -86,28 +108,6 @@
         <li><i class="fa-solid fa-palette mr-2 text-teal-500"></i><strong>Contraste élevé</strong> — couleurs choisies pour respecter les normes WCAG AA (ratio 4,5:1 minimum)</li>
         <li><i class="fa-solid fa-heading mr-2 text-teal-500"></i><strong>Structure sémantique</strong> — titres hiérarchisés pour une navigation facile avec les lecteurs d'écran</li>
       </ul>
-    </section>
-
-    <section class="card rounded-2xl border-2 p-6 space-y-3"
-      data-speech="Score d'accessibilité. Score AIM : 10 sur 10. Score obtenu avec l'outil AIM, Accessibility Insights for the Web, de Microsoft. Aucune erreur WAVE détectée. Structure, contraste, navigation au clavier et compatibilité lecteur d'écran sont validés.">
-      <h2 class="flex items-center justify-between text-2xl font-bold" style="color: var(--text-main)">
-        <span><i class="fa-solid fa-trophy mr-2 text-amber-500"></i>Score d'accessibilité</span>
-        <button class="speak-btn rounded-lg bg-teal-600 px-3 py-1 text-sm font-bold text-white hover:bg-teal-700" aria-label="Lire cette section à voix haute">
-          <i class="fa-solid fa-volume-high mr-1"></i>Lire
-        </button>
-      </h2>
-      <div class="flex items-center gap-4 flex-wrap">
-        <div class="rounded-2xl bg-teal-600 px-8 py-4 text-center text-white shadow">
-          <div class="text-5xl font-bold">10</div>
-          <div class="text-sm">sur 10</div>
-          <div class="text-xs text-teal-100 mt-1">Score AIM</div>
-        </div>
-        <p class="flex-1 text-base" style="color: var(--text-muted)">
-          Score obtenu avec l'outil <strong>AIM (Accessibility Insights for the Web)</strong> de Microsoft.
-          Aucune erreur WAVE détectée. Structure, contraste, navigation au clavier et
-          compatibilité lecteur d'écran sont validés.
-        </p>
-      </div>
     </section>
 
     <section class="card rounded-2xl border-2 p-6 space-y-3"
