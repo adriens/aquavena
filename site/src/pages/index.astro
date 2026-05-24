@@ -98,7 +98,7 @@ function formatDate(dateStr: string): string {
     <div class="mx-auto max-w-2xl px-4 py-2">
       <div class="relative">
         <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
-        <input id="search-input" type="search" placeholder="Rechercher un plat…"
+        <input id="search-input" type="search" placeholder="Rechercher un plat… (Ctrl+K)"
           aria-label="Rechercher un plat dans les menus"
           class="w-full rounded-xl border-2 py-2 pl-9 pr-4 text-base outline-none focus:border-teal-500"
           style="border-color: var(--border); background: var(--bg-card); color: var(--text-main)" />
@@ -400,8 +400,19 @@ function formatDate(dateStr: string): string {
       btn.addEventListener('click', () => speakWeek(btn));
     });
 
-    // Search
+    // Search — Ctrl+K / Cmd+K opens search
     const searchInput = document.getElementById('search-input');
+    document.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        searchInput.focus();
+        searchInput.select();
+      }
+      if (e.key === 'Escape') {
+        searchInput.blur();
+        searchResults.classList.add('hidden');
+      }
+    });
     const searchResults = document.getElementById('search-results');
     searchInput.addEventListener('input', () => {
       const q = searchInput.value.trim().toLowerCase();
