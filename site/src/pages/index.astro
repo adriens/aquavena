@@ -122,6 +122,10 @@ function formatDate(dateStr: string): string {
               class="ml-3 text-orange-500 hover:text-orange-700 text-base align-middle">
               <i class="fa-solid fa-square-rss"></i>
             </a>
+            <a href={`/aquavena/cal/${toAsciiSlug(r.slug)}.ics`} aria-label={`Calendrier iCal ${r.name}`}
+              class="ml-2 text-sky-500 hover:text-sky-700 text-base align-middle">
+              <i class="fa-solid fa-calendar-plus"></i>
+            </a>
           </h2>
           {r.menu?.description && (
             <p class="mb-5 text-base italic leading-relaxed" style="color: var(--text-muted)">{r.menu.description}</p>
@@ -250,6 +254,11 @@ function formatDate(dateStr: string): string {
       <a href="/aquavena/feed.xml" class="inline-flex items-center gap-1 hover:text-orange-700">
         <i class="fa-solid fa-square-rss text-orange-600 text-xl"></i>
         <span class="text-sm text-gray-700">Flux RSS — tous les régimes</span>
+      </a>
+      <span class="text-gray-400 mx-1">·</span>
+      <a href="/aquavena/cal.ics" class="inline-flex items-center gap-1 hover:text-sky-700">
+        <i class="fa-solid fa-calendar-plus text-sky-500 text-xl"></i>
+        <span class="text-sm text-gray-700">Calendrier iCal — tous les régimes</span>
       </a>
     </p>
   </footer>
