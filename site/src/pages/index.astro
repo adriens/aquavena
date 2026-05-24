@@ -93,6 +93,20 @@ function formatDate(dateStr: string): string {
     </div>
   </header>
 
+  <!-- Search bar -->
+  <div class="nav-bg border-b-2" style="border-color: var(--border)">
+    <div class="mx-auto max-w-2xl px-4 py-2">
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+        <input id="search-input" type="search" placeholder="Rechercher un plat…"
+          aria-label="Rechercher un plat dans les menus"
+          class="w-full rounded-xl border-2 py-2 pl-9 pr-4 text-base outline-none focus:border-teal-500"
+          style="border-color: var(--border); background: var(--bg-card); color: var(--text-main)" />
+      </div>
+      <div id="search-results" class="hidden mt-2 space-y-2"></div>
+    </div>
+  </div>
+
   <!-- Regime tabs -->
   <nav class="tabs nav-bg sticky top-16 z-40 overflow-x-auto border-b-2" aria-label="Régimes alimentaires">
     <div class="flex min-w-max">
@@ -265,7 +279,7 @@ function formatDate(dateStr: string): string {
     </p>
   </footer>
 
-  <script define:vars={{ slugs: regimes.map((r: any) => r.slug) }}>
+  <script define:vars={{ slugs: regimes.map((r: any) => r.slug), allRegimes: regimes.map((r: any) => ({ slug: r.slug, name: r.name, days: (r.menu?.days ?? []) })) }}>
     // Font size — on change html font-size so rem-based Tailwind classes scale
     function adjustFont(delta) {
       const cur = parseFloat(document.documentElement.style.fontSize) || 18;
@@ -384,6 +398,40 @@ function formatDate(dateStr: string): string {
     }
     document.querySelectorAll('.speak-week-btn').forEach(btn => {
       btn.addEventListener('click', () => speakWeek(btn));
+    });
+
+    // Search
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      searchResults.innerHTML = '';
+      if (q.length < 2) { searchResults.classList.add('hidden'); return; }
+      const hits = [];
+      for (const r of allRegimes) {
+        for (const day of r.days) {
+          for (const plat of day.plats) {
+            if (plat.description.toLowerCase().includes(q)) {
+              hits.push({ regime: r.name, slug: r.slug, date: day.date, plat: plat.description, meal: plat.meal_time });
+            }
+          }
+        }
+      }
+      if (!hits.length) {
+        searchResults.innerHTML = `<p class="text-base py-2" style="color:var(--text-muted)">Aucun plat trouvé pour « ${searchInput.value} ».</p>`;
+      } else {
+        hits.slice(0, 10).forEach(h => {
+          const d = new Date(h.date + 'T00:00:00').toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+          const label = d.charAt(0).toUpperCase() + d.slice(1);
+          const div = document.createElement('div');
+          div.className = 'card rounded-xl border p-3 cursor-pointer hover:border-teal-400';
+          div.style.borderColor = 'var(--border)';
+          div.innerHTML = `<p class="text-sm font-bold" style="color:var(--text-muted)">${h.regime} — ${label}</p><p class="text-base" style="color:var(--text-main)">${h.plat}</p>`;
+          div.addEventListener('click', () => { showRegime(h.slug); searchInput.value = ''; searchResults.classList.add('hidden'); });
+          searchResults.appendChild(div);
+        });
+      }
+      searchResults.classList.remove('hidden');
     });
 
     document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => showRegime(btn.dataset.slug)));
