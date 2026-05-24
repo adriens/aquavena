@@ -1,0 +1,206 @@
+---
+import menusData from '../data/menus.json';
+
+const data = menusData as any;
+const { generated_at, today, regimes } = data;
+const genLabel: string = (generated_at as string).slice(0, 16).replace('T', ' ');
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aquavena — Menus de la semaine</title>
+  <style>
+    .tabs::-webkit-scrollbar { display: none; }
+    .tabs { scrollbar-width: none; -ms-overflow-style: none; }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-900">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-teal-700 text-white shadow-md">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+      <div>
+        <p class="text-base font-bold leading-tight">Aquavena</p>
+        <p class="text-xs text-teal-200">Menus de la semaine</p>
+      </div>
+      <p class="font-mono text-xs text-teal-100">{genLabel}</p>
+    </div>
+  </header>
+
+  <!-- Regime tabs -->
+  <nav class="tabs sticky top-14 z-40 overflow-x-auto border-b bg-white shadow-sm">
+    <div class="flex min-w-max">
+      {regimes.map((r: any) => (
+        <button
+          data-slug={r.slug}
+          class="tab-btn border-b-2 border-transparent px-4 py-3 text-sm font-medium whitespace-nowrap text-gray-600 transition-colors hover:border-teal-500 hover:text-teal-700"
+        >
+          {r.name}
+        </button>
+      ))}
+    </div>
+  </nav>
+
+  <!-- Content panels -->
+  <main class="mx-auto max-w-5xl px-3 py-5">
+    {regimes.map((r: any) => {
+      const days: any[] = r.menu?.days ?? [];
+      const boissons: string[] = days[0]?.boissons ?? [];
+      return (
+        <section data-panel={r.slug} class="regime-panel hidden">
+          {r.menu?.description && (
+            <p class="mb-4 text-sm italic text-gray-500">{r.menu.description}</p>
+          )}
+
+          {days.length > 0 ? (
+            <div>
+              <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {days.map((day: any) => {
+                  const isToday = day.date === today;
+                  const isPast  = day.date < today;
+                  const midi    = day.plats.filter((p: any) => p.meal_time === 'midi');
+                  const soir    = day.plats.filter((p: any) => p.meal_time === 'soir');
+                  const gourmet = day.plats.filter((p: any) => p.meal_time.startsWith('gourmet'));
+                  return (
+                    <div
+                      data-today={isToday ? 'true' : 'false'}
+                      class={[
+                        'overflow-hidden rounded-xl border bg-white',
+                        isToday ? 'border-teal-400 shadow-md ring-2 ring-teal-300' : '',
+                        isPast  ? 'border-gray-100 opacity-50' : 'border-gray-200 shadow-sm',
+                      ].join(' ')}
+                    >
+                      <!-- Card header -->
+                      <div class={`flex items-center justify-between px-3 py-2 ${isToday ? 'bg-teal-600 text-white' : 'bg-gray-50 text-gray-500'}`}>
+                        <span class="font-mono text-sm font-semibold">{day.date}</span>
+                        <div class="flex items-center gap-1.5">
+                          {isToday && (
+                            <span class="rounded-full bg-white px-2 py-0.5 text-xs font-bold text-teal-700">
+                              Aujourd'hui
+                            </span>
+                          )}
+                          {day.formule && (
+                            <span class={`text-xs ${isToday ? 'text-teal-100' : 'text-gray-400'}`}>
+                              {day.formule}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <!-- Card body -->
+                      <div class="space-y-2 p-3">
+                        {midi.map((d: any) => (
+                          <div class="flex items-start gap-2">
+                            <span class="mt-0.5 shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">
+                              Midi
+                            </span>
+                            <span class="text-sm leading-snug text-gray-800">{d.description}</span>
+                          </div>
+                        ))}
+                        {soir.map((d: any) => (
+                          <div class="flex items-start gap-2">
+                            <span class="mt-0.5 shrink-0 rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700">
+                              Soir
+                            </span>
+                            <span class="text-sm leading-snug text-gray-800">{d.description}</span>
+                          </div>
+                        ))}
+                        {gourmet.map((d: any) => (
+                          <div class="flex items-start gap-2">
+                            <span class="mt-0.5 shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700">
+                              ★ Gourmet
+                            </span>
+                            <span class="text-sm leading-snug text-gray-800">{d.description}</span>
+                          </div>
+                        ))}
+                        {day.supplements?.length > 0 && (
+                          <div class="mt-2 border-t border-gray-100 pt-2">
+                            <p class="mb-1 text-xs font-semibold uppercase tracking-wide text-gray-400">
+                              Suppléments
+                            </p>
+                            {day.supplements.map((s: string) => (
+                              <p class="text-xs text-gray-500">{s}</p>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              {boissons.length > 0 && (
+                <div class="mt-5 rounded-xl border border-sky-100 bg-sky-50 p-3">
+                  <p class="mb-2 text-xs font-semibold uppercase tracking-wide text-sky-600">
+                    Boissons incluses
+                  </p>
+                  <div class="flex flex-wrap gap-2">
+                    {boissons.map((b: string) => (
+                      <span class="rounded-full bg-sky-100 px-2.5 py-1 text-xs text-sky-700">{b}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <p class="py-16 text-center text-gray-400">Aucun menu disponible.</p>
+          )}
+        </section>
+      );
+    })}
+  </main>
+
+  <footer class="mt-10 border-t py-5 text-center text-xs text-gray-400">
+    <a href="https://www.aquavena.nc" target="_blank" rel="noopener noreferrer" class="hover:text-teal-600">
+      aquavena.nc
+    </a>
+    {' · '}
+    <a href="https://github.com/adriens/aquavena-sdk" target="_blank" rel="noopener noreferrer" class="hover:text-teal-600">
+      aquavena-sdk
+    </a>
+  </footer>
+
+  <script define:vars={{ slugs: regimes.map((r: any) => r.slug) }}>
+    function showRegime(slug) {
+      document.querySelectorAll('.regime-panel').forEach((el) => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach((btn) => {
+        btn.classList.remove('border-teal-500', 'text-teal-700');
+        btn.classList.add('border-transparent', 'text-gray-600');
+      });
+
+      const panel = document.querySelector(`[data-panel="${slug}"]`);
+      if (panel) {
+        panel.classList.remove('hidden');
+        const todayCard = panel.querySelector('[data-today="true"]');
+        if (todayCard) {
+          requestAnimationFrame(() =>
+            todayCard.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          );
+        }
+      }
+
+      const tab = document.querySelector(`[data-slug="${slug}"]`);
+      if (tab) {
+        tab.classList.add('border-teal-500', 'text-teal-700');
+        tab.classList.remove('border-transparent', 'text-gray-600');
+        tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+
+      try { localStorage.setItem('aq-regime', slug); } catch {}
+    }
+
+    document.querySelectorAll('.tab-btn').forEach((btn) => {
+      btn.addEventListener('click', () => showRegime(btn.dataset.slug));
+    });
+
+    let saved;
+    try { saved = localStorage.getItem('aq-regime'); } catch {}
+    const initial = (saved && slugs.includes(saved)) ? saved : slugs[0];
+    if (initial) showRegime(initial);
+  </script>
+
+</body>
+</html>
