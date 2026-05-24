@@ -36,10 +36,14 @@ export function GET(context) {
 
   const days = (regime.menu?.days ?? []).filter(d => d.date >= today);
 
+  const imgHtml = regime.image_url
+    ? `<p><img src="${regime.image_url}" alt="${regime.name}" style="max-width:300px;border-radius:8px;" /></p>`
+    : '';
+
   const items = days.map(day => ({
     title: `${formatDate(day.date)} — ${regime.name}`,
     pubDate: new Date(day.date + 'T00:00:00'),
-    description: descriptionHtml(day),
+    description: imgHtml + descriptionHtml(day),
     link: `${context.site}aquavena/`,
     customData: `<guid isPermaLink="false">${regime.slug}-${day.date}</guid>`,
   }));
