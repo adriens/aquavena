@@ -189,6 +189,12 @@ function formatDate(dateStr: string): string {
                 if (soir.length)             speechParts.push(`Soir : ${soir.map((d: any) => d.description).join(', ')}.`);
                 if (gourmet.length)          speechParts.push(`Gourmet : ${gourmet.map((d: any) => d.description).join(', ')}.`);
                 if (day.supplements?.length) speechParts.push(`Suppléments : ${day.supplements.join(', ')}.`);
+                const waLines: string[] = [`🥗 Aquavena — ${r.name}`, `📅 ${formatDate(day.date)}`];
+                if (midi.length)    waLines.push(`🌞 Midi : ${midi.map((d: any) => d.description).join(', ')}`);
+                if (soir.length)    waLines.push(`🌙 Soir : ${soir.map((d: any) => d.description).join(', ')}`);
+                if (gourmet.length) waLines.push(`⭐ Gourmet : ${gourmet.map((d: any) => d.description).join(', ')}`);
+                waLines.push('', '👉 Commander sur https://www.aquavena.nc');
+                const waUrl = `https://wa.me/?text=${encodeURIComponent(waLines.join('\n'))}`;
                 return (
                   <article
                     data-today={isToday ? 'true' : 'false'}
@@ -206,6 +212,11 @@ function formatDate(dateStr: string): string {
                           aria-label="Lire le menu à voix haute">
                           <i class="fa-solid fa-volume-high mr-1"></i>Lire
                         </button>
+                        <a href={waUrl} target="_blank" rel="noopener noreferrer"
+                          class="no-print rounded-lg px-3 py-1 text-sm font-bold transition-colors bg-green-500 text-white hover:bg-green-600"
+                          aria-label="Partager ce menu sur WhatsApp">
+                          <i class="fa-brands fa-whatsapp mr-1"></i>Partager
+                        </a>
                       </div>
                     </div>
                     <div class="p-4 space-y-3">
