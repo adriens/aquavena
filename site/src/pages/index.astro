@@ -134,9 +134,15 @@ function formatDate(dateStr: string): string {
                 const midi    = day.plats.filter((p: any) => p.meal_time === 'midi');
                 const soir    = day.plats.filter((p: any) => p.meal_time === 'soir');
                 const gourmet = day.plats.filter((p: any) => p.meal_time.startsWith('gourmet'));
+                const speechParts: string[] = [`Menus du ${formatDate(day.date)}, régime ${r.name}.`];
+                if (midi.length)             speechParts.push(`Midi : ${midi.map((d: any) => d.description).join(', ')}.`);
+                if (soir.length)             speechParts.push(`Soir : ${soir.map((d: any) => d.description).join(', ')}.`);
+                if (gourmet.length)          speechParts.push(`Gourmet : ${gourmet.map((d: any) => d.description).join(', ')}.`);
+                if (day.supplements?.length) speechParts.push(`Suppléments : ${day.supplements.join(', ')}.`);
                 return (
                   <article
                     data-today={isToday ? 'true' : 'false'}
+                    data-speech={speechParts.join(' ')}
                     class={`card overflow-hidden rounded-2xl border-2 ${isToday ? 'border-teal-400 shadow-lg ring-4 ring-teal-200' : 'shadow-sm'}`}
                   >
                     <div class={`flex items-center justify-between px-5 py-3 flex-wrap gap-2 ${isToday ? 'bg-teal-600 text-white' : 'card-alt'}`}
@@ -145,6 +151,11 @@ function formatDate(dateStr: string): string {
                       <div class="flex items-center gap-2">
                         {isToday && <span class="rounded-full bg-white px-3 py-1 text-sm font-bold text-teal-700">Aujourd'hui</span>}
                         {day.formule && <span class={`text-sm font-medium ${isToday ? 'text-white' : ''}`} style={!isToday ? 'color: var(--text-muted)' : ''}>{day.formule}</span>}
+                        <button class="speak-btn rounded-lg px-3 py-1 text-sm font-bold transition-colors"
+                          class:list={[isToday ? 'bg-white text-teal-700 hover:bg-teal-50' : 'bg-teal-600 text-white hover:bg-teal-700']}
+                          aria-label="Lire le menu à voix haute">
+                          <i class="fa-solid fa-volume-high mr-1"></i>Lire
+                        </button>
                       </div>
                     </div>
                     <div class="p-4 space-y-3">
@@ -280,6 +291,43 @@ function formatDate(dateStr: string): string {
       }
       try { localStorage.setItem('aq-regime', slug); } catch {}
     }
+
+    // Text-to-speech
+    let activeSpeakBtn = null;
+    function speak(text, btn) {
+      if (!window.speechSynthesis) return;
+      if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        if (activeSpeakBtn) {
+          activeSpeakBtn.innerHTML = '<i class="fa-solid fa-volume-high mr-1"></i>Lire';
+          activeSpeakBtn.disabled = false;
+        }
+        if (activeSpeakBtn === btn) { activeSpeakBtn = null; return; }
+      }
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'fr-FR';
+      utter.rate = 0.9;
+      const voices = window.speechSynthesis.getVoices();
+      const frVoice = voices.find(v => v.lang.startsWith('fr'));
+      if (frVoice) utter.voice = frVoice;
+      utter.onstart = () => {
+        activeSpeakBtn = btn;
+        btn.innerHTML = '<i class="fa-solid fa-stop mr-1"></i>Stop';
+        btn.disabled = false;
+      };
+      utter.onend = utter.onerror = () => {
+        btn.innerHTML = '<i class="fa-solid fa-volume-high mr-1"></i>Lire';
+        btn.disabled = false;
+        activeSpeakBtn = null;
+      };
+      window.speechSynthesis.speak(utter);
+    }
+    document.querySelectorAll('.speak-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const article = btn.closest('article');
+        if (article?.dataset.speech) speak(article.dataset.speech, btn);
+      });
+    });
 
     document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => showRegime(btn.dataset.slug)));
 
