@@ -118,6 +118,46 @@
       </p>
     </section>
 
+    <section class="card rounded-2xl border-2 p-6 space-y-4">
+      <h2 class="text-2xl font-bold" style="color: var(--text-main)">
+        <i class="fa-solid fa-square-rss mr-2 text-orange-500"></i>Flux RSS
+      </h2>
+      <p style="color: var(--text-muted)">
+        Abonnez-vous aux flux RSS pour recevoir les menus automatiquement dans votre lecteur de flux préféré
+        (Feedly, NetNewsWire, etc.). Un flux global et un flux par régime sont disponibles.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="/aquavena/feed.xml" class="inline-flex items-center gap-2 rounded-xl bg-orange-500 px-4 py-2 text-white font-bold hover:bg-orange-600 transition-colors">
+          <i class="fa-solid fa-square-rss"></i>Tous les régimes
+        </a>
+      </div>
+      <p class="text-sm" style="color: var(--text-muted)">
+        Un flux par régime est aussi disponible — cliquez sur l'icône <i class="fa-solid fa-square-rss text-orange-500"></i> à côté du nom du régime sur la page principale.
+      </p>
+    </section>
+
+    <section class="card rounded-2xl border-2 p-6 space-y-4">
+      <h2 class="text-2xl font-bold" style="color: var(--text-main)">
+        <i class="fa-solid fa-calendar-plus mr-2 text-sky-500"></i>Calendriers iCal
+      </h2>
+      <p style="color: var(--text-muted)">
+        Ajoutez les menus directement dans votre agenda (iPhone, Google Calendar, Outlook…).
+        Chaque jour de menu apparaît comme un événement avec le détail Midi / Soir dans la description.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="/aquavena/cal.ics" class="inline-flex items-center gap-2 rounded-xl bg-sky-500 px-4 py-2 text-white font-bold hover:bg-sky-600 transition-colors">
+          <i class="fa-solid fa-calendar-plus"></i>Tous les régimes
+        </a>
+      </div>
+      <div class="rounded-xl bg-sky-50 border border-sky-200 p-4 text-sm space-y-1" style="color: var(--text-main)">
+        <p class="font-bold">S'abonner sur iPhone / iPad :</p>
+        <p style="color: var(--text-muted)">Réglages → Calendrier → Comptes → Ajouter un compte → Autre → S'abonner à un calendrier → coller l'URL <code>.ics</code></p>
+      </div>
+      <p class="text-sm" style="color: var(--text-muted)">
+        Un calendrier par régime est aussi disponible — cliquez sur l'icône <i class="fa-solid fa-calendar-plus text-sky-500"></i> à côté du nom du régime sur la page principale.
+      </p>
+    </section>
+
     <section class="card rounded-2xl border-2 p-6 space-y-3">
       <h2 class="text-2xl font-bold" style="color: var(--text-main)">
         <i class="fa-solid fa-robot mr-2 text-violet-600"></i>Interroger les menus avec Claude
