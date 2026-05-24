@@ -39,9 +39,19 @@
         <h1 class="text-lg font-bold leading-tight">À propos de ce site</h1>
         <p class="text-sm text-teal-100"><i class="fa-solid fa-eye-low-vision mr-1"></i>Optimisé pour les malvoyants</p>
       </div>
-      <a href="/aquavena/" class="rounded-lg border border-teal-500 bg-teal-800 px-4 py-2 text-sm font-bold hover:bg-teal-600">
-        <i class="fa-solid fa-arrow-left mr-1"></i>Retour aux menus
-      </a>
+      <div class="flex items-center gap-2 flex-wrap">
+        <button id="btn-font-down" aria-label="Réduire la taille du texte"
+          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm font-bold hover:bg-teal-600">A−</button>
+        <button id="btn-font-up" aria-label="Agrandir la taille du texte"
+          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-base font-bold hover:bg-teal-600">A+</button>
+        <button id="btn-dark" aria-label="Basculer mode nuit"
+          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm hover:bg-teal-600">
+          <i class="fa-solid fa-moon" id="dark-icon"></i>
+        </button>
+        <a href="/aquavena/" class="rounded-lg border border-teal-500 bg-teal-800 px-4 py-2 text-sm font-bold hover:bg-teal-600">
+          <i class="fa-solid fa-arrow-left mr-1"></i>Retour
+        </a>
+      </div>
     </div>
   </header>
 
@@ -217,6 +227,30 @@
   </footer>
 
   <script>
+    // Font size
+    function adjustFont(delta) {
+      const cur = parseFloat(document.documentElement.style.fontSize) || 18;
+      const next = Math.max(14, Math.min(28, cur + delta));
+      document.documentElement.style.fontSize = next + 'px';
+      try { localStorage.setItem('aq-fs', next); } catch {}
+    }
+    const storedFs = parseFloat(localStorage.getItem('aq-fs') || '18');
+    document.documentElement.style.fontSize = storedFs + 'px';
+    document.getElementById('btn-font-down').addEventListener('click', () => adjustFont(-2));
+    document.getElementById('btn-font-up').addEventListener('click', () => adjustFont(2));
+
+    // Dark mode
+    function toggleDark() {
+      const on = document.documentElement.hasAttribute('data-dark');
+      if (on) { document.documentElement.removeAttribute('data-dark'); document.getElementById('dark-icon').className = 'fa-solid fa-moon'; localStorage.setItem('aq-dark','0'); }
+      else    { document.documentElement.setAttribute('data-dark', ''); document.getElementById('dark-icon').className = 'fa-solid fa-sun';  localStorage.setItem('aq-dark','1'); }
+    }
+    if (localStorage.getItem('aq-dark') === '1') {
+      document.documentElement.setAttribute('data-dark', '');
+      document.getElementById('dark-icon').className = 'fa-solid fa-sun';
+    }
+    document.getElementById('btn-dark').addEventListener('click', toggleDark);
+
     let activeSpeakBtn = null;
     function speak(text, btn) {
       if (!window.speechSynthesis) return;
