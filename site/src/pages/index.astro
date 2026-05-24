@@ -127,6 +127,13 @@ function formatDate(dateStr: string): string {
             <p class="mb-5 text-base italic leading-relaxed" style="color: var(--text-muted)">{r.menu.description}</p>
           )}
 
+          {days.length > 0 && (
+            <button class="speak-week-btn mb-5 flex items-center gap-2 rounded-xl bg-teal-600 px-5 py-3 text-lg font-bold text-white shadow hover:bg-teal-700 transition-colors"
+              aria-label="Lire tous les menus de la semaine à voix haute">
+              <i class="fa-solid fa-volume-high"></i>Lire toute la semaine
+            </button>
+          )}
+
           {days.length > 0 ? (
             <div class="space-y-5">
               {days.filter((day: any) => day.date >= today).map((day: any) => {
@@ -327,6 +334,43 @@ function formatDate(dateStr: string): string {
         const article = btn.closest('article');
         if (article?.dataset.speech) speak(article.dataset.speech, btn);
       });
+    });
+
+    // "Lire toute la semaine"
+    function speakWeek(btn) {
+      if (!window.speechSynthesis) return;
+      if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        btn.innerHTML = '<i class="fa-solid fa-volume-high"></i>Lire toute la semaine';
+        btn.disabled = false;
+        if (activeSpeakBtn) { activeSpeakBtn.innerHTML = '<i class="fa-solid fa-volume-high mr-1"></i>Lire'; activeSpeakBtn = null; }
+        return;
+      }
+      const panel = btn.closest('section');
+      const texts = [...panel.querySelectorAll('article[data-speech]')].map(a => a.dataset.speech);
+      if (!texts.length) return;
+      btn.innerHTML = '<i class="fa-solid fa-stop"></i>Stop';
+      btn.disabled = false;
+      let i = 0;
+      function next() {
+        if (i >= texts.length) {
+          btn.innerHTML = '<i class="fa-solid fa-volume-high"></i>Lire toute la semaine';
+          return;
+        }
+        const utter = new SpeechSynthesisUtterance(texts[i++]);
+        utter.lang = 'fr-FR';
+        utter.rate = 0.9;
+        const voices = window.speechSynthesis.getVoices();
+        const frVoice = voices.find(v => v.lang.startsWith('fr'));
+        if (frVoice) utter.voice = frVoice;
+        utter.onend = next;
+        utter.onerror = () => { btn.innerHTML = '<i class="fa-solid fa-volume-high"></i>Lire toute la semaine'; };
+        window.speechSynthesis.speak(utter);
+      }
+      next();
+    }
+    document.querySelectorAll('.speak-week-btn').forEach(btn => {
+      btn.addEventListener('click', () => speakWeek(btn));
     });
 
     document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => showRegime(btn.dataset.slug)));
