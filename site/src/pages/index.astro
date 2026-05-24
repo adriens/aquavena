@@ -34,6 +34,20 @@ function formatDate(dateStr: string): string {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aquavena — Menus de la semaine (version malvoyants)</title>
+  <meta name="description" content="Consultez et écoutez les menus Aquavena de la semaine — optimisé pour les malvoyants. Police Atkinson Hyperlegible, lecture vocale, mode nuit. Livraison à Nouméa, Nouvelle-Calédonie." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:url" content="https://adriens.github.io/aquavena/" />
+  <meta property="og:site_name" content="Aquavena — Menus pour malvoyants" />
+  <meta property="og:title" content="Aquavena — Menus de la semaine pour malvoyants" />
+  <meta property="og:description" content="Consultez et écoutez les menus Aquavena de la semaine — optimisé pour les malvoyants. Lecture vocale, police adaptée, mode nuit. Livraison à Nouméa, Nouvelle-Calédonie." />
+  <meta property="og:image" content="https://adriens.github.io/aquavena/icon-512.png" />
+  <meta property="og:image:width" content="512" />
+  <meta property="og:image:height" content="512" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Aquavena — Menus de la semaine pour malvoyants" />
+  <meta name="twitter:description" content="Consultez et écoutez les menus Aquavena de la semaine — optimisé pour les malvoyants. Livraison à Nouméa, Nouvelle-Calédonie." />
+  <meta name="twitter:image" content="https://adriens.github.io/aquavena/icon-512.png" />
   <link rel="alternate" type="application/rss+xml" title="Aquavena — Tous les régimes" href="/aquavena/feed.xml" />
   {regimes.map((r: any) => (
     <link rel="alternate" type="application/rss+xml" title={`Aquavena — ${r.name}`} href={`/aquavena/feed/${toAsciiSlug(r.slug)}.xml`} />
