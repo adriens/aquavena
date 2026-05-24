@@ -4,6 +4,21 @@ import menusData from '../data/menus.json';
 const data = menusData as any;
 const { generated_at, today, regimes } = data;
 
+const REGIME_ICONS: Record<string, string> = {
+  'aqua-méditerranéen':    'fa-solid fa-sun',
+  'aqua-chrono-diet':      'fa-solid fa-clock',
+  'aqua-chrono-végé':      'fa-solid fa-seedling',
+  'aqua-bien-être-family': 'fa-solid fa-heart',
+  'aqua-gourmand':         'fa-solid fa-star',
+  'aqua-végé':             'fa-solid fa-leaf',
+  'aqua-low-carb':         'fa-solid fa-scale-balanced',
+  'aquasportif':           'fa-solid fa-dumbbell',
+  'la-boutique':           'fa-solid fa-bag-shopping',
+};
+function regimeIcon(slug: string): string {
+  return REGIME_ICONS[slug] ?? 'fa-solid fa-utensils';
+}
+
 
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr + 'T00:00:00');
@@ -18,6 +33,7 @@ function formatDate(dateStr: string): string {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aquavena — Menus de la semaine</title>
+  <link rel="alternate" type="application/rss+xml" title="Aquavena — Menus" href="/aquavena/feed.xml" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,7 +62,7 @@ function formatDate(dateStr: string): string {
           data-slug={r.slug}
           class="tab-btn border-b-4 border-transparent px-5 py-4 text-base font-semibold whitespace-nowrap text-gray-600 transition-colors hover:border-teal-500 hover:text-teal-700"
         >
-          {r.name}
+          <i class={`${regimeIcon(r.slug)} mr-1.5`}></i>{r.name}
         </button>
       ))}
     </div>
@@ -168,6 +184,12 @@ function formatDate(dateStr: string): string {
     <p class="text-sm">
       <i class="fa-solid fa-eye-low-vision mr-1"></i>Site optimisé pour les malvoyants — police <span class="italic">Atkinson Hyperlegible</span>
     </p>
+    <p>
+      <a href="/aquavena/feed.xml" class="inline-flex items-center gap-1 hover:text-orange-500">
+        <i class="fa-solid fa-square-rss text-orange-400 text-xl"></i>
+        <span class="text-sm">Flux RSS</span>
+      </a>
+    </p>
   </footer>
 
   <script define:vars={{ slugs: regimes.map((r: any) => r.slug) }}>
@@ -205,7 +227,8 @@ function formatDate(dateStr: string): string {
 
     let saved;
     try { saved = localStorage.getItem('aq-regime'); } catch {}
-    const initial = (saved && slugs.includes(saved)) ? saved : slugs[0];
+    const defaultSlug = slugs.find(s => s.includes('méditerran')) ?? slugs[0];
+    const initial = (saved && slugs.includes(saved)) ? saved : defaultSlug;
     if (initial) showRegime(initial);
   </script>
 
