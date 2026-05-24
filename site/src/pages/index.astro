@@ -54,11 +54,11 @@ function formatDate(dateStr: string): string {
       --bg-nav: #1a1a2e; --border: #2d3748;
       --text-main: #e2e8f0; --text-muted: #cbd5e0;
     }
+    html { font-size: 18px; }
     body {
       font-family: 'Atkinson Hyperlegible', sans-serif;
       letter-spacing: 0.015em; line-height: 1.8;
       background-color: var(--bg-page); color: var(--text-main);
-      font-size: var(--fs, 18px);
     }
     .card  { background-color: var(--bg-card); border-color: var(--border); }
     .card-alt { background-color: var(--bg-card-alt); }
@@ -235,15 +235,15 @@ function formatDate(dateStr: string): string {
   </footer>
 
   <script define:vars={{ slugs: regimes.map((r: any) => r.slug) }}>
-    // Font size
+    // Font size — on change html font-size so rem-based Tailwind classes scale
     function adjustFont(delta) {
-      const cur = parseFloat(document.body.style.getPropertyValue('--fs') || '18');
-      const next = Math.max(14, Math.min(30, cur + delta));
-      document.body.style.setProperty('--fs', next + 'px');
+      const cur = parseFloat(document.documentElement.style.fontSize) || 18;
+      const next = Math.max(14, Math.min(28, cur + delta));
+      document.documentElement.style.fontSize = next + 'px';
       try { localStorage.setItem('aq-fs', next); } catch {}
     }
     const storedFs = parseFloat(localStorage.getItem('aq-fs') || '18');
-    document.body.style.setProperty('--fs', storedFs + 'px');
+    document.documentElement.style.fontSize = storedFs + 'px';
     document.getElementById('btn-font-down').addEventListener('click', () => adjustFont(-2));
     document.getElementById('btn-font-up').addEventListener('click', () => adjustFont(2));
 
