@@ -3,7 +3,7 @@ import menusData from '../data/menus.json';
 
 const data = menusData as any;
 const { generated_at, today, regimes } = data;
-const genLabel: string = (generated_at as string).slice(0, 16).replace('T', ' ');
+
 
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr + 'T00:00:00');
@@ -31,7 +31,6 @@ function formatDate(dateStr: string): string {
   <header class="sticky top-0 z-50 bg-teal-700 text-white shadow-md">
     <div class="mx-auto flex max-w-4xl items-center justify-between px-5 py-4">
       <p class="text-lg font-bold">Aquavena — Menus de la semaine</p>
-      <p class="font-mono text-sm text-teal-100 text-right">{genLabel}</p>
     </div>
   </header>
 
