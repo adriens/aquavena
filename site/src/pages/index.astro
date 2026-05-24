@@ -67,6 +67,13 @@ function formatDate(dateStr: string): string {
     .tabs { scrollbar-width: none; -ms-overflow-style: none; }
     details > summary { cursor: pointer; list-style: none; }
     details > summary::-webkit-details-marker { display: none; }
+    @media print {
+      .no-print { display: none !important; }
+      .speak-btn, .speak-week-btn { display: none !important; }
+      header { position: static !important; box-shadow: none !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .card { box-shadow: none !important; break-inside: avoid; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
   </style>
 </head>
 <body>
@@ -78,7 +85,7 @@ function formatDate(dateStr: string): string {
         <h1 class="text-lg font-bold leading-tight">Aquavena — Menus de la semaine</h1>
         <p class="text-sm text-teal-100"><i class="fa-solid fa-eye-low-vision mr-1"></i>Optimisé pour les malvoyants</p>
       </div>
-      <div class="flex items-center gap-2">
+      <div class="no-print flex items-center gap-2">
         <!-- A+ / A- -->
         <button id="btn-font-down" aria-label="Réduire la taille du texte"
           class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm font-bold hover:bg-teal-600">A−</button>
@@ -99,7 +106,7 @@ function formatDate(dateStr: string): string {
   </header>
 
   <!-- Search bar -->
-  <div class="nav-bg border-b-2" style="border-color: var(--border)">
+  <div class="no-print nav-bg border-b-2" style="border-color: var(--border)">
     <div class="mx-auto max-w-2xl px-4 py-2">
       <div class="relative">
         <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
@@ -113,7 +120,7 @@ function formatDate(dateStr: string): string {
   </div>
 
   <!-- Mon menu du jour -->
-  <div class="nav-bg border-b-2 px-4 py-3" style="border-color: var(--border)">
+  <div class="no-print nav-bg border-b-2 px-4 py-3" style="border-color: var(--border)">
     <div class="mx-auto max-w-2xl">
       <button id="btn-today"
         aria-label="Afficher et lire le menu du jour pour mon régime favori"
@@ -126,7 +133,7 @@ function formatDate(dateStr: string): string {
   </div>
 
   <!-- Regime tabs -->
-  <nav class="tabs nav-bg sticky top-16 z-40 overflow-x-auto border-b-2" aria-label="Régimes alimentaires">
+  <nav class="no-print tabs nav-bg sticky top-16 z-40 overflow-x-auto border-b-2" aria-label="Régimes alimentaires">
     <div class="flex min-w-max">
       {regimes.map((r: any) => (
         <button
