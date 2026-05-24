@@ -19,8 +19,12 @@ function formatDate(dateStr: string): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aquavena — Menus de la semaine</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <style>
+    body { font-family: 'Atkinson Hyperlegible', sans-serif; letter-spacing: 0.015em; line-height: 1.8; }
     .tabs::-webkit-scrollbar { display: none; }
     .tabs { scrollbar-width: none; -ms-overflow-style: none; }
   </style>
@@ -155,10 +159,15 @@ function formatDate(dateStr: string): string {
     })}
   </main>
 
-  <footer class="mt-12 border-t-2 border-amber-200 py-6 text-center text-base text-gray-400">
-    <a href="https://www.aquavena.nc" target="_blank" rel="noopener noreferrer" class="hover:text-teal-600">aquavena.nc</a>
-    {' · '}
-    <a href="https://github.com/adriens/aquavena" target="_blank" rel="noopener noreferrer" class="hover:text-teal-600"><i class="fa-brands fa-github mr-1"></i>aquavena</a>
+  <footer class="mt-12 border-t-2 border-amber-200 py-6 text-center text-base text-gray-400 space-y-2">
+    <p>
+      <a href="https://www.aquavena.nc" target="_blank" rel="noopener noreferrer" class="hover:text-teal-600">aquavena.nc</a>
+      {' · '}
+      <a href="https://github.com/adriens/aquavena" target="_blank" rel="noopener noreferrer" class="hover:text-teal-600"><i class="fa-brands fa-github mr-1"></i>aquavena</a>
+    </p>
+    <p class="text-sm">
+      <i class="fa-solid fa-eye-low-vision mr-1"></i>Site optimisé pour les malvoyants — police <span class="italic">Atkinson Hyperlegible</span>
+    </p>
   </footer>
 
   <script define:vars={{ slugs: regimes.map((r: any) => r.slug) }}>
