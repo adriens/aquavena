@@ -18,6 +18,9 @@ const REGIME_ICONS: Record<string, string> = {
 function regimeIcon(slug: string): string {
   return REGIME_ICONS[slug] ?? 'fa-solid fa-utensils';
 }
+function toAsciiSlug(slug: string): string {
+  return slug.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9-]/g, '-');
+}
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr + 'T00:00:00');
   const s = d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
@@ -33,7 +36,7 @@ function formatDate(dateStr: string): string {
   <title>Aquavena — Menus de la semaine (version malvoyants)</title>
   <link rel="alternate" type="application/rss+xml" title="Aquavena — Tous les régimes" href="/aquavena/feed.xml" />
   {regimes.map((r: any) => (
-    <link rel="alternate" type="application/rss+xml" title={`Aquavena — ${r.name}`} href={`/aquavena/feed/${r.slug}.xml`} />
+    <link rel="alternate" type="application/rss+xml" title={`Aquavena — ${r.name}`} href={`/aquavena/feed/${toAsciiSlug(r.slug)}.xml`} />
   ))}
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -77,12 +80,12 @@ function formatDate(dateStr: string): string {
       </div>
       <div class="flex items-center gap-2">
         <!-- A+ / A- -->
-        <button onclick="adjustFont(-2)" aria-label="Réduire la taille du texte"
+        <button id="btn-font-down" aria-label="Réduire la taille du texte"
           class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm font-bold hover:bg-teal-600">A−</button>
-        <button onclick="adjustFont(2)" aria-label="Agrandir la taille du texte"
+        <button id="btn-font-up" aria-label="Agrandir la taille du texte"
           class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-base font-bold hover:bg-teal-600">A+</button>
         <!-- Mode nuit -->
-        <button onclick="toggleDark()" aria-label="Basculer mode nuit"
+        <button id="btn-dark" aria-label="Basculer mode nuit"
           class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm hover:bg-teal-600">
           <i class="fa-solid fa-moon" id="dark-icon"></i>
         </button>
@@ -115,7 +118,7 @@ function formatDate(dateStr: string): string {
         <section data-panel={r.slug} class="regime-panel hidden">
           <h2 class="text-xl font-bold mb-3" style="color: var(--text-main)">
             <i class={`${regimeIcon(r.slug)} mr-2`}></i>{r.name}
-            <a href={`/aquavena/feed/${r.slug}.xml`} aria-label={`Flux RSS ${r.name}`}
+            <a href={`/aquavena/feed/${toAsciiSlug(r.slug)}.xml`} aria-label={`Flux RSS ${r.name}`}
               class="ml-3 text-orange-500 hover:text-orange-700 text-base align-middle">
               <i class="fa-solid fa-square-rss"></i>
             </a>
@@ -233,23 +236,28 @@ function formatDate(dateStr: string): string {
 
   <script define:vars={{ slugs: regimes.map((r: any) => r.slug) }}>
     // Font size
-    const stored = parseInt(localStorage.getItem('aq-fs') || '18');
-    document.body.style.setProperty('--fs', stored + 'px');
     function adjustFont(delta) {
-      const cur = parseInt(getComputedStyle(document.body).getPropertyValue('--fs') || '18');
+      const cur = parseFloat(document.body.style.getPropertyValue('--fs') || '18');
       const next = Math.max(14, Math.min(30, cur + delta));
       document.body.style.setProperty('--fs', next + 'px');
       try { localStorage.setItem('aq-fs', next); } catch {}
     }
+    const storedFs = parseFloat(localStorage.getItem('aq-fs') || '18');
+    document.body.style.setProperty('--fs', storedFs + 'px');
+    document.getElementById('btn-font-down').addEventListener('click', () => adjustFont(-2));
+    document.getElementById('btn-font-up').addEventListener('click', () => adjustFont(2));
 
     // Dark mode
-    const isDark = localStorage.getItem('aq-dark') === '1';
-    if (isDark) { document.documentElement.setAttribute('data-dark', ''); document.getElementById('dark-icon').className = 'fa-solid fa-sun'; }
     function toggleDark() {
       const on = document.documentElement.hasAttribute('data-dark');
       if (on) { document.documentElement.removeAttribute('data-dark'); document.getElementById('dark-icon').className = 'fa-solid fa-moon'; localStorage.setItem('aq-dark','0'); }
-      else     { document.documentElement.setAttribute('data-dark', ''); document.getElementById('dark-icon').className = 'fa-solid fa-sun';  localStorage.setItem('aq-dark','1'); }
+      else    { document.documentElement.setAttribute('data-dark', ''); document.getElementById('dark-icon').className = 'fa-solid fa-sun';  localStorage.setItem('aq-dark','1'); }
     }
+    if (localStorage.getItem('aq-dark') === '1') {
+      document.documentElement.setAttribute('data-dark', '');
+      document.getElementById('dark-icon').className = 'fa-solid fa-sun';
+    }
+    document.getElementById('btn-dark').addEventListener('click', toggleDark);
 
     // Tabs
     function showRegime(slug) {

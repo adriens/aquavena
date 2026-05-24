@@ -1,6 +1,10 @@
 import rss from '@astrojs/rss';
 import menusData from '../../data/menus.json';
 
+function toAsciiSlug(slug) {
+  return slug.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9-]/g, '-');
+}
+
 function formatDate(dateStr) {
   const d = new Date(dateStr + 'T00:00:00');
   const s = d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
@@ -21,7 +25,7 @@ function descriptionHtml(day) {
 
 export function getStaticPaths() {
   return menusData.regimes.map(r => ({
-    params: { slug: r.slug },
+    params: { slug: toAsciiSlug(r.slug) },
     props: { regime: r },
   }));
 }
