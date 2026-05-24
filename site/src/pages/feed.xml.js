@@ -37,7 +37,8 @@ export function GET(context) {
         title: `${formatDate(day.date)} — ${r.name}`,
         pubDate: new Date(day.date + 'T00:00:00'),
         description: parts.join(' | '),
-        link: context.site + 'aquavena/',
+        link: `${context.site}aquavena/`,
+        customData: `<guid isPermaLink="false">${r.slug}-${day.date}</guid>`,
       });
     }
   }
