@@ -1,6 +1,7 @@
 # aquavena-sdk
 
 [![Tests](https://github.com/adriens/aquavena-sdk/actions/workflows/tests.yml/badge.svg)](https://github.com/adriens/aquavena-sdk/actions/workflows/tests.yml)
+[![PyPI version](https://badge.fury.io/py/aquavena-sdk.svg)](https://pypi.org/project/aquavena-sdk/)
 
 SDK Python + CLI pour scraper les menus et tarifs d'[Aquavena](https://www.aquavena.nc) — service de livraison de repas diététiques en Nouvelle-Calédonie.
 
