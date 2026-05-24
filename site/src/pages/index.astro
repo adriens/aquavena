@@ -60,7 +60,7 @@ function formatDate(dateStr: string): string {
       {regimes.map((r: any) => (
         <button
           data-slug={r.slug}
-          class="tab-btn border-b-4 border-transparent px-5 py-4 text-base font-semibold whitespace-nowrap text-gray-600 transition-colors hover:border-teal-500 hover:text-teal-700"
+          class="tab-btn border-b-4 border-transparent px-5 py-4 text-base font-semibold whitespace-nowrap text-gray-700 transition-colors hover:border-teal-600 hover:text-teal-800"
         >
           <i class={`${regimeIcon(r.slug)} mr-1.5`}></i>{r.name}
         </button>
@@ -76,7 +76,7 @@ function formatDate(dateStr: string): string {
       return (
         <section data-panel={r.slug} class="regime-panel hidden">
           {r.menu?.description && (
-            <p class="mb-5 text-base italic text-gray-500 leading-relaxed">{r.menu.description}</p>
+            <p class="mb-5 text-base italic text-gray-700 leading-relaxed">{r.menu.description}</p>
           )}
 
           {days.length > 0 ? (
@@ -107,7 +107,7 @@ function formatDate(dateStr: string): string {
                             </span>
                           )}
                           {day.formule && (
-                            <span class={`text-sm font-medium ${isToday ? 'text-teal-100' : 'text-gray-500'}`}>
+                            <span class={`text-sm font-medium ${isToday ? 'text-white' : 'text-gray-700'}`}>
                               {day.formule}
                             </span>
                           )}
@@ -143,9 +143,9 @@ function formatDate(dateStr: string): string {
                       )}
                       {day.supplements?.length > 0 && (
                         <div class="rounded-xl bg-gray-50 border border-gray-200 p-4">
-                          <p class="text-lg font-bold text-gray-500 mb-2"><i class="fa-solid fa-plus mr-1"></i>Suppléments</p>
+                          <p class="text-lg font-bold text-gray-700 mb-2"><i class="fa-solid fa-plus mr-1"></i>Suppléments</p>
                           {day.supplements.map((s: string) => (
-                            <p class="text-base text-gray-600 leading-relaxed">{s}</p>
+                            <p class="text-base text-gray-800 leading-relaxed">{s}</p>
                           ))}
                         </div>
                       )}
@@ -168,26 +168,26 @@ function formatDate(dateStr: string): string {
               )}
             </div>
           ) : (
-            <p class="py-16 text-center text-xl text-gray-400">Aucun menu disponible.</p>
+            <p class="py-16 text-center text-xl text-gray-600">Aucun menu disponible.</p>
           )}
         </section>
       );
     })}
   </main>
 
-  <footer class="mt-12 border-t-2 border-amber-200 py-6 text-center text-base text-gray-400 space-y-2">
+  <footer class="mt-12 border-t-2 border-amber-200 py-6 text-center text-base text-gray-700 space-y-2">
     <p>
-      <a href="https://www.aquavena.nc" target="_blank" rel="noopener noreferrer" class="hover:text-teal-600">aquavena.nc</a>
+      <a href="https://www.aquavena.nc" target="_blank" rel="noopener noreferrer" class="hover:text-teal-800">aquavena.nc</a>
       {' · '}
-      <a href="https://github.com/adriens/aquavena" target="_blank" rel="noopener noreferrer" class="hover:text-teal-600"><i class="fa-brands fa-github mr-1"></i>aquavena</a>
+      <a href="https://github.com/adriens/aquavena" target="_blank" rel="noopener noreferrer" class="hover:text-teal-800"><i class="fa-brands fa-github mr-1"></i>aquavena</a>
     </p>
-    <p class="text-sm">
+    <p class="text-sm text-gray-700">
       <i class="fa-solid fa-eye-low-vision mr-1"></i>Site optimisé pour les malvoyants — police <span class="italic">Atkinson Hyperlegible</span>
     </p>
     <p>
-      <a href="/aquavena/feed.xml" class="inline-flex items-center gap-1 hover:text-orange-500">
-        <i class="fa-solid fa-square-rss text-orange-400 text-xl"></i>
-        <span class="text-sm">Flux RSS</span>
+      <a href="/aquavena/feed.xml" class="inline-flex items-center gap-1 hover:text-orange-700">
+        <i class="fa-solid fa-square-rss text-orange-600 text-xl"></i>
+        <span class="text-sm text-gray-700">Flux RSS</span>
       </a>
     </p>
   </footer>
@@ -197,7 +197,7 @@ function formatDate(dateStr: string): string {
       document.querySelectorAll('.regime-panel').forEach((el) => el.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach((btn) => {
         btn.classList.remove('border-teal-500', 'text-teal-700');
-        btn.classList.add('border-transparent', 'text-gray-600');
+        btn.classList.add('border-transparent', 'text-gray-700');
       });
 
       const panel = document.querySelector(`[data-panel="${slug}"]`);
@@ -214,7 +214,7 @@ function formatDate(dateStr: string): string {
       const tab = document.querySelector(`[data-slug="${slug}"]`);
       if (tab) {
         tab.classList.add('border-teal-500', 'text-teal-700');
-        tab.classList.remove('border-transparent', 'text-gray-600');
+        tab.classList.remove('border-transparent', 'text-gray-700');
         tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
 
