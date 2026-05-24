@@ -399,6 +399,7 @@ function formatDate(dateStr: string): string {
         tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
       try { localStorage.setItem('aq-regime', slug); } catch {}
+      history.replaceState(null, '', location.pathname + location.search + '#' + encodeURIComponent(slug));
     }
 
     // Text-to-speech
@@ -522,9 +523,10 @@ function formatDate(dateStr: string): string {
 
     document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => showRegime(btn.dataset.slug)));
 
+    const hashSlug = location.hash ? decodeURIComponent(location.hash.slice(1)) : null;
     let saved; try { saved = localStorage.getItem('aq-regime'); } catch {}
     const defaultSlug = slugs.find(s => s.includes('méditerran')) ?? slugs[0];
-    const initial = (saved && slugs.includes(saved)) ? saved : defaultSlug;
+    const initial = (hashSlug && slugs.includes(hashSlug)) ? hashSlug : (saved && slugs.includes(saved)) ? saved : defaultSlug;
     if (initial) showRegime(initial);
 
     document.getElementById('btn-today').addEventListener('click', () => {
