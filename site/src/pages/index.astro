@@ -58,9 +58,9 @@ const genLabel: string = (generated_at as string).slice(0, 16).replace('T', ' ')
           {days.length > 0 ? (
             <div>
               <div class="grid gap-5 lg:grid-cols-2">
-                {days.map((day: any) => {
+                {days.filter((day: any) => day.date >= today).map((day: any) => {
                   const isToday = day.date === today;
-                  const isPast  = day.date < today;
+                  const isPast  = false;
                   const midi    = day.plats.filter((p: any) => p.meal_time === 'midi');
                   const soir    = day.plats.filter((p: any) => p.meal_time === 'soir');
                   const gourmet = day.plats.filter((p: any) => p.meal_time.startsWith('gourmet'));
