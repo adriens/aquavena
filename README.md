@@ -1,6 +1,6 @@
 # aquavena-sdk
 
-[![Tests](https://github.com/adriens/aquavena/actions/workflows/tests.yml/badge.svg)](https://github.com/adriens/aquavena/actions/workflows/tests.yml)
+[![Tests](https://github.com/adriens/aquavena-sdk/actions/workflows/tests.yml/badge.svg)](https://github.com/adriens/aquavena-sdk/actions/workflows/tests.yml)
 
 SDK Python + CLI pour scraper les menus et tarifs d'[Aquavena](https://www.aquavena.nc) — service de livraison de repas diététiques en Nouvelle-Calédonie.
 
@@ -96,7 +96,7 @@ upcoming = [d for d in menu.days if date.fromisoformat(d.date) >= date.today()]
 ## Développement
 
 ```bash
-git clone https://github.com/adriens/aquavena
+git clone https://github.com/adriens/aquavena-sdk
 cd aquavena/aquavena-sdk
 uv sync
 uv run pytest
