@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-24T23:41:34",
+  "generated_at": "2026-05-24T23:46:15",
   "today": "2026-05-24",
   "regimes": [
     {
@@ -221,7 +221,8 @@
             ]
           }
         ]
-      }
+      },
+      "tarifs": []
     },
     {
       "name": "Aqua Bien Être Family",
@@ -1366,7 +1367,34 @@
             ]
           }
         ]
-      }
+      },
+      "tarifs": [
+        {
+          "label": "Journée Aqua'Sportif (Plat Midi + Plat du soir)",
+          "price_ht": 2261,
+          "price_ttc": 2329
+        },
+        {
+          "label": "Plat du Midi",
+          "price_ht": 1303,
+          "price_ttc": 1342
+        },
+        {
+          "label": "Plat du Soir",
+          "price_ht": 1241,
+          "price_ttc": 1278
+        },
+        {
+          "label": "Plat Gourmet",
+          "price_ht": 1854,
+          "price_ttc": 1910
+        },
+        {
+          "label": "Energy Balls",
+          "price_ht": 489,
+          "price_ttc": 504
+        }
+      ]
     },
     {
       "name": "Aqua Chrono Diet",
@@ -2171,7 +2199,34 @@
             ]
           }
         ]
-      }
+      },
+      "tarifs": [
+        {
+          "label": "Journée CHRONO DIET Plat Midi + Plat du Soir",
+          "price_ht": 2122,
+          "price_ttc": 2186
+        },
+        {
+          "label": "Journée CHRONO DIET Plat Midi + Plat Soir Mini Bouddha",
+          "price_ht": 2070,
+          "price_ttc": 2132
+        },
+        {
+          "label": "Journée CHRONO DIET Plat Midi VG Diet + Plat du Soir",
+          "price_ht": 2070,
+          "price_ttc": 2132
+        },
+        {
+          "label": "Plat Midi ou Soir",
+          "price_ht": 1241,
+          "price_ttc": 1278
+        },
+        {
+          "label": "Plat Gourmet",
+          "price_ht": 1854,
+          "price_ttc": 1910
+        }
+      ]
     },
     {
       "name": "Aqua Chrono Végé",
@@ -2580,7 +2635,24 @@
             ]
           }
         ]
-      }
+      },
+      "tarifs": [
+        {
+          "label": "Journée Aqua'Chrono Végé (Plat du midi + plat du Soir)",
+          "price_ht": 2070,
+          "price_ttc": 2132
+        },
+        {
+          "label": "Plat midi",
+          "price_ht": 1231,
+          "price_ttc": 1268
+        },
+        {
+          "label": "Mini Buddha Bowl",
+          "price_ht": 1329,
+          "price_ttc": 1369
+        }
+      ]
     },
     {
       "name": "Aqua Méditerranéen",
@@ -2951,7 +3023,24 @@
             ]
           }
         ]
-      }
+      },
+      "tarifs": [
+        {
+          "label": "Forfait Journée « Plat Midi + Plat Soir »",
+          "price_ht": 2884,
+          "price_ttc": 2971
+        },
+        {
+          "label": "Plat Gourmet",
+          "price_ht": 1854,
+          "price_ttc": 1910
+        },
+        {
+          "label": "Plat",
+          "price_ht": 1231,
+          "price_ttc": 1268
+        }
+      ]
     },
     {
       "name": "Aqua Gourmand",
@@ -3588,7 +3677,24 @@
             ]
           }
         ]
-      }
+      },
+      "tarifs": [
+        {
+          "label": "Journée AQUA GOURMAND ( 2 Plats )",
+          "price_ht": 2261,
+          "price_ttc": 2329
+        },
+        {
+          "label": "Plat Aqua Gourmand",
+          "price_ht": 1303,
+          "price_ttc": 1342
+        },
+        {
+          "label": "Plat Gourmet Aqua Gourmand",
+          "price_ht": 1854,
+          "price_ttc": 1910
+        }
+      ]
     },
     {
       "name": "Aqua Végé",
@@ -4120,7 +4226,8 @@
             ]
           }
         ]
-      }
+      },
+      "tarifs": []
     },
     {
       "name": "Aqua Low Carb",
@@ -4682,7 +4789,49 @@
             ]
           }
         ]
-      }
+      },
+      "tarifs": [
+        {
+          "label": "Plat",
+          "price_ht": 1380,
+          "price_ttc": 1421
+        },
+        {
+          "label": "Plat Gourmet",
+          "price_ht": 1854,
+          "price_ttc": 1910
+        },
+        {
+          "label": "Journée Low Carb (Plat LC + Plat LC)",
+          "price_ht": 2485,
+          "price_ttc": 2560
+        },
+        {
+          "label": "Journée Low Carb (Plat LC Gourmet + Plat LC)",
+          "price_ht": 2972,
+          "price_ttc": 3061
+        },
+        {
+          "label": "Poke Bowl",
+          "price_ht": 1854,
+          "price_ttc": 1910
+        },
+        {
+          "label": "Mini Poke Bowl",
+          "price_ht": 1329,
+          "price_ttc": 1369
+        },
+        {
+          "label": "Dessert sans sucre",
+          "price_ht": 485,
+          "price_ttc": 499
+        },
+        {
+          "label": "Pain Maison sans gluten, Low Carb / Keto (aux Graines)",
+          "price_ht": 175,
+          "price_ttc": 180
+        }
+      ]
     },
     {
       "name": "Aquasportif",
@@ -5358,7 +5507,8 @@
             ]
           }
         ]
-      }
+      },
+      "tarifs": []
     }
   ]
 }

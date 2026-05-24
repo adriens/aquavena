@@ -2,7 +2,7 @@
 import menusData from '../data/menus.json';
 
 const data = menusData as any;
-const { generated_at, today, regimes } = data;
+const { today, regimes } = data;
 
 const REGIME_ICONS: Record<string, string> = {
   'aqua-méditerranéen':    'fa-solid fa-sun',
@@ -18,8 +18,6 @@ const REGIME_ICONS: Record<string, string> = {
 function regimeIcon(slug: string): string {
   return REGIME_ICONS[slug] ?? 'fa-solid fa-utensils';
 }
-
-
 function formatDate(dateStr: string): string {
   const d = new Date(dateStr + 'T00:00:00');
   const s = d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
@@ -33,36 +31,72 @@ function formatDate(dateStr: string): string {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aquavena — Menus de la semaine</title>
-  <link rel="alternate" type="application/rss+xml" title="Aquavena — Menus" href="/aquavena/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="Aquavena — Tous les régimes" href="/aquavena/feed.xml" />
+  {regimes.map((r: any) => (
+    <link rel="alternate" type="application/rss+xml" title={`Aquavena — ${r.name}`} href={`/aquavena/feed/${r.slug}.xml`} />
+  ))}
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <style>
-    body { font-family: 'Atkinson Hyperlegible', sans-serif; letter-spacing: 0.015em; line-height: 1.8; }
+    :root {
+      --bg-page: #FFFBEB; --bg-card: #ffffff; --bg-card-alt: #FEF3C7;
+      --bg-nav: #FFFBEB; --border: #FDE68A;
+      --text-main: #1f2937; --text-muted: #374151;
+    }
+    [data-dark] {
+      --bg-page: #1a1a2e; --bg-card: #16213e; --bg-card-alt: #0f3460;
+      --bg-nav: #1a1a2e; --border: #2d3748;
+      --text-main: #e2e8f0; --text-muted: #cbd5e0;
+    }
+    body {
+      font-family: 'Atkinson Hyperlegible', sans-serif;
+      letter-spacing: 0.015em; line-height: 1.8;
+      background-color: var(--bg-page); color: var(--text-main);
+      font-size: var(--fs, 18px);
+    }
+    .card  { background-color: var(--bg-card); border-color: var(--border); }
+    .card-alt { background-color: var(--bg-card-alt); }
+    .nav-bg { background-color: var(--bg-nav); border-color: var(--border); }
     .tabs::-webkit-scrollbar { display: none; }
     .tabs { scrollbar-width: none; -ms-overflow-style: none; }
+    details > summary { cursor: pointer; list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
   </style>
 </head>
-<body class="min-h-screen bg-amber-50 text-gray-800 text-lg">
+<body>
 
   <!-- Header -->
   <header class="sticky top-0 z-50 bg-teal-700 text-white shadow-md">
-    <div class="mx-auto flex max-w-4xl items-center justify-between px-5 py-4">
+    <div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-3 gap-3 flex-wrap">
       <div>
-        <h1 class="text-lg font-bold">Aquavena — Menus de la semaine</h1>
+        <h1 class="text-lg font-bold leading-tight">Aquavena — Menus de la semaine</h1>
         <p class="text-sm text-teal-100"><i class="fa-solid fa-eye-low-vision mr-1"></i>Optimisé pour les malvoyants</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <!-- A+ / A- -->
+        <button onclick="adjustFont(-2)" aria-label="Réduire la taille du texte"
+          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm font-bold hover:bg-teal-600">A−</button>
+        <button onclick="adjustFont(2)" aria-label="Agrandir la taille du texte"
+          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-base font-bold hover:bg-teal-600">A+</button>
+        <!-- Mode nuit -->
+        <button onclick="toggleDark()" aria-label="Basculer mode nuit"
+          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm hover:bg-teal-600">
+          <i class="fa-solid fa-moon" id="dark-icon"></i>
+        </button>
       </div>
     </div>
   </header>
 
   <!-- Regime tabs -->
-  <nav class="tabs sticky top-16 z-40 overflow-x-auto border-b-2 border-amber-200 bg-amber-50 shadow-sm">
+  <nav class="tabs nav-bg sticky top-16 z-40 overflow-x-auto border-b-2" aria-label="Régimes alimentaires">
     <div class="flex min-w-max">
       {regimes.map((r: any) => (
         <button
           data-slug={r.slug}
+          aria-label={`Afficher le régime ${r.name}`}
           class="tab-btn border-b-4 border-transparent px-5 py-4 text-base font-semibold whitespace-nowrap text-gray-700 transition-colors hover:border-teal-600 hover:text-teal-800"
         >
           <i class={`${regimeIcon(r.slug)} mr-1.5`}></i>{r.name}
@@ -76,13 +110,18 @@ function formatDate(dateStr: string): string {
     {regimes.map((r: any) => {
       const days: any[] = r.menu?.days ?? [];
       const boissons: string[] = days[0]?.boissons ?? [];
+      const tarifs: any[] = r.tarifs ?? [];
       return (
         <section data-panel={r.slug} class="regime-panel hidden">
-          <h2 class="text-xl font-bold text-gray-800 mb-3">
+          <h2 class="text-xl font-bold mb-3" style="color: var(--text-main)">
             <i class={`${regimeIcon(r.slug)} mr-2`}></i>{r.name}
+            <a href={`/aquavena/feed/${r.slug}.xml`} aria-label={`Flux RSS ${r.name}`}
+              class="ml-3 text-orange-500 hover:text-orange-700 text-base align-middle">
+              <i class="fa-solid fa-square-rss"></i>
+            </a>
           </h2>
           {r.menu?.description && (
-            <p class="mb-5 text-base italic text-gray-700 leading-relaxed">{r.menu.description}</p>
+            <p class="mb-5 text-base italic leading-relaxed" style="color: var(--text-muted)">{r.menu.description}</p>
           )}
 
           {days.length > 0 ? (
@@ -93,84 +132,81 @@ function formatDate(dateStr: string): string {
                 const soir    = day.plats.filter((p: any) => p.meal_time === 'soir');
                 const gourmet = day.plats.filter((p: any) => p.meal_time.startsWith('gourmet'));
                 return (
-                  <div
+                  <article
                     data-today={isToday ? 'true' : 'false'}
-                    class={[
-                      'overflow-hidden rounded-2xl border-2',
-                      isToday
-                        ? 'border-teal-400 shadow-lg ring-4 ring-teal-200'
-                        : 'border-amber-200 shadow-sm',
-                    ].join(' ')}
+                    class={`card overflow-hidden rounded-2xl border-2 ${isToday ? 'border-teal-400 shadow-lg ring-4 ring-teal-200' : 'shadow-sm'}`}
                   >
-                    <!-- Card header: date en français -->
-                    <div class={`px-5 py-4 ${isToday ? 'bg-teal-600 text-white' : 'bg-amber-100 text-gray-700'}`}>
-                      <div class="flex items-center justify-between gap-2 flex-wrap">
-                        <h3 class="text-2xl font-bold">{formatDate(day.date)}</h3>
-                        <div class="flex items-center gap-2">
-                          {isToday && (
-                            <span class="rounded-full bg-white px-3 py-1 text-sm font-bold text-teal-700">
-                              Aujourd'hui
-                            </span>
-                          )}
-                          {day.formule && (
-                            <span class={`text-sm font-medium ${isToday ? 'text-white' : 'text-gray-700'}`}>
-                              {day.formule}
-                            </span>
-                          )}
-                        </div>
+                    <div class={`flex items-center justify-between px-5 py-3 flex-wrap gap-2 ${isToday ? 'bg-teal-600 text-white' : 'card-alt'}`}
+                      style={!isToday ? 'color: var(--text-main)' : ''}>
+                      <h3 class="text-2xl font-bold">{formatDate(day.date)}</h3>
+                      <div class="flex items-center gap-2">
+                        {isToday && <span class="rounded-full bg-white px-3 py-1 text-sm font-bold text-teal-700">Aujourd'hui</span>}
+                        {day.formule && <span class={`text-sm font-medium ${isToday ? 'text-white' : ''}`} style={!isToday ? 'color: var(--text-muted)' : ''}>{day.formule}</span>}
                       </div>
                     </div>
-
-                    <!-- Card body: blocs colorés par service -->
-                    <div class="bg-white p-4 space-y-3">
+                    <div class="p-4 space-y-3">
                       {midi.length > 0 && (
-                        <div class="rounded-xl bg-green-50 border border-green-200 p-4">
+                        <div class="rounded-xl border border-green-200 bg-green-50 p-4">
                           <h4 class="text-lg font-bold text-green-800 mb-2"><i class="fa-solid fa-sun mr-1"></i>Midi</h4>
-                          {midi.map((d: any) => (
-                            <p class="text-xl leading-relaxed text-gray-800">{d.description}</p>
-                          ))}
+                          {midi.map((d: any) => <p class="text-xl leading-relaxed text-gray-800">{d.description}</p>)}
                         </div>
                       )}
                       {soir.length > 0 && (
-                        <div class="rounded-xl bg-indigo-50 border border-indigo-200 p-4">
+                        <div class="rounded-xl border border-indigo-200 bg-indigo-50 p-4">
                           <h4 class="text-lg font-bold text-indigo-800 mb-2"><i class="fa-solid fa-moon mr-1"></i>Soir</h4>
-                          {soir.map((d: any) => (
-                            <p class="text-xl leading-relaxed text-gray-800">{d.description}</p>
-                          ))}
+                          {soir.map((d: any) => <p class="text-xl leading-relaxed text-gray-800">{d.description}</p>)}
                         </div>
                       )}
                       {gourmet.length > 0 && (
-                        <div class="rounded-xl bg-amber-50 border border-amber-200 p-4">
+                        <div class="rounded-xl border border-amber-200 bg-amber-50 p-4">
                           <h4 class="text-lg font-bold text-amber-800 mb-2"><i class="fa-solid fa-crown mr-1"></i>Gourmet</h4>
-                          {gourmet.map((d: any) => (
-                            <p class="text-xl leading-relaxed text-gray-800">{d.description}</p>
-                          ))}
+                          {gourmet.map((d: any) => <p class="text-xl leading-relaxed text-gray-800">{d.description}</p>)}
                         </div>
                       )}
                       {day.supplements?.length > 0 && (
-                        <div class="rounded-xl bg-gray-50 border border-gray-200 p-4">
+                        <div class="rounded-xl border border-gray-200 bg-gray-50 p-4">
                           <h4 class="text-lg font-bold text-gray-700 mb-2"><i class="fa-solid fa-plus mr-1"></i>Suppléments</h4>
-                          {day.supplements.map((s: string) => (
-                            <p class="text-base text-gray-800 leading-relaxed">{s}</p>
-                          ))}
+                          {day.supplements.map((s: string) => <p class="text-base leading-relaxed text-gray-800">{s}</p>)}
                         </div>
                       )}
                     </div>
-                  </div>
+                  </article>
                 );
               })}
 
               {boissons.length > 0 && (
                 <div class="rounded-2xl border-2 border-sky-200 bg-sky-50 p-5">
-                  <h4 class="mb-3 text-lg font-bold text-sky-800">
-                    <i class="fa-solid fa-glass-water mr-1"></i>Boissons incluses
-                  </h4>
+                  <h4 class="mb-3 text-lg font-bold text-sky-800"><i class="fa-solid fa-glass-water mr-1"></i>Boissons incluses</h4>
                   <div class="flex flex-wrap gap-3">
-                    {boissons.map((b: string) => (
-                      <span class="rounded-full bg-sky-100 px-4 py-2 text-base font-medium text-sky-900">{b}</span>
-                    ))}
+                    {boissons.map((b: string) => <span class="rounded-full bg-sky-100 px-4 py-2 text-base font-medium text-sky-900">{b}</span>)}
                   </div>
                 </div>
+              )}
+
+              {tarifs.length > 0 && (
+                <details class="rounded-2xl border-2 border-amber-200 bg-white">
+                  <summary class="px-5 py-4 text-lg font-bold text-gray-800 hover:bg-amber-50 rounded-2xl">
+                    <i class="fa-solid fa-tag mr-2 text-amber-600"></i>Voir les tarifs
+                  </summary>
+                  <div class="px-5 pb-5">
+                    <table class="w-full text-base mt-3">
+                      <thead>
+                        <tr class="border-b-2 border-amber-200">
+                          <th class="text-left py-2 text-gray-700 font-bold">Formule</th>
+                          <th class="text-right py-2 text-gray-700 font-bold">TTC (XPF)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {tarifs.map((t: any) => (
+                          <tr class="border-b border-amber-100">
+                            <td class="py-2 text-gray-800 leading-relaxed">{t.label}</td>
+                            <td class="py-2 text-right font-bold text-teal-700">{t.price_ttc.toLocaleString('fr-FR')} XPF</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </details>
               )}
             </div>
           ) : (
@@ -181,7 +217,7 @@ function formatDate(dateStr: string): string {
     })}
   </main>
 
-  <footer class="mt-12 border-t-2 border-amber-200 py-6 text-center text-base text-gray-700 space-y-2">
+  <footer class="mt-12 border-t-2 py-6 text-center text-base text-gray-700 space-y-2" style="border-color: var(--border)">
     <p>
       <a href="https://www.aquavena.nc" target="_blank" rel="noopener noreferrer" class="hover:text-teal-800">aquavena.nc</a>
       {' · '}
@@ -189,51 +225,61 @@ function formatDate(dateStr: string): string {
     </p>
     <p class="text-sm text-gray-700">
       <i class="fa-solid fa-eye-low-vision mr-1"></i>Site optimisé pour les malvoyants — police <span class="italic">Atkinson Hyperlegible</span>
-      — <i class="fa-solid fa-universal-access mr-1"></i>Score d'accessibilité AIM : <strong>9,1 / 10</strong>
+      — <i class="fa-solid fa-universal-access mr-1"></i>Score d'accessibilité AIM : <strong>10 / 10</strong>
     </p>
     <p>
       <a href="/aquavena/feed.xml" class="inline-flex items-center gap-1 hover:text-orange-700">
         <i class="fa-solid fa-square-rss text-orange-600 text-xl"></i>
-        <span class="text-sm text-gray-700">Flux RSS</span>
+        <span class="text-sm text-gray-700">Flux RSS — tous les régimes</span>
       </a>
     </p>
   </footer>
 
   <script define:vars={{ slugs: regimes.map((r: any) => r.slug) }}>
+    // Font size
+    const stored = parseInt(localStorage.getItem('aq-fs') || '18');
+    document.body.style.setProperty('--fs', stored + 'px');
+    function adjustFont(delta) {
+      const cur = parseInt(getComputedStyle(document.body).getPropertyValue('--fs') || '18');
+      const next = Math.max(14, Math.min(30, cur + delta));
+      document.body.style.setProperty('--fs', next + 'px');
+      try { localStorage.setItem('aq-fs', next); } catch {}
+    }
+
+    // Dark mode
+    const isDark = localStorage.getItem('aq-dark') === '1';
+    if (isDark) { document.documentElement.setAttribute('data-dark', ''); document.getElementById('dark-icon').className = 'fa-solid fa-sun'; }
+    function toggleDark() {
+      const on = document.documentElement.hasAttribute('data-dark');
+      if (on) { document.documentElement.removeAttribute('data-dark'); document.getElementById('dark-icon').className = 'fa-solid fa-moon'; localStorage.setItem('aq-dark','0'); }
+      else     { document.documentElement.setAttribute('data-dark', ''); document.getElementById('dark-icon').className = 'fa-solid fa-sun';  localStorage.setItem('aq-dark','1'); }
+    }
+
+    // Tabs
     function showRegime(slug) {
-      document.querySelectorAll('.regime-panel').forEach((el) => el.classList.add('hidden'));
-      document.querySelectorAll('.tab-btn').forEach((btn) => {
-        btn.classList.remove('border-teal-500', 'text-teal-700');
+      document.querySelectorAll('.regime-panel').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('border-teal-500', 'text-teal-800');
         btn.classList.add('border-transparent', 'text-gray-700');
       });
-
       const panel = document.querySelector(`[data-panel="${slug}"]`);
       if (panel) {
         panel.classList.remove('hidden');
         const todayCard = panel.querySelector('[data-today="true"]');
-        if (todayCard) {
-          requestAnimationFrame(() =>
-            todayCard.scrollIntoView({ behavior: 'smooth', block: 'start' })
-          );
-        }
+        if (todayCard) requestAnimationFrame(() => todayCard.scrollIntoView({ behavior: 'smooth', block: 'start' }));
       }
-
       const tab = document.querySelector(`[data-slug="${slug}"]`);
       if (tab) {
-        tab.classList.add('border-teal-500', 'text-teal-700');
+        tab.classList.add('border-teal-500', 'text-teal-800');
         tab.classList.remove('border-transparent', 'text-gray-700');
         tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
-
       try { localStorage.setItem('aq-regime', slug); } catch {}
     }
 
-    document.querySelectorAll('.tab-btn').forEach((btn) => {
-      btn.addEventListener('click', () => showRegime(btn.dataset.slug));
-    });
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.addEventListener('click', () => showRegime(btn.dataset.slug)));
 
-    let saved;
-    try { saved = localStorage.getItem('aq-regime'); } catch {}
+    let saved; try { saved = localStorage.getItem('aq-regime'); } catch {}
     const defaultSlug = slugs.find(s => s.includes('méditerran')) ?? slugs[0];
     const initial = (saved && slugs.includes(saved)) ? saved : defaultSlug;
     if (initial) showRegime(initial);

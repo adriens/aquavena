@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT  = ROOT / "site" / "src" / "data" / "menus.json"
 
 MAX_RETRIES = 3
-RETRY_DELAY = 15  # seconds
+RETRY_DELAY = 15
 
 
 def _day(day: DayMenu) -> dict:
@@ -28,7 +28,7 @@ def _day(day: DayMenu) -> dict:
     }
 
 
-def _fetch() -> list:
+def _fetch() -> dict:
     regime_data = []
     with AquavenaClient(timeout=30.0) as client:
         regimes = client.list_regimes()
@@ -38,7 +38,7 @@ def _fetch() -> list:
                 m = client.get_menus(r.slug)
                 menu = {"description": m.description, "days": [_day(d) for d in m.days]}
             except Exception as exc:
-                print(f"  [warn] {exc}", file=sys.stderr)
+                print(f"  [warn] menus {r.slug}: {exc}", file=sys.stderr)
                 menu = {"description": "", "days": []}
             regime_data.append({
                 "name": r.name,
@@ -46,7 +46,28 @@ def _fetch() -> list:
                 "description": r.description,
                 "image_url": r.image_url,
                 "menu": menu,
+                "tarifs": [],
             })
+
+        print("  tarifs…", flush=True)
+        try:
+            raw_tarifs = client.get_tarifs()
+            for rt in raw_tarifs:
+                items = [{"label": i.label, "price_ht": i.price_ht, "price_ttc": i.price_ttc} for i in rt.items]
+                # Match tarif to regime by name similarity
+                best = None
+                best_score = 0
+                rname = rt.regime.lower()
+                for r in regime_data:
+                    score = sum(1 for w in r["name"].lower().split() if w in rname)
+                    if score > best_score:
+                        best_score = score
+                        best = r
+                if best and best_score > 0:
+                    best["tarifs"] = items
+        except Exception as exc:
+            print(f"  [warn] tarifs: {exc}", file=sys.stderr)
+
     return regime_data
 
 
