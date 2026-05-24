@@ -3,6 +3,17 @@
 [![Tests](https://github.com/adriens/aquavena/actions/workflows/tests.yml/badge.svg)](https://github.com/adriens/aquavena/actions/workflows/tests.yml)
 [![PyPI version](https://badge.fury.io/py/aquavena-sdk.svg)](https://pypi.org/project/aquavena-sdk/)
 
+[![Site GitHub Pages](https://img.shields.io/badge/Site-GitHub%20Pages-teal)](https://adriens.github.io/aquavena/)
+[![AIM Score](https://img.shields.io/badge/AIM%20Score-10%2F10-brightgreen)](https://adriens.github.io/aquavena/about/)
+[![WCAG AA](https://img.shields.io/badge/WCAG-AA-green)](https://adriens.github.io/aquavena/about/)
+[![Malvoyants](https://img.shields.io/badge/Optimis%C3%A9-Malvoyants-blueviolet)](https://adriens.github.io/aquavena/about/)
+
+[![RSS](https://img.shields.io/badge/RSS-Feed-orange)](https://adriens.github.io/aquavena/feed.xml)
+[![iCal](https://img.shields.io/badge/iCal-Calendrier-blue)](https://adriens.github.io/aquavena/cal.ics)
+
+[![Hugging Face Space](https://img.shields.io/badge/🤗%20Hugging%20Face-MCP%20Space-FFD21E)](https://huggingface.co/spaces/rastadidi/aquavena)
+[![Claude Skill](https://img.shields.io/badge/Claude-Skill-8A2BE2)](https://adriens.github.io/claude-commands/skills/aquavena/)
+
 SDK Python + CLI pour scraper les menus et tarifs d'[Aquavena](https://www.aquavena.nc) — service de livraison de repas diététiques en Nouvelle-Calédonie.
 
 ## Installation
