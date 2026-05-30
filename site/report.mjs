@@ -7,7 +7,7 @@ import { resolve } from 'path';
 const PORT = 4321;
 const BASE = `http://localhost:${PORT}`;
 const HASH = `#aqua-m%C3%A9diterran%C3%A9en`;
-const REPORTS = resolve('../benchmark/reports');
+const REPORTS = resolve('../../benchmark/reports');
 
 mkdirSync(REPORTS, { recursive: true });
 
