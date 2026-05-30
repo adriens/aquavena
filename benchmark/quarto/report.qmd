@@ -67,7 +67,7 @@ format:
           \vspace{0.8cm}
           {\large\today}
 
-          \vfill
+          \vspace{1.4cm}
 
           \begin{center}
           \textbf{Abstract}
