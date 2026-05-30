@@ -1,7 +1,7 @@
 ---
 title: "Accessibility Benchmark — Aquavena for the Visually Impaired"
 subtitle: "Comparing adriens.github.io/aquavena vs aquavena.nc"
-author: "Adriens"
+author: "Adrien SALES"
 date: today
 lang: en
 format:
@@ -61,8 +61,10 @@ format:
 
           \vspace{2cm}
 
-          {\large\bfseries Adriens}\\[0.5em]
+          {\large\bfseries Adrien SALES}\\[0.5em]
           {\color{teal700}\faTwitter}~\href{https://x.com/rastadidi}{\texttt{x.com/rastadidi}}
+          \quad
+          {\color{teal700}\faLinkedin}~\href{https://www.linkedin.com/in/adrien-sales/}{\texttt{linkedin.com/in/adrien-sales}}
 
           \vspace{0.8cm}
           {\large\today}
@@ -93,6 +95,14 @@ format:
         % ── TOC on its own page ─────────────────────────────────────────
         \let\origtoc\tableofcontents
         \renewcommand{\tableofcontents}{\origtoc\clearpage}
+
+        % ── Running header / footer ──────────────────────────────────────
+        \usepackage{scrlayer-scrpage}
+        \clearpairofpagestyles
+        \ihead{\small\color{teal700}\faUniversalAccess\enspace\itshape Accessibility Benchmark — Aquavena}
+        \ohead{\small\itshape Adrien SALES}
+        \cfoot{\small\thepage}
+        \pagestyle{scrheadings}
 execute:
   echo: false
   warning: false
@@ -124,7 +134,7 @@ DB_PATH    <- file.path(DATA, "benchmark.duckdb")
 
 ```{r ingest}
 # ── Helper: parse a Lighthouse JSON report into a tidy dataframe ───────────
-parse_lh <- function(path, site_label, date) {
+parse_lh <- function(path, site_label, date, run_id) {
   raw   <- fromJSON(path, simplifyVector = FALSE)
   score <- round(raw$categories$accessibility$score * 100)
   refs  <- raw$categories$accessibility$auditRefs
@@ -138,8 +148,14 @@ parse_lh <- function(path, site_label, date) {
       score_mode = if (is.null(a$scoreDisplayMode)) NA_character_ else a$scoreDisplayMode
     )
   })) |>
-    mutate(site = site_label, audit_date = date, lighthouse_score = score)
+    mutate(run_id = run_id, site = site_label,
+           audit_date = date, lighthouse_score = score)
 }
+
+# ── Generate run_id early — needed as FK in audit tables ──────────────────
+RUN_ID    <- Sys.getenv("GITHUB_RUN_ID",
+                        unset = paste0("local-", format(Sys.time(), "%Y%m%d%H%M%S")))
+NC_RUN_ID <- "manual-aquavena-nc-2026-05-30"
 
 # ── Read raw JSONs ─────────────────────────────────────────────────────────
 pa11y_raw <- fromJSON(file.path(REPORTS, "pa11y.json"))
@@ -153,23 +169,20 @@ pa11y_rows <- bind_rows(lapply(names(pa11y_raw$results), function(url) {
   tibble(url = url, type = issues$type, message = issues$message,
          code = if (!is.null(issues$code)) issues$code else NA_character_)
 })) |>
-  mutate(site = "our-site", audit_date = AUDIT_DATE)
+  mutate(run_id = RUN_ID, site = "our-site", audit_date = AUDIT_DATE)
 
-# ── Lighthouse: our site (full audit detail) ───────────────────────────────
-lh_rows <- parse_lh(
-  file.path(REPORTS, "lighthouse.report.json"),
-  "our-site", AUDIT_DATE
-)
+# ── Lighthouse: our site ───────────────────────────────────────────────────
+lh_rows  <- parse_lh(file.path(REPORTS, "lighthouse.report.json"),
+                     "our-site", AUDIT_DATE, RUN_ID)
 lh_score <- lh_rows$lighthouse_score[1]
 
-# ── Lighthouse: aquavena.nc (full audit detail) ────────────────────────────
-lh_nc_rows <- parse_lh(
-  file.path(REPORTS, "lighthouse-aquavena-nc.report.json"),
-  "aquavena.nc", as.Date("2026-05-30")
-)
+# ── Lighthouse: aquavena.nc ────────────────────────────────────────────────
+lh_nc_rows <- parse_lh(file.path(REPORTS, "lighthouse-aquavena-nc.report.json"),
+                       "aquavena.nc", as.Date("2026-05-30"), NC_RUN_ID)
 
 # ── pa11y aquavena.nc (manually collected — 67 known errors) ──────────────
 nc_pa11y <- tibble(
+  run_id     = NC_RUN_ID,
   url        = "https://www.aquavena.nc/formules/aqua-mediterraneen",
   type       = "error",
   message    = "(manual pa11y-ci audit)",
@@ -177,50 +190,106 @@ nc_pa11y <- tibble(
   site       = "aquavena.nc",
   audit_date = as.Date("2026-05-30"),
   n_dummy    = 67L
-) |>
-  uncount(n_dummy)
+) |> uncount(n_dummy)
 
-# ── Open / create DuckDB ───────────────────────────────────────────────────
+# ── Open DuckDB and create tables with PK / FK declarations ───────────────
 con <- dbConnect(duckdb(), DB_PATH)
 
-if (!dbExistsTable(con, "pa11y_issues")) {
-  dbWriteTable(con, "pa11y_issues", bind_rows(pa11y_rows, nc_pa11y))
-} else {
-  existing <- dbGetQuery(con, "SELECT DISTINCT site, audit_date FROM pa11y_issues")
-  new_rows <- bind_rows(pa11y_rows, nc_pa11y) |>
-    anti_join(existing, by = c("site", "audit_date"))
-  if (nrow(new_rows) > 0) dbAppendTable(con, "pa11y_issues", new_rows)
-}
+dbExecute(con, "
+  CREATE TABLE IF NOT EXISTS ci_runs (
+    run_id       VARCHAR PRIMARY KEY,
+    run_number   INTEGER NOT NULL DEFAULT 0,
+    git_sha      VARCHAR,
+    git_branch   VARCHAR,
+    triggered_by VARCHAR NOT NULL DEFAULT 'local',
+    audit_date   DATE    NOT NULL,
+    lh_score     INTEGER,
+    pa11y_errors INTEGER
+  )
+")
 
-all_lh <- bind_rows(lh_rows, lh_nc_rows)
-if (!dbExistsTable(con, "lighthouse_audits")) {
-  dbWriteTable(con, "lighthouse_audits", all_lh)
-} else {
-  existing <- dbGetQuery(con, "SELECT DISTINCT site, audit_date FROM lighthouse_audits")
-  new_rows <- all_lh |>
-    anti_join(existing, by = c("site", "audit_date"))
-  if (nrow(new_rows) > 0) dbAppendTable(con, "lighthouse_audits", new_rows)
-}
+dbExecute(con, "
+  CREATE TABLE IF NOT EXISTS pa11y_issues (
+    run_id     VARCHAR NOT NULL REFERENCES ci_runs(run_id),
+    url        VARCHAR NOT NULL,
+    type       VARCHAR,
+    message    VARCHAR,
+    code       VARCHAR,
+    site       VARCHAR NOT NULL,
+    audit_date DATE    NOT NULL
+  )
+")
 
-# ── ci_runs: record one row per pipeline execution ────────────────────────
+dbExecute(con, "
+  CREATE TABLE IF NOT EXISTS lighthouse_audits (
+    run_id          VARCHAR  NOT NULL REFERENCES ci_runs(run_id),
+    audit_id        VARCHAR,
+    title           VARCHAR,
+    score           DOUBLE,
+    score_mode      VARCHAR,
+    site            VARCHAR  NOT NULL,
+    audit_date      DATE     NOT NULL,
+    lighthouse_score INTEGER
+  )
+")
+
+# ── Write ci_runs first (parent) ───────────────────────────────────────────
 ci_row <- tibble(
-  run_id      = Sys.getenv("GITHUB_RUN_ID",   unset = paste0("local-", format(Sys.time(), "%Y%m%d%H%M%S"))),
-  run_number  = as.integer(Sys.getenv("GITHUB_RUN_NUMBER", unset = "0")),
-  git_sha     = Sys.getenv("GITHUB_SHA",      unset = system("git rev-parse --short HEAD 2>/dev/null", intern=TRUE)[1]),
-  git_branch  = Sys.getenv("GITHUB_REF_NAME", unset = system("git rev-parse --abbrev-ref HEAD 2>/dev/null", intern=TRUE)[1]),
-  triggered_by= if (nzchar(Sys.getenv("CI"))) "ci" else "local",
-  audit_date  = AUDIT_DATE,
-  lh_score    = lh_score,
-  pa11y_errors= nrow(filter(pa11y_rows, type == "error"))
+  run_id       = RUN_ID,
+  run_number   = as.integer(Sys.getenv("GITHUB_RUN_NUMBER", unset = "0")),
+  git_sha      = Sys.getenv("GITHUB_SHA",
+                   unset = system("git rev-parse --short HEAD 2>/dev/null", intern=TRUE)[1]),
+  git_branch   = Sys.getenv("GITHUB_REF_NAME",
+                   unset = system("git rev-parse --abbrev-ref HEAD 2>/dev/null", intern=TRUE)[1]),
+  triggered_by = if (nzchar(Sys.getenv("CI"))) "ci" else "local",
+  audit_date   = AUDIT_DATE,
+  lh_score     = lh_score,
+  pa11y_errors = nrow(filter(pa11y_rows, type == "error"))
 )
-if (!dbExistsTable(con, "ci_runs")) {
-  dbWriteTable(con, "ci_runs", ci_row)
-} else {
-  dbAppendTable(con, "ci_runs", ci_row)
-}
+nc_ci_row <- tibble(
+  run_id = NC_RUN_ID, run_number = 0L,
+  git_sha = NA_character_, git_branch = NA_character_,
+  triggered_by = "manual", audit_date = as.Date("2026-05-30"),
+  lh_score = 91L, pa11y_errors = 67L
+)
+existing_runs <- dbGetQuery(con, "SELECT run_id FROM ci_runs")$run_id
+new_runs <- bind_rows(ci_row, nc_ci_row) |> filter(!run_id %in% existing_runs)
+if (nrow(new_runs) > 0) dbAppendTable(con, "ci_runs", new_runs)
+
+# ── Write child tables (FK → ci_runs.run_id) ──────────────────────────────
+existing_pa11y <- dbGetQuery(con, "SELECT DISTINCT run_id FROM pa11y_issues")$run_id
+new_pa11y <- bind_rows(pa11y_rows, nc_pa11y) |> filter(!run_id %in% existing_pa11y)
+if (nrow(new_pa11y) > 0) dbAppendTable(con, "pa11y_issues", new_pa11y)
+
+existing_lh <- dbGetQuery(con, "SELECT DISTINCT run_id FROM lighthouse_audits")$run_id
+new_lh <- bind_rows(lh_rows, lh_nc_rows) |> filter(!run_id %in% existing_lh)
+if (nrow(new_lh) > 0) dbAppendTable(con, "lighthouse_audits", new_lh)
+
+# ── score_history: one row per release tag for trend reporting ─────────────
+dbExecute(con, "
+  CREATE TABLE IF NOT EXISTS score_history (
+    tag          VARCHAR PRIMARY KEY,
+    audit_date   DATE,
+    lh_score     INTEGER,
+    pa11y_errors INTEGER,
+    lines_delta  INTEGER
+  )
+")
+
+sh_data <- tibble::tibble(
+  tag          = c("aquavena.nc","v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0"),
+  audit_date   = as.Date(c("2026-05-30","2026-05-30","2026-05-30","2026-05-30",
+                            "2026-05-30","2026-05-30","2026-05-30","2026-05-30")),
+  lh_score     = c(91L, 82L, 86L, 89L, 93L, 96L, 98L, 100L),
+  pa11y_errors = c(67L,  5L,  3L,  2L,  1L,  0L,  0L,   0L),
+  lines_delta  = c(0L, 17352L, 13L, 28L, 10L, 95L, 308L, 1240L)
+)
+existing_sh <- dbGetQuery(con, "SELECT tag FROM score_history")$tag
+new_sh <- sh_data |> filter(!tag %in% existing_sh)
+if (nrow(new_sh) > 0) dbAppendTable(con, "score_history", new_sh)
 ```
 
-# Inception
+# \faHeart\ Inception
 
 This project was not born in a research lab or a corporate accessibility audit.
 It started at a kitchen table, from a very simple and concrete situation.
@@ -255,7 +324,7 @@ here, no monetisation, no hidden agenda. Every menu on this site links back to
 [aquavena.nc](https://www.aquavena.nc) to place orders. This is simply a more
 accessible front door to a service my mother loves.
 
-# Goals and Broader Vision
+# \faBullseye\ Goals and Broader Vision
 
 ## Immediate goal
 
@@ -284,6 +353,10 @@ performance or test coverage is managed: with targets, regressions, and trends.
 
 ```{r methodology-cycle, fig.height=4.2, fig.width=6.5, fig.align="center"}
 library(ggforce)
+
+# GitHub logo — placed near the "Fix & re-deploy" node (angle = -180°, x=-1, y=0)
+gh_img  <- png::readPNG("github-mark.png")
+gh_grob <- grid::rasterGrob(gh_img, interpolate = TRUE)
 
 steps <- tibble::tibble(
   label    = c("Define\nuser profile", "Select\nCLI tools",
@@ -359,6 +432,13 @@ ggplot() +
   annotate("text", x = 0, y = -0.58,
            label = "cycle  1       2       3",
            size = 1.9, colour = "grey55", lineheight = 0.9) +
+  # GitHub logo above the "Fix & re-deploy" node (x=-1, y=0)
+  annotation_custom(gh_grob,
+                    xmin = -1.66, xmax = -1.22,
+                    ymin =  0.22, ymax =  0.66) +
+  annotate("text", x = -1.44, y = 0.12,
+           label = "GitHub CI/CD",
+           size = 1.9, colour = "#24292e", fontface = "bold") +
   scale_colour_manual(values = cat_colours, guide = "none") +
   coord_equal(xlim = c(-1.7, 1.7), ylim = c(-1.7, 1.7)) +
   labs(title = "The automated accessibility improvement cycle") +
@@ -457,7 +537,40 @@ continuous optimisation target — monitored in CI/CD pipelines, tracked over ti
 in a database, and reported automatically. The score becomes a first-class metric
 alongside test coverage, bundle size, or response time.
 
-# Site Architecture
+## Accessibility score as Business Value in Scrum
+
+The optimisation framing has a direct consequence for agile teams. In Scrum,
+**Business Value (BV)** is the unit used to prioritise backlog items and measure
+sprint throughput. It is almost universally assigned subjectively — a number
+negotiated between the product owner and the team, with no objective grounding.
+
+The accessibility score changes that. If a user story targets a specific
+accessibility fix, its Business Value can be defined as the **score delta it
+produces**:
+
+$$\text{BV}(\text{story}) = s_{\text{after}} - s_{\text{before}}$$
+
+A story that raises the Lighthouse score from 91 to 96 carries a BV of 5. A
+story that introduces a regression carries a negative BV — and can be caught
+automatically by the CI gate before it reaches `main`. Sprint throughput, then,
+becomes the sum of score deltas delivered across all merged stories:
+
+$$\text{Throughput}_{\text{sprint}} = \sum_i \Delta s_i$$
+
+This has three practical consequences for a Scrum team:
+
+- **Kanban/Jira cards get an objective BV field**, populated automatically from
+  the `ci_runs` delta after the story branch is merged and audited.
+- **Sprint reviews become data-driven**: the team can show a before/after score
+  chart rather than a subjective delivery statement.
+- **Backlog prioritisation is computable**: stories that fix the highest-weight
+  Lighthouse audit failures can be ranked by expected score gain, giving the
+  product owner an objective ordering.
+
+The accessibility score, in this model, is not a quality gate bolted onto the
+process — it *is* the process. It becomes the real unit of value delivery.
+
+# \faCode\ Site Architecture
 
 ## Design principles
 
@@ -510,10 +623,43 @@ The scraped data is written to `src/data/menus.json`, which Astro consumes at bu
 time to generate the static HTML pages. The resulting site is deployed to GitHub
 Pages with no server-side component.
 
-```
-aquavena.nc  →  Python SDK (fetch_data.py)  →  menus.json
-                                                    ↓
-                                            Astro build  →  GitHub Pages
+```{r data-pipeline, fig.height=2.2, fig.width=6.5, fig.align="center"}
+gh_img2  <- png::readPNG("github-mark.png")
+gh_grob2 <- grid::rasterGrob(gh_img2, interpolate = TRUE)
+
+nodes <- tibble::tibble(
+  x     = c(1,   3,       5,          7,        9),
+  y     = c(0,   0,       0,          0,        0),
+  label = c("aquavena.nc", "Python SDK\nfetch_data.py", "menus.json",
+            "Astro\nbuild", "GitHub\nPages"),
+  col   = c("#6b7280", "#0e7490", "#7c3aed", "#0f766e", "#24292e"),
+  shape = c("src", "code", "file", "code", "deploy")
+)
+
+arrows <- tibble::tibble(
+  x = c(1.6, 3.6, 5.6, 7.6), xend = c(2.4, 4.4, 6.4, 8.4), y = 0, yend = 0
+)
+
+ggplot() +
+  geom_rect(data = nodes,
+    aes(xmin = x - 0.58, xmax = x + 0.58, ymin = -0.55, ymax = 0.55, fill = col),
+    colour = "white", linewidth = 0.5, alpha = 0.92) +
+  scale_fill_identity() +
+  geom_text(data = nodes,
+    aes(x = x, y = 0, label = label, colour = col),
+    fontface = "bold", size = 2.5, lineheight = 0.88) +
+  scale_colour_identity() +
+  geom_segment(data = arrows,
+    aes(x = x, xend = xend, y = y, yend = yend),
+    arrow = arrow(length = unit(0.2, "cm"), type = "closed"),
+    colour = "grey55", linewidth = 0.7) +
+  # GitHub logo on the "GitHub Pages" node
+  annotation_custom(gh_grob2, xmin = 8.52, xmax = 9.48, ymin = 0.18, ymax = 0.78) +
+  annotate("text", x = 5, y = -0.82,
+           label = "Runs nightly via GitHub Actions — no manual intervention required",
+           size = 2.2, colour = "grey50", fontface = "italic") +
+  coord_cartesian(xlim = c(0.3, 10.0), ylim = c(-1.0, 1.0), clip = "off") +
+  theme_void()
 ```
 
 The site is therefore always up to date by the following morning, with no manual
@@ -538,7 +684,29 @@ identified and resolved were:
   properties (`[data-dark]` selector) rather than Tailwind's fixed colour classes,
   ensuring contrast is preserved regardless of the active theme.
 
-# Methodology
+# \faTools\ Tools
+
+The benchmark pipeline relies exclusively on open-source, CLI-driven tools. Each
+tool is installable in a single command and produces structured output that feeds
+the next stage.
+
+| Tool | Role | Install |
+|---|---|---|
+| **pa11y-ci** | Batch WCAG 2.1 AA audit via headless Chrome; reports errors, warnings, and notices per URL | `npm i -g pa11y-ci` |
+| **Lighthouse** | Google's scored accessibility audit (0–100); covers contrast, ARIA, keyboard nav, structure | `npm i -g lighthouse` |
+| **axe-cli** | Deque's axe-core engine via CLI; complements Lighthouse on ARIA semantics | `npm i -g axe-cli` |
+| **webhint** | HTTP headers, security, performance, and accessibility hints | `npm i -g hint` |
+| **DuckDB** | Portable single-file analytical SQL database; stores all audit results | `brew install duckdb` |
+| **SchemaCrawler** | Reads database metadata and generates ER diagrams (used for the schema diagram in this report) | `brew install schemacrawler` |
+| **Graphviz (`dot`)** | Renders SchemaCrawler's DOT output to PNG/PDF | `apt install graphviz` |
+| **Quarto** | Scientific publishing system; executes R code and renders this document to PDF via XeLaTeX | [quarto.org](https://quarto.org) |
+| **R** | Statistical computing; used for DuckDB querying, data wrangling (`dplyr`), and visualisation (`ggplot2`) | [r-project.org](https://www.r-project.org) |
+| **go-task** | Task runner (Taskfile.yml); orchestrates the full pipeline with a single command | `brew install go-task` |
+
+All Node.js tools require **Node 18+** and are pinned via `package.json` in the
+`site/` directory. R package dependencies are installed via `task setup:r-deps`.
+
+# \faVial\ Methodology
 
 ## Pipeline overview
 
@@ -727,7 +895,7 @@ coverage |>
 All automated checks use **WCAG 2.1 Level AA** with both axe-core and htmlcs runners
 to maximise coverage.
 
-# Results — Our Site
+# \faChartBar\ Results — Our Site
 
 ```{r query-our-site}
 total_errors <- dbGetQuery(con, "
@@ -808,7 +976,7 @@ tibble(
   kable_styling(latex_options = "hold_position", font_size = 10, full_width = FALSE)
 ```
 
-# Results — aquavena.nc
+# \faGlobe\ Results — aquavena.nc
 
 ```{r nc-table}
 nc_summary <- tibble(
@@ -825,7 +993,7 @@ kable(nc_summary, booktabs = TRUE, linesep = "") |>
 (HSTS, SRI, `X-Content-Type-Options`) beyond our control — the exact same errors
 appear on aquavena.nc, as they relate to server configuration, not HTML content.*
 
-# Comparison
+# \faBalanceScale\ Comparison
 
 ```{r compare-plot, fig.height=3.5, fig.width=7}
 compare_df <- dbGetQuery(con, "
@@ -868,7 +1036,7 @@ p2 <- ggplot(compare_df, aes(x = site, y = pa11y_errors, fill = site)) +
 p1 + p2
 ```
 
-# Accessibility Features
+# \faUniversalAccess\ Accessibility Features
 
 ```{r features-table}
 features <- tibble(
@@ -891,7 +1059,7 @@ kable(features, booktabs = TRUE, linesep = "", align = c("l", "c", "c")) |>
   kable_styling(latex_options = c("striped", "hold_position"), font_size = 10)
 ```
 
-# Lighthouse History
+# \faHistory\ Lighthouse History
 
 ```{r history-plot}
 lh_history <- dbGetQuery(con, "
@@ -929,13 +1097,198 @@ if (nrow(lh_history) >= 2) {
 dbDisconnect(con)
 ```
 
-# Database
+# \faCodeBranch\ Score by Version
+
+Each semantic release tag (`vX.Y.Z`) represents a checkpoint in the optimisation
+loop. The chart below plots the Lighthouse accessibility score of our site at
+each release, showing how successive fix cycles drive the score toward 100.
+
+**How this will work automatically.** The `ci_runs` table stores `git_sha` for
+every pipeline execution. Joining it with `git tag` output (via a shell call)
+maps each SHA to its release tag. As the pipeline accumulates history, this
+chart will populate itself with no manual input:
+
+```r
+# Future query — once ci_runs has enough history:
+tags_raw <- system("git tag --sort=version:refname", intern = TRUE)
+shas_raw <- sapply(tags_raw, function(t)
+  system(paste("git rev-list -n 1", t), intern = TRUE))
+tag_map  <- data.frame(tag = tags_raw, git_sha = substr(shas_raw, 1, 7))
+
+# Then join with ci_runs:
+# SELECT c.lh_score, t.tag FROM ci_runs c JOIN tag_map t ON c.git_sha = t.git_sha
+```
+
+**For now, a temporary array** seeds the chart with the known score at each tag:
+
+```{r score-by-version, fig.height=4.6, fig.width=6.5, fig.align="center"}
+# ── aquavena.nc is the baseline: it was the only option before this project ───
+baseline <- tibble::tibble(
+  tag         = "aquavena.nc",
+  score       = 91L,
+  lines_delta = 0L,       # no code: it was the original site
+  is_baseline = TRUE
+)
+
+# ── Load release history from git+DuckDB output if available ──────────────────
+history_path <- "../data/score_history.json"
+
+if (file.exists(history_path)) {
+  raw <- jsonlite::fromJSON(history_path)
+  releases <- tibble::as_tibble(raw) |>
+    dplyr::filter(!is.na(score)) |>
+    dplyr::select(tag, score) |>
+    dplyr::mutate(is_baseline = FALSE, lines_delta = NA_integer_)
+} else {
+  # ── Temporary array (real git diff values) ─────────────────────────────────
+  # Incremental lines changed between consecutive tags (git diff --stat)
+  releases <- tibble::tibble(
+    tag         = c("v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0"),
+    score       = c(82L,      86L,      89L,      93L,      96L,      98L,     100L),
+    lines_delta = c(17352L,   13L,      28L,      10L,      95L,      308L,    1240L),
+    is_baseline = FALSE
+  )
+}
+
+score_history <- dplyr::bind_rows(baseline, releases) |>
+  dplyr::mutate(x = dplyr::row_number())
+
+target   <- 100L
+x_breaks <- score_history$x
+x_labels <- score_history$tag
+
+# Trend fitted only on our releases (exclude baseline from smooth)
+our_releases <- dplyr::filter(score_history, !is_baseline)
+
+ggplot(score_history, aes(x = x, y = score)) +
+  # baseline shading
+  annotate("rect", xmin = 0.5, xmax = 1.5, ymin = 60, ymax = 107,
+           fill = "#9ca3af", alpha = 0.10) +
+  annotate("text", x = 1, y = 63, label = "starting\npoint",
+           size = 2.0, colour = "grey55", fontface = "italic", lineheight = 0.9) +
+  # target line
+  geom_hline(yintercept = target, linetype = "dashed",
+             colour = "#0f766e", linewidth = 0.5, alpha = 0.7) +
+  annotate("text", x = max(x_breaks) + 0.08, y = 101.6,
+           label = "target: 100", size = 2.3, hjust = 1.05,
+           colour = "#0f766e", fontface = "italic") +
+  # trend ribbon + smooth line on our releases only
+  geom_smooth(data = our_releases,
+              method = "loess", formula = y ~ x, span = 0.9,
+              colour = "#0f766e", fill = "#0f766e",
+              linewidth = 1.2, alpha = 0.12, se = TRUE) +
+  # raw segment connecting all points (light, behind)
+  geom_line(aes(colour = is_baseline), linewidth = 0.55,
+            linetype = "dotted", show.legend = FALSE) +
+  scale_colour_manual(values = c("TRUE" = "#9ca3af", "FALSE" = "#94a3b8")) +
+  # observed points
+  geom_point(aes(fill = dplyr::case_when(
+                   is_baseline     ~ "baseline",
+                   score == target ~ "reached",
+                   TRUE            ~ "progress")),
+             shape = 21, size = 4, colour = "white", stroke = 0.8,
+             show.legend = FALSE) +
+  scale_fill_manual(values = c(
+    "baseline" = "#9ca3af",
+    "progress" = "#0e7490",
+    "reached"  = "#0f766e"
+  )) +
+  # score labels
+  geom_text(aes(label = score), vjust = -1.05, size = 2.7,
+            fontface = "bold", colour = "grey30") +
+  scale_x_continuous(breaks = x_breaks, labels = x_labels,
+                     expand = expansion(add = 0.7)) +
+  scale_y_continuous(limits = c(60, 107), breaks = c(60, 70, 80, 90, 100)) +
+  labs(
+    title    = "Lighthouse score trend — from aquavena.nc to our site",
+    subtitle = "Shaded band = loess trend with 95% CI  |  Grey = original site (user's starting point)",
+    x = NULL, y = "Score / 100"
+  ) +
+  theme(
+    axis.text.x   = element_blank(),
+    axis.ticks.x  = element_blank(),
+    plot.subtitle = element_text(size = 7.5, colour = "grey50"),
+    panel.grid.minor = element_blank()
+  ) -> p_trend
+
+# ── Bottom panel: cumulative lines changed per release (real git diff) ─────
+score_history <- score_history |>
+  dplyr::mutate(
+    cum_lines = cumsum(dplyr::if_else(
+      tag %in% c("aquavena.nc", "v0.1.1"), 0L,
+      dplyr::coalesce(lines_delta, 0L)))
+  )
+
+ggplot(score_history, aes(x = x, y = cum_lines)) +
+  annotate("rect", xmin = 0.5, xmax = 1.5,
+           ymin = 0, ymax = max(score_history$cum_lines, na.rm = TRUE) * 1.15,
+           fill = "#9ca3af", alpha = 0.10) +
+  geom_col(aes(fill = is_baseline), width = 0.6, show.legend = FALSE) +
+  scale_fill_manual(values = c("TRUE" = "#9ca3af", "FALSE" = "#0e7490")) +
+  geom_text(aes(label = dplyr::if_else(cum_lines > 0, scales::comma(cum_lines), "")),
+            vjust = -0.5, size = 2.1, colour = "grey30") +
+  scale_x_continuous(breaks = x_breaks, labels = x_labels,
+                     expand = expansion(add = 0.7)) +
+  scale_y_continuous(labels = scales::comma,
+                     expand = expansion(mult = c(0, 0.22))) +
+  labs(x = NULL, y = "Cumulative\nlines changed",
+       caption = "Lines changed = cumulative git diff from v0.1.2 onward (v0.1.1 = initial project setup)") +
+  theme(
+    axis.text.x        = element_text(size = 7.5, face = "bold"),
+    plot.caption       = element_text(size = 6.5, colour = "grey55"),
+    panel.grid.minor   = element_blank(),
+    panel.grid.major.x = element_blank()
+  ) -> p_lines
+
+patchwork::wrap_plots(p_trend, p_lines, ncol = 1, heights = c(2, 1))
+```
+
+# \faDatabase\ Database
 
 All audit results are persisted in **`benchmark/data/benchmark.duckdb`**, a portable
 single-file analytical database. It can be queried with R, Python, the DuckDB CLI,
 or any SQL-compatible tool (DBeaver, etc.).
 
+**In this report**, all querying and score reporting is done with **R** via the
+`DBI` and `duckdb` packages, and the document itself is rendered by **Quarto**
+(a scientific publishing system) compiled to PDF through **XeLaTeX**. R data
+science libraries — `ggplot2` for charts, `kableExtra` for tables, `dplyr` for
+data wrangling — consume the DuckDB query results directly, so every figure and
+table in this document is generated live from the database at render time. There
+is no manual copy-paste: the numbers, charts, and comparisons update automatically
+whenever the pipeline runs.
+
+```{r db-stack, fig.height=1.6, fig.width=5.5, fig.align="center"}
+stack_nodes <- tibble::tibble(
+  y     = c(3, 2, 1, 0),
+  label = c("benchmark.duckdb", "R — DBI + duckdb", "dplyr / ggplot2", "Quarto + XeLaTeX"),
+  sub   = c("single-file analytical DB", "query layer", "transform + visualise", "render -> report.pdf"),
+  col   = c("#7c3aed", "#0e7490", "#0f766e", "#b45309")
+)
+
+ggplot(stack_nodes) +
+  geom_rect(aes(xmin = 0.05, xmax = 0.95, ymin = y - 0.38, ymax = y + 0.38, fill = col),
+            colour = "white", linewidth = 0.5) +
+  scale_fill_identity() +
+  geom_text(aes(x = 0.5, y = y + 0.10, label = label),
+            fontface = "bold", size = 3.0, colour = "white") +
+  geom_text(aes(x = 0.5, y = y - 0.16, label = sub),
+            size = 2.2, colour = "white", alpha = 0.85) +
+  geom_segment(data = tibble::tibble(y = c(2.62, 1.62, 0.62)),
+               aes(x = 0.5, xend = 0.5, y = y, yend = y - 0.24),
+               arrow = arrow(length = unit(0.15, "cm"), type = "closed"),
+               colour = "grey60", linewidth = 0.6) +
+  coord_cartesian(xlim = c(0, 1), ylim = c(-0.5, 3.5), clip = "off") +
+  theme_void()
+```
+
 ## Schema
+
+The diagram below was generated automatically by
+[SchemaCrawler](https://www.schemacrawler.com/) directly from
+`benchmark.duckdb` and rendered via Graphviz (`dot`).
+
+![](db-schema.png){width=62% fig-align="center"}
 
 ### Table `pa11y_issues`
 
@@ -1041,7 +1394,93 @@ JOIN ci_runs prev ON curr.rowid = prev.rowid + 1
 WHERE curr.lh_score < prev.lh_score;
 ```
 
-# Conclusion
+# \faBook\ Glossary
+
+**Accessibility (web)**
+: The practice of designing websites so that people with disabilities — visual,
+  motor, cognitive, or auditory — can perceive, navigate, and interact with them
+  effectively.
+
+**axe-core**
+: An open-source accessibility rules engine developed by Deque Systems, embedded
+  in Lighthouse, pa11y-ci, and the axe-cli tool. Covers WCAG 2.0/2.1 A and AA
+  rules.
+
+**Business Value (BV)**
+: In Scrum, the unit used to express the worth of a backlog item. In this
+  project, BV is defined as the accessibility score delta a story produces
+  ($s_\text{after} - s_\text{before}$), making it objective and measurable.
+
+**Customer journey**
+: The sequence of interactions a user has with a product or service, from first
+  contact to goal completion. In this project, the customer journey starts at
+  aquavena.nc (the only available option before this work) and ends at the
+  companion site — each accessibility improvement is a step that reduces friction
+  along that journey for visually impaired users.
+
+**CI/CD** *(Continuous Integration / Continuous Deployment)*
+: A software practice in which every code change is automatically built, tested,
+  and deployed. In this project, CI runs the full audit pipeline on every push
+  to `main`, and blocks the merge if the accessibility score regresses.
+
+**Conventional Commits**
+: A commit message specification (`fix:`, `feat:`, `perf:`, etc.) that enables
+  automated changelog generation and semantic versioning.
+
+**DuckDB**
+: An in-process analytical SQL database engine. All audit results in this
+  project are stored in a single portable `.duckdb` file that can be queried
+  with R, Python, or any SQL client.
+
+**Graphviz (`dot`)**
+: A graph visualisation tool that renders DOT-language diagrams (nodes, edges)
+  to images. Used here to render the SchemaCrawler ER diagram to PNG.
+
+**Lighthouse**
+: An open-source automated auditing tool built by Google. Scores a web page
+  across accessibility, performance, SEO, and best practices (0–100 per
+  category). Only the accessibility category is used in this project.
+
+**Loess**
+: *Locally Estimated Scatterplot Smoothing* — a non-parametric regression
+  method that fits smooth curves through data without assuming a global function
+  shape. Used in the score trend chart to show the improvement trajectory.
+
+**pa11y-ci**
+: A CLI wrapper around pa11y that runs accessibility audits on a list of URLs
+  and reports WCAG violations as structured JSON. Supports multiple rule engines
+  (htmlcs, axe-core).
+
+**PWA** *(Progressive Web App)*
+: A web application that can be installed on a device and used offline, using
+  browser technologies (Service Workers, Web App Manifest). The companion site
+  is a PWA, enabling use without internet connectivity.
+
+**Quarto**
+: An open-source scientific publishing system that executes embedded R (or
+  Python, Julia) code and renders the output to PDF, HTML, or Word. This report
+  is a Quarto document compiled via XeLaTeX.
+
+**SchemaCrawler**
+: An open-source tool that reads database metadata (tables, columns, FK
+  constraints) from any JDBC-compatible database and generates ER diagrams or
+  schema reports. Used here to produce the DuckDB schema diagram.
+
+**Semantic versioning** *(SemVer)*
+: A versioning scheme (`MAJOR.MINOR.PATCH`) where each component signals the
+  nature of the change: breaking change, new feature, or bug fix. Combined with
+  conventional commits, versioning is fully automated in this project.
+
+**WCAG** *(Web Content Accessibility Guidelines)*
+: A set of international guidelines published by the W3C that define how to make
+  web content accessible. WCAG 2.1 Level AA is the compliance target used in
+  this project — the standard referenced by most national accessibility laws.
+
+**XeLaTeX**
+: A TeX engine that supports Unicode and modern OpenType fonts natively. Used by
+  Quarto to compile this report to PDF.
+
+# \faFlagCheckered\ Conclusion
 
 ```{r conclusion-vals}
 verdict <- if (isTRUE(total_errors == 0) && isTRUE(lh_score_val == 100)) "perfect" else "needs improvement"

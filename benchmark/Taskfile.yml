@@ -115,6 +115,23 @@ tasks:
     cmds:
       - task: report
 
+  score-history:
+    desc: "Extract per-release Lighthouse scores from git tags + DuckDB → data/score_history.json"
+    cmds:
+      - uv run python scripts/extract_score_history.py
+
+  diagram:db:
+    desc: "Generate DB schema diagram from DuckDB via SchemaCrawler + Graphviz → quarto/db-schema.png"
+    cmds:
+      - >
+        schemacrawler
+        --url="jdbc:duckdb:{{.DATA_DIR}}/benchmark.duckdb"
+        --info-level=standard
+        --command=schema
+        --output-format=dot
+        --output-file={{.QUARTO_DIR}}/db-schema.dot
+      - dot -Tpng -Gdpi=150 {{.QUARTO_DIR}}/db-schema.dot -o {{.QUARTO_DIR}}/db-schema.png
+
   report:
     desc: "Render the Quarto PDF report (loads JSONs → DuckDB → PDF via XeLaTeX)"
     dir: "{{.QUARTO_DIR}}"
@@ -122,10 +139,12 @@ tasks:
       - quarto render report.qmd --to pdf
 
   report:fresh:
-    desc: "Delete DuckDB then re-render the PDF (clean rebuild)"
+    desc: "Delete DuckDB, regenerate diagram, extract score history, then re-render PDF"
     cmds:
       - task: db:clean
       - task: report
+      - task: diagram:db
+      - task: score-history
 
   # ── Full pipeline ─────────────────────────────────────────────────────────
 
