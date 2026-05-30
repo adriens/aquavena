@@ -230,7 +230,7 @@ function formatDate(dateStr: string): string {
                         {isToday && <span class="rounded-full bg-white px-3 py-1 text-sm font-bold text-teal-700">Aujourd'hui</span>}
                         {day.formule && <span class={`text-sm font-medium ${isToday ? 'text-white' : ''}`} style={!isToday ? 'color: var(--text-muted)' : ''}>{day.formule}</span>}
                         <button class="speak-btn rounded-lg px-3 py-1 text-sm font-bold transition-colors"
-                          class:list={[isToday ? 'bg-white text-teal-700 hover:bg-teal-50' : 'bg-teal-600 text-white hover:bg-teal-700']}
+                          class:list={[isToday ? 'bg-white text-teal-700 hover:bg-teal-50' : 'bg-teal-700 text-white hover:bg-teal-800']}
                           aria-label="Lire le menu à voix haute">
                           <i class="fa-solid fa-volume-high mr-1"></i>Lire
                         </button>

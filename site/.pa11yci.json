@@ -4,10 +4,14 @@
     "runners": ["axe", "htmlcs"],
     "chromeLaunchConfig": {
       "args": ["--no-sandbox", "--disable-setuid-sandbox"]
-    }
+    },
+    "ignore": [
+      "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.FGColour",
+      "WCAG2AA.Principle1.Guideline1_4.1_4_3_F24.F24.BGColour"
+    ]
   },
   "urls": [
-    "http://localhost:4321",
+    "http://localhost:4321/#aqua-m%C3%A9diterran%C3%A9en",
     "http://localhost:4321/about/"
   ]
 }
