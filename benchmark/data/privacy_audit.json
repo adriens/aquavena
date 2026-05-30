@@ -1,0 +1,28 @@
+{
+  "aquavena.nc": {
+    "total_requests": 28,
+    "third_party_requests": 3,
+    "third_party_hosts": [
+      "www.googletagmanager.com",
+      "www.google-analytics.com"
+    ],
+    "known_trackers": [
+      "www.googletagmanager.com",
+      "www.google-analytics.com"
+    ],
+    "cookies_count": 0,
+    "cookies": []
+  },
+  "our-site": {
+    "total_requests": 8,
+    "third_party_requests": 6,
+    "third_party_hosts": [
+      "fonts.googleapis.com",
+      "cdnjs.cloudflare.com",
+      "fonts.gstatic.com"
+    ],
+    "known_trackers": [],
+    "cookies_count": 0,
+    "cookies": []
+  }
+}

@@ -1,5 +1,5 @@
 digraph SchemaCrawler_Diagram {
-	graph [bb="0,0,1095.2,607.25",
+	graph [bb="0,0,1947,2128.9",
 		fontname=Helvetica,
 		label=<
       <table border="1" cellborder="0" cellspacing="0" color="#888888">
@@ -9,13 +9,13 @@ digraph SchemaCrawler_Diagram {
 	</tr>
 	<tr>
 		<td align='right'>generated on</td>
-		<td align='left'>2026-05-30 04:23:36</td>
+		<td align='left'>2026-05-30 17:29:32</td>
 	</tr>
       </table>
     >,
 		labeljust=r,
 		lheight=0.62,
-		lp="952.12,26.25",
+		lp="1803.9,26.25",
 		lwidth=3.75,
 		rankdir=RL
 	];
@@ -73,8 +73,99 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="179.12,241.5",
+		pos="966.38,571.12",
 		width=4.9757];
+	git_commits_93a01e32	[height=1.9097,
+		label=<
+      <table border="1" cellborder="0" cellspacing="0" color="#888888">
+	<tr>
+		<td colspan='2' bgcolor='#F2CDC2' align='left'><b><i>benchmark.main.git_commits</i></b></td>
+		<td bgcolor='#F2CDC2' align='right'>[table]</td>
+	</tr>
+	<tr>
+		<td port='git_sha_e2c1eacd.start' align='left'><b><i>git_sha</i></b></td>
+		<td align='left'> </td>
+		<td port='git_sha_e2c1eacd.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='commit_ts_87825295.start' align='left'>commit_ts</td>
+		<td align='left'> </td>
+		<td port='commit_ts_87825295.end' align='left'>TIMESTAMP</td>
+	</tr>
+	<tr>
+		<td port='author_8c90c999.start' align='left'>author</td>
+		<td align='left'> </td>
+		<td port='author_8c90c999.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='subject_710dfd3a.start' align='left'>subject</td>
+		<td align='left'> </td>
+		<td port='subject_710dfd3a.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='first_seen_d6cd8ab8.start' align='left'>first_seen</td>
+		<td align='left'> </td>
+		<td port='first_seen_d6cd8ab8.end' align='left'>DATE</td>
+	</tr>
+      </table>
+    >,
+		pos="199,812.12",
+		width=5.5278];
+	ci_runs_b2eaef04:"git_sha_acd1343b.start":w -> git_commits_93a01e32:"git_sha_e2c1eacd.end":e	[arrowhead=teetee,
+		arrowtail=crowodot,
+		dir=both,
+		label=<ci_runs_git_sha_git_sha_fkey>,
+		lp="564.12,830.5",
+		pos="s,795.25,592.38 e,390,844 775.92,592.76 596.57,600.08 570.43,710.54 416,821.88 407.15,828.25 405.43,836.89 399.53,841.25",
+		style=solid];
+	html_quality_60956fee	[height=2.2049,
+		label=<
+      <table border="1" cellborder="0" cellspacing="0" color="#888888">
+	<tr>
+		<td colspan='2' bgcolor='#F2CDC2' align='left'><b><i>benchmark.main.html_quality</i></b></td>
+		<td bgcolor='#F2CDC2' align='right'>[table]</td>
+	</tr>
+	<tr>
+		<td port='run_id_7b453521.start' align='left'><b><i>run_id</i></b></td>
+		<td align='left'> </td>
+		<td port='run_id_7b453521.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='site_b24e6d19.start' align='left'><b><i>site</i></b></td>
+		<td align='left'> </td>
+		<td port='site_b24e6d19.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='audit_date_16f2cb64.start' align='left'>audit_date</td>
+		<td align='left'> </td>
+		<td port='audit_date_16f2cb64.end' align='left'>DATE NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='html_errors_28b00c51.start' align='left'>html_errors</td>
+		<td align='left'> </td>
+		<td port='html_errors_28b00c51.end' align='left'>INTEGER</td>
+	</tr>
+	<tr>
+		<td port='html_warnings_ab436c3d.start' align='left'>html_warnings</td>
+		<td align='left'> </td>
+		<td port='html_warnings_ab436c3d.end' align='left'>INTEGER</td>
+	</tr>
+	<tr>
+		<td port='page_bytes_1250ac8d.start' align='left'>page_bytes</td>
+		<td align='left'> </td>
+		<td port='page_bytes_1250ac8d.end' align='left'>INTEGER</td>
+	</tr>
+      </table>
+    >,
+		pos="1722.1,769.12",
+		width=5.559];
+	html_quality_60956fee:"run_id_7b453521.start":w -> ci_runs_b2eaef04:"run_id_739f98cb.end":e	[arrowhead=teetee,
+		arrowtail=crowtee,
+		dir=both,
+		label=<html_quality_run_id_run_id_fkey>,
+		lp="1349.9,808.12",
+		pos="s,1530,811.62 e,1137.5,634.88 1514.6,810.3 1417.7,794.7 1241.3,645.9 1147.4,635.45",
+		style=solid];
 	lighthouse_audits_4792f190	[height=2.7951,
 		label=<
       <table border="1" cellborder="0" cellspacing="0" color="#888888">
@@ -124,14 +215,14 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="874.12,351.5",
+		pos="1722.1,571.12",
 		width=6.1424];
 	lighthouse_audits_4792f190:"run_id_73f7e7bf.start":w -> ci_runs_b2eaef04:"run_id_739f98cb.end":e	[arrowhead=teetee,
 		arrowtail=crowtee,
 		dir=both,
 		label=<lighthouse_audits_run_id_run_id_fkey>,
-		lp="505.62,423.33",
-		pos="s,661,415.25 e,350.25,305.25 645.89,415.12 525.48,413.01 489.14,384.78 376.25,325.5 366.93,320.61 365.14,312.29 359.44,307.99",
+		lp="1349.9,643.5",
+		pos="s,1509,634.88 e,1137.5,634.88 1493.9,634.88 1344.3,634.88 1299.3,634.88 1147.2,634.88",
 		style=solid];
 	pa11y_issues_e5627b94	[height=2.5,
 		label=<
@@ -177,16 +268,426 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="874.12,142.5",
+		pos="1722.1,362.12",
 		width=5.6632];
 	pa11y_issues_e5627b94:"run_id_90199e3b.start":w -> ci_runs_b2eaef04:"run_id_739f98cb.end":e	[arrowhead=teetee,
 		arrowtail=crowtee,
 		dir=both,
 		label=<pa11y_issues_run_id_run_id_fkey>,
-		lp="505.62,312.74",
-		pos="s,678.25,195.62 e,350.25,305.25 662.95,196 526.13,202.83 499.85,300.7 360.07,305.1",
+		lp="1349.9,611.62",
+		pos="s,1526.2,415.25 e,1137.5,634.88 1511.1,416.77 1412.2,435.51 1243.9,621.5 1147.5,634.19",
 		style=solid];
-	score_history_3e80f36a	[height=1.9097,
+	privacy_audit_f9d937e7	[height=2.7951,
+		label=<
+      <table border="1" cellborder="0" cellspacing="0" color="#888888">
+	<tr>
+		<td colspan='2' bgcolor='#F2CDC2' align='left'><b><i>benchmark.main.privacy_audit</i></b></td>
+		<td bgcolor='#F2CDC2' align='right'>[table]</td>
+	</tr>
+	<tr>
+		<td port='run_id_a7a6c48.start' align='left'><b><i>run_id</i></b></td>
+		<td align='left'> </td>
+		<td port='run_id_a7a6c48.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='site_4183a440.start' align='left'><b><i>site</i></b></td>
+		<td align='left'> </td>
+		<td port='site_4183a440.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='audit_date_a628028b.start' align='left'>audit_date</td>
+		<td align='left'> </td>
+		<td port='audit_date_a628028b.end' align='left'>DATE NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='total_requests_e8b3e758.start' align='left'>total_requests</td>
+		<td align='left'> </td>
+		<td port='total_requests_e8b3e758.end' align='left'>INTEGER</td>
+	</tr>
+	<tr>
+		<td port='third_party_requests_3ed1abce.start' align='left'>third_party_requests</td>
+		<td align='left'> </td>
+		<td port='third_party_requests_3ed1abce.end' align='left'>INTEGER</td>
+	</tr>
+	<tr>
+		<td port='third_party_hosts_5ca5bf53.start' align='left'>third_party_hosts</td>
+		<td align='left'> </td>
+		<td port='third_party_hosts_5ca5bf53.end' align='left'>VARCHAR[]</td>
+	</tr>
+	<tr>
+		<td port='known_trackers_fa517eb0.start' align='left'>known_trackers</td>
+		<td align='left'> </td>
+		<td port='known_trackers_fa517eb0.end' align='left'>VARCHAR[]</td>
+	</tr>
+	<tr>
+		<td port='cookies_count_b4f45458.start' align='left'>cookies_count</td>
+		<td align='left'> </td>
+		<td port='cookies_count_b4f45458.end' align='left'>INTEGER</td>
+	</tr>
+      </table>
+    >,
+		pos="1722.1,153.12",
+		width=5.6736];
+	privacy_audit_f9d937e7:"run_id_a7a6c48.start":w -> ci_runs_b2eaef04:"run_id_739f98cb.end":e	[arrowhead=teetee,
+		arrowtail=crowtee,
+		dir=both,
+		label=<privacy_audit_run_id_run_id_fkey>,
+		lp="1349.9,417.5",
+		pos="s,1525.9,216.88 e,1137.5,634.88 1510.7,217.08 1362.7,221.28 1318.1,288.3 1220.5,408.88 1155.3,489.35 1238.8,625.73 1147.2,634.44",
+		style=solid];
+	claude_sessions_55fa83a1	[height=1.6146,
+		label=<
+      <table border="1" cellborder="0" cellspacing="0" color="#888888">
+	<tr>
+		<td colspan='2' bgcolor='#F2CDC2' align='left'><b><i>benchmark.main.claude_sessions</i></b></td>
+		<td bgcolor='#F2CDC2' align='right'>[table]</td>
+	</tr>
+	<tr>
+		<td port='session_dfa67315.start' align='left'><b><i>session</i></b></td>
+		<td align='left'> </td>
+		<td port='session_dfa67315.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='started_at_bdec530.start' align='left'>started_at</td>
+		<td align='left'> </td>
+		<td port='started_at_bdec530.end' align='left'>TIMESTAMP</td>
+	</tr>
+	<tr>
+		<td port='ended_at_d07ce457.start' align='left'>ended_at</td>
+		<td align='left'> </td>
+		<td port='ended_at_d07ce457.end' align='left'>TIMESTAMP</td>
+	</tr>
+	<tr>
+		<td port='user_messages_50ce4bbf.start' align='left'>user_messages</td>
+		<td align='left'> </td>
+		<td port='user_messages_50ce4bbf.end' align='left'>INTEGER</td>
+	</tr>
+      </table>
+    >,
+		pos="966.38,1228.1",
+		width=5.9653];
+	claude_usage_be1b9943	[height=2.7951,
+		label=<
+      <table border="1" cellborder="0" cellspacing="0" color="#888888">
+	<tr>
+		<td colspan='2' bgcolor='#F2CDC2' align='left'><b><i>benchmark.main.claude_usage</i></b></td>
+		<td bgcolor='#F2CDC2' align='right'>[table]</td>
+	</tr>
+	<tr>
+		<td port='session_7ba811b3.start' align='left'><b><i>session</i></b></td>
+		<td align='left'> </td>
+		<td port='session_7ba811b3.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='model_b8b8a46.start' align='left'><b><i>model</i></b></td>
+		<td align='left'> </td>
+		<td port='model_b8b8a46.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='assistant_messages_f628a8aa.start' align='left'>assistant_messages</td>
+		<td align='left'> </td>
+		<td port='assistant_messages_f628a8aa.end' align='left'>INTEGER</td>
+	</tr>
+	<tr>
+		<td port='input_tokens_4a9a42cc.start' align='left'>input_tokens</td>
+		<td align='left'> </td>
+		<td port='input_tokens_4a9a42cc.end' align='left'>BIGINT</td>
+	</tr>
+	<tr>
+		<td port='output_tokens_8f1a05b5.start' align='left'>output_tokens</td>
+		<td align='left'> </td>
+		<td port='output_tokens_8f1a05b5.end' align='left'>BIGINT</td>
+	</tr>
+	<tr>
+		<td port='cache_read_7125350.start' align='left'>cache_read</td>
+		<td align='left'> </td>
+		<td port='cache_read_7125350.end' align='left'>BIGINT</td>
+	</tr>
+	<tr>
+		<td port='cache_write_3b41cfff.start' align='left'>cache_write</td>
+		<td align='left'> </td>
+		<td port='cache_write_3b41cfff.end' align='left'>BIGINT</td>
+	</tr>
+	<tr>
+		<td port='total_tokens_30e4c212.start' align='left'>total_tokens</td>
+		<td align='left'> </td>
+		<td port='total_tokens_30e4c212.end' align='left'>BIGINT</td>
+	</tr>
+      </table>
+    >,
+		pos="1722.1,1186.1",
+		width=5.6944];
+	claude_usage_be1b9943:"session_7ba811b3.start":w -> claude_sessions_55fa83a1:"session_dfa67315.end":e	[arrowhead=teetee,
+		arrowtail=crowtee,
+		dir=both,
+		label=<claude_usage_session_session_fkey>,
+		lp="1349.9,1258.5",
+		pos="s,1525.1,1249.9 e,1173.1,1249.4 1509.9,1249.9 1369,1249.8 1326.2,1249.4 1182.7,1249.4",
+		style=solid];
+	commit_classification_d23bdf71	[height=2.5,
+		label=<
+      <table border="1" cellborder="0" cellspacing="0" color="#888888">
+	<tr>
+		<td colspan='2' bgcolor='#F2CDC2' align='left'><b><i>benchmark.main.commit_classification</i></b></td>
+		<td bgcolor='#F2CDC2' align='right'>[table]</td>
+	</tr>
+	<tr>
+		<td port='git_sha_779e516e.start' align='left'><b><i>git_sha</i></b></td>
+		<td align='left'> </td>
+		<td port='git_sha_779e516e.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='subject_5ea63db.start' align='left'>subject</td>
+		<td align='left'> </td>
+		<td port='subject_5ea63db.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='commit_type_cf5e57f1.start' align='left'>commit_type</td>
+		<td align='left'> </td>
+		<td port='commit_type_cf5e57f1.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='scope_7bc34d03.start' align='left'>"scope"</td>
+		<td align='left'> </td>
+		<td port='scope_7bc34d03.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='cluster_id_8392742f.start' align='left'>cluster_id</td>
+		<td align='left'> </td>
+		<td port='cluster_id_8392742f.end' align='left'>INTEGER</td>
+	</tr>
+	<tr>
+		<td port='embed_x_13aa1741.start' align='left'>embed_x</td>
+		<td align='left'> </td>
+		<td port='embed_x_13aa1741.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+	<tr>
+		<td port='embed_y_13aa1742.start' align='left'>embed_y</td>
+		<td align='left'> </td>
+		<td port='embed_y_13aa1742.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+      </table>
+    >,
+		pos="966.38,1009.1",
+		width=6.559];
+	commit_classification_d23bdf71:"git_sha_779e516e.start":w -> git_commits_93a01e32:"git_sha_e2c1eacd.end":e	[arrowhead=teetee,
+		arrowtail=teetee,
+		dir=both,
+		label=<commit_classification_git_sha_git_sha_fkey>,
+		lp="564.12,1069.8",
+		pos="s,738.25,1062.2 e,390,844 728.58,1062.1 569.64,1058.3 550.39,960.19 416,865.12 407.26,858.94 405.35,850.74 399.43,846.61",
+		style=solid];
+	commit_clusters_1c977f44	[height=1.6146,
+		label=<
+      <table border="1" cellborder="0" cellspacing="0" color="#888888">
+	<tr>
+		<td colspan='2' bgcolor='#F2CDC2' align='left'><b><i>benchmark.main.commit_clusters</i></b></td>
+		<td bgcolor='#F2CDC2' align='right'>[table]</td>
+	</tr>
+	<tr>
+		<td port='cluster_id_84aacebc.start' align='left'><b><i>cluster_id</i></b></td>
+		<td align='left'> </td>
+		<td port='cluster_id_84aacebc.end' align='left'>INTEGER NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='size_768e493d.start' align='left'>size</td>
+		<td align='left'> </td>
+		<td port='size_768e493d.end' align='left'>INTEGER</td>
+	</tr>
+	<tr>
+		<td port='terms_7ceab2c3.start' align='left'>terms</td>
+		<td align='left'> </td>
+		<td port='terms_7ceab2c3.end' align='left'>VARCHAR[]</td>
+	</tr>
+	<tr>
+		<td port='exemplar_f0a8e784.start' align='left'>exemplar</td>
+		<td align='left'> </td>
+		<td port='exemplar_f0a8e784.end' align='left'>VARCHAR</td>
+	</tr>
+      </table>
+    >,
+		pos="1722.1,1363.1",
+		width=5.9028];
+	commit_cost_df5b4558	[height=2.5,
+		label=<
+      <table border="1" cellborder="0" cellspacing="0" color="#888888">
+	<tr>
+		<td colspan='2' bgcolor='#F2CDC2' align='left'><b><i>benchmark.main.commit_cost</i></b></td>
+		<td bgcolor='#F2CDC2' align='right'>[view]</td>
+	</tr>
+	<tr>
+		<td port='git_sha_e6ba867.start' align='left'>git_sha</td>
+		<td align='left'> </td>
+		<td port='git_sha_e6ba867.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='model_124160d1.start' align='left'>model</td>
+		<td align='left'> </td>
+		<td port='model_124160d1.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='input_usd_71d0bd39.start' align='left'>input_usd</td>
+		<td align='left'> </td>
+		<td port='input_usd_71d0bd39.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+	<tr>
+		<td port='output_usd_c0250af0.start' align='left'>output_usd</td>
+		<td align='left'> </td>
+		<td port='output_usd_c0250af0.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+	<tr>
+		<td port='cache_read_usd_6dc1cd22.start' align='left'>cache_read_usd</td>
+		<td align='left'> </td>
+		<td port='cache_read_usd_6dc1cd22.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+	<tr>
+		<td port='cache_write_usd_cf755a51.start' align='left'>cache_write_usd</td>
+		<td align='left'> </td>
+		<td port='cache_write_usd_cf755a51.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+	<tr>
+		<td port='total_usd_e9a9f3b3.start' align='left'>total_usd</td>
+		<td align='left'> </td>
+		<td port='total_usd_e9a9f3b3.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+      </table>
+    >,
+		pos="1722.1,1529.1",
+		width=5.059];
+	commit_to_session_81fe7c5d	[height=1.9097,
+		label=<
+      <table border="1" cellborder="0" cellspacing="0" color="#888888">
+	<tr>
+		<td colspan='2' bgcolor='#F2CDC2' align='left'><b><i>benchmark.main.commit_to_session</i></b></td>
+		<td bgcolor='#F2CDC2' align='right'>[view]</td>
+	</tr>
+	<tr>
+		<td port='git_sha_c02f5202.start' align='left'>git_sha</td>
+		<td align='left'> </td>
+		<td port='git_sha_c02f5202.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='commit_ts_64efb9ca.start' align='left'>commit_ts</td>
+		<td align='left'> </td>
+		<td port='commit_ts_64efb9ca.end' align='left'>TIMESTAMP</td>
+	</tr>
+	<tr>
+		<td port='author_69fe30ce.start' align='left'>author</td>
+		<td align='left'> </td>
+		<td port='author_69fe30ce.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='subject_4e7b646f.start' align='left'>subject</td>
+		<td align='left'> </td>
+		<td port='subject_4e7b646f.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='session_342191d9.start' align='left'>session</td>
+		<td align='left'> </td>
+		<td port='session_342191d9.end' align='left'>VARCHAR</td>
+	</tr>
+      </table>
+    >,
+		pos="1722.1,1706.1",
+		width=5.3924];
+	commit_tokens_d066b925	[height=2.5,
+		label=<
+      <table border="1" cellborder="0" cellspacing="0" color="#888888">
+	<tr>
+		<td colspan='2' bgcolor='#F2CDC2' align='left'><b><i>benchmark.main.commit_tokens</i></b></td>
+		<td bgcolor='#F2CDC2' align='right'>[view]</td>
+	</tr>
+	<tr>
+		<td port='git_sha_3eceae3a.start' align='left'>git_sha</td>
+		<td align='left'> </td>
+		<td port='git_sha_3eceae3a.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='model_42a466a4.start' align='left'>model</td>
+		<td align='left'> </td>
+		<td port='model_42a466a4.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='input_tokens_81b31f2a.start' align='left'>input_tokens</td>
+		<td align='left'> </td>
+		<td port='input_tokens_81b31f2a.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+	<tr>
+		<td port='output_tokens_c632e213.start' align='left'>output_tokens</td>
+		<td align='left'> </td>
+		<td port='output_tokens_c632e213.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+	<tr>
+		<td port='cache_read_3e2b2fae.start' align='left'>cache_read</td>
+		<td align='left'> </td>
+		<td port='cache_read_3e2b2fae.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+	<tr>
+		<td port='cache_write_725aac5d.start' align='left'>cache_write</td>
+		<td align='left'> </td>
+		<td port='cache_write_725aac5d.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+	<tr>
+		<td port='total_tokens_67fd9e70.start' align='left'>total_tokens</td>
+		<td align='left'> </td>
+		<td port='total_tokens_67fd9e70.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+      </table>
+    >,
+		pos="1722.1,1883.1",
+		width=5.3403];
+	gh_releases_8fa7c66d	[height=2.7951,
+		label=<
+      <table border="1" cellborder="0" cellspacing="0" color="#888888">
+	<tr>
+		<td colspan='2' bgcolor='#F2CDC2' align='left'><b><i>benchmark.main.gh_releases</i></b></td>
+		<td bgcolor='#F2CDC2' align='right'>[table]</td>
+	</tr>
+	<tr>
+		<td port='tag_6552c6cd.start' align='left'><b><i>tag</i></b></td>
+		<td align='left'> </td>
+		<td port='tag_6552c6cd.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='release_name_f028fef6.start' align='left'>release_name</td>
+		<td align='left'> </td>
+		<td port='release_name_f028fef6.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='published_at_f6896757.start' align='left'>published_at</td>
+		<td align='left'> </td>
+		<td port='published_at_f6896757.end' align='left'>DATE NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='published_at_ts_d4ce77ad.start' align='left'>published_at_ts</td>
+		<td align='left'> </td>
+		<td port='published_at_ts_d4ce77ad.end' align='left'>TIMESTAMP</td>
+	</tr>
+	<tr>
+		<td port='url_6552cca2.start' align='left'>url</td>
+		<td align='left'> </td>
+		<td port='url_6552cca2.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='author_117e28be.start' align='left'>author</td>
+		<td align='left'> </td>
+		<td port='author_117e28be.end' align='left'>VARCHAR</td>
+	</tr>
+	<tr>
+		<td port='is_prerelease_122d196c.start' align='left'>is_prerelease</td>
+		<td align='left'> </td>
+		<td port='is_prerelease_122d196c.end' align='left'>BOOLEAN NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='body_excerpt_a551cb17.start' align='left'>body_excerpt</td>
+		<td align='left'> </td>
+		<td port='body_excerpt_a551cb17.end' align='left'>VARCHAR</td>
+	</tr>
+      </table>
+    >,
+		pos="1722.1,967.12",
+		width=5.5278];
+	score_history_3e80f36a	[height=2.2049,
 		label=<
       <table border="1" cellborder="0" cellspacing="0" color="#888888">
 	<tr>
@@ -197,6 +698,11 @@ digraph SchemaCrawler_Diagram {
 		<td port='tag_919f3970.start' align='left'><b><i>tag</i></b></td>
 		<td align='left'> </td>
 		<td port='tag_919f3970.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='git_sha_93fbbc95.start' align='left'>git_sha</td>
+		<td align='left'> </td>
+		<td port='git_sha_93fbbc95.end' align='left'>VARCHAR</td>
 	</tr>
 	<tr>
 		<td port='audit_date_f677b768.start' align='left'>audit_date</td>
@@ -220,6 +726,56 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="874.12,538.5",
+		pos="966.38,822.12",
 		width=5.6736];
+	gh_releases_8fa7c66d:"tag_6552c6cd.start":w -> score_history_3e80f36a:"tag_919f3970.end":e	[arrowhead=teetee,
+		arrowtail=teetee,
+		dir=both,
+		label=<gh_releases_tag_tag_fkey>,
+		lp="1349.9,1032.9",
+		pos="s,1531.1,1030.9 e,1162.6,864.62 1521.3,1030.7 1354.2,1024.9 1339.5,870.51 1172.3,864.79",
+		style=solid];
+	score_history_3e80f36a:"git_sha_93fbbc95.start":w -> git_commits_93a01e32:"git_sha_e2c1eacd.end":e	[arrowhead=teetee,
+		arrowtail=crowodot,
+		dir=both,
+		label=<score_history_git_sha_git_sha_fkey>,
+		lp="564.12,852.62",
+		pos="s,770.12,843.38 e,390,844 750.89,843.38 600.83,843.42 554.25,843.98 399.84,844",
+		style=solid];
+	model_pricing_fa0be433	[height=1.9097,
+		label=<
+      <table border="1" cellborder="0" cellspacing="0" color="#888888">
+	<tr>
+		<td colspan='2' bgcolor='#F2CDC2' align='left'><b><i>benchmark.main.model_pricing</i></b></td>
+		<td bgcolor='#F2CDC2' align='right'>[table]</td>
+	</tr>
+	<tr>
+		<td port='model_4da49d56.start' align='left'><b><i>model</i></b></td>
+		<td align='left'> </td>
+		<td port='model_4da49d56.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='input_price_pm_4278efb5.start' align='left'>input_price_pm</td>
+		<td align='left'> </td>
+		<td port='input_price_pm_4278efb5.end' align='left'>DOUBLE(53, 0) NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='output_price_pm_66139c5e.start' align='left'>output_price_pm</td>
+		<td align='left'> </td>
+		<td port='output_price_pm_66139c5e.end' align='left'>DOUBLE(53, 0) NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='cache_read_pm_8ca7ffb6.start' align='left'>cache_read_pm</td>
+		<td align='left'> </td>
+		<td port='cache_read_pm_8ca7ffb6.end' align='left'>DOUBLE(53, 0) NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='cache_write_pm_6ec690a7.start' align='left'>cache_write_pm</td>
+		<td align='left'> </td>
+		<td port='cache_write_pm_6ec690a7.end' align='left'>DOUBLE(53, 0) NOT NULL</td>
+	</tr>
+      </table>
+    >,
+		pos="1722.1,2060.1",
+		width=6.2465];
 }

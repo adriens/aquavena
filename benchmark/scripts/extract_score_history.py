@@ -69,6 +69,11 @@ def main() -> None:
         ORDER BY MIN(audit_date)
     """)
 
+    # Also pull git_sha from score_history for tags that have one stored
+    sh_rows = query_duckdb("SELECT tag, git_sha FROM score_history WHERE git_sha IS NOT NULL")
+
+    sh_sha_map = {r["tag"]: r["git_sha"] for r in sh_rows}
+
     history: list[dict] = []
     for row in rows:
         sha = (row["git_sha"] or "")[:7]
@@ -92,6 +97,11 @@ def main() -> None:
                 "score":        None,
                 "pa11y_errors": None,
             })
+
+    # Backfill sha from score_history table for tags missing it
+    for entry in history:
+        if not entry.get("sha") and entry["tag"] in sh_sha_map:
+            entry["sha"] = sh_sha_map[entry["tag"]]
 
     # Sort by semver-aware tag order using git tag --sort output
     tag_order = {meta["tag"]: i for i, meta in enumerate(tag_map.values())}

@@ -1,0 +1,896 @@
+{
+  "commits": [
+    {
+      "sha": "2e5e47e",
+      "subject": "feat(benchmark): FK schema, tools section, glossary, score trend chart + lines panel",
+      "ts": "2026-05-30T15:25:49+11:00",
+      "type": "feat",
+      "scope": "benchmark",
+      "cluster": 1,
+      "x": -0.3616347908973694,
+      "y": -0.29253950715065
+    },
+    {
+      "sha": "534854c",
+      "subject": "feat(benchmark): pipeline flow chart, improvement cycle with score bars, release discipline",
+      "ts": "2026-05-30T14:52:13+11:00",
+      "type": "feat",
+      "scope": "benchmark",
+      "cluster": 1,
+      "x": -0.3227761685848236,
+      "y": -0.317872017621994
+    },
+    {
+      "sha": "be98344",
+      "subject": "feat(benchmark): heatmap couverture outils × dimensions accessibilité",
+      "ts": "2026-05-30T14:34:08+11:00",
+      "type": "feat",
+      "scope": "benchmark",
+      "cluster": 1,
+      "x": -0.24149054288864136,
+      "y": -0.2929224967956543
+    },
+    {
+      "sha": "fc37360",
+      "subject": "feat(benchmark): refonte section Context → Goals and Broader Vision",
+      "ts": "2026-05-30T14:32:31+11:00",
+      "type": "feat",
+      "scope": "benchmark",
+      "cluster": 1,
+      "x": -0.2916884422302246,
+      "y": -0.19477730989456177
+    },
+    {
+      "sha": "feb7cfa",
+      "subject": "feat(benchmark): section 'Site Architecture' (stack, principes, accessibilité)",
+      "ts": "2026-05-30T14:30:48+11:00",
+      "type": "feat",
+      "scope": "benchmark",
+      "cluster": 1,
+      "x": -0.3429263234138489,
+      "y": -0.3200567066669464
+    },
+    {
+      "sha": "c67b70f",
+      "subject": "feat(benchmark): section Inception + supprime heading Data Ingestion",
+      "ts": "2026-05-30T14:29:31+11:00",
+      "type": "feat",
+      "scope": "benchmark",
+      "cluster": 1,
+      "x": -0.3218977749347687,
+      "y": -0.2262703776359558
+    },
+    {
+      "sha": "0be8016",
+      "subject": "style(benchmark): remonte l'abstract sur la page de titre (vfill → vspace fixe)",
+      "ts": "2026-05-30T14:27:24+11:00",
+      "type": "style",
+      "scope": "benchmark",
+      "cluster": 1,
+      "x": 0.08301321417093277,
+      "y": -0.22530201077461243
+    },
+    {
+      "sha": "d4d440b",
+      "subject": "style(benchmark): supprime les keywords de la page de titre",
+      "ts": "2026-05-30T14:26:31+11:00",
+      "type": "style",
+      "scope": "benchmark",
+      "cluster": 1,
+      "x": 0.14605426788330078,
+      "y": -0.2164662927389145
+    },
+    {
+      "sha": "2c0e7fa",
+      "subject": "style(benchmark): abstract classique style papier académique (italique centré)",
+      "ts": "2026-05-30T14:25:44+11:00",
+      "type": "style",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.14392340183258057,
+      "y": -0.16876719892024994
+    },
+    {
+      "sha": "df7ef90",
+      "subject": "feat(benchmark): rapport en anglais, page de titre LaTeX, diagramme TikZ, schéma DB, Taskfile",
+      "ts": "2026-05-30T14:20:52+11:00",
+      "type": "feat",
+      "scope": "benchmark",
+      "cluster": 1,
+      "x": -0.15846967697143555,
+      "y": -0.42412278056144714
+    },
+    {
+      "sha": "7b30003",
+      "subject": "feat(benchmark): répertoire benchmark/ à la racine du SDK",
+      "ts": "2026-05-30T14:11:20+11:00",
+      "type": "feat",
+      "scope": "benchmark",
+      "cluster": 1,
+      "x": -0.15450447797775269,
+      "y": -0.36858296394348145
+    },
+    {
+      "sha": "df22695",
+      "subject": "refactor(benchmark): déplace benchmark/ un niveau au-dessus (hors aquavena-sdk/)",
+      "ts": "2026-05-30T11:46:18+11:00",
+      "type": "refactor",
+      "scope": "benchmark",
+      "cluster": 1,
+      "x": -0.23026342689990997,
+      "y": -0.5073825120925903
+    },
+    {
+      "sha": "eccabc3",
+      "subject": "fix(a11y): corrige toutes violations contraste restantes + structure benchmark/",
+      "ts": "2026-05-30T11:43:15+11:00",
+      "type": "fix",
+      "scope": "a11y",
+      "cluster": 1,
+      "x": 0.04444921761751175,
+      "y": -0.2160966545343399
+    },
+    {
+      "sha": "a59d12d",
+      "subject": "feat(a11y): rapport complet pa11y+Lighthouse (npm run report) + fix WCAG 2.5.3",
+      "ts": "2026-05-30T11:21:10+11:00",
+      "type": "feat",
+      "scope": "a11y",
+      "cluster": 3,
+      "x": -0.3386497497558594,
+      "y": 0.04931492730975151
+    },
+    {
+      "sha": "81fba2b",
+      "subject": "fix(a11y): contraste bouton Lire (speak-btn) + audit local avec hash régime",
+      "ts": "2026-05-30T11:17:07+11:00",
+      "type": "fix",
+      "scope": "a11y",
+      "cluster": 2,
+      "x": 0.21022489666938782,
+      "y": 0.07976417988538742
+    },
+    {
+      "sha": "9a5ca91",
+      "subject": "feat(a11y): audit WCAG2AA automatisé via pa11y-ci (npm run a11y)",
+      "ts": "2026-05-30T11:12:58+11:00",
+      "type": "feat",
+      "scope": "a11y",
+      "cluster": 1,
+      "x": -0.43529483675956726,
+      "y": -0.044564422219991684
+    },
+    {
+      "sha": "76658ae",
+      "subject": "fix(a11y): contraste onglets régimes en mode nuit",
+      "ts": "2026-05-30T11:02:04+11:00",
+      "type": "fix",
+      "scope": "a11y",
+      "cluster": 2,
+      "x": 0.23435771465301514,
+      "y": 0.11685891449451447
+    },
+    {
+      "sha": "0fdeff3",
+      "subject": "fix(a11y): corrige erreurs de contraste WCAG AA thème clair + affichage aqua-chrono-végé",
+      "ts": "2026-05-30T10:52:51+11:00",
+      "type": "fix",
+      "scope": "a11y",
+      "cluster": 2,
+      "x": 0.2703416049480438,
+      "y": 0.03622806817293167
+    },
+    {
+      "sha": "ce78cf0",
+      "subject": "feat: URL shareable via hash lors du changement de régime",
+      "ts": "2026-05-25T07:30:24+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.10150907188653946,
+      "y": -0.06754710525274277
+    },
+    {
+      "sha": "d9f8982",
+      "subject": "feat: balises Open Graph et Twitter Card pour aperçu WhatsApp/Facebook/LinkedIn",
+      "ts": "2026-05-25T07:10:43+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.12554681301116943,
+      "y": -0.12046340852975845
+    },
+    {
+      "sha": "5f72d4e",
+      "subject": "feat: bouton WhatsApp partage menu du jour + guide installation PWA tablette/mobile",
+      "ts": "2026-05-25T07:08:24+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 0,
+      "x": -0.009891538880765438,
+      "y": -0.011617384850978851
+    },
+    {
+      "sha": "92b66f1",
+      "subject": "feat(about): lien site AVH comité Nouvelle-Calédonie dans section Valentin Haüy",
+      "ts": "2026-05-25T07:03:28+11:00",
+      "type": "feat",
+      "scope": "about",
+      "cluster": 0,
+      "x": 0.3170844614505768,
+      "y": -0.1674623191356659
+    },
+    {
+      "sha": "44958f7",
+      "subject": "feat(about): ajoute que la version papier était aussi illisible — trop petit, plusieurs pages",
+      "ts": "2026-05-25T06:58:48+11:00",
+      "type": "feat",
+      "scope": "about",
+      "cluster": 0,
+      "x": 0.1557050496339798,
+      "y": -0.12290727347135544
+    },
+    {
+      "sha": "31f83fc",
+      "subject": "feat(about): précise que la mère utilise sa tablette — affichage plus grand et confortable",
+      "ts": "2026-05-25T06:57:30+11:00",
+      "type": "feat",
+      "scope": "about",
+      "cluster": 0,
+      "x": 0.11528542637825012,
+      "y": -0.2018710970878601
+    },
+    {
+      "sha": "5ab7d88",
+      "subject": "feat(about): histoire du projet — elle se régalait mais ne pouvait plus planifier en autonomie",
+      "ts": "2026-05-25T06:54:28+11:00",
+      "type": "feat",
+      "scope": "about",
+      "cluster": 0,
+      "x": 0.2681705951690674,
+      "y": -0.22024568915367126
+    },
+    {
+      "sha": "e8926bc",
+      "subject": "feat: adresse cliquable vers Google Maps (fa-location-dot)",
+      "ts": "2026-05-25T06:52:38+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 0,
+      "x": -0.037666987627744675,
+      "y": -0.1386481672525406
+    },
+    {
+      "sha": "88d02d4",
+      "subject": "feat(about): enrichit \"Pourquoi ce site ?\" — RSS, iCal, open innovation",
+      "ts": "2026-05-25T06:50:48+11:00",
+      "type": "feat",
+      "scope": "about",
+      "cluster": 0,
+      "x": 0.05606832355260849,
+      "y": -0.1051497682929039
+    },
+    {
+      "sha": "bfc5c61",
+      "subject": "fix(about): tous les blocs encadrés lisibles en dark mode",
+      "ts": "2026-05-25T06:46:28+11:00",
+      "type": "fix",
+      "scope": "about",
+      "cluster": 2,
+      "x": 0.40502503514289856,
+      "y": 0.1747400462627411
+    },
+    {
+      "sha": "b91b255",
+      "subject": "fix(about): bloc pipeline lisible en dark mode — variables CSS au lieu de couleurs fixes",
+      "ts": "2026-05-25T06:44:39+11:00",
+      "type": "fix",
+      "scope": "about",
+      "cluster": 2,
+      "x": 0.2152176946401596,
+      "y": 0.2539710998535156
+    },
+    {
+      "sha": "5079572",
+      "subject": "feat: lien page de contact officielle aquavena.nc/content/contactez-nous",
+      "ts": "2026-05-25T06:41:51+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.015727968886494637,
+      "y": -0.2502025067806244
+    },
+    {
+      "sha": "a1bbaf4",
+      "subject": "feat: infos de contact Aquavena (adresse, tél, FB, Instagram, Play Store)",
+      "ts": "2026-05-25T06:41:26+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 0,
+      "x": -0.04518520459532738,
+      "y": -0.3221965730190277
+    },
+    {
+      "sha": "47136f5",
+      "subject": "feat: CSS impression — masque UI chrome, conserve uniquement le régime actif",
+      "ts": "2026-05-25T06:35:54+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 2,
+      "x": 0.23646630346775055,
+      "y": 0.09141089022159576
+    },
+    {
+      "sha": "3995f4d",
+      "subject": "feat(about): lien PyPI aquavena-sdk dans la section \"Comment ça fonctionne ?\"",
+      "ts": "2026-05-25T06:32:58+11:00",
+      "type": "feat",
+      "scope": "about",
+      "cluster": 0,
+      "x": 0.11375825107097626,
+      "y": -0.23290401697158813
+    },
+    {
+      "sha": "6ec9faa",
+      "subject": "feat(about): section histoire du projet — origine, positionnement, message Aquavena",
+      "ts": "2026-05-25T06:32:30+11:00",
+      "type": "feat",
+      "scope": "about",
+      "cluster": 0,
+      "x": 0.1594972014427185,
+      "y": -0.2878050208091736
+    },
+    {
+      "sha": "b92954d",
+      "subject": "feat: bouton menu du jour, lien À propos dans header, section Valentin Haüy",
+      "ts": "2026-05-25T06:26:12+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.3302840292453766,
+      "y": -0.15962384641170502
+    },
+    {
+      "sha": "74eceda",
+      "subject": "feat: Ctrl+K focuses search, Escape closes it",
+      "ts": "2026-05-25T01:32:52+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 3,
+      "x": -0.30130529403686523,
+      "y": 0.03282583877444267
+    },
+    {
+      "sha": "3009840",
+      "subject": "feat: add PWA support and search bar",
+      "ts": "2026-05-25T01:29:00+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 3,
+      "x": -0.4149318337440491,
+      "y": 0.14930672943592072
+    },
+    {
+      "sha": "0eab040",
+      "subject": "feat: add A+/A- and dark mode to About page header",
+      "ts": "2026-05-25T01:14:31+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 3,
+      "x": -0.13643653690814972,
+      "y": 0.37774649262428284
+    },
+    {
+      "sha": "7204fa7",
+      "subject": "feat: move accessibility score section to top of About page",
+      "ts": "2026-05-25T01:12:39+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 3,
+      "x": -0.2976580858230591,
+      "y": 0.29750728607177734
+    },
+    {
+      "sha": "66453b8",
+      "subject": "feat: add read-aloud button to each About page section",
+      "ts": "2026-05-25T01:09:13+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 3,
+      "x": -0.3279666304588318,
+      "y": 0.4434942305088043
+    },
+    {
+      "sha": "94949a4",
+      "subject": "feat: add RSS and iCal sections to About page",
+      "ts": "2026-05-25T01:01:45+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 3,
+      "x": -0.32927626371383667,
+      "y": 0.28909996151924133
+    },
+    {
+      "sha": "d7377cc",
+      "subject": "feat: robot icon for Claude skill MCP link",
+      "ts": "2026-05-25T00:55:47+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 3,
+      "x": -0.17497557401657104,
+      "y": 0.047949764877557755
+    },
+    {
+      "sha": "3c7ad5c",
+      "subject": "feat: add Claude MCP skill section on About page",
+      "ts": "2026-05-25T00:55:09+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 3,
+      "x": -0.3356899917125702,
+      "y": 0.16249686479568481
+    },
+    {
+      "sha": "4912599",
+      "subject": "docs: add shields for site, accessibility, feeds, HF Space and Claude skill",
+      "ts": "2026-05-25T00:53:45+11:00",
+      "type": "docs",
+      "scope": null,
+      "cluster": 3,
+      "x": -0.2284422516822815,
+      "y": 0.14911077916622162
+    },
+    {
+      "sha": "1c19156",
+      "subject": "fix: footer text readable in dark mode",
+      "ts": "2026-05-25T00:41:16+11:00",
+      "type": "fix",
+      "scope": null,
+      "cluster": 2,
+      "x": 0.0827077180147171,
+      "y": 0.4924072325229645
+    },
+    {
+      "sha": "187f564",
+      "subject": "feat: add iCal feeds (per-regime + global)",
+      "ts": "2026-05-25T00:32:40+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 1,
+      "x": -0.38407018780708313,
+      "y": 0.05213321000337601
+    },
+    {
+      "sha": "3f6c3bc",
+      "subject": "feat: add About page explaining the accessibility approach",
+      "ts": "2026-05-25T00:29:53+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 3,
+      "x": -0.2787308990955353,
+      "y": 0.19407953321933746
+    },
+    {
+      "sha": "b8263b3",
+      "subject": "feat: add \"Lire toute la semaine\" button per regime",
+      "ts": "2026-05-25T00:27:59+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.03464055806398392,
+      "y": 0.17189423739910126
+    },
+    {
+      "sha": "d725d1e",
+      "subject": "feat: add text-to-speech button on each menu card",
+      "ts": "2026-05-25T00:20:41+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 3,
+      "x": -0.20185035467147827,
+      "y": 0.34979164600372314
+    },
+    {
+      "sha": "aee5397",
+      "subject": "fix: A+/A- now scale all text by changing html font-size",
+      "ts": "2026-05-25T00:00:12+11:00",
+      "type": "fix",
+      "scope": null,
+      "cluster": 2,
+      "x": -0.04186129570007324,
+      "y": 0.3522299826145172
+    },
+    {
+      "sha": "ea01af7",
+      "subject": "feat: add regime image to per-regime RSS feed items",
+      "ts": "2026-05-24T23:53:46+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 1,
+      "x": -0.2501294016838074,
+      "y": 0.18307368457317352
+    },
+    {
+      "sha": "412f000",
+      "subject": "fix: remove accents from per-regime RSS feed filenames",
+      "ts": "2026-05-24T23:53:28+11:00",
+      "type": "fix",
+      "scope": null,
+      "cluster": 2,
+      "x": -0.04910231754183769,
+      "y": 0.34214484691619873
+    },
+    {
+      "sha": "80955b7",
+      "subject": "style: tarifs toujours visibles, plus de <details> pliable",
+      "ts": "2026-05-24T23:49:05+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.3021342158317566,
+      "y": 0.059056952595710754
+    },
+    {
+      "sha": "bed31bc",
+      "subject": "style: titre HTML précise \"version malvoyants\"",
+      "ts": "2026-05-24T23:48:17+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 2,
+      "x": 0.23230862617492676,
+      "y": 0.15314587950706482
+    },
+    {
+      "sha": "19ff411",
+      "subject": "feat: tarifs, feeds par régime, A+/A−, mode nuit, aria-labels, AIM 10/10",
+      "ts": "2026-05-24T23:46:34+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 1,
+      "x": -0.09531883150339127,
+      "y": -0.10954373329877853
+    },
+    {
+      "sha": "7659d78",
+      "subject": "fix: structure de titres HTML pour WAVE/accessibilité",
+      "ts": "2026-05-24T23:41:46+11:00",
+      "type": "fix",
+      "scope": null,
+      "cluster": 2,
+      "x": 0.20015664398670197,
+      "y": 0.13392361998558044
+    },
+    {
+      "sha": "ab66299",
+      "subject": "style: score accessibilité AIM 9,1/10 dans le footer",
+      "ts": "2026-05-24T23:39:55+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.33975186944007874,
+      "y": -0.03903187811374664
+    },
+    {
+      "sha": "434b475",
+      "subject": "fix: retry x3 + fallback sur menus.json existant si timeout réseau",
+      "ts": "2026-05-24T23:37:10+11:00",
+      "type": "fix",
+      "scope": null,
+      "cluster": 2,
+      "x": -0.12184621393680573,
+      "y": 0.1329028606414795
+    },
+    {
+      "sha": "8a27442",
+      "subject": "style: mention malvoyants dans le header",
+      "ts": "2026-05-24T23:35:56+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.4038591980934143,
+      "y": 0.05611225217580795
+    },
+    {
+      "sha": "52cdfed",
+      "subject": "fix: contraste WCAG AA — éliminer tous les gris trop clairs",
+      "ts": "2026-05-24T23:34:16+11:00",
+      "type": "fix",
+      "scope": null,
+      "cluster": 2,
+      "x": 0.4010297358036041,
+      "y": 0.03888469561934471
+    },
+    {
+      "sha": "a7498bf",
+      "subject": "fix: guid unique par item RSS pour éviter la déduplication",
+      "ts": "2026-05-24T23:31:40+11:00",
+      "type": "fix",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.02601506933569908,
+      "y": 0.003395788837224245
+    },
+    {
+      "sha": "1e3ad26",
+      "subject": "feat: flux RSS + icônes par régime + méditerranéen par défaut",
+      "ts": "2026-05-24T23:27:12+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.10919258743524551,
+      "y": -0.09887664020061493
+    },
+    {
+      "sha": "4edb9d3",
+      "subject": "style: police Atkinson Hyperlegible + espacement + mention malvoyants",
+      "ts": "2026-05-24T23:24:45+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 3,
+      "x": 0.05844646692276001,
+      "y": 0.22985871136188507
+    },
+    {
+      "sha": "fdb530a",
+      "subject": "style: supprimer l'horodatage du header",
+      "ts": "2026-05-24T23:22:06+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.4050886332988739,
+      "y": -0.06402000784873962
+    },
+    {
+      "sha": "102ad40",
+      "subject": "style: icône GitHub Font Awesome dans le footer",
+      "ts": "2026-05-24T23:20:36+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.35655084252357483,
+      "y": 0.08709375560283661
+    },
+    {
+      "sha": "4dd7671",
+      "subject": "style: favicon 🥗 via SVG data URI",
+      "ts": "2026-05-24T23:19:33+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.09336992353200912,
+      "y": 0.14949817955493927
+    },
+    {
+      "sha": "0917c94",
+      "subject": "style: réduire le header — une seule ligne text-lg",
+      "ts": "2026-05-24T23:18:31+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.4927392303943634,
+      "y": 0.14030909538269043
+    },
+    {
+      "sha": "ebeb837",
+      "subject": "style: labels Midi/Soir/Gourmet/Boissons en text-lg, plus lisibles",
+      "ts": "2026-05-24T23:17:46+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.2538464069366455,
+      "y": 0.09728642553091049
+    },
+    {
+      "sha": "7984b83",
+      "subject": "style: icônes Font Awesome sur les labels de service",
+      "ts": "2026-05-24T23:17:04+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.4694909453392029,
+      "y": 0.0040604290552437305
+    },
+    {
+      "sha": "52e6e41",
+      "subject": "chore: renommer les références GitHub repo aquavena-sdk → aquavena",
+      "ts": "2026-05-24T23:13:12+11:00",
+      "type": "chore",
+      "scope": null,
+      "cluster": 4,
+      "x": -0.2463010549545288,
+      "y": -0.27439603209495544
+    },
+    {
+      "sha": "41c416c",
+      "subject": "style: date en français, blocs Midi/Soir colorés, texte text-xl",
+      "ts": "2026-05-24T23:11:08+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.3932356834411621,
+      "y": 0.02803894132375717
+    },
+    {
+      "sha": "c9e202f",
+      "subject": "style: fond crème chaud (amber-50) pour réduire la fatigue visuelle",
+      "ts": "2026-05-24T23:08:04+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.3313320279121399,
+      "y": 0.017122384160757065
+    },
+    {
+      "sha": "c18a884",
+      "subject": "chore: refresh menus data",
+      "ts": "2026-05-24T23:06:18+11:00",
+      "type": "chore",
+      "scope": null,
+      "cluster": 1,
+      "x": -0.14464564621448517,
+      "y": 0.18614481389522552
+    },
+    {
+      "sha": "a2c898b",
+      "subject": "style: masquer les jours passés pour gagner de la place",
+      "ts": "2026-05-24T23:05:38+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.385783314704895,
+      "y": -0.07614387571811676
+    },
+    {
+      "sha": "2a85d56",
+      "subject": "style: agrandir la taille du texte pour meilleure lisibilité",
+      "ts": "2026-05-24T23:04:17+11:00",
+      "type": "style",
+      "scope": null,
+      "cluster": 0,
+      "x": 0.47037824988365173,
+      "y": -0.009748254902660847
+    },
+    {
+      "sha": "dab55b1",
+      "subject": "feat: add Astro static site with daily GitHub Pages deployment",
+      "ts": "2026-05-24T23:01:39+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 4,
+      "x": -0.3520311713218689,
+      "y": 0.059238944202661514
+    },
+    {
+      "sha": "ffda59a",
+      "subject": "docs: add PyPI version badge to README",
+      "ts": "2026-05-24T22:37:41+11:00",
+      "type": "docs",
+      "scope": null,
+      "cluster": 5,
+      "x": -0.23731300234794617,
+      "y": 0.32624128460884094
+    },
+    {
+      "sha": "54fb877",
+      "subject": "chore: update repo URLs after GitHub rename to aquavena-sdk",
+      "ts": "2026-05-24T22:36:40+11:00",
+      "type": "chore",
+      "scope": null,
+      "cluster": 4,
+      "x": -0.3395935595035553,
+      "y": -0.10347077995538712
+    },
+    {
+      "sha": "5b545fb",
+      "subject": "docs: add CI badge to README",
+      "ts": "2026-05-24T22:32:26+11:00",
+      "type": "docs",
+      "scope": null,
+      "cluster": 5,
+      "x": -0.22401213645935059,
+      "y": 0.3392564058303833
+    },
+    {
+      "sha": "893f411",
+      "subject": "ci: add GitHub Actions workflow for tests",
+      "ts": "2026-05-24T22:30:19+11:00",
+      "type": "ci",
+      "scope": null,
+      "cluster": 4,
+      "x": -0.43077218532562256,
+      "y": 0.1310609132051468
+    },
+    {
+      "sha": "691560d",
+      "subject": "feat: initial release 0.1.0 — SDK + CLI Aquavena",
+      "ts": "2026-05-24T22:29:35+11:00",
+      "type": "feat",
+      "scope": null,
+      "cluster": 4,
+      "x": -0.35316821932792664,
+      "y": -0.26261410117149353
+    }
+  ],
+  "clusters": [
+    {
+      "id": 0,
+      "size": 31,
+      "terms": [
+        "style",
+        "feat",
+        "la",
+        "du",
+        "pour"
+      ],
+      "exemplar": "feat: bouton menu du jour, lien À propos dans header, section Valentin Haüy"
+    },
+    {
+      "id": 1,
+      "size": 17,
+      "terms": [
+        "benchmark",
+        "feat benchmark",
+        "feat",
+        "section",
+        "benchmark section"
+      ],
+      "exemplar": "feat(benchmark): rapport en anglais, page de titre LaTeX, diagramme TikZ, schéma DB, Taskfile"
+    },
+    {
+      "id": 2,
+      "size": 13,
+      "terms": [
+        "fix",
+        "html",
+        "contraste",
+        "mode",
+        "text"
+      ],
+      "exemplar": "fix(about): tous les blocs encadrés lisibles en dark mode"
+    },
+    {
+      "id": 3,
+      "size": 13,
+      "terms": [
+        "feat",
+        "about page",
+        "add",
+        "feat add",
+        "page"
+      ],
+      "exemplar": "feat: add Claude MCP skill section on About page"
+    },
+    {
+      "id": 4,
+      "size": 5,
+      "terms": [
+        "github",
+        "aquavena",
+        "repo",
+        "chore",
+        "aquavena-sdk"
+      ],
+      "exemplar": "chore: update repo URLs after GitHub rename to aquavena-sdk"
+    },
+    {
+      "id": 5,
+      "size": 2,
+      "terms": [
+        "readme",
+        "to readme",
+        "badge",
+        "badge to",
+        "docs"
+      ],
+      "exemplar": "docs: add CI badge to README"
+    }
+  ],
+  "explained_variance": [
+    0.09151531010866165,
+    0.059071894735097885
+  ],
+  "n_clusters": 6,
+  "n_commits": 81,
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "embedding_dim": 384
+}

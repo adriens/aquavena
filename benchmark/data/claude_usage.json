@@ -1,0 +1,180 @@
+{
+  "total": {
+    "input": 4286,
+    "output": 1908166,
+    "cache_read": 300206135,
+    "cache_write": 4468200,
+    "total": 306586787
+  },
+  "n_sessions": 4,
+  "user_messages": 1542,
+  "assistant_messages": 2383,
+  "models": [
+    "<synthetic>",
+    "claude-opus-4-7",
+    "claude-sonnet-4-6"
+  ],
+  "by_session": [
+    {
+      "session": "1c8e4bd7-5b73-4de2-8693-11cfbceb8277",
+      "started_at": "2026-05-24T19:15:01.564000+00:00",
+      "ended_at": "2026-05-24T20:13:55.964000+00:00",
+      "user_messages": 118,
+      "assistant_messages": 181,
+      "input": 378,
+      "output": 98054,
+      "cache_read": 12064199,
+      "cache_write": 163596,
+      "total": 12326227,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "session": "312e1ec8-8eb0-4ca2-916c-11914fa41341",
+      "started_at": "2026-05-24T20:23:18.282000+00:00",
+      "ended_at": "2026-05-24T20:33:34.643000+00:00",
+      "user_messages": 16,
+      "assistant_messages": 23,
+      "input": 37,
+      "output": 10311,
+      "cache_read": 688949,
+      "cache_write": 62378,
+      "total": 761675,
+      "models": [
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "session": "8f1a947c-16f2-454e-9832-7748ed639703",
+      "started_at": "2026-05-29T23:42:37.030000+00:00",
+      "ended_at": "2026-05-30T10:10:14.768000+00:00",
+      "user_messages": 863,
+      "assistant_messages": 1382,
+      "input": 2664,
+      "output": 1252955,
+      "cache_read": 212556158,
+      "cache_write": 3413225,
+      "total": 217225002,
+      "models": [
+        "<synthetic>",
+        "claude-opus-4-7",
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "session": "c016be0a-d554-4dd8-88f1-3eb755463535",
+      "started_at": "2026-05-24T10:58:40.448000+00:00",
+      "ended_at": "2026-05-24T14:32:57.558000+00:00",
+      "user_messages": 545,
+      "assistant_messages": 797,
+      "input": 1207,
+      "output": 546846,
+      "cache_read": 74896829,
+      "cache_write": 829001,
+      "total": 76273883,
+      "models": [
+        "<synthetic>",
+        "claude-sonnet-4-6"
+      ]
+    }
+  ],
+  "by_session_model": [
+    {
+      "session": "1c8e4bd7-5b73-4de2-8693-11cfbceb8277",
+      "model": "claude-sonnet-4-6",
+      "assistant_messages": 181,
+      "input": 378,
+      "output": 98054,
+      "cache_read": 12064199,
+      "cache_write": 163596,
+      "total": 12326227
+    },
+    {
+      "session": "312e1ec8-8eb0-4ca2-916c-11914fa41341",
+      "model": "claude-sonnet-4-6",
+      "assistant_messages": 23,
+      "input": 37,
+      "output": 10311,
+      "cache_read": 688949,
+      "cache_write": 62378,
+      "total": 761675
+    },
+    {
+      "session": "8f1a947c-16f2-454e-9832-7748ed639703",
+      "model": "claude-sonnet-4-6",
+      "assistant_messages": 951,
+      "input": 1973,
+      "output": 675682,
+      "cache_read": 90514871,
+      "cache_write": 1558305,
+      "total": 92750831
+    },
+    {
+      "session": "8f1a947c-16f2-454e-9832-7748ed639703",
+      "model": "<synthetic>",
+      "assistant_messages": 5,
+      "input": 0,
+      "output": 0,
+      "cache_read": 0,
+      "cache_write": 0,
+      "total": 0
+    },
+    {
+      "session": "8f1a947c-16f2-454e-9832-7748ed639703",
+      "model": "claude-opus-4-7",
+      "assistant_messages": 426,
+      "input": 691,
+      "output": 577273,
+      "cache_read": 122041287,
+      "cache_write": 1854920,
+      "total": 124474171
+    },
+    {
+      "session": "c016be0a-d554-4dd8-88f1-3eb755463535",
+      "model": "<synthetic>",
+      "assistant_messages": 2,
+      "input": 0,
+      "output": 0,
+      "cache_read": 0,
+      "cache_write": 0,
+      "total": 0
+    },
+    {
+      "session": "c016be0a-d554-4dd8-88f1-3eb755463535",
+      "model": "claude-sonnet-4-6",
+      "assistant_messages": 795,
+      "input": 1207,
+      "output": 546846,
+      "cache_read": 74896829,
+      "cache_write": 829001,
+      "total": 76273883
+    }
+  ],
+  "by_day": [
+    {
+      "date": "2026-05-24",
+      "total": 89361785,
+      "input": 1622,
+      "output": 655211,
+      "cache_read": 87649977,
+      "cache_write": 1054975
+    },
+    {
+      "date": "2026-05-29",
+      "total": 6853345,
+      "input": 868,
+      "output": 120600,
+      "cache_read": 6480824,
+      "cache_write": 251053
+    },
+    {
+      "date": "2026-05-30",
+      "total": 210371657,
+      "input": 1796,
+      "output": 1132355,
+      "cache_read": 206075334,
+      "cache_write": 3162172
+    }
+  ]
+}

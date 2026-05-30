@@ -1,0 +1,10 @@
+{
+  "v0.1.1": { "lighthouse": 100, "pa11y_errors": 0 },
+  "v0.1.2": { "lighthouse": 100, "pa11y_errors": 0 },
+  "v0.1.3": { "lighthouse": 100, "pa11y_errors": 0 },
+  "v0.1.4": { "lighthouse": 100, "pa11y_errors": 0 },
+  "v0.1.5": { "lighthouse": 100, "pa11y_errors": 0 },
+  "v1.5.0": { "lighthouse": 100, "pa11y_errors": 0 },
+  "v1.6.0": { "lighthouse": 100, "pa11y_errors": 0 },
+  "v1.7.0": { "lighthouse": 100, "pa11y_errors": 0 }
+}

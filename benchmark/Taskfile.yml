@@ -21,7 +21,7 @@ tasks:
     cmds:
       - >
         Rscript -e '
-          pkgs <- c("DBI","duckdb","ggplot2","knitr","kableExtra","ggforce","tibble");
+          pkgs <- c("DBI","duckdb","ggplot2","knitr","kableExtra","ggforce","tibble","ggrepel");
           missing <- pkgs[!pkgs %in% installed.packages()[,"Package"]];
           if (length(missing)) install.packages(missing, repos="https://cran.r-project.org")
           else cat("All R packages already installed.\n")
@@ -139,11 +139,12 @@ tasks:
       - quarto render report.qmd --to pdf
 
   report:fresh:
-    desc: "Delete DuckDB, regenerate diagram, extract score history, then re-render PDF"
+    desc: "Delete DuckDB, render once to build DB, regenerate diagram, re-render PDF with new diagram"
     cmds:
       - task: db:clean
-      - task: report
-      - task: diagram:db
+      - task: report        # first pass: creates DuckDB + initial PDF
+      - task: diagram:db    # regenerate schema PNG from the fresh DB
+      - task: report        # second pass: embed updated diagram in final PDF
       - task: score-history
 
   # ── Full pipeline ─────────────────────────────────────────────────────────
