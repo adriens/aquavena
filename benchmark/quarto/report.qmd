@@ -31,7 +31,6 @@ format:
       text: |
         \usepackage{fontawesome5}
         \usepackage{xcolor}
-        \usepackage{mdframed}
         \usepackage{hyperref}
         \usepackage{tikz}
         \usetikzlibrary{positioning}
@@ -70,28 +69,25 @@ format:
 
           \vfill
 
-          \begin{mdframed}[
-            backgroundcolor=teal100,
-            linecolor=teal700,
-            linewidth=1.5pt,
-            roundcorner=6pt,
-            innerleftmargin=12pt,
-            innerrightmargin=12pt,
-            innertopmargin=10pt,
-            innerbottommargin=10pt
-          ]
-          \small\textbf{Abstract} — This report automatically compares the web
-          accessibility of \textbf{adriens.github.io/aquavena} — designed for
-          visually impaired users — against the source website
-          \textbf{aquavena.nc}, a dietetic meal delivery service in New Caledonia.
-          Standard CLI tools (pa11y-ci, Lighthouse, axe-core, webhint) are used
-          as a common reference. Results show a \textbf{100/100 Lighthouse score
-          and 0 WCAG 2.1 AA errors} for our site, versus 91/100 and 67~errors
-          for the official website. All audit data is persisted in a DuckDB
-          database for longitudinal tracking.\\[0.3em]
-          \textbf{Keywords:} accessibility, low vision, WCAG 2.1 AA, Lighthouse,
-          pa11y, New Caledonia.
-          \end{mdframed}
+          \begin{center}
+          \textbf{Abstract}
+          \end{center}
+          \begin{center}
+          \begin{minipage}{0.85\textwidth}
+          \centering\small\itshape
+          This report automatically compares the web accessibility of
+          \textbf{\textit{adriens.github.io/aquavena}} — designed for visually
+          impaired users — against the source website \textbf{\textit{aquavena.nc}},
+          a dietetic meal delivery service in New Caledonia. Standard CLI tools
+          (pa11y-ci, Lighthouse, axe-core, webhint) are used as a common reference.
+          Results show a \textbf{\textit{100/100 Lighthouse score and 0 WCAG 2.1 AA
+          errors}} for our site, versus 91/100 and 67~errors for the official website.
+          All audit data is persisted in a DuckDB database for longitudinal tracking.
+          \\[0.6em]
+          \textbf{\textit{Keywords:}} \textit{accessibility, low vision, WCAG 2.1 AA,
+          Lighthouse, pa11y, New Caledonia.}
+          \end{minipage}
+          \end{center}
 
           \end{titlepage}
           \newpage
