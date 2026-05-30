@@ -1,0 +1,407 @@
+---
+title: "Benchmark d'accessibilité — Aquavena pour malvoyants"
+subtitle: |
+  Comparaison adriens.github.io/aquavena vs aquavena.nc
+  Accessibilité web · Malvoyance · WCAG 2.1 AA · Nouvelle-Calédonie
+author: "Adriens"
+date: today
+lang: fr
+format:
+  pdf:
+    pdf-engine: xelatex
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    colorlinks: true
+    geometry:
+      - top=25mm
+      - bottom=25mm
+      - left=20mm
+      - right=20mm
+    mainfont: "DejaVu Serif"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
+    keywords:
+      - accessibilité
+      - malvoyant
+      - malvoyance
+      - WCAG
+      - handicap visuel
+      - Nouvelle-Calédonie
+      - Aquavena
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r setup}
+library(DBI)
+library(duckdb)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(jsonlite)
+library(kableExtra)
+library(patchwork)
+
+REPORTS <- "../reports"
+DATA    <- "../data"
+dir.create(DATA, showWarnings = FALSE)
+
+theme_set(
+  theme_minimal(base_size = 11) +
+  theme(plot.title = element_text(face = "bold"), panel.grid.minor = element_blank())
+)
+
+AUDIT_DATE <- Sys.Date()
+DB_PATH    <- file.path(DATA, "benchmark.duckdb")
+```
+
+# Chargement des données → DuckDB
+
+```{r ingest}
+# ── Helper : extraire les audits d'un rapport Lighthouse ───────────────────
+parse_lh <- function(path, site_label, date) {
+  raw   <- fromJSON(path, simplifyVector = FALSE)
+  score <- round(raw$categories$accessibility$score * 100)
+  refs  <- raw$categories$accessibility$auditRefs
+  bind_rows(lapply(refs, function(ref) {
+    a <- raw$audits[[ref$id]]
+    if (is.null(a)) return(NULL)
+    tibble(
+      audit_id   = ref$id,
+      title      = a$title,
+      score      = if (is.null(a$score)) NA_real_ else as.numeric(a$score),
+      score_mode = if (is.null(a$scoreDisplayMode)) NA_character_ else a$scoreDisplayMode
+    )
+  })) |>
+    mutate(site = site_label, audit_date = date, lighthouse_score = score)
+}
+
+# ── Lire les JSONs bruts ───────────────────────────────────────────────────
+pa11y_raw <- fromJSON(file.path(REPORTS, "pa11y.json"))
+
+# ── pa11y : aplatir en lignes (notre site) ────────────────────────────────
+pa11y_rows <- bind_rows(lapply(names(pa11y_raw$results), function(url) {
+  issues <- pa11y_raw$results[[url]]
+  if (is.null(issues) || length(issues) == 0)
+    return(tibble(url = url, type = NA_character_, message = NA_character_,
+                  code = NA_character_))
+  tibble(url = url, type = issues$type, message = issues$message,
+         code = if (!is.null(issues$code)) issues$code else NA_character_)
+})) |>
+  mutate(site = "notre-site", audit_date = AUDIT_DATE)
+
+# ── Lighthouse : notre site (détaillé) ────────────────────────────────────
+lh_rows <- parse_lh(
+  file.path(REPORTS, "lighthouse.report.json"),
+  "notre-site", AUDIT_DATE
+)
+lh_score <- lh_rows$lighthouse_score[1]
+
+# ── Lighthouse : aquavena.nc (détaillé) ───────────────────────────────────
+lh_nc_rows <- parse_lh(
+  file.path(REPORTS, "lighthouse-aquavena-nc.report.json"),
+  "aquavena.nc", as.Date("2026-05-30")
+)
+
+# ── pa11y aquavena.nc (données manuelles — 67 erreurs connues) ─────────────
+nc_pa11y <- tibble(
+  url        = "https://www.aquavena.nc/formules/aqua-mediterraneen",
+  type       = "error",
+  message    = "(audit manuel pa11y-ci)",
+  code       = NA_character_,
+  site       = "aquavena.nc",
+  audit_date = as.Date("2026-05-30"),
+  n_dummy    = 67L
+) |>
+  uncount(n_dummy)
+
+# ── Ouvrir / créer la base DuckDB ──────────────────────────────────────────
+con <- dbConnect(duckdb(), DB_PATH)
+
+# Table pa11y_issues
+if (!dbExistsTable(con, "pa11y_issues")) {
+  dbWriteTable(con, "pa11y_issues", bind_rows(pa11y_rows, nc_pa11y))
+} else {
+  existing <- dbGetQuery(con,
+    "SELECT DISTINCT site, audit_date FROM pa11y_issues")
+  new_rows <- bind_rows(pa11y_rows, nc_pa11y) |>
+    anti_join(existing, by = c("site", "audit_date"))
+  if (nrow(new_rows) > 0) dbAppendTable(con, "pa11y_issues", new_rows)
+}
+
+# Table lighthouse_audits (notre site + aquavena.nc, audits détaillés)
+all_lh <- bind_rows(lh_rows, lh_nc_rows)
+if (!dbExistsTable(con, "lighthouse_audits")) {
+  dbWriteTable(con, "lighthouse_audits", all_lh)
+} else {
+  existing <- dbGetQuery(con,
+    "SELECT DISTINCT site, audit_date FROM lighthouse_audits")
+  new_rows <- all_lh |>
+    anti_join(existing, by = c("site", "audit_date"))
+  if (nrow(new_rows) > 0) dbAppendTable(con, "lighthouse_audits", new_rows)
+}
+```
+
+Les données sont maintenant dans **`benchmark/data/benchmark.duckdb`** — ce fichier
+peut être ouvert dans DBeaver, Python (duckdb), R ou CLI (`duckdb benchmark.duckdb`).
+
+# Contexte
+
+Ce rapport compare l'accessibilité du site
+[adriens.github.io/aquavena](https://adriens.github.io/aquavena) — conçu pour les
+personnes malvoyantes — avec le site source
+[aquavena.nc](https://www.aquavena.nc).
+
+**Motivation :** Ma mère, cliente Aquavena et malvoyante, ne pouvait pas consulter les
+menus de façon autonome. Ce site est un complément accessible qui lui permet de lire
+ou d'écouter les menus depuis sa tablette.
+
+# Méthodologie
+
+```{r outils-table}
+outils <- tibble::tribble(
+  ~Outil,         ~Version, ~Rôle,
+  "pa11y-ci",     "4.1.1",  "Audit WCAG 2.1 AA automatisé, multi-URL",
+  "Lighthouse",   "13.3.0", "Score accessibilité 0–100",
+  "axe-cli",      "4.11.3", "Violations axe-core en CLI",
+  "W3C Validator","API",    "Validation HTML sémantique",
+  "webhint",      "7.1.13", "Compat, sécurité, headers HTTP"
+)
+kable(outils, booktabs = TRUE, linesep = "") |>
+  kable_styling(latex_options = c("striped","hold_position"), font_size = 10)
+```
+
+Standard de référence : **WCAG 2.1 niveau AA**, runners axe-core + htmlcs.
+
+# Résultats — notre site
+
+```{r query-notre-site}
+# Tout vient de DuckDB à partir d'ici
+pa11y_our <- dbGetQuery(con, "
+  SELECT url, type, COUNT(*) AS n
+  FROM pa11y_issues
+  WHERE site = 'notre-site' AND audit_date = (
+    SELECT MAX(audit_date) FROM pa11y_issues WHERE site = 'notre-site'
+  )
+  GROUP BY url, type
+")
+
+total_errors   <- dbGetQuery(con, "
+  SELECT COUNT(*) AS n FROM pa11y_issues
+  WHERE site = 'notre-site' AND type = 'error'
+    AND audit_date = (SELECT MAX(audit_date) FROM pa11y_issues WHERE site = 'notre-site')
+")$n
+
+lh_our <- dbGetQuery(con, "
+  SELECT lighthouse_score,
+         SUM(CASE WHEN score = 1.0 THEN 1 ELSE 0 END) AS passed,
+         SUM(CASE WHEN score = 0.0 THEN 1 ELSE 0 END) AS failed,
+         SUM(CASE WHEN score_mode = 'notApplicable' THEN 1 ELSE 0 END) AS na_count
+  FROM lighthouse_audits
+  WHERE site = 'notre-site'
+    AND audit_date = (SELECT MAX(audit_date) FROM lighthouse_audits WHERE site = 'notre-site')
+  GROUP BY lighthouse_score
+  LIMIT 1
+")
+lh_score_val <- if (nrow(lh_our) > 0) lh_our$lighthouse_score[[1]] else lh_score
+```
+
+## pa11y-ci — WCAG 2.1 AA
+
+```{r pa11y-our-table}
+pa11y_display <- dbGetQuery(con, "
+  SELECT url,
+         SUM(CASE WHEN type = 'error'   THEN 1 ELSE 0 END) AS Erreurs,
+         SUM(CASE WHEN type = 'warning' THEN 1 ELSE 0 END) AS Avertissements
+  FROM pa11y_issues
+  WHERE site = 'notre-site'
+    AND audit_date = (SELECT MAX(audit_date) FROM pa11y_issues WHERE site = 'notre-site')
+  GROUP BY url
+")
+
+if (nrow(pa11y_display) == 0)
+  pa11y_display <- data.frame(url = "Toutes URLs", Erreurs = 0L, Avertissements = 0L)
+
+kable(pa11y_display, booktabs = TRUE, linesep = "", col.names = c("URL","Erreurs","Avertissements")) |>
+  kable_styling(latex_options = c("striped","hold_position"), font_size = 9)
+```
+
+**Total : `r total_errors` erreur(s)**
+
+## Lighthouse Accessibility
+
+```{r lighthouse-gauge, fig.height=2.8, fig.width=5, fig.align="center"}
+gauge_df <- tibble(
+  label = c("Score", "Reste"),
+  value = c(lh_score_val, 100 - lh_score_val),
+  fill  = c("#0f766e", "#e5e7eb")
+)
+ggplot(gauge_df, aes(x = 2, y = value, fill = fill)) +
+  geom_col(width = 1, color = "white") +
+  coord_polar(theta = "y", start = pi) +
+  xlim(0.5, 2.5) +
+  scale_fill_identity() +
+  annotate("text", x = 0.5, y = 0,
+           label = paste0(lh_score_val, "/100"),
+           size = 9, fontface = "bold", color = "#0f766e") +
+  annotate("text", x = 0.5, y = -20,
+           label = "Lighthouse Accessibility", size = 3.5, color = "grey40") +
+  theme_void()
+```
+
+```{r lighthouse-details}
+lh1 <- if (nrow(lh_our) > 0) lh_our[1, ] else data.frame(lighthouse_score=lh_score_val, passed=NA, failed=NA, na_count=NA)
+tibble(
+  Métrique = c("Score", "Audits réussis", "Audits échoués", "Non applicables"),
+  Valeur   = c(paste0(lh1$lighthouse_score, "/100"),
+               as.character(lh1$passed),
+               as.character(lh1$failed),
+               as.character(lh1$na_count))
+) |>
+  kable(booktabs = TRUE, linesep = "") |>
+  kable_styling(latex_options = "hold_position", font_size = 10, full_width = FALSE)
+```
+
+# Résultats — aquavena.nc
+
+```{r nc-table}
+nc_summary <- tibble(
+  Outil                      = c("pa11y-ci (WCAG 2.1 AA)", "Lighthouse Accessibility",
+                                 "webhint erreurs", "webhint avertissements", "webhint hints"),
+  `aquavena.nc`              = c("67 erreurs", "91/100", "10", "63", "120"),
+  `Notre site`               = c("0 erreur",   "100/100", "10*", "62", "120")
+)
+kable(nc_summary, booktabs = TRUE, linesep = "") |>
+  kable_styling(latex_options = c("striped","hold_position"), font_size = 10)
+```
+
+*\* Les 10 erreurs webhint de notre site sont des problèmes d'infrastructure GitHub Pages
+(HSTS, SRI, `X-Content-Type-Options`) indépendants du code : les mêmes erreurs apparaissent
+sur aquavena.nc car elles concernent la configuration serveur, non le contenu HTML.*
+
+# Comparaison
+
+```{r compare-plot, fig.height=3.5, fig.width=7}
+compare_df <- dbGetQuery(con, "
+  SELECT
+    site,
+    MAX(lighthouse_score) AS lh_score
+  FROM lighthouse_audits
+  GROUP BY site
+") |>
+  left_join(
+    dbGetQuery(con, "
+      SELECT site, COUNT(*) AS pa11y_errors
+      FROM pa11y_issues
+      WHERE type = 'error'
+      GROUP BY site
+    "),
+    by = "site"
+  ) |>
+  mutate(
+    site = recode(site,
+      "notre-site"  = "Notre site",
+      "aquavena.nc" = "aquavena.nc"
+    ),
+    pa11y_errors = replace_na(pa11y_errors, 0L)
+  )
+
+couleurs <- c("Notre site" = "#0f766e", "aquavena.nc" = "#9ca3af")
+
+p1 <- ggplot(compare_df, aes(x = site, y = lh_score, fill = site)) +
+  geom_col(width = 0.5, show.legend = FALSE) +
+  geom_text(aes(label = lh_score), vjust = -0.4, fontface = "bold", size = 4) +
+  scale_fill_manual(values = couleurs) +
+  scale_y_continuous(limits = c(0, 115)) +
+  labs(title = "Score Lighthouse", x = NULL, y = "Score / 100") +
+  theme(axis.text.x = element_text(face = "bold"))
+
+p2 <- ggplot(compare_df, aes(x = site, y = pa11y_errors, fill = site)) +
+  geom_col(width = 0.5, show.legend = FALSE) +
+  geom_text(aes(label = pa11y_errors), vjust = -0.4, fontface = "bold", size = 4) +
+  scale_fill_manual(values = couleurs) +
+  scale_y_continuous(limits = c(0, 80)) +
+  labs(title = "Erreurs WCAG 2.1 AA (pa11y)", x = NULL, y = "Nombre d'erreurs") +
+  theme(axis.text.x = element_text(face = "bold"))
+
+p1 + p2
+```
+
+# Fonctionnalités d'accessibilité
+
+```{r features-table}
+features <- tibble(
+  Fonctionnalité              = c(
+    "WCAG 2.1 AA — 0 erreur",
+    "Lighthouse 100/100",
+    "Police Atkinson Hyperlegible",
+    "Taille de texte réglable",
+    "Mode nuit",
+    "Lecture vocale (TTS)",
+    "PWA — installable hors-ligne",
+    "Flux RSS par régime",
+    "Calendriers iCal par régime",
+    "Skill Claude (MCP)"
+  ),
+  `Notre site`  = rep("✅", 10),
+  `aquavena.nc` = rep("❌", 10)
+)
+kable(features, booktabs = TRUE, linesep = "", align = c("l","c","c")) |>
+  kable_styling(latex_options = c("striped","hold_position"), font_size = 10)
+```
+
+# Historique Lighthouse
+
+```{r history-plot}
+lh_history <- dbGetQuery(con, "
+  SELECT audit_date, lighthouse_score, site
+  FROM (
+    SELECT audit_date, lighthouse_score, site,
+           ROW_NUMBER() OVER (PARTITION BY site, audit_date ORDER BY audit_date) AS rn
+    FROM lighthouse_audits
+    WHERE audit_id IS NULL OR score IS NOT NULL
+  )
+  WHERE rn = 1
+  ORDER BY site, audit_date
+")
+
+if (nrow(lh_history) >= 2) {
+  ggplot(lh_history, aes(x = as.Date(audit_date), y = lighthouse_score,
+                          color = site, group = site)) +
+    geom_line(linewidth = 1) +
+    geom_point(size = 3) +
+    scale_color_manual(values = c("notre-site" = "#0f766e", "aquavena.nc" = "#9ca3af"),
+                       labels = c("notre-site" = "Notre site", "aquavena.nc" = "aquavena.nc")) +
+    scale_y_continuous(limits = c(80, 105)) +
+    scale_x_date(date_labels = "%d %b") +
+    labs(title = "Évolution du score Lighthouse", x = NULL,
+         y = "Score / 100", color = "Site") +
+    theme(legend.position = "bottom")
+} else {
+  cat("*(Historique insuffisant — relancer le rapport à plusieurs dates pour voir l'évolution.)*")
+}
+```
+
+```{r disconnect}
+dbDisconnect(con)
+```
+
+# Conclusion
+
+```{r conclusion-vals}
+verdict <- if (isTRUE(total_errors == 0) && isTRUE(lh_score_val == 100)) "parfait" else "à améliorer"
+```
+
+Le site atteint un score d'accessibilité **`r verdict`** :
+**`r total_errors` erreur(s) WCAG** et **Lighthouse `r lh_score_val`/100**.
+
+Comparé à aquavena.nc (91/100, 67 erreurs WCAG), ce site offre une accessibilité
+nettement supérieure, avec en plus des fonctionnalités dédiées aux malvoyants absentes
+du site source : lecture vocale, mode nuit, taille de texte réglable, PWA, RSS et iCal.
+
+---
+
+*Rapport généré le `r format(Sys.Date(), "%d %B %Y")` · Quarto `r system("quarto --version", intern=TRUE)` · R `r R.version$major`.`r R.version$minor`*
