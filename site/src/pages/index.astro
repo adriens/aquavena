@@ -79,6 +79,11 @@ function formatDate(dateStr: string): string {
     .nav-bg { background-color: var(--bg-nav); border-color: var(--border); }
     .tabs::-webkit-scrollbar { display: none; }
     .tabs { scrollbar-width: none; -ms-overflow-style: none; }
+    .tab-btn { color: var(--text-main); border-color: transparent; }
+    .tab-btn:hover { border-color: #0d9488; }
+    [data-dark] .tab-btn:hover { border-color: #5eead4; }
+    .tab-btn.tab-active { color: #0f766e; border-color: #0f766e; }
+    [data-dark] .tab-btn.tab-active { color: #5eead4; border-color: #5eead4; }
     details > summary { cursor: pointer; list-style: none; }
     details > summary::-webkit-details-marker { display: none; }
     @media print {
@@ -153,7 +158,7 @@ function formatDate(dateStr: string): string {
         <button
           data-slug={r.slug}
           aria-label={`Afficher le régime ${r.name}`}
-          class="tab-btn border-b-4 border-transparent px-5 py-4 text-base font-semibold whitespace-nowrap text-gray-700 transition-colors hover:border-teal-600 hover:text-teal-800"
+          class="tab-btn border-b-4 px-5 py-4 text-base font-semibold whitespace-nowrap transition-colors"
         >
           <i class={`${regimeIcon(r.slug)} mr-1.5`}></i>{r.name}
         </button>
@@ -392,8 +397,7 @@ function formatDate(dateStr: string): string {
     function showRegime(slug) {
       document.querySelectorAll('.regime-panel').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('border-teal-500', 'text-teal-800');
-        btn.classList.add('border-transparent', 'text-gray-700');
+        btn.classList.remove('tab-active');
       });
       const panel = document.querySelector(`[data-panel="${slug}"]`);
       if (panel) {
@@ -403,8 +407,7 @@ function formatDate(dateStr: string): string {
       }
       const tab = document.querySelector(`[data-slug="${slug}"]`);
       if (tab) {
-        tab.classList.add('border-teal-500', 'text-teal-800');
-        tab.classList.remove('border-transparent', 'text-gray-700');
+        tab.classList.add('tab-active');
         tab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
       try { localStorage.setItem('aq-regime', slug); } catch {}
