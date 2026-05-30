@@ -238,12 +238,56 @@ here, no monetisation, no hidden agenda. Every menu on this site links back to
 [aquavena.nc](https://www.aquavena.nc) to place orders. This is simply a more
 accessible front door to a service my mother loves.
 
-# Context
+# Goals and Broader Vision
 
-This report compares the accessibility of
-[adriens.github.io/aquavena](https://adriens.github.io/aquavena) — designed for
-visually impaired users — against the original source website
-[aquavena.nc](https://www.aquavena.nc) — using identical, reproducible CLI tools.
+## Immediate goal
+
+The immediate goal of this work is narrow and personal: give a visually impaired
+person autonomous, comfortable access to a weekly meal menu. That problem is solved.
+But the process of solving it surfaced something more general.
+
+## A replicable methodology
+
+Building this site required answering a question that turns out to be surprisingly
+hard in practice: *how do you know whether a website is actually accessible?*
+Subjective assessment does not scale. Manual inspection is inconsistent. What this
+project demonstrated is that a fully automated, score-based pipeline can answer
+that question reproducibly and cheaply.
+
+The methodology is as follows. A set of open-source CLI tools — pa11y-ci,
+Lighthouse, axe-core — each consume a URL and produce a structured output: a JSON
+file containing a score, a list of violations, and enough metadata to track change
+over time. Those outputs are loaded into an analytical database (DuckDB), which
+makes them queryable, comparable, and archivable. A report is then generated
+automatically from that database.
+
+The key insight is that **accessibility becomes measurable**. Once it is measurable,
+it can be benchmarked, monitored, and improved in the same way that software
+performance or test coverage is managed: with targets, regressions, and trends.
+
+## Transferability to other accessibility domains
+
+Low vision is one accessibility challenge among many. The same pipeline —
+automated audit → structured score → database → report — applies without
+modification to other user profiles:
+
+- **Dyslexia:** Tools such as the Readability Score API or custom axe rules can
+  measure line length, font choice, letter spacing, and paragraph density.
+  A dyslexic-friendly site has computable characteristics, and a score can be
+  assigned to them just as Lighthouse assigns a score to colour contrast.
+
+- **Motor impairment:** Keyboard navigability, focus order, and touch target size
+  are already audited by Lighthouse and axe-core. A pipeline targeting these
+  specific rules would produce a "motor accessibility score" for any site.
+
+- **Cognitive load:** Metrics such as reading level (Flesch-Kincaid), page
+  complexity, and number of interactive elements per viewport can be computed
+  automatically and tracked over time.
+
+The template is always the same: identify the user profile, map it to computable
+signals, plug those signals into the pipeline, and let the data speak. The Aquavena
+project is one instantiation of that template. Others could follow with minimal
+adaptation — including, potentially, the official aquavena.nc site itself.
 
 # Site Architecture
 
