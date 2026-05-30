@@ -1,0 +1,129 @@
+version: "3"
+
+vars:
+  SITE_DIR: ../site
+  REPORTS_DIR: reports
+  QUARTO_DIR: quarto
+  DATA_DIR: data
+  PORT: 4321
+
+tasks:
+
+  default:
+    desc: "Show available tasks"
+    cmds:
+      - task --list
+
+  # ── Data ──────────────────────────────────────────────────────────────────
+
+  fetch:
+    desc: "Scrape menus from aquavena.nc (Python)"
+    dir: ..
+    cmds:
+      - uv run python scripts/fetch_data.py
+
+  # ── Site build ────────────────────────────────────────────────────────────
+
+  build:
+    desc: "Build the Astro static site"
+    dir: "{{.SITE_DIR}}"
+    cmds:
+      - npm run build
+
+  # ── Accessibility audits ──────────────────────────────────────────────────
+
+  audit:pa11y:
+    desc: "Run pa11y-ci WCAG 2.1 AA audit on local site → reports/pa11y.json"
+    dir: "{{.SITE_DIR}}"
+    cmds:
+      - mkdir -p ../benchmark/{{.REPORTS_DIR}}
+      - npx serve dist -p {{.PORT}} &
+      - sleep 3
+      - npx pa11y-ci --config .pa11yci.json --json > ../benchmark/{{.REPORTS_DIR}}/pa11y.json 2>/dev/null || true
+      - kill %1 2>/dev/null || true
+
+  audit:lighthouse:our-site:
+    desc: "Lighthouse accessibility audit on our site → reports/lighthouse.report.json"
+    dir: "{{.SITE_DIR}}"
+    cmds:
+      - mkdir -p ../benchmark/{{.REPORTS_DIR}}
+      - npx serve dist -p {{.PORT}} &
+      - sleep 3
+      - >
+        npx lighthouse "http://localhost:{{.PORT}}/#aqua-m%C3%A9diterran%C3%A9en"
+        --only-categories=accessibility
+        --output=json,html
+        --output-path="../benchmark/{{.REPORTS_DIR}}/lighthouse"
+        --chrome-flags="--no-sandbox --headless"
+        --quiet
+      - kill %1 2>/dev/null || true
+
+  audit:lighthouse:aquavena-nc:
+    desc: "Lighthouse accessibility audit on aquavena.nc → reports/lighthouse-aquavena-nc.report.json"
+    dir: "{{.SITE_DIR}}"
+    cmds:
+      - mkdir -p ../benchmark/{{.REPORTS_DIR}}
+      - >
+        npx lighthouse "https://www.aquavena.nc/formules/aqua-m%C3%A9diterran%C3%A9en"
+        --only-categories=accessibility
+        --output=json
+        --output-path="../benchmark/{{.REPORTS_DIR}}/lighthouse-aquavena-nc.report.json"
+        --chrome-flags="--no-sandbox --headless"
+        --quiet
+
+  audit:
+    desc: "Run all audits (pa11y + Lighthouse our-site + Lighthouse aquavena.nc)"
+    cmds:
+      - task: audit:pa11y
+      - task: audit:lighthouse:our-site
+      - task: audit:lighthouse:aquavena-nc
+
+  # ── DuckDB + Report ───────────────────────────────────────────────────────
+
+  db:
+    desc: "Load JSONs into DuckDB (via Quarto render — R code)"
+    cmds:
+      - task: report
+
+  report:
+    desc: "Render the Quarto PDF report (loads JSONs → DuckDB → PDF)"
+    dir: "{{.QUARTO_DIR}}"
+    cmds:
+      - quarto render report.qmd --to pdf
+
+  # ── Full pipeline ─────────────────────────────────────────────────────────
+
+  all:
+    desc: "Full pipeline: fetch → build → audit → report"
+    cmds:
+      - task: fetch
+      - task: build
+      - task: audit
+      - task: report
+
+  all:no-fetch:
+    desc: "Pipeline without data fetch: build → audit → report"
+    cmds:
+      - task: build
+      - task: audit
+      - task: report
+
+  # ── Utilities ─────────────────────────────────────────────────────────────
+
+  clean:reports:
+    desc: "Delete generated reports (pa11y.json, lighthouse*.json, *.html)"
+    cmds:
+      - rm -f {{.REPORTS_DIR}}/pa11y.json
+      - rm -f {{.REPORTS_DIR}}/lighthouse*.json
+      - rm -f {{.REPORTS_DIR}}/lighthouse*.html
+
+  clean:db:
+    desc: "Delete DuckDB database (forces full rebuild on next report)"
+    cmds:
+      - rm -f {{.DATA_DIR}}/benchmark.duckdb
+
+  clean:
+    desc: "Delete all generated files (reports + db)"
+    cmds:
+      - task: clean:reports
+      - task: clean:db
