@@ -7,7 +7,7 @@ import { resolve } from 'path';
 const PORT = 4321;
 const BASE = `http://localhost:${PORT}`;
 const HASH = `#aqua-m%C3%A9diterran%C3%A9en`;
-const REPORTS = resolve('reports');
+const REPORTS = resolve('../benchmark/reports');
 
 mkdirSync(REPORTS, { recursive: true });
 
@@ -20,12 +20,12 @@ try {
   // --- pa11y-ci ---
   console.log('\n📋 pa11y-ci — audit WCAG2AA\n');
   try {
-    execSync(`npx pa11y-ci --config .pa11yci.json --json > reports/pa11y.json 2>/dev/null`, { stdio: 'inherit' });
+    execSync(`npx pa11y-ci --config .pa11yci.json --json > "${REPORTS}/pa11y.json" 2>/dev/null`, { stdio: 'inherit' });
   } catch {
     // pa11y-ci exits non-zero when issues found — check the JSON anyway
   }
   let pa11yResult = { results: {} };
-  try { pa11yResult = JSON.parse(readFileSync('reports/pa11y.json', 'utf8')); } catch {}
+  try { pa11yResult = JSON.parse(readFileSync(`${REPORTS}/pa11y.json`, 'utf8')); } catch {}
 
   let totalErrors = 0, totalWarnings = 0;
   for (const [url, issues] of Object.entries(pa11yResult.results ?? {})) {
@@ -44,13 +44,13 @@ try {
     `npx lighthouse "${BASE}/${HASH}" ` +
     `--only-categories=accessibility ` +
     `--output=json,html ` +
-    `--output-path=reports/lighthouse ` +
+    `--output-path="${REPORTS}/lighthouse" ` +
     `--chrome-flags="--no-sandbox --headless" ` +
     `--quiet`,
     { stdio: 'inherit' }
   );
 
-  const lh = JSON.parse(readFileSync('reports/lighthouse.report.json', 'utf8'));
+  const lh = JSON.parse(readFileSync(`${REPORTS}/lighthouse.report.json`, 'utf8'));
   const score = Math.round(lh.categories.accessibility.score * 100);
   const audits = lh.categories.accessibility.auditRefs;
   const failed  = audits.filter(a => lh.audits[a.id]?.score === 0);
@@ -69,9 +69,9 @@ try {
     exitCode = 1;
   }
 
-  console.log(`\n  📄 Rapport HTML → reports/lighthouse.report.html`);
-  console.log(`  📄 Rapport JSON → reports/lighthouse.report.json`);
-  console.log(`  📄 pa11y JSON   → reports/pa11y.json`);
+  console.log(`\n  📄 Rapport HTML → benchmark/reports/lighthouse.report.html`);
+  console.log(`  📄 Rapport JSON → benchmark/reports/lighthouse.report.json`);
+  console.log(`  📄 pa11y JSON   → benchmark/reports/pa11y.json`);
 
   // --- Résumé final ---
   console.log('\n' + '─'.repeat(50));
