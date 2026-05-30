@@ -122,8 +122,6 @@ AUDIT_DATE <- Sys.Date()
 DB_PATH    <- file.path(DATA, "benchmark.duckdb")
 ```
 
-# Data Ingestion → DuckDB
-
 ```{r ingest}
 # ── Helper: parse a Lighthouse JSON report into a tidy dataframe ───────────
 parse_lh <- function(path, site_label, date) {
@@ -205,20 +203,47 @@ if (!dbExistsTable(con, "lighthouse_audits")) {
 }
 ```
 
-All audit data is now stored in **`benchmark/data/benchmark.duckdb`** — this file
-can be opened in DBeaver, Python (`import duckdb`), R, or the CLI
-(`duckdb benchmark.duckdb`).
+# Inception
+
+This project was not born in a research lab or a corporate accessibility audit.
+It started at a kitchen table, from a very simple and concrete situation.
+
+My mother has been a loyal Aquavena customer for years. Every week she orders her
+meals from their service, and she genuinely enjoys the food. But she is visually
+impaired — and as her condition evolved, consulting the weekly menus on the official
+website became increasingly difficult, then impossible to do on her own. The layout,
+the font sizes, the colour contrasts, the absence of any audio alternative: none of
+it was designed with her in mind.
+
+The consequence was small but recurring, and that is precisely what made it
+significant. Every week, she had to wait for someone to be available — a family
+member, a neighbour — to read the menus out loud to her. She lost the freedom to
+plan her own meals at her own pace. A minor dependency, perhaps, but one that
+repeated itself week after week, quietly eroding her autonomy.
+
+I am a software engineer. I realised that a few hours of work could give that
+autonomy back to her: a dedicated page she could open on her tablet, with large text,
+high contrast, a dark mode for tired eyes, and a button to have the menus read aloud
+in her own language. Something she could use alone, at any hour, without asking
+anyone for help.
+
+That is why this site exists. It is not a product, not a startup, not a statement.
+It is a small act of care, built with the tools I know, for the person who matters
+most. The accessibility work documented in this report is a direct consequence of
+that intent: if the site is meant to help someone with low vision, it had better
+actually be accessible.
+
+A note to the Aquavena team, should they ever read this: there is no competition
+here, no monetisation, no hidden agenda. Every menu on this site links back to
+[aquavena.nc](https://www.aquavena.nc) to place orders. This is simply a more
+accessible front door to a service my mother loves.
 
 # Context
 
 This report compares the accessibility of
 [adriens.github.io/aquavena](https://adriens.github.io/aquavena) — designed for
 visually impaired users — against the original source website
-[aquavena.nc](https://www.aquavena.nc).
-
-**Motivation:** My mother, an Aquavena customer with low vision, could not
-independently consult the weekly menus on the official website. This companion site
-lets her read or listen to the menus from her tablet, fully on her own.
+[aquavena.nc](https://www.aquavena.nc) — using identical, reproducible CLI tools.
 
 # Methodology
 
