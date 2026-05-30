@@ -1,0 +1,8 @@
+{
+  "standard": "WCAG2AA",
+  "reporter": "cli",
+  "runners": ["axe", "htmlcs"],
+  "chromeLaunchConfig": {
+    "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+  }
+}
