@@ -442,20 +442,85 @@ entirely by CLI tools. Each step produces a JSON artefact that feeds the next.
 \end{center}
 ```
 
-## Tools
+## Tool coverage
 
-```{r tools-table}
-tools_df <- tibble::tribble(
-  ~Tool,           ~Version, ~Purpose,
-  "pa11y-ci",      "4.1.1",  "Automated WCAG 2.1 AA audit, multi-URL",
-  "Lighthouse",    "13.3.0", "Accessibility score 0–100, 24 audits",
-  "axe-cli",       "4.11.3", "axe-core violations via CLI",
-  "W3C Validator", "API",    "HTML semantic validation",
-  "webhint",       "7.1.13", "Browser compat, security, HTTP headers"
+No single tool covers the full accessibility surface. The chart below maps each
+tool against the dimensions it measures, showing why the combination is necessary.
+
+```{r coverage-heatmap, fig.height=3.6, fig.width=7.2, fig.align="center"}
+library(forcats)
+
+coverage <- tibble::tribble(
+  ~Tool,           ~Dimension,                   ~Level,
+  "pa11y-ci",      "Colour contrast",             "Full",
+  "pa11y-ci",      "Keyboard navigation",         "Full",
+  "pa11y-ci",      "ARIA / semantics",            "Full",
+  "pa11y-ci",      "HTML structure",              "Partial",
+  "pa11y-ci",      "HTTP headers / security",     "None",
+  "pa11y-ci",      "Performance",                 "None",
+
+  "Lighthouse",    "Colour contrast",             "Full",
+  "Lighthouse",    "Keyboard navigation",         "Full",
+  "Lighthouse",    "ARIA / semantics",            "Full",
+  "Lighthouse",    "HTML structure",              "Partial",
+  "Lighthouse",    "HTTP headers / security",     "Partial",
+  "Lighthouse",    "Performance",                 "Full",
+
+  "axe-cli",       "Colour contrast",             "Full",
+  "axe-cli",       "Keyboard navigation",         "Full",
+  "axe-cli",       "ARIA / semantics",            "Full",
+  "axe-cli",       "HTML structure",              "Partial",
+  "axe-cli",       "HTTP headers / security",     "None",
+  "axe-cli",       "Performance",                 "None",
+
+  "W3C Validator", "Colour contrast",             "None",
+  "W3C Validator", "Keyboard navigation",         "None",
+  "W3C Validator", "ARIA / semantics",            "Partial",
+  "W3C Validator", "HTML structure",              "Full",
+  "W3C Validator", "HTTP headers / security",     "None",
+  "W3C Validator", "Performance",                 "None",
+
+  "webhint",       "Colour contrast",             "Partial",
+  "webhint",       "Keyboard navigation",         "None",
+  "webhint",       "ARIA / semantics",            "Partial",
+  "webhint",       "HTML structure",              "None",
+  "webhint",       "HTTP headers / security",     "Full",
+  "webhint",       "Performance",                 "Partial"
 )
-kable(tools_df, booktabs = TRUE, linesep = "") |>
-  kable_styling(latex_options = c("striped", "hold_position"), font_size = 10)
+
+level_colours <- c(
+  "Full"    = "#0f766e",
+  "Partial" = "#99f6e4",
+  "None"    = "#f3f4f6"
+)
+
+coverage |>
+  mutate(
+    Tool      = fct_rev(factor(Tool,
+                  levels = c("pa11y-ci","Lighthouse","axe-cli","W3C Validator","webhint"))),
+    Dimension = factor(Dimension,
+                  levels = c("Colour contrast","Keyboard navigation","ARIA / semantics",
+                             "HTML structure","HTTP headers / security","Performance")),
+    Level     = factor(Level, levels = c("Full","Partial","None"))
+  ) |>
+  ggplot(aes(x = Dimension, y = Tool, fill = Level)) +
+  geom_tile(colour = "white", linewidth = 1.2) +
+  geom_text(aes(label = Level), size = 2.8, colour = "grey20") +
+  scale_fill_manual(values = level_colours) +
+  labs(
+    title = "Accessibility dimension coverage by tool",
+    x = NULL, y = NULL, fill = NULL
+  ) +
+  theme(
+    axis.text.x   = element_text(angle = 30, hjust = 1, size = 9),
+    axis.text.y   = element_text(size = 9),
+    legend.position = "bottom",
+    panel.grid    = element_blank(),
+    plot.title    = element_text(face = "bold", size = 11)
+  )
 ```
+
+## Tools
 
 ## Standard
 
