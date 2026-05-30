@@ -14,6 +14,31 @@ tasks:
     cmds:
       - task --list
 
+  # ── Setup ─────────────────────────────────────────────────────────────────
+
+  setup:r-deps:
+    desc: "Install required R packages (DBI, duckdb, ggplot2, knitr, kableExtra, ggforce)"
+    cmds:
+      - >
+        Rscript -e '
+          pkgs <- c("DBI","duckdb","ggplot2","knitr","kableExtra","ggforce","tibble");
+          missing <- pkgs[!pkgs %in% installed.packages()[,"Package"]];
+          if (length(missing)) install.packages(missing, repos="https://cran.r-project.org")
+          else cat("All R packages already installed.\n")
+        '
+
+  setup:node-deps:
+    desc: "Install Node.js dependencies (pa11y-ci, lighthouse, serve) globally"
+    dir: "{{.SITE_DIR}}"
+    cmds:
+      - npm install
+
+  setup:
+    desc: "Install all dependencies (R packages + Node.js)"
+    cmds:
+      - task: setup:r-deps
+      - task: setup:node-deps
+
   # ── Data ──────────────────────────────────────────────────────────────────
 
   fetch:
@@ -80,33 +105,53 @@ tasks:
 
   # ── DuckDB + Report ───────────────────────────────────────────────────────
 
+  db:clean:
+    desc: "Delete DuckDB database (forces full rebuild on next report)"
+    cmds:
+      - rm -f {{.DATA_DIR}}/benchmark.duckdb
+
   db:
     desc: "Load JSONs into DuckDB (via Quarto render — R code)"
     cmds:
       - task: report
 
   report:
-    desc: "Render the Quarto PDF report (loads JSONs → DuckDB → PDF)"
+    desc: "Render the Quarto PDF report (loads JSONs → DuckDB → PDF via XeLaTeX)"
     dir: "{{.QUARTO_DIR}}"
     cmds:
       - quarto render report.qmd --to pdf
 
+  report:fresh:
+    desc: "Delete DuckDB then re-render the PDF (clean rebuild)"
+    cmds:
+      - task: db:clean
+      - task: report
+
   # ── Full pipeline ─────────────────────────────────────────────────────────
 
+  ci:
+    desc: "CI pipeline: build → audit → report (no fetch; sets CI=true for ci_runs tracking)"
+    env:
+      CI: "true"
+    cmds:
+      - task: build
+      - task: audit
+      - task: report:fresh
+
   all:
-    desc: "Full pipeline: fetch → build → audit → report"
+    desc: "Full pipeline: fetch → build → audit → report (fresh DB)"
     cmds:
       - task: fetch
       - task: build
       - task: audit
-      - task: report
+      - task: report:fresh
 
   all:no-fetch:
-    desc: "Pipeline without data fetch: build → audit → report"
+    desc: "Pipeline without data fetch: build → audit → report (fresh DB)"
     cmds:
       - task: build
       - task: audit
-      - task: report
+      - task: report:fresh
 
   # ── Utilities ─────────────────────────────────────────────────────────────
 
@@ -118,12 +163,18 @@ tasks:
       - rm -f {{.REPORTS_DIR}}/lighthouse*.html
 
   clean:db:
-    desc: "Delete DuckDB database (forces full rebuild on next report)"
+    desc: "Delete DuckDB database"
     cmds:
       - rm -f {{.DATA_DIR}}/benchmark.duckdb
 
+  clean:pdf:
+    desc: "Delete generated PDF report"
+    cmds:
+      - rm -f {{.QUARTO_DIR}}/report.pdf
+
   clean:
-    desc: "Delete all generated files (reports + db)"
+    desc: "Delete all generated files (reports + db + pdf)"
     cmds:
       - task: clean:reports
       - task: clean:db
+      - task: clean:pdf
