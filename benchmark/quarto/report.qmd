@@ -48,8 +48,57 @@ format:
         \definecolor{teal700}{RGB}{15,118,110}
         \definecolor{teal100}{RGB}{204,251,241}
 
-        % ── Custom title page ───────────────────────────────────────────
+        % ── Cover & title pages ─────────────────────────────────────────
+        \definecolor{coverbg}{HTML}{0A0E1A}
+        \definecolor{coverteal}{HTML}{5EEAD4}
         \renewcommand{\maketitle}{%
+          % ─── Cover page: galactic commit graph ────────────────────────
+          \begin{titlepage}
+          \begin{tikzpicture}[remember picture, overlay]
+            \fill[coverbg]
+              (current page.south west) rectangle (current page.north east);
+          \end{tikzpicture}
+          \color{white}
+          \centering
+          \vspace*{1.2cm}
+
+          {\color{coverteal}\fontsize{38}{44}\selectfont\faUniversalAccess}
+
+          \vspace{0.8cm}
+
+          {\fontsize{32}{36}\selectfont\bfseries\color{coverteal}
+            Accessibility Benchmark}\\[0.3em]
+          {\fontsize{18}{22}\selectfont\itshape\color{white}
+            Aquavena for the Visually Impaired}
+
+          \vspace{0.4cm}
+          {\color{coverteal}\rule{0.30\textwidth}{0.8pt}}\\[0.3em]
+          {\fontsize{20}{24}\selectfont\bfseries\color{white}by Adrien SALES}
+
+          \vspace{0.5cm}
+
+          \includegraphics[width=0.62\textwidth]{commit_graph_cover.png}
+
+          \vfill
+
+          {\color{coverteal}\faGithub}~{\color{white}\texttt{github.com/adriens/aquavena}}
+          \quad
+          {\color{coverteal}\faLinkedin}~{\color{white}\texttt{linkedin.com/in/adrien-sales}}\\[0.5em]
+          {\small\color{white!70}\today}
+
+          \vspace{0.4cm}
+
+          % CC BY-SA 4.0 license badge
+          {\fontsize{22}{26}\selectfont\color{white!85}%
+            \faCreativeCommons\,\faCreativeCommonsBy\,\faCreativeCommonsSa}\\[0.2em]
+          {\small\color{white!70}This work is licensed under
+            \href{https://creativecommons.org/licenses/by-sa/4.0/}%
+            {\color{coverteal}\texttt{CC BY-SA 4.0}}}
+
+          \vspace{0.3cm}
+          \end{titlepage}
+
+          % ─── Title page: detailed metadata + abstract ─────────────────
           \begin{titlepage}
           \centering
           \vspace*{1.5cm}
@@ -336,6 +385,15 @@ invisible(dbExecute(con, "
 "))
 
 invisible(dbExecute(con, "
+  CREATE TABLE IF NOT EXISTS commit_graph_metrics (
+    git_sha     VARCHAR PRIMARY KEY REFERENCES git_commits(git_sha),
+    pagerank    DOUBLE,
+    betweenness DOUBLE,
+    degree      INTEGER
+  )
+"))
+
+invisible(dbExecute(con, "
   CREATE TABLE IF NOT EXISTS claude_sessions (
     session       VARCHAR PRIMARY KEY,
     started_at    TIMESTAMP,
@@ -452,13 +510,13 @@ if (nrow(new_lh) > 0) dbAppendTable(con, "lighthouse_audits", new_lh)
 # — checks out each tag, builds, serves and audits the same menu page) override
 # these values when the file is present.
 sh_data <- tibble::tibble(
-  tag          = c("aquavena.nc","v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0","v1.7.0"),
-  git_sha      = c(NA_character_, "0fdeff3","76658ae","9a5ca91","81fba2b","a59d12d","eccabc3","534854c","2e5e47e"),
+  tag          = c("aquavena.nc","v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0","v1.7.0","v1.8.0"),
+  git_sha      = c(NA_character_, "0fdeff3","76658ae","9a5ca91","81fba2b","a59d12d","eccabc3","534854c","2e5e47e","9dc1a0b"),
   audit_date   = as.Date(c("2026-05-30","2026-05-29","2026-05-30","2026-05-30",
-                            "2026-05-30","2026-05-30","2026-05-30","2026-05-30","2026-05-30")),
-  lh_score     = c(91L, 82L, 86L, 89L, 93L, 96L, 98L, 100L, 100L),
-  pa11y_errors = c(67L,  5L,  3L,  2L,  1L,  0L,  0L,   0L,   0L),
-  lines_delta  = c(0L, 17352L, 13L, 28L, 10L, 95L, 308L, 1240L, 919L)
+                            "2026-05-30","2026-05-30","2026-05-30","2026-05-30","2026-05-30","2026-05-31")),
+  lh_score     = c(91L, 82L, 86L, 89L, 93L, 96L, 98L, 100L, 100L, 100L),
+  pa11y_errors = c(67L,  5L,  3L,  2L,  1L,  0L,  0L,   0L,   0L,   0L),
+  lines_delta  = c(0L, 17352L, 13L, 28L, 10L, 95L, 308L, 1240L, 919L, 0L)
 )
 
 # Override lh_score with real measurements when available
@@ -505,7 +563,7 @@ new_sh <- sh_data |> filter(!tag %in% existing_sh)
 if (nrow(new_sh) > 0) dbAppendTable(con, "score_history", new_sh)
 
 gr_data <- tibble::tibble(
-  tag          = c("v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0","v1.7.0"),
+  tag          = c("v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0","v1.7.0","v1.8.0"),
   release_name = c(
     "v0.1.1 - Contraste WCAG AA & menus Aqua-Chrono-Vege",
     "v0.1.2 - Onglets regimes lisibles en mode nuit",
@@ -514,13 +572,14 @@ gr_data <- tibble::tibble(
     "v0.1.5 - Rapport accessibilite complet : Lighthouse 100/100",
     "v1.5.0 - Score accessibilite 100/100 : toutes violations WCAG corrigees + benchmark/",
     "v1.6.0 - Benchmark : graphiques pipeline, cycle d'amelioration et discipline de release",
-    "v1.7.0 - Schema FK, glossaire, outils, trend chart"
+    "v1.7.0 - Schema FK, glossaire, outils, trend chart",
+    "v1.8.0 - Executive Dashboard, ML semantic analysis & full audit replay"
   ),
   published_at    = as.Date(c("2026-05-29","2026-05-30","2026-05-30","2026-05-30",
-                               "2026-05-30","2026-05-30","2026-05-30","2026-05-30")),
+                               "2026-05-30","2026-05-30","2026-05-30","2026-05-30","2026-05-31")),
   published_at_ts = as.POSIXct(c("2026-05-29 23:58:03","2026-05-30 00:02:20","2026-05-30 00:14:10",
                                   "2026-05-30 00:17:29","2026-05-30 00:21:35","2026-05-30 00:43:38",
-                                  "2026-05-30 03:52:36","2026-05-30 04:26:04"), tz = "UTC"),
+                                  "2026-05-30 03:52:36","2026-05-30 04:26:04","2026-05-30 17:49:08"), tz = "UTC"),
   url           = c(
     "https://github.com/adriens/aquavena/releases/tag/v0.1.1",
     "https://github.com/adriens/aquavena/releases/tag/v0.1.2",
@@ -529,10 +588,11 @@ gr_data <- tibble::tibble(
     "https://github.com/adriens/aquavena/releases/tag/v0.1.5",
     "https://github.com/adriens/aquavena/releases/tag/v1.5.0",
     "https://github.com/adriens/aquavena/releases/tag/v1.6.0",
-    "https://github.com/adriens/aquavena/releases/tag/v1.7.0"
+    "https://github.com/adriens/aquavena/releases/tag/v1.7.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.8.0"
   ),
-  author        = rep("adriens", 8),
-  is_prerelease = rep(FALSE, 8),
+  author        = rep("adriens", 9),
+  is_prerelease = rep(FALSE, 9),
   body_excerpt  = c(
     "Corrections contraste WCAG AA theme clair — tous les composants menus (Aqua, Chrono, Vege) passent desormais le ratio 4.5:1.",
     "Correction contraste onglets regimes en mode nuit — les noms de regime sont desormais lisibles sur fond sombre.",
@@ -541,7 +601,8 @@ gr_data <- tibble::tibble(
     "Rapport accessibilite complet via npm run report : pa11y-ci + Lighthouse. Score Lighthouse 100/100.",
     "Score 100/100 Lighthouse, 0 erreur pa11y. Ajout dossier benchmark/ avec pipeline d'audit automatise.",
     "Benchmark enrichi : graphiques ggplot2 pipeline de donnees, cycle d'amelioration, discipline de release semantique.",
-    "Schema DuckDB avec cles etrangeres, diagramme SchemaCrawler, glossaire, section outils, chart de tendance."
+    "Schema DuckDB avec cles etrangeres, diagramme SchemaCrawler, glossaire, section outils, chart de tendance.",
+    "Executive Dashboard PMI, analyse semantique ML (bge-m3 multilingue), audits HTML/poids/privacy, replay historique, schema 12 tables."
   )
 )
 existing_gr <- dbGetQuery(con, "SELECT tag FROM gh_releases")$tag
@@ -728,6 +789,22 @@ if (file.exists(sem_path)) {
         as.integer(cl$id), as.integer(cl$size),
         array_lit(unlist(cl$terms)),
         sql_quote(cl$exemplar)
+      )))
+    }
+  }
+  # Per-commit graph centrality metrics
+  for (c in sem$commits) {
+    if (!is.null(c$pagerank) &&
+        nrow(dbGetQuery(con, sprintf(
+            "SELECT 1 FROM commit_graph_metrics WHERE git_sha = '%s'",
+            c$sha))) == 0) {
+      invisible(dbExecute(con, sprintf(
+        "INSERT INTO commit_graph_metrics (git_sha, pagerank, betweenness, degree)
+         VALUES (%s, %f, %f, %d)",
+        sql_quote(c$sha),
+        as.numeric(c$pagerank),
+        as.numeric(c$betweenness),
+        as.integer(c$degree)
       )))
     }
   }
@@ -1186,6 +1263,39 @@ transcripts into the `claude_sessions` and `claude_usage` tables. Joining with
 `git_commits` via timestamp range gives **tokens per release** (apportioned by
 the time elapsed between consecutive tags).
 
+::: {.callout-note appearance="simple"}
+## \faInfoCircle\ What does "cache hit" mean here?
+
+Claude charges for **every** token, but the **prompt cache** changes the rates
+dramatically:
+
+| Token category | Price (Sonnet 4.6) | Price (Opus 4.7) | Relative |
+|---|---|---|---|
+| Fresh input (cache miss) | \$3.00 / M | \$15.00 / M | **1.0×** |
+| Cache write (one-off setup) | \$3.75 / M | \$18.75 / M | 1.25× |
+| **Cache read (cache hit)** | **\$0.30 / M** | **\$1.50 / M** | **0.1×** |
+| Output tokens | \$15.00 / M | \$75.00 / M | 5.0× |
+
+A **cache hit** is when the model serves part of the prompt from cache instead
+of re-encoding it. It is **still billed**, but at **10% of the fresh-input rate**.
+
+**Why our 98% cache-hit ratio matters.** In a long Claude Code conversation the
+entire prior transcript is replayed as context with every new message. Without
+caching, this re-encoding cost would scale roughly quadratically with session
+length. With caching, it scales linearly — and at the 10% rate. Concretely:
+the ~420 M cache-read tokens we logged would have cost **\$1,260** at fresh-input
+rates; they actually cost about **\$126**. A **10× saving**, automatically.
+
+**What "good" looks like in our case.** A high cache-hit ratio (≥ 90%) means we
+are working as efficiently as possible — long, coherent sessions reuse the same
+context. A **low** cache-hit ratio would indicate either many short sessions
+(each pays the cache-write tax without amortising it) or the conversation
+constantly bringing in fresh files. For project-style work like this benchmark,
+the 98% ratio is **the ceiling, not the average** — it is the strongest signal
+that the project was delivered in a small number of focused sessions rather
+than fragmented across many cold starts.
+:::
+
 ```{r ai-tokens-kpis, results="asis"}
 sonnet_tok <- dbGetQuery(con, "SELECT COALESCE(SUM(total_tokens),0) AS t
                                 FROM claude_usage WHERE model = 'claude-sonnet-4-6'")$t
@@ -1273,7 +1383,7 @@ for (s in unique(tag_rows$session)) {
   }
 }
 apport <- dplyr::bind_rows(apport)
-tag_levels <- c("v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0","v1.7.0")
+tag_levels <- c("v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0","v1.7.0","v1.8.0")
 apport$tag <- factor(apport$tag, levels = tag_levels)
 
 # Cumulative tokens per tag (summed across models)
@@ -1339,7 +1449,8 @@ ggplot() +
 ## Semantic analysis of commit messages
 
 All **81 commit messages** were embedded with the
-`sentence-transformers/all-MiniLM-L6-v2` model (384-dimensional vectors),
+`BAAI/bge-m3` model (1024-dimensional **multilingual** embeddings — handles
+the project's mix of French and English commit messages),
 clustered with K-Means into 6 groups, and projected to 2D with PCA. The
 result is stored in two tables — `commit_classification` (per-commit
 type/scope/cluster/coords) and `commit_clusters` (per-cluster size and
@@ -1424,7 +1535,7 @@ p_map <- ggplot(sem_map, aes(x = embed_x, y = embed_y, colour = factor(cluster_i
   scale_colour_manual(values = cluster_palette, guide = "none") +
   scale_fill_manual(values   = cluster_palette, guide = "none") +
   labs(title = "Semantic map of commits (PCA 2D)",
-       subtitle = "MiniLM-L6-v2 embeddings · K-Means k=6",
+       subtitle = "BAAI/bge-m3 multilingual embeddings · K-Means k=6",
        x = "PC1", y = "PC2") +
   theme_minimal(base_size = 9) +
   theme(panel.grid.minor = element_blank())
@@ -1449,6 +1560,263 @@ kable(ct, booktabs = TRUE, linesep = "", align = c("c","c","l","l")) |>
   kable_styling(latex_options = c("striped","hold_position"), font_size = 8) |>
   column_spec(4, width = "5.5cm")
 ```
+
+### Graph data science — anchors & bridges
+
+The embeddings already cluster the commits. Treating them as a **graph** —
+nodes = commits, edges = cosine similarity ≥ 0.55 — adds a second layer of
+insight: which commit best *represents* each theme (highest **PageRank**
+within its cluster, the **anchor**), and which commits *connect* different
+themes (highest **betweenness centrality**, the **bridges**). Both metrics
+are computed with `networkx`, persisted in `commit_graph_metrics` for direct
+SQL queries, and exported as `benchmark/data/commit_graph.gexf` — a
+**Gephi-ready file** with all node attributes (cluster, PageRank, betweenness,
+degree, type, scope, timestamp) and edge weights, so the graph can be
+explored interactively (ForceAtlas2 layout, community detection, etc.) in
+Gephi without re-running the pipeline.
+
+![Commit-similarity graph — **ForceAtlas2** layout (Gephi's native algorithm, `fa2-modified` port) · node colour = cluster · node size = PageRank (normalised, ≈20× ratio) · edges = cosine similarity ≥ 0.55](commit_graph.png){width=92% fig-align="center"}
+
+```{r anchors-bridges}
+anchors <- dbGetQuery(con, "
+  WITH ranked AS (
+    SELECT cc.cluster_id, cc.subject, gm.pagerank,
+           ROW_NUMBER() OVER (PARTITION BY cc.cluster_id ORDER BY gm.pagerank DESC) AS rk
+    FROM commit_classification cc
+    JOIN commit_graph_metrics gm USING (git_sha)
+  )
+  SELECT 'C' || cluster_id AS cluster, ROUND(pagerank, 4) AS pagerank, subject
+  FROM ranked WHERE rk = 1 ORDER BY cluster_id
+")
+names(anchors) <- c("Cluster", "PageRank", "Anchor commit")
+kable(anchors, booktabs = TRUE, linesep = "", caption = "Anchor commit per cluster — the most-representative work in each theme") |>
+  kable_styling(latex_options = c("striped","hold_position"), font_size = 8) |>
+  column_spec(3, width = "9.5cm")
+
+bridges <- dbGetQuery(con, "
+  SELECT 'C' || cc.cluster_id AS cluster,
+         ROUND(gm.betweenness, 4) AS betweenness,
+         cc.subject
+  FROM commit_classification cc
+  JOIN commit_graph_metrics gm USING (git_sha)
+  ORDER BY gm.betweenness DESC LIMIT 5
+")
+names(bridges) <- c("From cluster", "Betweenness", "Bridge commit")
+kable(bridges, booktabs = TRUE, linesep = "", caption = "Top-5 bridge commits — connect distinct themes (highest betweenness centrality)") |>
+  kable_styling(latex_options = c("striped","hold_position"), font_size = 8) |>
+  column_spec(3, width = "9.0cm")
+```
+
+::: {.callout-note appearance="simple"}
+## \faNetworkWired\ What the graph reveals
+
+**Anchors (cluster representatives).** Across all six clusters, the anchor
+is almost always an **About-page feature commit** (`feat: add A+/A- and dark
+mode to About page header`, `feat: move accessibility score section to top
+of About page`, `feat: add read-aloud button…`). This is the structural
+finding: the **About page is the semantic centre of the codebase** — the
+single page where the project explains itself most fully, and where the
+embeddings find the highest density of similar content.
+
+**Bridges (theme-linkers).** The top-5 betweenness commits all touch
+**multiple themes simultaneously** — they're the commits that introduced
+A+/A- *and* dark mode (style + feature), or moved the accessibility-score
+section *to* the About page (a11y + About). These are the **integration
+commits** — the ones a knowledge-graph would surface as architecturally
+critical.
+
+**Why this matters at scale.** With 82 commits the graph is small, but the
+*technique scales linearly with commit count*. Applied to a 1000-commit
+codebase, PageRank surfaces the commits that anchor each subsystem;
+betweenness surfaces the integration commits whose removal would *fracture*
+the codebase. Both are signals an experienced reviewer would notice manually
+— this method makes them queryable.
+:::
+
+### Retrospective Gantt — workstream activity over time
+
+Combining `git_commits.commit_ts`, `commit_classification.cluster_id`, and
+`gh_releases.published_at_ts` lets us reconstruct **when each semantic
+workstream was active** and overlay the release tags shipped along the way.
+Each horizontal bar spans the **first → last commit** of one cluster; each
+short vertical tick on the bar is an individual commit; the dashed vertical
+lines are **release tags** with their labels at the top. Local time is
+Pacific/Noumea (UTC+11).
+
+```{r retro-gantt, fig.height=4.6, fig.width=7.0, fig.align="center"}
+cluster_palette <- c("0" = "#0f766e", "1" = "#dc2626", "2" = "#0891b2",
+                     "3" = "#7c3aed", "4" = "#f59e0b", "5" = "#059669")
+
+# Per-cluster start/end of activity
+cluster_windows <- dbGetQuery(con, "
+  SELECT cc.cluster_id,
+         MIN(gc.commit_ts) AS start_ts,
+         MAX(gc.commit_ts) AS end_ts,
+         COUNT(*)          AS n
+  FROM commit_classification cc
+  JOIN git_commits gc USING (git_sha)
+  GROUP BY cc.cluster_id
+  ORDER BY cluster_id
+")
+# Short label per cluster (top 3 TF-IDF terms)
+cluster_labels <- dbGetQuery(con, "
+  SELECT cluster_id, array_to_string(terms[1:3], ', ') AS short_label
+  FROM commit_clusters
+")
+cluster_windows <- dplyr::left_join(cluster_windows, cluster_labels,
+                                     by = "cluster_id")
+cluster_windows$y_label <- sprintf("C%d · %s",
+                                    cluster_windows$cluster_id,
+                                    cluster_windows$short_label)
+cluster_windows$y_label <- factor(cluster_windows$y_label,
+                                   levels = rev(cluster_windows$y_label))
+cluster_windows$start_ts <- as.POSIXct(cluster_windows$start_ts, tz = "UTC")
+cluster_windows$end_ts   <- as.POSIXct(cluster_windows$end_ts,   tz = "UTC")
+attr(cluster_windows$start_ts, "tzone") <- "Pacific/Noumea"
+attr(cluster_windows$end_ts,   "tzone") <- "Pacific/Noumea"
+
+# Per-commit tick marks
+ticks <- dbGetQuery(con, "
+  SELECT cc.cluster_id, gc.commit_ts
+  FROM commit_classification cc
+  JOIN git_commits gc USING (git_sha)
+  ORDER BY gc.commit_ts
+")
+ticks$commit_ts <- as.POSIXct(ticks$commit_ts, tz = "UTC")
+attr(ticks$commit_ts, "tzone") <- "Pacific/Noumea"
+ticks <- dplyr::left_join(ticks, cluster_windows[, c("cluster_id", "y_label")],
+                          by = "cluster_id")
+
+# Time-spent estimation per cluster: each commit's "work time" =
+# elapsed time since previous commit (any cluster), capped at 30 minutes
+# (longer gaps are assumed to be breaks, not active work).
+GAP_CAP_SECS <- 30 * 60   # 30 min cap per inter-commit gap
+ticks_ordered <- ticks |> dplyr::arrange(commit_ts)
+ticks_ordered$gap_secs <- c(0, as.numeric(diff(ticks_ordered$commit_ts),
+                                          units = "secs"))
+ticks_ordered$gap_secs <- pmin(ticks_ordered$gap_secs, GAP_CAP_SECS)
+time_per_cluster <- ticks_ordered |>
+  dplyr::group_by(cluster_id) |>
+  dplyr::summarise(active_minutes = sum(gap_secs) / 60, .groups = "drop")
+cluster_windows <- dplyr::left_join(cluster_windows, time_per_cluster,
+                                     by = "cluster_id")
+cluster_windows$time_label <- sprintf("  %d commits · %.0f min",
+                                       cluster_windows$n,
+                                       cluster_windows$active_minutes)
+
+# Release markers
+releases <- dbGetQuery(con, "
+  SELECT tag, published_at_ts FROM gh_releases ORDER BY published_at_ts
+")
+releases$published_at_ts <- as.POSIXct(releases$published_at_ts, tz = "UTC")
+attr(releases$published_at_ts, "tzone") <- "Pacific/Noumea"
+
+x_min <- min(cluster_windows$start_ts) - 60 * 60
+x_max <- max(cluster_windows$end_ts)   + 60 * 60
+
+ggplot() +
+  # Release-tag vertical lines
+  geom_vline(data = releases,
+             aes(xintercept = published_at_ts),
+             linetype = "dashed", colour = "#0f766e",
+             alpha = 0.45, linewidth = 0.35) +
+  # Cluster activity bars
+  geom_segment(data = cluster_windows,
+               aes(x = start_ts, xend = end_ts,
+                   y = y_label, yend = y_label,
+                   colour = factor(cluster_id)),
+               linewidth = 7.5, alpha = 0.32, lineend = "round") +
+  geom_segment(data = cluster_windows,
+               aes(x = start_ts, xend = end_ts,
+                   y = y_label, yend = y_label,
+                   colour = factor(cluster_id)),
+               linewidth = 1.2, alpha = 1.0) +
+  # Per-commit tick marks
+  geom_point(data = ticks,
+             aes(x = commit_ts, y = y_label, colour = factor(cluster_id)),
+             shape = "|", size = 4.5, stroke = 1.2) +
+  # Cluster size + estimated active time labels at the right end of each bar
+  geom_text(data = cluster_windows,
+            aes(x = end_ts, y = y_label,
+                label = time_label,
+                colour = factor(cluster_id)),
+            hjust = 0, size = 2.5, fontface = "bold") +
+  # Release-tag labels at the very top of the plot
+  geom_text(data = releases,
+            aes(x = published_at_ts,
+                y = length(unique(cluster_windows$y_label)) + 0.7,
+                label = tag),
+            angle = 60, hjust = 0, vjust = 0.5, size = 2.2,
+            colour = "#0f766e", fontface = "bold") +
+  scale_colour_manual(values = cluster_palette, guide = "none") +
+  scale_x_datetime(date_breaks = "1 day", date_labels = "%a %d %b",
+                   limits = c(x_min, x_max),
+                   expand = expansion(mult = c(0.02, 0.10))) +
+  coord_cartesian(clip = "off") +
+  labs(title = "Retro Gantt — semantic workstreams over time",
+       subtitle = "Bars = first→last commit of each cluster · ticks = individual commits · dashed lines = release tags",
+       x = NULL, y = NULL) +
+  theme_minimal(base_size = 9) +
+  theme(panel.grid.minor = element_blank(),
+        panel.grid.major.y = element_blank(),
+        plot.margin = margin(40, 18, 6, 6),
+        axis.text.y = element_text(face = "bold"))
+```
+
+**Estimated active time per cluster.** Each cluster bar is now annotated
+with **both** the commit count and the estimated **active minutes** spent on
+that workstream. The estimate is computed as the sum of inter-commit gaps
+attributed to each commit's cluster, **capped at 30 minutes per gap** —
+longer gaps are assumed to be breaks rather than active work. The values
+underlying the bars are queryable directly:
+
+```sql
+WITH ordered AS (
+  SELECT cc.cluster_id, gc.commit_ts,
+         LAG(gc.commit_ts) OVER (ORDER BY gc.commit_ts) AS prev_ts
+  FROM commit_classification cc JOIN git_commits gc USING (git_sha)
+)
+SELECT cluster_id,
+       ROUND(SUM(LEAST(1800,
+              GREATEST(0, EXTRACT(EPOCH FROM (commit_ts - prev_ts)))
+              )) / 60.0, 1) AS minutes_active
+FROM ordered GROUP BY cluster_id ORDER BY minutes_active DESC;
+```
+
+**Why this matters in a professional setting.** This per-cluster active-time
+estimate is exactly the shape of payload a **time-tracking tool** (Jira
+Tempo, Toggl, Harvest, Clockify, etc.) consumes. The pipeline already
+captures the work category (`commit_type`/`scope`/`cluster`) and the
+duration; a thin adapter could **auto-create Jira worklog entries** from
+every commit, with the cluster as the activity tag and the capped gap as
+the duration. The benchmark `DuckDB` becomes the source of truth for
+**how engineering time is actually allocated** — fixing the chronic problem
+that manually-filled timesheets diverge from real work patterns.
+
+::: {.callout-note appearance="simple"}
+## \faStream\ What the retro Gantt reveals
+
+**Two distinct work epochs.** The chart splits visibly into a **first
+intense burst (May 24–25)** — during which clusters C0/C1/C2/C3 (style,
+RSS, About-page, accessibility/Claude) were all active in parallel —
+followed by the **measurement epoch (May 30–31)** dominated by cluster C4
+(benchmark) with C5 (fix) interleaved.
+
+**Parallel vs. sequential workstreams.** During the first epoch, four
+clusters overlapped — a classic *broad-front* exploratory phase. The second
+epoch is narrower: the team converged on the benchmark/reporting strand,
+with brief returns to fixes as needed.
+
+**Release cadence.** The dashed lines cluster tightly around the early
+work (v0.1.1–v0.1.5 in the first night) and reappear at the end of the
+benchmark epoch (v1.5.0–v1.8.0). The classic "ship-then-instrument" arc
+is visible at a glance.
+
+**What this confirms.** The semantic clustering, the activity heatmap, and
+this Gantt — three independent views — all agree on the same project
+narrative: a short coding sprint, then an extended measurement sprint,
+with every commit traceable to a workstream and a release.
+:::
 
 ### Tokens consumed by category
 

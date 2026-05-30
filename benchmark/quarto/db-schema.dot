@@ -1,5 +1,5 @@
 digraph SchemaCrawler_Diagram {
-	graph [bb="0,0,1947,2128.9",
+	graph [bb="0,0,1965,2266.9",
 		fontname=Helvetica,
 		label=<
       <table border="1" cellborder="0" cellspacing="0" color="#888888">
@@ -9,13 +9,13 @@ digraph SchemaCrawler_Diagram {
 	</tr>
 	<tr>
 		<td align='right'>generated on</td>
-		<td align='left'>2026-05-30 17:29:32</td>
+		<td align='left'>2026-05-30 18:06:09</td>
 	</tr>
       </table>
     >,
 		labeljust=r,
 		lheight=0.62,
-		lp="1803.9,26.25",
+		lp="1821.9,26.25",
 		lwidth=3.75,
 		rankdir=RL
 	];
@@ -73,7 +73,7 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="966.38,571.12",
+		pos="980.62,571.12",
 		width=4.9757];
 	git_commits_93a01e32	[height=1.9097,
 		label=<
@@ -109,14 +109,14 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="199,812.12",
+		pos="199,985.12",
 		width=5.5278];
 	ci_runs_b2eaef04:"git_sha_acd1343b.start":w -> git_commits_93a01e32:"git_sha_e2c1eacd.end":e	[arrowhead=teetee,
 		arrowtail=crowodot,
 		dir=both,
 		label=<ci_runs_git_sha_git_sha_fkey>,
-		lp="564.12,830.5",
-		pos="s,795.25,592.38 e,390,844 775.92,592.76 596.57,600.08 570.43,710.54 416,821.88 407.15,828.25 405.43,836.89 399.53,841.25",
+		lp="569.38,888.5",
+		pos="s,809.5,592.38 e,390,1017 790.25,592.66 589.15,598.77 528.21,702.32 416,879.88 401.37,903.02 416.48,992.17 398.88,1012.7",
 		style=solid];
 	html_quality_60956fee	[height=2.2049,
 		label=<
@@ -157,14 +157,14 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="1722.1,769.12",
+		pos="1740.1,769.12",
 		width=5.559];
 	html_quality_60956fee:"run_id_7b453521.start":w -> ci_runs_b2eaef04:"run_id_739f98cb.end":e	[arrowhead=teetee,
 		arrowtail=crowtee,
 		dir=both,
 		label=<html_quality_run_id_run_id_fkey>,
-		lp="1349.9,808.12",
-		pos="s,1530,811.62 e,1137.5,634.88 1514.6,810.3 1417.7,794.7 1241.3,645.9 1147.4,635.45",
+		lp="1367.9,808.12",
+		pos="s,1548,811.62 e,1151.8,634.88 1532.8,810.35 1435,795 1256.1,645.62 1161.5,635.42",
 		style=solid];
 	lighthouse_audits_4792f190	[height=2.7951,
 		label=<
@@ -215,14 +215,14 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="1722.1,571.12",
+		pos="1740.1,571.12",
 		width=6.1424];
 	lighthouse_audits_4792f190:"run_id_73f7e7bf.start":w -> ci_runs_b2eaef04:"run_id_739f98cb.end":e	[arrowhead=teetee,
 		arrowtail=crowtee,
 		dir=both,
 		label=<lighthouse_audits_run_id_run_id_fkey>,
-		lp="1349.9,643.5",
-		pos="s,1509,634.88 e,1137.5,634.88 1493.9,634.88 1344.3,634.88 1299.3,634.88 1147.2,634.88",
+		lp="1367.9,643.5",
+		pos="s,1527,634.88 e,1151.8,634.88 1511.7,634.88 1360.7,634.88 1315.2,634.88 1161.5,634.88",
 		style=solid];
 	pa11y_issues_e5627b94	[height=2.5,
 		label=<
@@ -268,14 +268,14 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="1722.1,362.12",
+		pos="1740.1,362.12",
 		width=5.6632];
 	pa11y_issues_e5627b94:"run_id_90199e3b.start":w -> ci_runs_b2eaef04:"run_id_739f98cb.end":e	[arrowhead=teetee,
 		arrowtail=crowtee,
 		dir=both,
 		label=<pa11y_issues_run_id_run_id_fkey>,
-		lp="1349.9,611.62",
-		pos="s,1526.2,415.25 e,1137.5,634.88 1511.1,416.77 1412.2,435.51 1243.9,621.5 1147.5,634.19",
+		lp="1367.9,606.68",
+		pos="s,1544.2,415.25 e,1151.8,634.88 1529,416.77 1429.1,435.53 1258.6,621.88 1161.5,634.23",
 		style=solid];
 	privacy_audit_f9d937e7	[height=2.7951,
 		label=<
@@ -326,14 +326,14 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="1722.1,153.12",
+		pos="1740.1,153.12",
 		width=5.6736];
 	privacy_audit_f9d937e7:"run_id_a7a6c48.start":w -> ci_runs_b2eaef04:"run_id_739f98cb.end":e	[arrowhead=teetee,
 		arrowtail=crowtee,
 		dir=both,
 		label=<privacy_audit_run_id_run_id_fkey>,
-		lp="1349.9,417.5",
-		pos="s,1525.9,216.88 e,1137.5,634.88 1510.7,217.08 1362.7,221.28 1318.1,288.3 1220.5,408.88 1155.3,489.35 1238.8,625.73 1147.2,634.44",
+		lp="1367.9,417.5",
+		pos="s,1543.9,216.88 e,1151.8,634.88 1528.7,217.09 1380.7,221.33 1337,289.02 1238.5,408.88 1172.4,489.31 1253.8,625.73 1161.6,634.44",
 		style=solid];
 	claude_sessions_55fa83a1	[height=1.6146,
 		label=<
@@ -364,7 +364,7 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="966.38,1228.1",
+		pos="980.62,1366.1",
 		width=5.9653];
 	claude_usage_be1b9943	[height=2.7951,
 		label=<
@@ -415,14 +415,14 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="1722.1,1186.1",
+		pos="1740.1,1324.1",
 		width=5.6944];
 	claude_usage_be1b9943:"session_7ba811b3.start":w -> claude_sessions_55fa83a1:"session_dfa67315.end":e	[arrowhead=teetee,
 		arrowtail=crowtee,
 		dir=both,
 		label=<claude_usage_session_session_fkey>,
-		lp="1349.9,1258.5",
-		pos="s,1525.1,1249.9 e,1173.1,1249.4 1509.9,1249.9 1369,1249.8 1326.2,1249.4 1182.7,1249.4",
+		lp="1367.9,1396.5",
+		pos="s,1543.1,1387.9 e,1187.4,1387.4 1527.8,1387.9 1385.4,1387.8 1342.1,1387.4 1197.1,1387.4",
 		style=solid];
 	commit_classification_d23bdf71	[height=2.5,
 		label=<
@@ -468,14 +468,14 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="966.38,1009.1",
+		pos="980.62,1200.1",
 		width=6.559];
 	commit_classification_d23bdf71:"git_sha_779e516e.start":w -> git_commits_93a01e32:"git_sha_e2c1eacd.end":e	[arrowhead=teetee,
 		arrowtail=teetee,
 		dir=both,
 		label=<commit_classification_git_sha_git_sha_fkey>,
-		lp="564.12,1069.8",
-		pos="s,738.25,1062.2 e,390,844 728.58,1062.1 569.64,1058.3 550.39,960.19 416,865.12 407.26,858.94 405.35,850.74 399.43,846.61",
+		lp="569.38,1260.8",
+		pos="s,752.5,1253.2 e,390,1017 742.73,1253.2 581.43,1251.1 528.99,1197.3 416,1076.1 399.33,1058.2 413.01,1027.9 399.72,1019.3",
 		style=solid];
 	commit_clusters_1c977f44	[height=1.6146,
 		label=<
@@ -506,7 +506,7 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="1722.1,1363.1",
+		pos="1740.1,1501.1",
 		width=5.9028];
 	commit_cost_df5b4558	[height=2.5,
 		label=<
@@ -552,8 +552,46 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="1722.1,1529.1",
+		pos="1740.1,1667.1",
 		width=5.059];
+	commit_graph_metrics_dabe54d	[height=1.6146,
+		label=<
+      <table border="1" cellborder="0" cellspacing="0" color="#888888">
+	<tr>
+		<td colspan='2' bgcolor='#F2CDC2' align='left'><b><i>benchmark.main.commit_graph_metrics</i></b></td>
+		<td bgcolor='#F2CDC2' align='right'>[table]</td>
+	</tr>
+	<tr>
+		<td port='git_sha_aa2f0712.start' align='left'><b><i>git_sha</i></b></td>
+		<td align='left'> </td>
+		<td port='git_sha_aa2f0712.end' align='left'>VARCHAR NOT NULL</td>
+	</tr>
+	<tr>
+		<td port='pagerank_db18938e.start' align='left'>pagerank</td>
+		<td align='left'> </td>
+		<td port='pagerank_db18938e.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+	<tr>
+		<td port='betweenness_127576b2.start' align='left'>betweenness</td>
+		<td align='left'> </td>
+		<td port='betweenness_127576b2.end' align='left'>DOUBLE(53, 0)</td>
+	</tr>
+	<tr>
+		<td port='degree_5835331f.start' align='left'>degree</td>
+		<td align='left'> </td>
+		<td port='degree_5835331f.end' align='left'>INTEGER</td>
+	</tr>
+      </table>
+    >,
+		pos="980.62,1034.1",
+		width=6.6632];
+	commit_graph_metrics_dabe54d:"git_sha_aa2f0712.start":w -> git_commits_93a01e32:"git_sha_e2c1eacd.end":e	[arrowhead=teetee,
+		arrowtail=teetee,
+		dir=both,
+		label=<commit_graph_metrics_git_sha_git_sha_fkey>,
+		lp="569.38,1063.6",
+		pos="s,748.75,1055.4 e,390,1017 739.04,1055.3 590.06,1053.8 548.82,1018.6 399.96,1017.1",
+		style=solid];
 	commit_to_session_81fe7c5d	[height=1.9097,
 		label=<
       <table border="1" cellborder="0" cellspacing="0" color="#888888">
@@ -588,7 +626,7 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="1722.1,1706.1",
+		pos="1740.1,1844.1",
 		width=5.3924];
 	commit_tokens_d066b925	[height=2.5,
 		label=<
@@ -634,7 +672,7 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="1722.1,1883.1",
+		pos="1740.1,2021.1",
 		width=5.3403];
 	gh_releases_8fa7c66d	[height=2.7951,
 		label=<
@@ -685,7 +723,7 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="1722.1,967.12",
+		pos="1740.1,967.12",
 		width=5.5278];
 	score_history_3e80f36a	[height=2.2049,
 		label=<
@@ -726,21 +764,21 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="966.38,822.12",
+		pos="980.62,878.12",
 		width=5.6736];
 	gh_releases_8fa7c66d:"tag_6552c6cd.start":w -> score_history_3e80f36a:"tag_919f3970.end":e	[arrowhead=teetee,
 		arrowtail=teetee,
 		dir=both,
 		label=<gh_releases_tag_tag_fkey>,
-		lp="1349.9,1032.9",
-		pos="s,1531.1,1030.9 e,1162.6,864.62 1521.3,1030.7 1354.2,1024.9 1339.5,870.51 1172.3,864.79",
+		lp="1367.9,1035.1",
+		pos="s,1549.1,1030.9 e,1176.9,920.62 1539.2,1030.8 1378.7,1026.7 1347.3,924.73 1186.6,920.74",
 		style=solid];
 	score_history_3e80f36a:"git_sha_93fbbc95.start":w -> git_commits_93a01e32:"git_sha_e2c1eacd.end":e	[arrowhead=teetee,
 		arrowtail=crowodot,
 		dir=both,
 		label=<score_history_git_sha_git_sha_fkey>,
-		lp="564.12,852.62",
-		pos="s,770.12,843.38 e,390,844 750.89,843.38 600.83,843.42 554.25,843.98 399.84,844",
+		lp="569.38,1004.5",
+		pos="s,784.38,899.38 e,390,1017 765.08,899.47 611.21,901.02 561.06,922.33 416,995.88 406.46,1000.7 404.89,1009.5 399.24,1014.1",
 		style=solid];
 	model_pricing_fa0be433	[height=1.9097,
 		label=<
@@ -776,6 +814,6 @@ digraph SchemaCrawler_Diagram {
 	</tr>
       </table>
     >,
-		pos="1722.1,2060.1",
+		pos="1740.1,2198.1",
 		width=6.2465];
 }
