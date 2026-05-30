@@ -83,9 +83,6 @@ format:
           Results show a \textbf{\textit{100/100 Lighthouse score and 0 WCAG 2.1 AA
           errors}} for our site, versus 91/100 and 67~errors for the official website.
           All audit data is persisted in a DuckDB database for longitudinal tracking.
-          \\[0.6em]
-          \textbf{\textit{Keywords:}} \textit{accessibility, low vision, WCAG 2.1 AA,
-          Lighthouse, pa11y, New Caledonia.}
           \end{minipage}
           \end{center}
 
