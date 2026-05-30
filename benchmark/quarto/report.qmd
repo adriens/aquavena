@@ -245,6 +245,87 @@ This report compares the accessibility of
 visually impaired users — against the original source website
 [aquavena.nc](https://www.aquavena.nc) — using identical, reproducible CLI tools.
 
+# Site Architecture
+
+## Design principles
+
+The companion site was built around a single constraint: every design decision had
+to serve a visually impaired user first. Three principles guided the work throughout.
+
+**Readability before aesthetics.** The site uses
+[Atkinson Hyperlegible](https://brailleinstitute.org/freefont), a typeface designed
+by the Braille Institute specifically to maximise legibility for people with low
+vision. Each letterform is engineered to be unambiguous: no `l` that looks like `1`,
+no `O` that looks like `0`. The base font size is 18px, adjustable at runtime via
+A+ / A− buttons that persist across sessions in `localStorage`.
+
+**Multiple access modalities.** Users should never be forced to read. Every menu can
+be listened to via the Web Speech API (text-to-speech), one day at a time or the
+entire week in sequence. Menus are also exposed as RSS feeds and iCal calendars so
+that a screen reader, a podcast app, or a calendar assistant can consume them without
+opening a browser at all.
+
+**Progressive Web App.** The site is installable on any device (iOS, Android,
+desktop) and works fully offline once cached, so connectivity issues — relevant in
+parts of New Caledonia — do not block access to the weekly menus.
+
+## Technology stack
+
+```{r stack-table}
+stack <- tibble::tribble(
+  ~Layer,          ~Technology,          ~Role,
+  "Framework",     "Astro 4",            "Static site generator — zero JS by default",
+  "Styling",       "Tailwind CSS 3",     "Utility-first CSS, WCAG-compliant colour palette",
+  "Typography",    "Atkinson Hyperlegible","Typeface designed for low vision",
+  "Icons",         "Font Awesome 6",     "Accessible SVG icons with aria-labels",
+  "TTS",           "Web Speech API",     "Browser-native text-to-speech, no dependency",
+  "PWA",           "Vite PWA / Workbox", "Service worker, offline cache, installability",
+  "Data",          "Python + SDK",       "Custom scraper — fetches menus from aquavena.nc",
+  "Feeds",         "Astro RSS",          "RSS 2.0 feeds per diet regime",
+  "Calendars",     "ical.js",            "iCal (.ics) exports per diet regime",
+  "CI/CD",         "GitHub Actions",     "Nightly data fetch + build + deploy to GitHub Pages",
+  "AI interface",  "Claude MCP skill",   "Natural-language menu queries via Model Context Protocol"
+)
+kable(stack, booktabs = TRUE, linesep = "") |>
+  kable_styling(latex_options = c("striped", "hold_position"), font_size = 10)
+```
+
+## Data pipeline
+
+Menus are not hardcoded. A Python SDK scrapes the weekly menus from
+[aquavena.nc](https://www.aquavena.nc) each night via a GitHub Actions workflow.
+The scraped data is written to `src/data/menus.json`, which Astro consumes at build
+time to generate the static HTML pages. The resulting site is deployed to GitHub
+Pages with no server-side component.
+
+```
+aquavena.nc  →  Python SDK (fetch_data.py)  →  menus.json
+                                                    ↓
+                                            Astro build  →  GitHub Pages
+```
+
+The site is therefore always up to date by the following morning, with no manual
+intervention required.
+
+## Accessibility engineering
+
+WCAG 2.1 AA conformance was achieved iteratively, guided by three complementary
+tools run after every change: **pa11y-ci** (WCAG rule violations), **Lighthouse**
+(scored audit), and **axe-cli** (axe-core engine). The main categories of issues
+identified and resolved were:
+
+- **Colour contrast (1.4.3):** All interactive elements — speak buttons, tab labels,
+  action links — were systematically audited. Colours such as `bg-orange-500` and
+  `bg-sky-500` were replaced with their `-700` variants to meet the 4.5:1 ratio for
+  normal text and 3:1 for large bold text.
+- **Landmark regions (4.1.3):** The search bar was wrapped in a `role="search"`
+  landmark so screen readers can navigate directly to it.
+- **Label in name (2.5.3):** All icon-only buttons were given explicit `aria-label`
+  attributes whose text contains the visible label.
+- **Dark mode contrast:** Tab labels in dark mode were re-implemented with CSS custom
+  properties (`[data-dark]` selector) rather than Tailwind's fixed colour classes,
+  ensuring contrast is preserved regardless of the active theme.
+
 # Methodology
 
 ## Pipeline overview
