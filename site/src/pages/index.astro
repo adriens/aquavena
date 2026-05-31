@@ -1,8 +1,10 @@
 ---
 import menusData from '../data/menus.json';
+import { Font } from 'astro:assets';
 
 const data = menusData as any;
-const { today, regimes } = data;
+const { today } = data;
+const regimes = (data.regimes as any[]).filter((r: any) => r.slug !== 'la-boutique');
 
 // Menus are published weeks in advance; ordering deadline is Wednesday midnight.
 // Show only the next fully-orderable week:
@@ -66,9 +68,7 @@ function formatDate(dateStr: string): string {
     <link rel="alternate" type="application/rss+xml" title={`Aquavena — ${r.name}`} href={`/aquavena/feed/${toAsciiSlug(r.slug)}.xml`} />
   ))}
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" />
+  <Font cssVariable="--font-atkinson" preload />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <style>
     :root {
@@ -83,7 +83,7 @@ function formatDate(dateStr: string): string {
     }
     html { font-size: 18px; }
     body {
-      font-family: 'Atkinson Hyperlegible', sans-serif;
+      font-family: var(--font-atkinson), sans-serif;
       letter-spacing: 0.015em; line-height: 1.8;
       background-color: var(--bg-page); color: var(--text-main);
     }
@@ -112,60 +112,39 @@ function formatDate(dateStr: string): string {
 
   <!-- Header -->
   <header class="sticky top-0 z-50 bg-teal-700 text-white shadow-md">
-    <div class="mx-auto flex max-w-4xl items-center justify-between px-4 py-3 gap-3 flex-wrap">
-      <div>
-        <h1 class="text-lg font-bold leading-tight">Aquavena — Menus de la semaine</h1>
-        <p class="text-sm text-teal-100"><i class="fa-solid fa-eye-low-vision mr-1"></i>Optimisé pour les malvoyants</p>
+    <div class="mx-auto max-w-4xl px-4 py-3 space-y-2">
+      <div class="flex items-center justify-between gap-3 flex-wrap">
+        <h1 class="text-lg font-bold leading-tight">
+          <i class="fa-solid fa-eye-low-vision mr-2 text-teal-200"></i>Aquavena pour les malvoyants
+        </h1>
+        <div class="no-print flex items-center gap-2">
+          <button id="btn-font-down" aria-label="Réduire la taille du texte"
+            class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm font-bold hover:bg-teal-600">A−</button>
+          <button id="btn-font-up" aria-label="Agrandir la taille du texte"
+            class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-base font-bold hover:bg-teal-600">A+</button>
+          <button id="btn-dark" aria-label="Basculer mode nuit"
+            class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm hover:bg-teal-600">
+            <i class="fa-solid fa-moon" id="dark-icon"></i>
+          </button>
+          <a href="/aquavena/about/" aria-label="À propos de ce site"
+            class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm hover:bg-teal-600">
+            <i class="fa-solid fa-circle-question"></i>
+          </a>
+        </div>
       </div>
-      <div class="no-print flex items-center gap-2">
-        <!-- A+ / A- -->
-        <button id="btn-font-down" aria-label="Réduire la taille du texte"
-          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm font-bold hover:bg-teal-600">A−</button>
-        <button id="btn-font-up" aria-label="Agrandir la taille du texte"
-          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-base font-bold hover:bg-teal-600">A+</button>
-        <!-- Mode nuit -->
-        <button id="btn-dark" aria-label="Basculer mode nuit"
-          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm hover:bg-teal-600">
-          <i class="fa-solid fa-moon" id="dark-icon"></i>
-        </button>
-        <!-- À propos -->
-        <a href="/aquavena/about/" aria-label="À propos de ce site"
-          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm hover:bg-teal-600">
-          <i class="fa-solid fa-circle-question"></i>
-        </a>
+      <div role="search" class="no-print relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-teal-200"></i>
+        <input id="search-input" type="search" placeholder="Rechercher un plat… (Ctrl+K)"
+          aria-label="Rechercher un plat dans les menus"
+          class="w-full rounded-xl border border-teal-500 bg-teal-800 py-2 pl-9 pr-4 text-base text-white placeholder-teal-300 outline-none focus:border-white focus:bg-teal-900" />
+        <div id="search-results" class="absolute left-0 right-0 top-full z-50 mt-1 hidden space-y-2 rounded-xl p-2"
+          style="background: var(--bg-card); border: 2px solid var(--border)"></div>
       </div>
     </div>
   </header>
 
-  <!-- Search bar -->
-  <div role="search" class="no-print nav-bg border-b-2" style="border-color: var(--border)">
-    <div class="mx-auto max-w-2xl px-4 py-2">
-      <div class="relative">
-        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-600"></i>
-        <input id="search-input" type="search" placeholder="Rechercher un plat… (Ctrl+K)"
-          aria-label="Rechercher un plat dans les menus"
-          class="w-full rounded-xl border-2 py-2 pl-9 pr-4 text-base outline-none focus:border-teal-500"
-          style="border-color: var(--border); background: var(--bg-card); color: var(--text-main)" />
-      </div>
-      <div id="search-results" class="hidden mt-2 space-y-2"></div>
-    </div>
-  </div>
-
-  <!-- Mon menu du jour -->
-  <div class="no-print nav-bg border-b-2 px-4 py-3" style="border-color: var(--border)">
-    <div class="mx-auto max-w-2xl">
-      <button id="btn-today"
-        aria-label="Mon menu du jour"
-        class="w-full flex items-center justify-center gap-3 rounded-2xl bg-teal-600 px-6 py-4 text-xl font-bold text-white shadow-md hover:bg-teal-700 active:scale-95 transition-all">
-        <i class="fa-solid fa-calendar-day text-2xl"></i>
-        <span>Mon menu du jour</span>
-        <i class="fa-solid fa-volume-high text-xl"></i>
-      </button>
-    </div>
-  </div>
-
   <!-- Regime tabs -->
-  <nav class="no-print tabs nav-bg sticky top-16 z-40 overflow-x-auto border-b-2" aria-label="Régimes alimentaires">
+  <nav class="no-print tabs nav-bg sticky top-24 z-40 overflow-x-auto border-b-2" aria-label="Régimes alimentaires">
     <div class="flex min-w-max">
       {regimes.map((r: any) => (
         <button
@@ -575,19 +554,6 @@ function formatDate(dateStr: string): string {
     const initial = (hashSlug && slugs.includes(hashSlug)) ? hashSlug : (saved && slugs.includes(saved)) ? saved : defaultSlug;
     if (initial) showRegime(initial);
 
-    document.getElementById('btn-today').addEventListener('click', () => {
-      let cur; try { cur = localStorage.getItem('aq-regime'); } catch {}
-      const slug = (cur && slugs.includes(cur)) ? cur : defaultSlug;
-      showRegime(slug);
-      setTimeout(() => {
-        const panel = document.querySelector(`[data-panel="${slug}"]`);
-        const todayArticle = panel?.querySelector('[data-today="true"]');
-        if (todayArticle?.dataset.speech) {
-          const speakBtn = todayArticle.querySelector('.speak-btn');
-          speak(todayArticle.dataset.speech, speakBtn ?? document.getElementById('btn-today'));
-        }
-      }, 350);
-    });
   </script>
 
 </body>

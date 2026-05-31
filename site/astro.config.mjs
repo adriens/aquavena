@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import VitePWA from '@vite-pwa/astro';
 
@@ -6,6 +6,11 @@ export default defineConfig({
   site: 'https://adriens.github.io',
   base: '/aquavena',
   output: 'static',
+  fonts: [{
+    provider: fontProviders.google(),
+    name: 'Atkinson Hyperlegible',
+    cssVariable: '--font-atkinson',
+  }],
   integrations: [
     tailwind(),
     VitePWA({
