@@ -42,6 +42,9 @@ format:
       text: |
         \input{git-sha.tex}
         \usepackage{fontawesome5}
+        \newcommand{\kwpill}[1]{%
+          \mbox{\colorbox{teal100}{\footnotesize\color{teal700}\strut\,#1\,}}\hspace{3pt}%
+        }
         \usepackage{xcolor}
         \usepackage{hyperref}
         \usepackage{tikz}
@@ -160,11 +163,26 @@ format:
           errors}} for our site, versus 91/100 and 67~errors for the official website.
           All audit data is persisted in a DuckDB database for longitudinal tracking.
 
-          \vspace{0.8em}
-          {\normalfont\small \textbf{Keywords:} civitech, tech for good, inclusive design,
-          digital inclusion, accessibility, WCAG, visually impaired, social impact,
-          assistive technology, elderly care, aging population, senior accessibility,
-          human-centered design, design thinking, New Caledonia.}
+          \vspace{1em}
+          {\normalfont\small\bfseries Keywords}\\[0.5em]
+          \end{minipage}
+          \begin{minipage}{0.82\textwidth}
+          \raggedright
+          \kwpill{civitech}%
+          \kwpill{tech for good}%
+          \kwpill{inclusive design}%
+          \kwpill{digital inclusion}%
+          \kwpill{accessibility}%
+          \kwpill{WCAG}%
+          \kwpill{visually impaired}%
+          \kwpill{social impact}%
+          \kwpill{assistive technology}%
+          \kwpill{elderly care}%
+          \kwpill{aging population}%
+          \kwpill{senior accessibility}%
+          \kwpill{human-centered design}%
+          \kwpill{design thinking}%
+          \kwpill{New Caledonia}%
           \end{minipage}
 
           \vspace{1.5cm}
