@@ -1490,32 +1490,44 @@ for (s in unique(tag_rows$session)) {
   }
 }
 apport <- dplyr::bind_rows(apport)
-tag_levels <- c("v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0","v1.7.0","v1.8.0")
-apport$tag <- factor(apport$tag, levels = tag_levels)
 
-# Cumulative tokens per tag (summed across models)
+# Derive chronological tag order from commit timestamps (avoids hardcoded list → no NA)
+tag_chron <- tag_rows |>
+  dplyr::distinct(tag, commit_ts) |>
+  dplyr::arrange(commit_ts) |>
+  dplyr::pull(tag)
+apport$tag <- factor(apport$tag, levels = tag_chron)
+
+# Cumulative tokens per tag (summed across models), in chronological order
 cum_df <- apport |>
   dplyr::group_by(tag) |>
   dplyr::summarise(per_tag = sum(tokens), .groups = "drop") |>
+  dplyr::mutate(tag = factor(tag, levels = tag_chron)) |>
   dplyr::arrange(tag) |>
   dplyr::mutate(cumulative = cumsum(per_tag))
 
-# Scale the cumulative line onto the bar y-axis (millions of tokens)
-max_bar    <- max(cum_df$per_tag, na.rm = TRUE) / 1e6
-max_cum    <- max(cum_df$cumulative, na.rm = TRUE) / 1e6
-scale_fac  <- max_bar / max_cum
+# Bar totals for top labels
+bar_totals <- apport |>
+  dplyr::group_by(tag) |>
+  dplyr::summarise(total = sum(tokens), .groups = "drop")
 
-ggplot() +
+# Scale the cumulative line onto the bar y-axis (millions of tokens)
+max_bar   <- max(cum_df$per_tag, na.rm = TRUE) / 1e6
+max_cum   <- max(cum_df$cumulative, na.rm = TRUE) / 1e6
+scale_fac <- max_bar / max_cum
+
+# Tailwind v4 x-position (numeric index in factor)
+tw_idx <- which(tag_chron == "v1.14.0")
+
+p <- ggplot() +
   geom_col(data = apport,
            aes(x = tag, y = tokens / 1e6, fill = model),
            width = 0.6) +
-  geom_text(data = apport,
-            aes(x = tag, y = tokens / 1e6,
-                label = ifelse(tokens / 1e6 >= 1,
-                                paste0(sprintf("%.1f", tokens / 1e6), "M"),
-                                "")),
-            position = position_stack(vjust = 0.5),
-            colour = "white", fontface = "bold", size = 2.5) +
+  # Total label above each bar (avoids in-bar overlap on small bars)
+  geom_text(data = bar_totals,
+            aes(x = tag, y = total / 1e6,
+                label = paste0(sprintf("%.0f", total / 1e6), "M")),
+            vjust = -0.4, size = 2.3, colour = "grey30") +
   # Cumulative line (amber, secondary scale)
   geom_line(data = cum_df,
             aes(x = tag, y = cumulative / 1e6 * scale_fac, group = 1),
@@ -1526,8 +1538,7 @@ ggplot() +
   geom_text(data = cum_df,
             aes(x = tag, y = cumulative / 1e6 * scale_fac,
                 label = paste0(sprintf("%.0f", cumulative / 1e6), "M")),
-            colour = "#92400e", size = 2.4, fontface = "bold",
-            vjust = -1) +
+            colour = "#92400e", size = 2.4, fontface = "bold", vjust = -1) +
   scale_fill_manual(values = c(
     "claude-opus-4-7"   = "#7c3aed",
     "claude-sonnet-4-6" = "#0f766e"
@@ -1551,6 +1562,17 @@ ggplot() +
         panel.grid.major.x = element_blank(),
         axis.text.x = element_text(face = "bold", angle = 35, hjust = 1),
         axis.title.y.right = element_text(colour = "#f59e0b"))
+
+# Pin Tailwind v4 migration if the tag is present in the data
+if (length(tw_idx) > 0) {
+  p <- p +
+    geom_vline(xintercept = tw_idx, linetype = "dashed",
+               colour = "#f59e0b", linewidth = 0.6) +
+    annotate("text", x = tw_idx + 0.15, y = max_bar * 0.95,
+             label = "Tailwind v4\nmigration", hjust = 0,
+             size = 2.2, colour = "#b45309", fontface = "bold", lineheight = 0.9)
+}
+p
 ```
 
 ## Semantic analysis of commit messages
