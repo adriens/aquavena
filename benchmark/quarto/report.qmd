@@ -1791,189 +1791,157 @@ the codebase. Both are signals an experienced reviewer would notice manually
 — this method makes them queryable.
 :::
 
-### Retrospective Gantt — workstream activity over time
+### BUILD vs RUN — hackathon intensity over time
 
-Combining `git_commits.commit_ts`, `commit_classification.cluster_id`, and
-`gh_releases.published_at_ts` lets us reconstruct **when each semantic
-workstream was active** and overlay the release tags shipped along the way.
-Each horizontal bar spans the **first → last commit** of one cluster; each
-short vertical tick on the bar is an individual commit; the dashed vertical
-lines are **release tags** with their labels at the top. Local time is
-Pacific/Noumea (UTC+11).
+The chart below answers three questions at once: **when** was effort delivered,
+**what kind** of work it was (BUILD = new value, RUN = maintenance), and **how
+intense** the sessions were.
 
-```{r retro-gantt, fig.height=4.6, fig.width=7.0, fig.align="center"}
-cluster_palette <- c("0" = "#0f766e", "1" = "#dc2626", "2" = "#0891b2",
-                     "3" = "#7c3aed", "4" = "#f59e0b", "5" = "#059669")
+**Why conventional commits with scope make this possible.**
+A plain `fix:` or `docs:` tells you the type but not the topic.
+The `scope` field is what makes classification precise and automatic:
+`docs(benchmark):` lands in BUILD because the benchmark report is a
+deliverable; a bare `docs:` (release notes, README) stays in RUN.
+**No time-tracking tool was filled in. No spreadsheet was maintained.**
+The metadata already lived in every commit message — the pipeline simply
+reads it. This is the core argument for conventional commits: they turn git
+history into a queryable KPI source with zero developer overhead.
 
-# Per-cluster start/end of activity
-cluster_windows <- dbGetQuery(con, "
-  SELECT cc.cluster_id,
-         MIN(gc.commit_ts) AS start_ts,
-         MAX(gc.commit_ts) AS end_ts,
-         COUNT(*)          AS n
-  FROM commit_classification cc
-  JOIN git_commits gc USING (git_sha)
-  GROUP BY cc.cluster_id
-  ORDER BY cluster_id
-")
-# Short label per cluster (top 3 TF-IDF terms)
-cluster_labels <- dbGetQuery(con, "
-  SELECT cluster_id, array_to_string(terms[1:3], ', ') AS short_label
-  FROM commit_clusters
-")
-cluster_windows <- dplyr::left_join(cluster_windows, cluster_labels,
-                                     by = "cluster_id")
-cluster_windows$y_label <- sprintf("C%d · %s",
-                                    cluster_windows$cluster_id,
-                                    cluster_windows$short_label)
-cluster_windows$y_label <- factor(cluster_windows$y_label,
-                                   levels = rev(cluster_windows$y_label))
-cluster_windows$start_ts <- as.POSIXct(cluster_windows$start_ts, tz = "UTC")
-cluster_windows$end_ts   <- as.POSIXct(cluster_windows$end_ts,   tz = "UTC")
-attr(cluster_windows$start_ts, "tzone") <- "Pacific/Noumea"
-attr(cluster_windows$end_ts,   "tzone") <- "Pacific/Noumea"
-
-# Per-commit tick marks
-ticks <- dbGetQuery(con, "
-  SELECT cc.cluster_id, gc.commit_ts
-  FROM commit_classification cc
-  JOIN git_commits gc USING (git_sha)
+```{r retro-gantt, fig.height=5.2, fig.width=7.0, fig.align="center"}
+# BUILD = feat: commits + docs(benchmark): (the report is a deliverable)
+# RUN   = everything else: fix:, style:, chore:, ci:, refactor:, other docs:
+commits_br <- dbGetQuery(con, "
+  SELECT gc.git_sha, gc.commit_ts,
+         cc.commit_type,
+         COALESCE(cc.scope, '') AS scope,
+         CASE
+           WHEN cc.commit_type = 'feat' THEN 'BUILD'
+           WHEN cc.commit_type = 'docs' AND cc.scope = 'benchmark' THEN 'BUILD'
+           ELSE 'RUN'
+         END AS activity
+  FROM git_commits gc
+  JOIN commit_classification cc USING (git_sha)
   ORDER BY gc.commit_ts
 ")
-ticks$commit_ts <- as.POSIXct(ticks$commit_ts, tz = "UTC")
-attr(ticks$commit_ts, "tzone") <- "Pacific/Noumea"
-ticks <- dplyr::left_join(ticks, cluster_windows[, c("cluster_id", "y_label")],
-                          by = "cluster_id")
+commits_br$commit_ts <- as.POSIXct(commits_br$commit_ts, tz = "UTC")
+attr(commits_br$commit_ts, "tzone") <- "Pacific/Noumea"
+commits_br$activity <- factor(commits_br$activity, levels = c("BUILD", "RUN"))
 
-# Time-spent estimation per cluster: each commit's "work time" =
-# elapsed time since previous commit (any cluster), capped at 30 minutes
-# (longer gaps are assumed to be breaks, not active work).
-GAP_CAP_SECS <- 30 * 60   # 30 min cap per inter-commit gap
-ticks_ordered <- ticks |> dplyr::arrange(commit_ts)
-ticks_ordered$gap_secs <- c(0, as.numeric(diff(ticks_ordered$commit_ts),
-                                          units = "secs"))
-ticks_ordered$gap_secs <- pmin(ticks_ordered$gap_secs, GAP_CAP_SECS)
-time_per_cluster <- ticks_ordered |>
-  dplyr::group_by(cluster_id) |>
-  dplyr::summarise(active_minutes = sum(gap_secs) / 60, .groups = "drop")
-cluster_windows <- dplyr::left_join(cluster_windows, time_per_cluster,
-                                     by = "cluster_id")
-cluster_windows$time_label <- sprintf("  %d commits · %.0f min",
-                                       cluster_windows$n,
-                                       cluster_windows$active_minutes)
+# Time-spent per commit: gap since previous commit across ALL commits, capped at 30 min.
+GAP_CAP <- 30L * 60L
+ord     <- order(commits_br$commit_ts)
+gaps    <- c(0L, pmin(as.integer(diff(commits_br$commit_ts[ord]), units = "secs"), GAP_CAP))
+commits_br$time_secs           <- 0L
+commits_br$time_secs[ord]      <- gaps
+
+# 2-hour intensity bins
+BIN_SECS <- 2L * 3600L
+commits_br$time_bin <- as.POSIXct(
+  floor(as.numeric(commits_br$commit_ts) / BIN_SECS) * BIN_SECS,
+  origin = "1970-01-01", tz = "Pacific/Noumea"
+)
+intensity <- commits_br |>
+  dplyr::group_by(activity, time_bin) |>
+  dplyr::summarise(active_min = sum(time_secs) / 60, .groups = "drop")
 
 # Release markers
-releases <- dbGetQuery(con, "
-  SELECT tag, published_at_ts FROM gh_releases ORDER BY published_at_ts
-")
-releases$published_at_ts <- as.POSIXct(releases$published_at_ts, tz = "UTC")
-attr(releases$published_at_ts, "tzone") <- "Pacific/Noumea"
+releases_br <- dbGetQuery(con,
+  "SELECT tag, published_at_ts FROM gh_releases ORDER BY published_at_ts")
+releases_br$published_at_ts <- as.POSIXct(releases_br$published_at_ts, tz = "UTC")
+attr(releases_br$published_at_ts, "tzone") <- "Pacific/Noumea"
 
-x_min <- min(cluster_windows$start_ts) - 60 * 60
-x_max <- max(cluster_windows$end_ts)   + 60 * 60
+type_pal <- c(feat = "#0f766e", fix = "#dc2626", style = "#f59e0b",
+              chore = "#9ca3af", docs = "#0891b2", ci = "#7c3aed",
+              refactor = "#db2777")
+swim_pal <- c(BUILD = "#0f766e", RUN = "#dc2626")
 
 ggplot() +
-  # Release-tag vertical lines
-  geom_vline(data = releases,
+  geom_col(data = intensity,
+           aes(x = time_bin, y = active_min, fill = activity),
+           width = BIN_SECS * 0.82, alpha = 0.55) +
+  geom_vline(data = releases_br,
              aes(xintercept = published_at_ts),
-             linetype = "dashed", colour = "#0f766e",
-             alpha = 0.45, linewidth = 0.35) +
-  # Cluster activity bars
-  geom_segment(data = cluster_windows,
-               aes(x = start_ts, xend = end_ts,
-                   y = y_label, yend = y_label,
-                   colour = factor(cluster_id)),
-               linewidth = 7.5, alpha = 0.32, lineend = "round") +
-  geom_segment(data = cluster_windows,
-               aes(x = start_ts, xend = end_ts,
-                   y = y_label, yend = y_label,
-                   colour = factor(cluster_id)),
-               linewidth = 1.2, alpha = 1.0) +
-  # Per-commit tick marks
-  geom_point(data = ticks,
-             aes(x = commit_ts, y = y_label, colour = factor(cluster_id)),
-             shape = "|", size = 4.5, stroke = 1.2) +
-  # Cluster size + estimated active time labels at the right end of each bar
-  geom_text(data = cluster_windows,
-            aes(x = end_ts, y = y_label,
-                label = time_label,
-                colour = factor(cluster_id)),
-            hjust = 0, size = 2.5, fontface = "bold") +
-  # Release-tag labels at the very top of the plot
-  geom_text(data = releases,
-            aes(x = published_at_ts,
-                y = length(unique(cluster_windows$y_label)) + 0.7,
-                label = tag),
-            angle = 60, hjust = 0, vjust = 0.5, size = 2.2,
-            colour = "#0f766e", fontface = "bold") +
-  scale_colour_manual(values = cluster_palette, guide = "none") +
+             linetype = "dashed", colour = "#64748b",
+             alpha = 0.50, linewidth = 0.28) +
+  geom_rug(data = commits_br,
+           aes(x = commit_ts, colour = commit_type),
+           sides = "b", linewidth = 0.85,
+           length = unit(0.07, "npc"), alpha = 0.85) +
+  geom_text(data = releases_br,
+            aes(x = published_at_ts, y = Inf, label = tag),
+            angle = 60, hjust = 0, vjust = 0.5,
+            size = 1.9, colour = "#475569", fontface = "bold",
+            inherit.aes = FALSE) +
+  scale_fill_manual(values = swim_pal, guide = "none") +
+  scale_colour_manual(values = type_pal, name = NULL,
+                      guide = guide_legend(nrow = 1,
+                                           keywidth  = unit(0.55, "cm"),
+                                           keyheight = unit(0.35, "cm"))) +
+  facet_grid(activity ~ ., scales = "free_y") +
   scale_x_datetime(date_breaks = "1 day", date_labels = "%a %d %b",
-                   limits = c(x_min, x_max),
-                   expand = expansion(mult = c(0.02, 0.10))) +
+                   expand = expansion(mult = c(0.01, 0.06))) +
   coord_cartesian(clip = "off") +
-  labs(title = "Retro Gantt — semantic workstreams over time",
-       subtitle = "Bars = first→last commit of each cluster · ticks = individual commits · dashed lines = release tags",
-       x = NULL, y = NULL) +
+  labs(title = "BUILD vs RUN — hackathon intensity over time",
+       subtitle = paste0("BUILD = feat: + docs(benchmark): · RUN = fix:/style:/chore:/ci: · ",
+                         "bars = active minutes per 2 h window · rug = individual commits"),
+       x = NULL, y = "active minutes") +
   theme_minimal(base_size = 9) +
-  theme(panel.grid.minor = element_blank(),
-        panel.grid.major.y = element_blank(),
-        plot.margin = margin(40, 18, 6, 6),
-        axis.text.y = element_text(face = "bold"))
+  theme(panel.grid.minor   = element_blank(),
+        panel.grid.major.x = element_blank(),
+        strip.text  = element_text(face = "bold", size = 9),
+        legend.position = "bottom",
+        plot.margin = margin(30, 10, 6, 6),
+        axis.text.x = element_text(angle = 40, hjust = 1))
 ```
 
-**Estimated active time per cluster.** Each cluster bar is now annotated
-with **both** the commit count and the estimated **active minutes** spent on
-that workstream. The estimate is computed as the sum of inter-commit gaps
-attributed to each commit's cluster, **capped at 30 minutes per gap** —
-longer gaps are assumed to be breaks rather than active work. The values
-underlying the bars are queryable directly:
+**Reading the chart.** Each bar is the sum of time-spent (inter-commit gaps
+capped at 30 min) falling in a 2-hour window. A tall bar means a focused
+session; a flat stretch means a break or a day off. The rug marks at the
+bottom of each lane show individual commits coloured by type — the mix of
+colours reveals whether a burst was feature-driven (`feat`, teal) or
+fire-fighting (`fix`, red).
+
+**The queryable source of truth.**
+The active-time estimate underlying the bars is directly queryable:
 
 ```sql
 WITH ordered AS (
-  SELECT cc.cluster_id, gc.commit_ts,
+  SELECT CASE WHEN commit_type = 'feat'                        THEN 'BUILD'
+              WHEN commit_type = 'docs' AND scope = 'benchmark' THEN 'BUILD'
+              ELSE 'RUN' END          AS activity,
+         gc.commit_ts,
          LAG(gc.commit_ts) OVER (ORDER BY gc.commit_ts) AS prev_ts
   FROM commit_classification cc JOIN git_commits gc USING (git_sha)
 )
-SELECT cluster_id,
+SELECT activity,
        ROUND(SUM(LEAST(1800,
-              GREATEST(0, EXTRACT(EPOCH FROM (commit_ts - prev_ts)))
-              )) / 60.0, 1) AS minutes_active
-FROM ordered GROUP BY cluster_id ORDER BY minutes_active DESC;
+             GREATEST(0, EXTRACT(EPOCH FROM (commit_ts - prev_ts)))
+             )) / 60.0, 1) AS minutes_active
+FROM ordered GROUP BY activity ORDER BY activity;
 ```
 
-**Why this matters in a professional setting.** This per-cluster active-time
-estimate is exactly the shape of payload a **time-tracking tool** (Jira
-Tempo, Toggl, Harvest, Clockify, etc.) consumes. The pipeline already
-captures the work category (`commit_type`/`scope`/`cluster`) and the
-duration; a thin adapter could **auto-create Jira worklog entries** from
-every commit, with the cluster as the activity tag and the capped gap as
-the duration. The benchmark `DuckDB` becomes the source of truth for
-**how engineering time is actually allocated** — fixing the chronic problem
-that manually-filled timesheets diverge from real work patterns.
-
 ::: {.callout-note appearance="simple"}
-## \faStream\ What the retro Gantt reveals
+## \faStream\ What the BUILD/RUN split reveals
 
-**Two distinct work epochs.** The chart splits visibly into a **first
-intense burst (May 24–25)** — during which clusters C0/C1/C2/C3 (style,
-RSS, About-page, accessibility/Claude) were all active in parallel —
-followed by the **measurement epoch (May 30–31)** dominated by cluster C4
-(benchmark) with C5 (fix) interleaved.
+**Conventional commits eliminate time-tracking overhead.** The BUILD/RUN
+classification is derived entirely from `commit_type` and `scope` — two
+fields that every developer writes anyway. No Jira worklog. No Toggl timer.
+No spreadsheet. The git history *is* the timesheet, and the pipeline reads
+it automatically. This is the strongest practical argument for adopting
+conventional commits on any project: they turn a developer's natural commit
+habit into a queryable KPI source at zero extra cost.
 
-**Parallel vs. sequential workstreams.** During the first epoch, four
-clusters overlapped — a classic *broad-front* exploratory phase. The second
-epoch is narrower: the team converged on the benchmark/reporting strand,
-with brief returns to fixes as needed.
+**The scope field is the precision layer.** A bare `docs:` commit would
+be misclassified as RUN. `docs(benchmark):` correctly lands in BUILD because
+the scope carries the topic. Without scope, the classification degrades to a
+coarse type-only split. With scope, it is surgically accurate — and entirely
+machine-readable.
 
-**Release cadence.** The dashed lines cluster tightly around the early
-work (v0.1.1–v0.1.5 in the first night) and reappear at the end of the
-benchmark epoch (v1.5.0–v1.8.0). The classic "ship-then-instrument" arc
-is visible at a glance.
-
-**What this confirms.** The semantic clustering, the activity heatmap, and
-this Gantt — three independent views — all agree on the same project
-narrative: a short coding sprint, then an extended measurement sprint,
-with every commit traceable to a workstream and a release.
+**The marathon is visible.** The intensity bars do not lie: the hackathon
+weekend appears as a sustained sequence of tall BUILD bars, not a polite
+9-to-5 profile. That kind of effort is invisible in a story-point count or
+a commit-count chart; it surfaces only when you measure *time actually
+spent at the keyboard*.
 :::
 
 ### Tokens consumed by category
