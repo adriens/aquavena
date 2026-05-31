@@ -1982,7 +1982,7 @@ every `fix:`, every semantic cluster, etc. This is the **first ML-adjacent
 insight from the real data**: it reveals which kinds of work are
 token-cheap versus token-expensive.
 
-```{r tokens-per-category, fig.height=4.4, fig.width=7.0, fig.align="center"}
+```{r tokens-per-category, fig.height=3.2, fig.width=7.0, fig.align="center"}
 tok_type <- dbGetQuery(con, "
   WITH per_commit AS (
     SELECT git_sha, SUM(total_tokens) AS toks
@@ -2054,12 +2054,32 @@ p_c <- panel(tok_cluster,
              "By semantic cluster",
              "Each cluster = commits with similar embedding vectors",
              "#7c3aed")
-p_s <- panel(tok_scope,
-             "By commit scope — where the report-writing effort lives",
-             "Scopes from feat(scope): / fix(scope): — `benchmark` = analysis report",
-             "#d97706")
 
-p_t / p_c / p_s
+p_t / p_c
+```
+
+```{r tokens-per-scope, fig.height=3.6, fig.width=7.0, fig.align="center"}
+# Scope panel gets its own full height (12 scopes need room to breathe)
+panel_scope <- function(df, ttitle, sub, fill_col) {
+  df$category <- factor(df$category, levels = rev(df$category))
+  ggplot(df, aes(y = category)) +
+    geom_col(aes(x = total_M), fill = fill_col, width = 0.65) +
+    geom_text(aes(x = total_M,
+                  label = sprintf("%.1f M  ·  %d commits", total_M, n)),
+              hjust = -0.06, size = 2.5, colour = "grey20") +
+    scale_x_continuous(expand = expansion(mult = c(0, 0.40)),
+                       labels = function(x) paste0(x, " M")) +
+    labs(title = ttitle, subtitle = sub, x = "Total tokens consumed", y = NULL) +
+    theme_minimal(base_size = 9) +
+    theme(panel.grid.minor  = element_blank(),
+          panel.grid.major.y = element_blank(),
+          axis.text.y = element_text(face = "bold", size = 8))
+}
+
+panel_scope(tok_scope,
+            "By commit scope — where the report-writing effort lives",
+            "Scopes from feat(scope): / fix(scope): — `benchmark` = analysis report  ·  `(none)` = no scope declared",
+            "#d97706")
 ```
 
 ```{r tokens-key-numbers, results="asis"}
