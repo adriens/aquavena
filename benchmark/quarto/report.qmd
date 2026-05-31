@@ -1308,15 +1308,9 @@ A short lead time means fixes and features reach users quickly.
 \end{minipage}
 \end{center}
 
-## Development activity heatmap
+## Development intensity
 
-Every commit from `git_commits.commit_ts` (converted to **Pacific/Noumea local
-time**) is binned into a day × hour grid. Cell intensity = commit count. This
-makes the *when* and the *how intensive* of the work immediately visible: the
-project ran in concentrated bursts, mostly late evenings and early mornings,
-with a peak hour during the rebuild sprint.
-
-```{r activity-heatmap, fig.height=4.2, fig.width=6.5, fig.align="center"}
+```{r activity-heatmap, fig.height=2.8, fig.width=6.5, fig.align="center"}
 commits <- dbGetQuery(con, "
   SELECT commit_ts FROM git_commits WHERE commit_ts IS NOT NULL
 ")
@@ -1326,97 +1320,46 @@ attr(ts_local, "tzone") <- "Pacific/Noumea"
 heat <- tibble::tibble(
   date = as.Date(ts_local, tz = "Pacific/Noumea"),
   hour = as.integer(format(ts_local, "%H", tz = "Pacific/Noumea"))
-) |>
-  dplyr::count(date, hour, name = "commits")
+) |> dplyr::count(date, hour, name = "commits")
 
-# Build a complete grid so empty cells render as 0 (clean visual)
 all_dates <- seq(min(heat$date), max(heat$date), by = "day")
 grid <- tidyr::expand_grid(date = all_dates, hour = 0:23) |>
   dplyr::left_join(heat, by = c("date", "hour")) |>
   dplyr::mutate(commits = tidyr::replace_na(commits, 0L))
 
-peak <- heat |> dplyr::slice_max(commits, n = 1)
+peak          <- heat |> dplyr::slice_max(commits, n = 1)
 total_commits <- nrow(commits)
 active_days   <- length(unique(heat$date))
 
-# Day/night classification (Pacific/Noumea) for the y-axis side panel
-DAY_START <- 6; DAY_END <- 18   # 06h–18h = daylight, otherwise = night
-
-# Commit totals per day-vs-night bucket
-period_totals <- grid |>
-  dplyr::mutate(period = ifelse(hour >= DAY_START & hour < DAY_END,
-                                 "Daylight", "Night")) |>
-  dplyr::group_by(period) |>
-  dplyr::summarise(commits = sum(commits), .groups = "drop")
-day_total   <- sum(period_totals$commits[period_totals$period == "Daylight"])
-night_total <- sum(period_totals$commits[period_totals$period == "Night"])
-day_pct     <- round(100 * day_total   / total_commits, 1)
-night_pct   <- round(100 * night_total / total_commits, 1)
-
-# Vertical "Day/Night" stripe on the LEFT to make the contrast explicit
-date_min <- min(grid$date)
-date_max <- max(grid$date)
-n_dates  <- length(unique(grid$date))
-stripe_x_min <- date_min - 0.95
-stripe_x_max <- date_min - 0.20
-stripe_mid_x <- date_min - 0.575   # midpoint between stripe_x_min and stripe_x_max
-
 ggplot(grid, aes(x = date, y = hour)) +
-  # Day/Night stripe + labels on the left margin
-  annotate("rect",
-           xmin = stripe_x_min, xmax = stripe_x_max,
-           ymin = -0.5,         ymax = DAY_START - 0.5,
-           fill = "#312e81", alpha = 0.18) +
-  annotate("rect",
-           xmin = stripe_x_min, xmax = stripe_x_max,
-           ymin = DAY_START - 0.5, ymax = DAY_END - 0.5,
-           fill = "#fde68a", alpha = 0.55) +
-  annotate("rect",
-           xmin = stripe_x_min, xmax = stripe_x_max,
-           ymin = DAY_END - 0.5, ymax = 23.5,
-           fill = "#312e81", alpha = 0.18) +
-  annotate("text",
-           x = stripe_mid_x,
-           y = (DAY_START + DAY_END) / 2,
-           label = sprintf("☼  Day\n%d commits\n(%g%%)",
-                            day_total, day_pct),
-           size = 2.4, fontface = "bold", colour = "#92400e",
-           lineheight = 0.95) +
-  annotate("text",
-           x = stripe_mid_x,
-           y = (DAY_END + 23.5 + 1) / 2 + 0.5,
-           label = sprintf("☾  Night\n%d commits\n(%g%%)",
-                            night_total, night_pct),
-           size = 2.4, fontface = "bold", colour = "#1e1b4b",
-           lineheight = 0.95) +
-  # The heatmap tiles themselves
-  geom_tile(aes(fill = commits), colour = "white", linewidth = 0.4) +
+  geom_tile(aes(fill = commits), colour = "white", linewidth = 0.3) +
   scale_fill_gradientn(
-    colours = c("#f8fafc", "#ccfbf1", "#5eead4", "#0f766e", "#134e4a"),
-    values  = scales::rescale(c(0, 1, 3, 6, max(grid$commits))),
-    name    = "Commits",
-    guide   = guide_colourbar(barwidth = 8, barheight = 0.5)
+    colours = c("#f1f5f9", "#99f6e4", "#0f766e", "#134e4a"),
+    values  = scales::rescale(c(0, 1, 4, max(grid$commits))),
+    name    = "commits",
+    guide   = guide_colourbar(barwidth = 6, barheight = 0.4,
+                               title.position = "left", title.vjust = 0.8)
   ) +
-  # Subtle horizontal dashed lines marking the daylight boundary on the heatmap
-  geom_hline(yintercept = DAY_START - 0.5,
-             linetype = "dotted", colour = "#f59e0b", linewidth = 0.5) +
-  geom_hline(yintercept = DAY_END - 0.5,
-             linetype = "dotted", colour = "#f59e0b", linewidth = 0.5) +
+  geom_hline(yintercept = 5.5,  linetype = "dotted", colour = "#94a3b8", linewidth = 0.4) +
+  geom_hline(yintercept = 17.5, linetype = "dotted", colour = "#94a3b8", linewidth = 0.4) +
+  annotate("text", x = min(grid$date), y = 11.5,
+           label = "day", size = 2.2, colour = "#94a3b8", hjust = -0.1) +
+  annotate("text", x = min(grid$date), y = 21,
+           label = "night", size = 2.2, colour = "#94a3b8", hjust = -0.1) +
   scale_x_date(breaks = unique(grid$date),
-               labels = format(unique(grid$date), "%a %d %b"),
-               limits = c(stripe_x_min - 0.10, date_max + 0.5),
-               expand = c(0, 0)) +
-  scale_y_reverse(breaks = c(0, 6, 9, 12, 15, 18, 21, 23),
-                  labels = c("00h","06h","09h","12h","15h","18h","21h","23h")) +
-  labs(title = sprintf("Development intensity — %d commits across %d active days",
-                        total_commits, active_days),
-       subtitle = sprintf("Local time (Pacific/Noumea, UTC+11). Peak: %d commits in one hour. Yellow zone = daylight (06h–18h).",
-                          peak$commits[1]),
-       x = NULL, y = "Hour of day") +
-  theme_minimal(base_size = 9) +
-  theme(panel.grid = element_blank(),
+               labels = format(unique(grid$date), "%a\n%d %b"),
+               expand = c(0.01, 0)) +
+  scale_y_reverse(breaks = c(0, 6, 12, 18, 23),
+                  labels = c("00h","06h","12h","18h","23h"),
+                  expand = c(0.01, 0)) +
+  labs(title = sprintf("%d commits · %d active days · peak %d/h",
+                       total_commits, active_days, peak$commits[1]),
+       x = NULL, y = NULL) +
+  theme_minimal(base_size = 8.5) +
+  theme(panel.grid    = element_blank(),
         legend.position = "bottom",
-        axis.text.x = element_text(angle = 0, hjust = 0.5))
+        legend.margin   = margin(t = -4),
+        plot.title      = element_text(size = 8.5, colour = "grey30"))
 ```
 
 ## AI-assisted delivery — Claude token consumption
