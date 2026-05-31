@@ -198,9 +198,6 @@ function formatDate(dateStr: string): string {
               <i class="fa-solid fa-calendar-plus"></i>
             </a>
           </h2>
-          {r.menu?.description && (
-            <p class="mb-5 text-base italic leading-relaxed" style="color: var(--text-muted)">{r.menu.description}</p>
-          )}
 
           {days.length > 0 && (
             <button class="speak-week-btn mb-5 flex items-center gap-2 rounded-xl bg-teal-700 px-5 py-3 text-lg font-bold text-white shadow hover:bg-teal-800 transition-colors"
@@ -534,8 +531,8 @@ function formatDate(dateStr: string): string {
       }
       // Flèches ← → pour naviguer entre régimes (hors champ de recherche actif)
       if (document.activeElement !== searchInput) {
-        if (e.key === 'ArrowLeft')  navigateRegime(-1);
-        if (e.key === 'ArrowRight') navigateRegime(1);
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); navigateRegime(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); navigateRegime(1); }
       }
     });
     const searchResults = document.getElementById('search-results');
