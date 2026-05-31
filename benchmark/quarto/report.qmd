@@ -1257,22 +1257,18 @@ gap_mins        <- as.numeric(diff(ts), units = "mins")
 median_lead     <- round(median(gap_mins), 1)
 total_hours     <- as.numeric(difftime(max(ts), min(ts), units = "hours"))
 deploys_per_day <- round(length(ts) / (total_hours / 24), 1)
-cfr_pct         <- 0     # zero rollbacks / hotfixes across all releases
-mttr_label      <- "n/a"  # no incidents → no MTTR to report
 
 cat("```{=latex}
 \\begin{center}
 \\renewcommand{\\arraystretch}{1.35}
-\\begin{tabular}{>{\\centering\\arraybackslash}p{0.20\\textwidth}>{\\centering\\arraybackslash}p{0.20\\textwidth}>{\\centering\\arraybackslash}p{0.20\\textwidth}>{\\centering\\arraybackslash}p{0.20\\textwidth}}
+\\begin{tabular}{>{\\centering\\arraybackslash}p{0.35\\textwidth}>{\\centering\\arraybackslash}p{0.35\\textwidth}}
 \\toprule
 {\\Huge\\color{teal700}\\faRocket} &
-{\\Huge\\color{teal700}\\faClock} &
-{\\Huge\\color{teal700}\\faBug} &
-{\\Huge\\color{teal700}\\faWrench} \\\\
-", sprintf("{\\Large\\textbf{%s/day}} & {\\Large\\textbf{%s\\,min}} & {\\Large\\textbf{%s\\%%}} & {\\Large\\textbf{%s}} \\\\\n",
-  deploys_per_day, median_lead, cfr_pct, mttr_label),
-"Deployment Frequency & Lead Time for Changes & Change Failure Rate & MTTR \\\\
-\\small\\color{teal700}\\itshape Elite & \\small\\color{teal700}\\itshape Elite & \\small\\color{teal700}\\itshape Elite & \\small\\color{teal700}\\itshape Elite \\\\
+{\\Huge\\color{teal700}\\faClock} \\\\
+", sprintf("{\\Large\\textbf{%s/day}} & {\\Large\\textbf{%s\\,min}} \\\\\n",
+  deploys_per_day, median_lead),
+"Deployment Frequency & Lead Time for Changes \\\\
+\\small\\color{teal700}\\itshape Elite & \\small\\color{teal700}\\itshape Elite \\\\
 \\bottomrule
 \\end{tabular}
 \\end{center}
@@ -1280,7 +1276,7 @@ cat("```{=latex}
 ```
 
 \begin{center}\small\itshape
-DORA 2023 Elite tier: on-demand deploys, lead time < 1\,h, CFR 0–15\%, MTTR < 1\,h.
+DORA 2023 Elite tier: on-demand deploys, lead time < 1\,h.
 \end{center}
 
 ## Development activity heatmap
