@@ -163,8 +163,7 @@ format:
           errors}} for our site, versus 91/100 and 67~errors for the official website.
           All audit data is persisted in a DuckDB database for longitudinal tracking.
 
-          \vspace{1em}
-          {\normalfont\small\bfseries Keywords}\\[0.5em]
+          \vspace{1.5em}
           \end{minipage}
           \begin{minipage}{0.82\textwidth}
           \raggedright
@@ -543,13 +542,54 @@ if (nrow(new_lh) > 0) dbAppendTable(con, "lighthouse_audits", new_lh)
 # — checks out each tag, builds, serves and audits the same menu page) override
 # these values when the file is present.
 sh_data <- tibble::tibble(
-  tag          = c("aquavena.nc","v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0","v1.7.0","v1.8.0","v1.9.0"),
-  git_sha      = c(NA_character_, "0fdeff3","76658ae","9a5ca91","81fba2b","a59d12d","eccabc3","534854c","2e5e47e","9dc1a0b","dd2a22b"),
-  audit_date   = as.Date(c("2026-05-30","2026-05-29","2026-05-30","2026-05-30",
-                            "2026-05-30","2026-05-30","2026-05-30","2026-05-30","2026-05-30","2026-05-31","2026-05-31")),
-  lh_score     = c(91L, 82L, 86L, 89L, 93L, 96L, 98L, 100L, 100L, 100L, 100L),
-  pa11y_errors = c(67L,  5L,  3L,  2L,  1L,  0L,  0L,   0L,   0L,   0L,   0L),
-  lines_delta  = c(0L, 17352L, 13L, 28L, 10L, 95L, 308L, 1240L, 919L, 0L, 0L)
+  tag          = c(
+    "aquavena.nc",
+    "v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5",
+    "v1.4.0","v1.5.0","v1.6.0","v1.7.0","v1.8.0","v1.9.0",
+    "v1.10.0","v1.11.0","v1.11.1","v1.11.2",
+    "v1.12.0","v1.12.1","v1.12.2","v1.12.3","v1.12.4","v1.12.5","v1.12.6",
+    "v1.13.0","v1.13.1","v1.14.0"
+  ),
+  git_sha      = c(
+    NA_character_,
+    "0fdeff3","76658ae","9a5ca91","81fba2b","a59d12d",
+    "6b3a9ea","805481b","308cd78","2e5e47e","9dc1a0b","dd2a22b",
+    "a5d9ba7","6f5334f","d4b70eb","e7fd200",
+    "56e8c1c","ad1732a","589ab14","cd352ba","138caa8","50922d3","326b2af",
+    "98e65f8","919f36a","52fc47b"
+  ),
+  audit_date   = as.Date(c(
+    "2026-05-30",
+    "2026-05-29","2026-05-30","2026-05-30","2026-05-30","2026-05-30",
+    "2026-05-31","2026-05-31","2026-05-31","2026-05-30","2026-05-31","2026-05-31",
+    "2026-05-31","2026-05-31","2026-05-31","2026-05-31",
+    "2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31",
+    "2026-05-31","2026-05-31","2026-05-31"
+  )),
+  lh_score     = c(
+    91L,
+    82L, 86L, 89L, 93L, 96L,
+    100L, 100L, 100L, 100L, 100L, 100L,
+    100L, 100L, 100L, 100L,
+    100L, 100L, 100L, 100L, 100L, 100L, 100L,
+    100L, 100L, 100L
+  ),
+  pa11y_errors = c(
+    67L,
+    5L, 3L, 2L, 1L, 0L,
+    0L, 0L, 0L, 0L, 0L, 0L,
+    0L, 0L, 0L, 0L,
+    0L, 0L, 0L, 0L, 0L, 0L, 0L,
+    0L, 0L, 0L
+  ),
+  lines_delta  = c(
+    0L,
+    1356L, 13L, 28L, 10L, 95L,
+    215L, 8L, 18L, 179L, 0L, 0L,
+    15L, 24L, 0L, 7L,
+    107L, 2L, 42L, 12L, 1L, 21L, 1L,
+    14L, 0L, 13L
+  )
 )
 
 # Override lh_score with real measurements when available
@@ -596,49 +636,112 @@ new_sh <- sh_data |> filter(!tag %in% existing_sh)
 if (nrow(new_sh) > 0) dbAppendTable(con, "score_history", new_sh)
 
 gr_data <- tibble::tibble(
-  tag          = c("v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0","v1.7.0","v1.8.0","v1.9.0"),
+  tag          = c(
+    "v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5",
+    "v1.4.0","v1.5.0","v1.6.0","v1.7.0","v1.8.0","v1.9.0",
+    "v1.10.0","v1.11.0","v1.11.1","v1.11.2",
+    "v1.12.0","v1.12.1","v1.12.2","v1.12.3","v1.12.4","v1.12.5","v1.12.6",
+    "v1.13.0","v1.13.1","v1.14.0"
+  ),
   release_name = c(
     "v0.1.1 - Contraste WCAG AA & menus Aqua-Chrono-Vege",
     "v0.1.2 - Onglets regimes lisibles en mode nuit",
     "v0.1.3 - Audit accessibilite WCAG2AA en ligne de commande",
     "v0.1.4 - Contraste bouton Lire + audit local renforce",
     "v0.1.5 - Rapport accessibilite complet : Lighthouse 100/100",
-    "v1.5.0 - Score accessibilite 100/100 : toutes violations WCAG corrigees + benchmark/",
-    "v1.6.0 - Benchmark : graphiques pipeline, cycle d'amelioration et discipline de release",
+    "v1.4.0 - Correction affichage menus",
+    "v1.5.0 - Navigation amelioree",
+    "v1.6.0 - Boutons A+/A- visibles sur mobile",
     "v1.7.0 - Schema FK, glossaire, outils, trend chart",
     "v1.8.0 - Executive Dashboard, ML semantic analysis & full audit replay",
-    "v1.9.0 - Graph DS, retro Gantt, edge bundling & artistic cover"
+    "v1.9.0 - Graph DS, retro Gantt, edge bundling & artistic cover",
+    "v1.10.0 - Affichage intelligent des menus commandables",
+    "v1.11.0 - Navigation horizontale : fleches clavier et swipe tactile",
+    "v1.11.1 - Dependabot active (npm + pip)",
+    "v1.11.2 - Affichage epure + fleches clavier corrigees",
+    "v1.12.0 - Astro v6, Fonts API locale, header repense",
+    "v1.12.1 - Titre header simplifie",
+    "v1.12.2 - Recherche dans la barre de titre",
+    "v1.12.3 - Label bouton raccourci",
+    "v1.12.4 - Suppression des codes formule",
+    "v1.12.5 - Swipe horizontal corrige sur ecran tactile laptop",
+    "v1.12.6 - Page noire au swipe supprimee",
+    "v1.13.0 - Content Security Policy activee",
+    "v1.13.1 - Licence AGPL v3",
+    "v1.14.0 - Migration Tailwind CSS v3 -> v4"
   ),
-  published_at    = as.Date(c("2026-05-29","2026-05-30","2026-05-30","2026-05-30",
-                               "2026-05-30","2026-05-30","2026-05-30","2026-05-30","2026-05-31","2026-05-31")),
-  published_at_ts = as.POSIXct(c("2026-05-29 23:58:03","2026-05-30 00:02:20","2026-05-30 00:14:10",
-                                  "2026-05-30 00:17:29","2026-05-30 00:21:35","2026-05-30 00:43:38",
-                                  "2026-05-30 03:52:36","2026-05-30 04:26:04","2026-05-30 17:49:08","2026-05-31 17:55:00"), tz = "UTC"),
+  published_at    = as.Date(c(
+    "2026-05-29","2026-05-30","2026-05-30","2026-05-30","2026-05-30",
+    "2026-05-31","2026-05-31","2026-05-31","2026-05-30","2026-05-31","2026-05-31",
+    "2026-05-31","2026-05-31","2026-05-31","2026-05-31",
+    "2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31",
+    "2026-05-31","2026-05-31","2026-05-31"
+  )),
+  published_at_ts = as.POSIXct(c(
+    "2026-05-29 23:58:03","2026-05-30 00:02:20","2026-05-30 00:14:10",
+    "2026-05-30 00:17:29","2026-05-30 00:21:35",
+    "2026-05-31 05:54:38","2026-05-31 05:59:21","2026-05-31 06:05:11",
+    "2026-05-30 04:26:04","2026-05-30 17:49:08","2026-05-30 18:49:55",
+    "2026-05-31 04:28:11","2026-05-31 04:31:33","2026-05-31 04:35:08","2026-05-31 04:40:34",
+    "2026-05-31 04:50:28","2026-05-31 04:55:12","2026-05-31 04:57:39","2026-05-31 04:59:49",
+    "2026-05-31 05:04:08","2026-05-31 05:07:16","2026-05-31 05:10:07",
+    "2026-05-31 05:14:37","2026-05-31 05:19:09","2026-05-31 05:28:51"
+  ), tz = "UTC"),
   url           = c(
     "https://github.com/adriens/aquavena/releases/tag/v0.1.1",
     "https://github.com/adriens/aquavena/releases/tag/v0.1.2",
     "https://github.com/adriens/aquavena/releases/tag/v0.1.3",
     "https://github.com/adriens/aquavena/releases/tag/v0.1.4",
     "https://github.com/adriens/aquavena/releases/tag/v0.1.5",
+    "https://github.com/adriens/aquavena/releases/tag/v1.4.0",
     "https://github.com/adriens/aquavena/releases/tag/v1.5.0",
     "https://github.com/adriens/aquavena/releases/tag/v1.6.0",
     "https://github.com/adriens/aquavena/releases/tag/v1.7.0",
     "https://github.com/adriens/aquavena/releases/tag/v1.8.0",
-    "https://github.com/adriens/aquavena/releases/tag/v1.9.0"
+    "https://github.com/adriens/aquavena/releases/tag/v1.9.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.10.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.11.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.11.1",
+    "https://github.com/adriens/aquavena/releases/tag/v1.11.2",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.1",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.2",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.3",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.4",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.5",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.6",
+    "https://github.com/adriens/aquavena/releases/tag/v1.13.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.13.1",
+    "https://github.com/adriens/aquavena/releases/tag/v1.14.0"
   ),
-  author        = rep("adriens", 10),
-  is_prerelease = rep(FALSE, 10),
+  author        = rep("adriens", 25),
+  is_prerelease = rep(FALSE, 25),
   body_excerpt  = c(
     "Corrections contraste WCAG AA theme clair — tous les composants menus (Aqua, Chrono, Vege) passent desormais le ratio 4.5:1.",
     "Correction contraste onglets regimes en mode nuit — les noms de regime sont desormais lisibles sur fond sombre.",
     "Nouvel audit WCAG2AA automatise via npm run a11y (pa11y-ci) — integration dans le pipeline de validation.",
     "Correction contraste bouton Lire sur jours ordinaires + renforcement de l'audit local.",
     "Rapport accessibilite complet via npm run report : pa11y-ci + Lighthouse. Score Lighthouse 100/100.",
-    "Score 100/100 Lighthouse, 0 erreur pa11y. Ajout dossier benchmark/ avec pipeline d'audit automatise.",
-    "Benchmark enrichi : graphiques ggplot2 pipeline de donnees, cycle d'amelioration, discipline de release semantique.",
+    "Desactivation CSP — bug Astro v6 bloquait le JavaScript et masquait tous les menus.",
+    "Navigation circulaire entre onglets (fleches + swipe). Suppression du prefixe Aqua dans les noms d'onglets.",
+    "Boutons A+ et A- deplaces sous le titre Aquavena pour les rendre visibles sur mobile.",
     "Schema DuckDB avec cles etrangeres, diagramme SchemaCrawler, glossaire, section outils, chart de tendance.",
     "Executive Dashboard PMI, analyse semantique ML (bge-m3 multilingue), audits HTML/poids/privacy, replay historique, schema 12 tables.",
-    "Graph data science (PageRank + betweenness), retro Gantt avec temps actif, ForceAtlas2 + datashader bundling, couverture galactique, CC BY-SA 4.0."
+    "Graph data science (PageRank + betweenness), retro Gantt avec temps actif, ForceAtlas2 + datashader bundling, couverture galactique, CC BY-SA 4.0.",
+    "N'afficher que les menus commandables selon le jour de consultation.",
+    "Navigation horizontale entre regimes via fleches clavier et swipe tactile.",
+    "Activation Dependabot pour npm et pip.",
+    "Suppression description regime et correction fleches clavier PC.",
+    "Migration Astro v6, API Fonts locale, refonte du header, nettoyage UI.",
+    "Titre header simplifie — Aquavena avec icone malvoyants.",
+    "Recherche alignee sur la meme ligne que le titre dans le header.",
+    "Label Lire semaine (etait Lire toute la semaine).",
+    "Suppression du code formule (MD, VG, LC) dans les cartes menu.",
+    "Swipe horizontal corrige sur ecran tactile laptop.",
+    "Suppression page noire au swipe sur mobile.",
+    "Activation Content Security Policy via Astro v6.",
+    "Ajout licence AGPL v3.",
+    "Migration Tailwind CSS v3 -> v4 (CSS-first, sans fichier de config)."
   )
 )
 existing_gr <- dbGetQuery(con, "SELECT tag FROM gh_releases")$tag

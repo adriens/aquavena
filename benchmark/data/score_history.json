@@ -52,8 +52,8 @@
     "tag": "v1.6.0",
     "sha": "308cd78",
     "date": "2026-05-31",
-    "score": 100,
-    "pa11y_errors": 0
+    "score": null,
+    "pa11y_errors": null
   },
   {
     "tag": "v1.7.0",
@@ -173,5 +173,12 @@
     "date": "2026-05-31",
     "score": null,
     "pa11y_errors": null
+  },
+  {
+    "tag": "6c8c0a3",
+    "sha": "6c8c0a3",
+    "date": "2026-05-31",
+    "score": 100,
+    "pa11y_errors": 0
   }
 ]

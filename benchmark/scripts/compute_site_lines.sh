@@ -19,7 +19,11 @@ set -uo pipefail
 
 ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 OUT="$ROOT/benchmark/data/site_lines.json"
-TAGS=(v0.1.1 v0.1.2 v0.1.3 v0.1.4 v0.1.5 v1.5.0 v1.6.0 v1.7.0)
+TAGS=(v0.1.1 v0.1.2 v0.1.3 v0.1.4 v0.1.5
+      v1.4.0 v1.5.0 v1.6.0 v1.7.0 v1.8.0 v1.9.0
+      v1.10.0 v1.11.0 v1.11.1 v1.11.2
+      v1.12.0 v1.12.1 v1.12.2 v1.12.3 v1.12.4 v1.12.5 v1.12.6
+      v1.13.0 v1.13.1 v1.14.0)
 
 EXCL=(
   ":(exclude)site/node_modules"
