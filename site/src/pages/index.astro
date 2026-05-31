@@ -118,9 +118,17 @@ function formatDate(dateStr: string): string {
   <!-- Header -->
   <header class="sticky top-0 z-50 bg-teal-700 text-white shadow-md">
     <div class="mx-auto max-w-4xl px-4 py-3 flex items-center gap-3">
-      <h1 class="text-lg font-bold leading-tight shrink-0">
-        <i class="fa-solid fa-eye-low-vision mr-2 text-teal-200"></i>Aquavena
-      </h1>
+      <div class="shrink-0 flex flex-col gap-1">
+        <h1 class="text-lg font-bold leading-tight">
+          <i class="fa-solid fa-eye-low-vision mr-2 text-teal-200"></i>Aquavena
+        </h1>
+        <div class="no-print flex gap-1">
+          <button id="btn-font-down" aria-label="Réduire la taille du texte"
+            class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm font-bold hover:bg-teal-600">A−</button>
+          <button id="btn-font-up" aria-label="Agrandir la taille du texte"
+            class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm font-bold hover:bg-teal-600">A+</button>
+        </div>
+      </div>
       <div role="search" class="no-print relative flex-1">
         <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-teal-200"></i>
         <input id="search-input" type="search" placeholder="Rechercher un plat… (Ctrl+K)"
@@ -130,10 +138,6 @@ function formatDate(dateStr: string): string {
           style="background: var(--bg-card); border: 2px solid var(--border)"></div>
       </div>
       <div class="no-print flex items-center gap-2 shrink-0">
-        <button id="btn-font-down" aria-label="Réduire la taille du texte"
-          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm font-bold hover:bg-teal-600">A−</button>
-        <button id="btn-font-up" aria-label="Agrandir la taille du texte"
-          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-base font-bold hover:bg-teal-600">A+</button>
         <button id="btn-dark" aria-label="Basculer mode nuit"
           class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm hover:bg-teal-600">
           <i class="fa-solid fa-moon" id="dark-icon"></i>
