@@ -4,6 +4,19 @@ import menusData from '../data/menus.json';
 const data = menusData as any;
 const { today, regimes } = data;
 
+// Menus are published weeks in advance; ordering deadline is Wednesday midnight.
+// Show only the next fully-orderable week:
+//   Mon/Tue/Wed  → start from next Monday (week N+1)
+//   Thu/Fri/Sat/Sun → start from the Monday after next (week N+2)
+const _d = new Date(today + 'T00:00:00');
+const _wd = _d.getDay(); // 0=Sun, 1=Mon … 6=Sat
+const _daysToNextMonday = _wd === 1 ? 7 : (8 - _wd) % 7;
+const _extraDays = (_wd === 0 || _wd >= 4) ? 7 : 0;
+const _first = new Date(_d);
+_first.setDate(_first.getDate() + _daysToNextMonday + _extraDays);
+// Use local date components to avoid UTC-offset shift (NC is UTC+11)
+const firstDisplayDate = `${_first.getFullYear()}-${String(_first.getMonth()+1).padStart(2,'0')}-${String(_first.getDate()).padStart(2,'0')}`;
+
 const REGIME_ICONS: Record<string, string> = {
   'aqua-méditerranéen':    'fa-solid fa-sun',
   'aqua-chrono-diet':      'fa-solid fa-clock',
@@ -198,7 +211,7 @@ function formatDate(dateStr: string): string {
 
           {days.length > 0 ? (
             <div class="space-y-5">
-              {days.filter((day: any) => day.date >= today).map((day: any) => {
+              {days.filter((day: any) => day.date >= firstDisplayDate).map((day: any) => {
                 const isToday = day.date === today;
                 const midi    = day.plats.filter((p: any) => p.meal_time === 'midi');
                 const soir    = day.plats.filter((p: any) => p.meal_time === 'soir');
