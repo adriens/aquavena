@@ -486,11 +486,26 @@ function formatDate(dateStr: string): string {
     }
 
     // Swipe gauche/droite (tactile)
-    let _touchX = 0;
-    document.addEventListener('touchstart', e => { _touchX = e.touches[0].clientX; }, { passive: true });
+    // touchmove non-passive pour pouvoir appeler preventDefault() sur les swipes
+    // horizontaux — sinon le navigateur les intercepte (navigation arrière/avant)
+    let _touchX = 0, _touchY = 0, _swipeBlocked = false;
+    document.addEventListener('touchstart', e => {
+      _touchX = e.touches[0].clientX;
+      _touchY = e.touches[0].clientY;
+      _swipeBlocked = false;
+    }, { passive: true });
+    document.addEventListener('touchmove', e => {
+      if (_swipeBlocked) return;
+      const dx = Math.abs(e.touches[0].clientX - _touchX);
+      const dy = Math.abs(e.touches[0].clientY - _touchY);
+      if (dx > dy && dx > 10) e.preventDefault(); // swipe horizontal → bloquer le navigateur
+      else if (dy > dx && dy > 10) _swipeBlocked = true; // swipe vertical → laisser scroller
+    }, { passive: false });
     document.addEventListener('touchend', e => {
+      if (_swipeBlocked) return;
       const dx = e.changedTouches[0].clientX - _touchX;
-      if (Math.abs(dx) > 50) navigateRegime(dx < 0 ? 1 : -1);
+      const dy = e.changedTouches[0].clientY - _touchY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) navigateRegime(dx < 0 ? 1 : -1);
     }, { passive: true });
 
     // Search — Ctrl+K / Cmd+K opens search
