@@ -34,6 +34,9 @@ const REGIME_ICONS: Record<string, string> = {
 function regimeIcon(slug: string): string {
   return REGIME_ICONS[slug] ?? 'fa-solid fa-utensils';
 }
+function tabLabel(name: string): string {
+  return name.replace(/^Aqua /, '');
+}
 function toAsciiSlug(slug: string): string {
   return slug.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9-]/g, '-');
 }
@@ -152,7 +155,7 @@ function formatDate(dateStr: string): string {
           aria-label={`Afficher le régime ${r.name}`}
           class="tab-btn border-b-4 px-5 py-4 text-base font-semibold whitespace-nowrap transition-colors"
         >
-          <i class={`${regimeIcon(r.slug)} mr-1.5`}></i>{r.name}
+          <i class={`${regimeIcon(r.slug)} mr-1.5`}></i>{tabLabel(r.name)}
         </button>
       ))}
     </div>
