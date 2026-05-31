@@ -35,10 +35,10 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install Astro deps
-        run: npm install
+        run: npm install --legacy-peer-deps
         working-directory: site
 
       - name: Build site
