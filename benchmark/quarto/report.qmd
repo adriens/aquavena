@@ -1591,7 +1591,7 @@ p
 
 ## Semantic analysis of commit messages
 
-All **81 commit messages** were embedded with the
+All **83 commit messages** were embedded with the
 `BAAI/bge-m3` model (1024-dimensional **multilingual** embeddings — handles
 the project's mix of French and English commit messages),
 clustered with K-Means into 6 groups, and projected to 2D with PCA. The
@@ -1688,6 +1688,19 @@ p_types + p_map
 
 The cluster terms below come from per-cluster TF-IDF; each row's exemplar is
 the commit closest to the cluster centroid in embedding space.
+
+\begin{center}
+\begin{minipage}{0.82\textwidth}
+\small\color{gray!60!black}
+\textbf{TF-IDF} (Term Frequency – Inverse Document Frequency) measures how
+characteristic a word is to one cluster compared to all others.
+A term scores high when it appears often \emph{inside} a cluster (TF) but
+rarely across the other clusters (IDF).
+It is what makes ``accessibility'' a top term for the feature cluster but not
+for the fix or chore clusters — even if the word appears everywhere, the IDF
+weight penalises it unless it is truly distinctive.
+\end{minipage}
+\end{center}
 
 ```{r commit-clusters-table}
 ct <- dbGetQuery(con, "
@@ -4061,7 +4074,7 @@ multi-site data, two derived graphs become valuable:
 
 ## Deepen the commit-semantics work
 
-This report already embeds 81 commits with sentence-transformers and clusters
+This report already embeds 83 commits with sentence-transformers and clusters
 them into 6 groups. At a 10× volume:
 
 - **Topic drift over time** — track how the cluster mix shifts release after
@@ -4086,7 +4099,7 @@ accessibility evolution on the New Caledonia web — a publishable dataset.
 |---|---|---|
 | Site clustering | ~30 sites | 2 |
 | Co-failure community detection | ~50 sites | 2 |
-| Embedding-based effort prediction | ~500 commits | 81 |
+| Embedding-based effort prediction | ~500 commits | 83 |
 | Time-series forecasting | ~50 releases | 9 |
 | Anomaly detection (regressions) | ~20 weekly audits | 1 |
 
