@@ -40,6 +40,7 @@ format:
       - design thinking
     include-in-header:
       text: |
+        \input{git-sha.tex}
         \usepackage{fontawesome5}
         \usepackage{xcolor}
         \usepackage{hyperref}
@@ -129,16 +130,27 @@ format:
           {\color{teal700}\faGithub}~\href{https://github.com/adriens/aquavena}{\texttt{github.com/adriens/aquavena}}
 
           \vspace{0.8cm}
-          {\large\today}
+          {\small\color{gray!60!black}{\faCodeBranch}~\texttt{\gitsha}}
 
-          \vspace{1.4cm}
+          \end{titlepage}
 
-          \begin{center}
-          \textbf{Abstract}
-          \end{center}
-          \begin{center}
-          \begin{minipage}{0.85\textwidth}
-          \centering\small\itshape
+          % ─── Abstract page ────────────────────────────────────────────────
+          \begin{titlepage}
+          \centering
+          \vspace*{3cm}
+
+          {\color{teal700}\rule{0.5\textwidth}{1.5pt}}
+
+          \vspace{1.2cm}
+
+          {\fontsize{18}{22}\selectfont\bfseries\color{teal700} Abstract}
+
+          \vspace{1.2cm}
+
+          \begin{minipage}{0.78\textwidth}
+          \setlength{\parindent}{0pt}
+          \setlength{\parskip}{0.8em}
+          \normalsize\itshape
           This report automatically compares the web accessibility of
           \textbf{\textit{adriens.github.io/aquavena}} — designed for visually
           impaired users — against the source website \textbf{\textit{aquavena.nc}},
@@ -147,13 +159,16 @@ format:
           Results show a \textbf{\textit{100/100 Lighthouse score and 0 WCAG 2.1 AA
           errors}} for our site, versus 91/100 and 67~errors for the official website.
           All audit data is persisted in a DuckDB database for longitudinal tracking.
-          \\ \vspace{0.6em}
+
+          \vspace{0.8em}
           {\normalfont\small \textbf{Keywords:} civitech, tech for good, inclusive design,
           digital inclusion, accessibility, WCAG, visually impaired, social impact,
           assistive technology, elderly care, aging population, senior accessibility,
           human-centered design, design thinking, New Caledonia.}
           \end{minipage}
-          \end{center}
+
+          \vspace{1.5cm}
+          {\color{teal700}\rule{0.5\textwidth}{1.5pt}}
 
           \end{titlepage}
           \newpage

@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-05-24T23:57:41",
-  "today": "2026-05-24",
+  "generated_at": "2026-05-31T17:14:28",
+  "today": "2026-05-31",
   "regimes": [
     {
       "name": "La Boutique",
@@ -10,76 +10,6 @@
       "menu": {
         "description": "Nouveauté ! AquaVena - Votre Boutique en Ligne",
         "days": [
-          {
-            "date": "2026-05-18",
-            "label": "Lundi 18 mai 2026",
-            "formule": "BO",
-            "plats": [],
-            "supplements": [],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-19",
-            "label": "Mardi 19 mai 2026",
-            "formule": "BO",
-            "plats": [],
-            "supplements": [],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-20",
-            "label": "Mercredi 20 mai 2026",
-            "formule": "BO",
-            "plats": [],
-            "supplements": [],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-21",
-            "label": "Jeudi 21 mai 2026",
-            "formule": "BO",
-            "plats": [],
-            "supplements": [],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-22",
-            "label": "Vendredi 22 mai 2026",
-            "formule": "BO",
-            "plats": [],
-            "supplements": [],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
           {
             "date": "2026-05-25",
             "label": "Lundi 25 mai 2026",
@@ -219,6 +149,76 @@
               "Perrier 33 cl",
               "Eau Minérale Thonon 50cl"
             ]
+          },
+          {
+            "date": "2026-06-08",
+            "label": "Lundi 8 juin 2026",
+            "formule": "BO",
+            "plats": [],
+            "supplements": [],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "label": "Mardi 9 juin 2026",
+            "formule": "BO",
+            "plats": [],
+            "supplements": [],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "label": "Mercredi 10 juin 2026",
+            "formule": "BO",
+            "plats": [],
+            "supplements": [],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "label": "Jeudi 11 juin 2026",
+            "formule": "BO",
+            "plats": [],
+            "supplements": [],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-12",
+            "label": "Vendredi 12 juin 2026",
+            "formule": "BO",
+            "plats": [],
+            "supplements": [],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
           }
         ]
       },
@@ -232,386 +232,6 @@
       "menu": {
         "description": "AQUA'VENA propose également des menus classiques et variés où l'on retrouve le plaisir de manger de tout. Bien évidemment, nos menus sont établis dans le respect des règles de diététiques et d'équilibre alimentaire.",
         "days": [
-          {
-            "date": "2026-05-18",
-            "label": "Lundi 18 mai 2026",
-            "formule": "BE",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Cassoulet  aux saucisses fumées"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Poulet au Pesto Rosso, Butternut rôtie, Polenta"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Rougail de Seiches, Achards de légumes & Squash au four, Riz blanc"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Boulettes de poulet sauce aigre douce, Poêlée de Tomates & Poivrons, Riz sauté"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Magret de Canard caramélisé, Sauce Miel et Balsamique, Haricots verts persillés, Purée de Pommes de Terre"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Salade de Lentilles, Tomates cerises, Feta, Œufs durs, Courgettes, Cranberries et Basilic, vinaigrette de Framboises"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Poulet Fermier aux tomates séchées, olives et romarin, Légumes du soleil rôtis au pesto"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "VEGE : Boulettes de Quinoa au Cheddar, Lamelles d'Aubergines, Risotto aux champignons"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "VEGE : Lasagne Tex-Mex aux Légumes & Haricots Rouges (Tortillas façon lasagne, légumes mijotés, fromage fondant)"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade de Pâtes, Jambon cru, légumes rôtis, Mozza, olives et basilic"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Cassoulet  aux saucisses fumées"
-              }
-            ],
-            "supplements": [
-              "Butternut rôtie",
-              "Riz blanc",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-19",
-            "label": "Mardi 19 mai 2026",
-            "formule": "BE",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Boulettes de Veau crème au parmesan, Poêlée d'Aubergines, Spaghettis"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Poulet grillé aux sésames & Cacahuètes, Légumes Chop suey, Nouilles Chinoises"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mi Cuit de Thon Crème Citronnée, Poêlée de courgettes, Polenta"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Lasagnes Bolognaise"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet de Mahi Mahi et Crevettes au Pesto Rosso, Gratin de Poireaux au Parmesan, Risotto"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Quiche de légumes à la méditerranéenne (aux Poivrons, Tomates Confites et Parmesan), Salade du Sud - Chou & carottes à l'aïoli"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Effiloché de Souris d'Agneau confite, Tian de légumes, Purée de Pommes de Terre aux olives"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "VEGE : Croquettes d'épinards au Chèvre, Légumes du Soleil, Spaghettis au Pesto"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "VEGE : Chao men Végétarien"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade de Quinoa au Poulet & Chèvre (légumes, olives, graines & pesto)"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Lasagnes Bolognaise"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Buddha Bowl : Fallafels, Tomates, Aubergines marinées, Concombre, Salade Verte, Endives, Olives, Noix, Vinaigrette sauce Tahini"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL : Crevettes, Riz à sushi, Tomates, Aubergines marinées, Concombre, Salade Verte, Endives, Noix, Vinaigrette sauce Tahini"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Légumes Chop suey",
-              "Polenta",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-20",
-            "label": "Mercredi 20 mai 2026",
-            "formule": "BE",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Blanquette de Veau, Carottes et champignons, Riz blanc"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Bami au Poulet"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mouclade (moules à la crème au curry), Epinards à l'ail , Riz blanc"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Spaghettis au Thon, Pesto & Tomates Fraiches"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Tartare de Bœuf au Couteau à l'italienne (parmesan, basilic et tomates séchées), Escalivade (légumes du soleil marinés huile olive  herbes & câpres), Pommes de terre aux herbes"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Lasagnes méditerranéennes aux légumes rôtis, Chèvre et Miel"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Tartare de Thon jaune et Crevettes,  Guacamole, Caviar d'aubergines à la crétoise (aux olives & capres) et Toasts grillés"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "VEGE : Hamburger au Steak de Quinoa, Lamelles de Carottes, Comté, salade, tomates, oignons Sauce Moutarde Miel"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "VEGE : Galette Frangipane  aux Epinards & Champignons, Houmous de flageolets à la citrouille & Feta"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "FRESH : Wrap au Thon, Œuf dur, Crudités, Mayonnaise + Houmous à l'ail et citron confit - FRESH"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Spaghettis au Thon, Pesto & Tomates Fraiches"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Buddha Bowl : Boulettes de riz aux Cacahuètes & Sésames, Navets rôtis, Poivrons marinés, Betteraves, Salade Verte, Chou vert, Mimolette, Graines de courge, Sauce Cacahuètes"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL : Tartare de Thon Jaune et Saumon Fumé, Riz à sushi, Navets rôtis, Poivrons marinés, Betteraves, Salade Verte, Chou vert, Graines de courge, Sauce Cacahuètes"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Epinards à l'ail",
-              "Riz blanc",
-              "Perles de konjac safranées",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-21",
-            "label": "Jeudi 21 mai 2026",
-            "formule": "BE",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Sauté de veau à l'Espagnole (au chorizo & Olives), Légumes du soleil rôtis, Spaghettis"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Poulet Thai aux cacahuètes, Poivrons & Courgettes, Riz Sauté"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Roti de Thon mi-cuit en croûte de graines, Salade de chou et carottes, Houmous méditerranéen aux tomates et olives"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Poulet Crème aux Champignons, Haricots verts persillés, Pommes Grenailles rôties"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet mignon de Porc Sauce au Comté, Haricots verts persillés, Gratin Dauphinois"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Salade de Pâtes Fusilli au Jambon cru, poivrons marinés, courgettes, mozza, olives et tomates séchées"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Crevettes à l'Aïoli , Salade d'Avocats, Endives,  Tomates cerises & Graines de courge"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "VEGE : Steak de Boulghour au tomates séchées et mix de Graines, légumes du soleil, Purée de Haricots blancs et son Coulis de Poivrons aux Noix"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "VEGE : Nuggets de Haricots rouges à la mozza, Sauce Barbecue, Haricots verts persillés, Gratin Dauphinois"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "FRESH : Quiche aux Champignons & Parmesan / Salade croquante de Carottes et Chou aux Noix"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Poulet Crème aux Champignons, Haricots verts persillés, Pommes Grenailles rôties"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Buddha Bowl : Boulettes de légumineuses à l'Indienne, Papayes, Squash rôtie, Tomates, Salade Verte, Endives, Oignons frits, Noix , Vinaigrette au curry"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL : Tartare de Thon Jaune et Saumon Fumé, Riz à sushi, Papayes, Squash rôtie, Tomates, Salade Verte, Endives, Oignons frits, Noix , Vinaigrette au curry"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Riz Sauté",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-22",
-            "label": "Vendredi 22 mai 2026",
-            "formule": "BE",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Steak Haché de Bœuf aux lardons, Sauce Béarnaise, Courgettes rôties, Tagliatelles"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Pollo al Limone (Poulet citron à l'italienne), Aubergines, courgettes et poivrons grillés au balsamique, Risotto"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Blanquette de Thon et Marlin, Carottes et Champignons, Riz Blanc"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Gnocchis Sauce Carbonara, haricots verts persillade"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Assiette de la mer (Crevettes, Tartare de Thon jaune, Rillettes de Thon & Saumon fumé), Escalivade, Riz sauvage"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi :  Moussaka gourmande aux Aubergines & Feta (aux œufs et Parmesan gratiné), Pommes Grenailles rôties"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Pavé de Mahi Mahi au beurre Passion, Poêlée de légumes verts croquants au citron & éclats de Noisettes"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "VEGE : Quiche aux légumes & mix de Graines, Salade de Lentilles Corails"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "VEGE : Risotto aux champignons, courgettes, épinards, tomates séchées et Parmesan"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade Javanaise au Poulet (nouilles, lait de coco & cacahuètes)"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Steak Haché de Bœuf aux lardons, Sauce Béarnaise, Courgettes rôties, Tagliatelles"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Buddha Bowl : Mini bruschettas aubergine chèvre, Carottes, Courgettes marinées à l'huile d'olive, Haricots verts , Salade Verte, Chou Vert, Emmental, Mix de graines, Vinaigrette César (aux anchois)"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL : Tartare de Thon Jaune et Saumon Fumé, Riz à sushi, Carottes, Courgettes marinées à l'huile d'olive, Haricots verts , Salade Verte, Chou Vert, Mix de graines, Vinaigrette Thaï"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Courgettes rôties",
-              "Purée de pois cassés",
-              "Riz de Konjac",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
           {
             "date": "2026-05-25",
             "label": "Lundi 25 mai 2026",
@@ -690,7 +310,7 @@
               },
               {
                 "meal_time": "unknown",
-                "description": "Mi cuit de Thon doré au Curry et Gingembre, Tian de légumes, Petites fèves à la crème aux herbes"
+                "description": "Mi cuit de Thon doré au Curry et Gingembre, Tian de légumes, Flageolets à la crème aux herbes"
               },
               {
                 "meal_time": "unknown",
@@ -739,7 +359,7 @@
             ],
             "supplements": [
               "Carottes braisées",
-              "Petites fèves à la crème aux herbes",
+              "Flageolets à la crème aux herbes",
               "Pain Sans Gluten / Keto"
             ],
             "boissons": [
@@ -801,7 +421,7 @@
               },
               {
                 "meal_time": "unknown",
-                "description": "Buddha Bowl : Taboulé de Quinoa, Salsa de tomates, Radis , Brocolis, Salade Verte, Endives, Gouda, Amandes, Vinaigrette au sésame & gingembre"
+                "description": "Buddha Bowl : Taboulé, Salsa de tomates, Radis , Brocolis, Salade Verte, Endives, Gouda, Amandes, Vinaigrette au sésame & gingembre"
               },
               {
                 "meal_time": "unknown",
@@ -841,7 +461,7 @@
               },
               {
                 "meal_time": "unknown",
-                "description": "Mafé de Poulet mijoté à la sénégalaise, sauce onctueuse au beurre de cacahuètes, Squash rôtie, Riz au coco"
+                "description": "Mafé de Poulet mijoté à la sénégalaise, sauce onctueuse au beurre de cacahuètes, Courgettes rôties, Riz au coco"
               },
               {
                 "meal_time": "unknown",
@@ -849,7 +469,7 @@
               },
               {
                 "meal_time": "unknown",
-                "description": "Mi-cuit de Thon Crème Combawa, aux noix de cajou torréfiées, Julienne de Légumes, Potatoes"
+                "description": "Mi-cuit de Thon Crème Combawa, aux cerneaux de noix, Julienne de Légumes, Potatoes"
               },
               {
                 "meal_time": "unknown",
@@ -869,7 +489,7 @@
               },
               {
                 "meal_time": "unknown",
-                "description": "VEGE : Risotto aux Epinards, Chèvre et Noisettes"
+                "description": "VEGE : Risotto aux Epinards, Chèvre et Cerneaux de Noix"
               },
               {
                 "meal_time": "unknown",
@@ -1365,6 +985,386 @@
               "Perrier 33 cl",
               "Eau Minérale Thonon 50cl"
             ]
+          },
+          {
+            "date": "2026-06-08",
+            "label": "Lundi 8 juin 2026",
+            "formule": "BE",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Bœuf Bourguignon, Carottes, Spaghettis"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Poulet Crème au Parmesan, Courgettes grillées, Polenta"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Poêlée de seiches persillade, Poêlée méridionale de tomates et poivrons, Riz Blanc"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Lasagnes au Poulet, Epinards, Mozzarella et Parmesan"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Tajine de Souris d'Agneau aux Olives, Légumes rôtis, Semoule aux raisins secs"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Méditerranéen Soir:  Tajine de Boulettes de Lentilles et Chou Fleur sauce Orientale, Epinards au citron confit et raisins secs, Carottes rôtis"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Méditerranéen Midi : Magret de Canard  au Chutney de figues, Squash au Four, Purée de Pommes de terre  aux olives"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "VEGE : Steak de Quinoa et Courgettes au Chèvre, Tian de légumes, Risotto"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "VEGE : Bouchées d'épinards à la mozza, Légumes du Soleil rôtis, Houmous au Pesto"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "FRESH : Salade de Quinoa Citronné, Pois chiches & Feta  (aux Poivrons, Œufs  dur)"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Aqua'Kids (Portion Enfant) : Lasagnes au Poulet, Epinards, Mozzarella et Parmesan"
+              }
+            ],
+            "supplements": [
+              "Carottes",
+              "Riz Blanc",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "label": "Mardi 9 juin 2026",
+            "formule": "BE",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Escalopes de Veau au  citron & câpres, façon piccata, Courgettes à l'ail, Pommes Grenaille rôties"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Rougail de Poulet à la Créole, Achards de légumes & Squash, Riz blanc"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Boulettes de Thon Sauce au pesto, Haricots Verts Persillés, Purée de Pommes de terre"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Gratin de Patates douces et Squash au Chèvre et lardons"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Mi-cuit de Thon Jaune au Pesto Rosso, Croquettes d'épinards à la mozza, Risotto aux champignons"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Méditerranéen Midi : Salade de lentilles au Chèvre & crudités aux épices douces et graines de Courge"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Méditerranéen Soir : Duo Méditerranéen de Thon jaune et Crevettes au Pesto, Aubergines rôties au Thym et Caviar de Poivrons"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "VEGE : Couscous aux Falafels, Légumes Orientaux , Semoule dorée aux raisins secs"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "VEGE : Lasagnes à la Courge, crème de houmous et Mozzarella"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "FRESH : Salade de Pâtes façon César au Poulet grillé (parmesan, tomates, croûtons, anchois)"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Aqua'Kids (Portion Enfant) : Gratin de Patates douces et Squash au Chèvre et lardons"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Buddha Bowl : Salade de Pommes de Terre au Maïs, Radis, Tomates, Poivrons rôtis marinés, Salade Verte, Endives, copeaux de parmesan, Graines de courge & Tournesol, Sauce Caesar"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL : Crevettes, Riz à sushi, Radis, Tomates, Poivrons rôtis marinés, Salade Verte, Endives, Graines de courge & Tournesol, Sauce crémeuse au sésame"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots Verts Persillés",
+              "Riz blanc",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "label": "Mercredi 10 juin 2026",
+            "formule": "BE",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Escalope de Porc sauce Charcutière (Moutarde et cornichons), Haricots verts Persillés, Purée de Pommes de terre"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Boulettes de Poulet crème aux 3 fromages, Carottes Vichy, Spaghettis"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Mi Cuit de Thon et son aïoli Maison, Lamelles d'aubergines Fondante, Risotto"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Raviolis à la Carbonara, Haricots Verts Persillade"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Pavé de Saumon à la gremolata, Haricots verts persillés, Ecrasé de Patates douces"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Méditerranéen Midi : Salade niçoise au Thon, Riz brun, vinaigrette à l'huile d'olive et au citron"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Méditerranéen Soir : Poulet Fermier mijoté aux olives et au thym, Légumes rôtis"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "VEGE : Curry de Boulettes de Lentilles à l'Indienne, Epinards, Riz"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "VEGE : Salade Italienne (Pâtes, Feta, Œuf, Tomates, Poivrons, Olives, Sauce Pesto Rosso)"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "FRESH : Salade de Lentilles au Poulet, Butternut, Noix torrefiées et Feta - FRESH"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Aqua'Kids (Portion Enfant) : Raviolis à la Carbonara, Haricots Verts Persillade"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Buddha Bowl : Mini Bruschettas Aubergine & Chèvre, Betteraves, Concombre, Courgette grillée, Salade Verte, Chou Vert, Tomates confites, Cacahuètes, Vinaigrette à l'italienne"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL : Saumon cru et avocat, Riz à sushi, Betteraves, Concombre, Courgette grillée, Salade Verte, Chou Vert, Cacahuètes, Sauce crémeuse au Wasabi"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots verts Persillés",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "label": "Jeudi 11 juin 2026",
+            "formule": "BE",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Boulettes de Veau Crème aux Champignons, Haricots verts persillés, Polenta gratinée"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Poulet Madras aux raisins secs (curry indien aux épices douces, au lait de coco), Chou fleur rôti , Dahl de lentilles"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Sashimi de Thon , Salade de chou, Riz au sésame"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Porc au Sucre, Chop Suey, Riz blanc"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Confit de Canard à l'ail en chemise, Poêlée d'asperges vertes , Purée Aligot"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Méditerranéen Midi :  Wrap de poulet, Feta, avocat, tomates confites, légumes du soleil, sauce Tzatzíki"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Méditerranéen Soir : Tartare de Saumon & Thon jaune, citron, basilic, tomates séchées & Parmesan, Légumes méditerranéens grillés, huile d'olive & herbes"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "VEGE : Hamburger au Steak de Betteraves et Boulghour, Brie, Légumes rôtis Sauce Fromagère"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "VEGE : Croquettes de Poivrons à l'emmental, Légumes du Soleil rôtis, Riz safrané"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "FRESH : Quiche aux épinards et saumon fumé / Taboulé Libanais aux Noix & Graines"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Aqua'Kids (Portion Enfant) : Porc au Sucre, Chop Suey, Riz blanc"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Buddha Bowl : Boulettes de légumineuses à l'Indienne, Concombres, Aubergines grillées, Papaye verte râpée, Salade Verte, Chou Kalé, Graines de sésame, Sauce Vinaigrette au Curry"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL : Saumon cru et avocat, Riz à sushi, Concombres, Aubergines grillées, Papaye verte râpée, Salade Verte, Chou Kalé, Graines de sésame, Sauce vinaigrette au curry"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots verts persillés",
+              "Riz blanc",
+              "Riz de Konjac",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-12",
+            "label": "Vendredi 12 juin 2026",
+            "formule": "BE",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Saucisses à L'Italienne, Légumes du soleil rôtis, Purée de Pommes de Terre"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Tajine de Poulet aux Olives, Légumes rôtis, Semoule dorée"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Curry vert Thaï de Thon et Marlin, Chop suey, Riz blanc"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Risotto crémeux au Boudin noir,  champignons & Parmesan"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Escalope de Poulet fermier au Pesto de noix, Palets de Brocolis au parmesan, Polenta Gratinée"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Méditerranéen Soir : Salade César au Poulet (vinaigrette César aux anchois)"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Méditerranéen Midi : Duo de mahi mahi & Crevettes en persillade, Sauce rouille (mayonnaise à l'ail et au safran), légumes rôtis, Ecrasé de Patates douces"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "VEGE : Tofu Mariné au Soyo & Pané aux Graines de sésame, Wok de légumes, Nouilles Chinoises aux Oignons Frits"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "VEGE : Saucisses Végé à la Crème aux herbes, courges rôties, Gratin Dauphinois"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "FRESH : Salade de Pâtes au Jambon Cru, Chèvre, Tomates, courgettes au Pesto"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Aqua'Kids (Portion Enfant) : Saucisses à L'Italienne, Légumes du soleil rôtis, Purée de Pommes de Terre"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Buddha Bowl : Polenta au Bleu & au Noix, Fond d'artichaut, Carottes, Tomates, Salade Verte, Chou rouge, Olives Marinées,  Graines de Pavot, Vinaigrette Traditionnelle"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL : Saumon cru et avocat, Riz à sushi, Fond d'artichaut, Carottes, Tomates, Salade Verte, Chou rouge,  Graines de Pavot, Sauce crémeuse au sésame"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Légumes rôtis",
+              "Riz blanc",
+              "Riz de Konjac",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
           }
         ]
       },
@@ -1404,270 +1404,6 @@
       "menu": {
         "description": "Une formule Sans Gluten basée sur notre horloge biologique : l’art de manger de tous les aliments au moment de la journée où ils seront le plus utile. Satisfaire les besoins en énergie de l’organisme sans que les aliments et les graisses ne soient stockés. Une formule inédite dans laquelle AQUAVENA vous propose une prise en charge à la journée comprenant le plat du midi, la collation et le plat du soir. NOUVEAU ! Vous souhaitez diminuer votre consommation de Protéines animales ? Deux options s’offrent à vous :",
         "days": [
-          {
-            "date": "2026-05-18",
-            "label": "Lundi 18 mai 2026",
-            "formule": "CD",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Cassoulet  aux saucisses fumées"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Poulet au Pesto Rosso, Polenta"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Boulettes de Quinoa au Cheddar, Lamelles d'Aubergines, Risotto aux champignons"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Rougail de Seiches, Achards de légumes, riz de chou fleur"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Poulet au Pesto Rosso, Purée de Brocolis"
-              },
-              {
-                "meal_time": "gourmet_midi",
-                "description": "Magret de Canard caramélisé, Sauce Miel et Balsamique, Purée de Pommes de Terre"
-              }
-            ],
-            "supplements": [
-              "Butternut rôtie",
-              "Riz blanc",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-19",
-            "label": "Mardi 19 mai 2026",
-            "formule": "CD",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Boulettes de Veau crème au parmesan, Pâtes sans Gluten"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Poulet grillé aux sésames & Cacahuètes, Nouilles Chinoises (Sans Gluten)"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Croquettes d'épinards au Chèvre, Légumes du Soleil, Spaghettis au Pesto"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Mi Cuit de Thon Crème Citronnée, Poêlée de courgettes"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Poulet grillé aux sésames & Cacahuètes, Légumes Chop suey"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mini Buddha Bowl : Fallafels, Tomates, Aubergines marinées, Concombre, Salade Verte, Endives, Olives, Noix, Vinaigrette sauce Tahini"
-              },
-              {
-                "meal_time": "gourmet_soir",
-                "description": "Filet de Mahi Mahi et Crevettes au Pesto Rosso, Fondue de Poireaux"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL : Crevettes, Riz à sushi, Tomates, Aubergines marinées, Concombre, Salade Verte, Endives, Noix, Vinaigrette sauce Tahini"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Légumes Chop suey",
-              "Polenta",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-20",
-            "label": "Mercredi 20 mai 2026",
-            "formule": "CD",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Blanquette de Veau, Carottes et champignons, Riz blanc"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Bami au Poulet"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Hamburger au Steak de Quinoa, Lamelles de Carottes, Comté, salade, tomates, oignons Sauce Moutarde Miel"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Mouclade (moules à la crème légère au curry), Epinards à l'ail , Perles de konjac safranées"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Bami de Konjac au Poulet"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mini Buddha Bowl : Boulettes de riz aux Cacahuètes & Sésames, Navets rôtis, Poivrons marinés, Betteraves, Salade Verte, Chou vert, Mimolette, Graines de courge, Sauce Cacahuètes"
-              },
-              {
-                "meal_time": "gourmet_midi",
-                "description": "Tartare de Bœuf au Couteau à l'italienne (parmesan, basilic et tomates séchées), Pommes de terre aux herbes"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL : Tartare de Thon Jaune et Saumon Fumé, Riz à sushi, Navets rôtis, Poivrons marinés, Betteraves, Salade Verte, Chou vert, Graines de courge, Sauce Cacahuètes"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Epinards à l'ail",
-              "Riz blanc",
-              "Perles de konjac safranées",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-21",
-            "label": "Jeudi 21 mai 2026",
-            "formule": "CD",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Sauté de veau à l'Espagnole (au chorizo & Olives), Pâtes sans gluten"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Poulet Thai aux cacahuètes, Riz Sauté"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Steak de Boulghour au tomates séchées et mix de Graines, légumes du soleil, Purée de Haricots blancs et son Coulis de Poivrons aux Noix"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Roti de Thon mi-cuit en croûte de graines, Taboulé de chou fleur aux légumes citronnés"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Poulet Thai aux cacahuètes, Poivrons & Courgettes"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mini Buddha Bowl : Boulettes de légumineuses à l'Indienne, Papayes, Squash rôtie, Tomates, Salade Verte, Endives, Oignons frits, Noix , Vinaigrette au curry"
-              },
-              {
-                "meal_time": "gourmet_midi",
-                "description": "Filet mignon de Porc Sauce au Comté, Gratin Dauphinois"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL : Tartare de Thon Jaune et Saumon Fumé, Riz à sushi, Papayes, Squash rôtie, Tomates, Salade Verte, Endives, Oignons frits, Noix , Vinaigrette au curry"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Riz Sauté",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-22",
-            "label": "Vendredi 22 mai 2026",
-            "formule": "CD",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Steak Haché de Bœuf aux lardons, Sauce Béarnaise, Purée de pois cassés"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Pollo al Limone (Poulet citron à l'italienne), Risotto"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Quiche aux légumes & mix de Graines, Salade de Lentilles Corails"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Blanquette de Thon et Marlin, Carottes et Champignons, Riz de Konjac"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Pollo al Limone (Poulet citron à l'italienne), Aubergines, courgettes et poivrons grillés au balsamique"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mini Buddha Bowl : Mini bruschettas aubergine chèvre, Carottes, Courgettes marinées à l'huile d'olive, Haricots verts , Salade Verte, Chou Vert, Emmental, Mix de graines, Vinaigrette César (aux anchois)"
-              },
-              {
-                "meal_time": "gourmet_soir",
-                "description": "Assiette de la mer (Crevettes, Tartare de Thon jaune, Rillettes de Thon & Saumon fumé), Escalivade"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL : Tartare de Thon Jaune et Saumon Fumé, Riz à sushi, Carottes, Courgettes marinées à l'huile d'olive, Haricots verts , Salade Verte, Chou Vert, Mix de graines, Vinaigrette Thaï"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Courgettes rôties",
-              "Purée de pois cassés",
-              "Riz de Konjac",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
           {
             "date": "2026-05-25",
             "label": "Lundi 25 mai 2026",
@@ -1755,7 +1491,7 @@
             ],
             "supplements": [
               "Carottes braisées",
-              "Petites fèves à la crème aux herbes",
+              "Flageolets à la crème aux herbes",
               "Pain Sans Gluten / Keto"
             ],
             "boissons": [
@@ -1793,7 +1529,7 @@
               },
               {
                 "meal_time": "unknown",
-                "description": "Mini Buddha Bowl : Taboulé de Quinoa, Salsa de tomates, Radis , Brocolis, Salade Verte, Endives, Gouda, Amandes, Vinaigrette au sésame & gingembre"
+                "description": "Mini Buddha Bowl : Taboulé, Salsa de tomates, Radis , Brocolis, Salade Verte, Endives, Gouda, Amandes, Vinaigrette au sésame & gingembre"
               },
               {
                 "meal_time": "gourmet_soir",
@@ -1845,7 +1581,7 @@
               },
               {
                 "meal_time": "soir",
-                "description": "Mafé de Poulet mijoté à la sénégalaise, sauce onctueuse au beurre de cacahuètes, Squash rôtie, Riz de Konjac au coco"
+                "description": "Mafé de Poulet mijoté à la sénégalaise, sauce onctueuse au beurre de cacahuètes,Courgettes rôties, Riz de Konjac au coco"
               },
               {
                 "meal_time": "unknown",
@@ -2197,6 +1933,270 @@
               "Perrier 33 cl",
               "Eau Minérale Thonon 50cl"
             ]
+          },
+          {
+            "date": "2026-06-08",
+            "label": "Lundi 8 juin 2026",
+            "formule": "CD",
+            "plats": [
+              {
+                "meal_time": "midi",
+                "description": "Bœuf Bourguignon, Pates sans gluten"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Poulet Crème au Parmesan, Polenta"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Steak de Quinoa et Courgettes au Chèvre, Tian de légumes, Risotto"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Poêlée de seiches persillade, Poêlée méridionale de tomates et poivrons, Tagliatelles de Konjac"
+              },
+              {
+                "meal_time": "gourmet_midi",
+                "description": "Tajine de Souris d'Agneau aux Olives, Quinoa aux raisins secs"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Poulet crème légère moutardée à l'estragon, Courgettes grillées"
+              }
+            ],
+            "supplements": [
+              "Carottes",
+              "Riz Blanc",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "label": "Mardi 9 juin 2026",
+            "formule": "CD",
+            "plats": [
+              {
+                "meal_time": "midi",
+                "description": "Escalopes de Veau au  citron & câpres, façon piccata, Pommes Grenaille rôties"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Rougail de Poulet à la Créole, Riz blanc"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Couscous aux Falafels, Légumes Orientaux , Semoule dorée aux raisins secs"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Boulettes de Thon Sauce au pesto, Légumes du soleil"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Rougail de Poulet à la Créole, Achards de légumes et riz de konjac"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Mini Buddha Bowl : Salade de Pommes de Terre au Maïs, Radis, Tomates, Poivrons rôtis marinés, Salade Verte, Endives, copeaux de parmesan, Graines de courge & Tournesol, Sauce Caesar"
+              },
+              {
+                "meal_time": "gourmet_soir",
+                "description": "Mi-cuit de Thon Jaune au Pesto Rosso, Caviar de légumes méditerranéens"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL :  Crevettes, Riz de konjac au sésame, Radis, Tomates, Poivrons rôtis marinés, Salade Verte, Endives, copeaux de parmesan, Graines de courge & Tournesol, Sauce crémeuse au sésame"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots Verts Persillés",
+              "Riz blanc",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "label": "Mercredi 10 juin 2026",
+            "formule": "CD",
+            "plats": [
+              {
+                "meal_time": "midi",
+                "description": "Escalope de Porc sauce Charcutière (Moutarde et cornichons), Purée de Pommes de terre"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Boulettes de Poulet crème aux 3 fromages, Pates sans gluten"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Curry de Boulettes de Lentilles à l'Indienne, Epinards, Riz"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Mi Cuit de Thon et son aïoli Maison, Lamelles d'aubergines Fondante"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Boulettes de Poulet crème légère au Poivre, Carottes Vichy"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Mini Buddha Bowl :  Mini Bruschettas Aubergine & Chèvre, Betteraves, Concombre, Courgette grillée, Salade Verte, Chou Vert, Tomates confites, Cacahuètes, Vinaigrette à l'italienne"
+              },
+              {
+                "meal_time": "gourmet_soir",
+                "description": "Pavé de Saumon à la gremolata, Haricots verts persillés, Riz de Konjac"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL : Saumon cru et avocat,   Riz de konjac au sésame Betteraves, Concombre, Courgette grillée, Salade Verte, Chou Vert, Cacahuètes, Sauce crémeuse au Wasabi"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots verts Persillés",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "label": "Jeudi 11 juin 2026",
+            "formule": "CD",
+            "plats": [
+              {
+                "meal_time": "midi",
+                "description": "Boulettes de Veau Crème aux Champignons, Polenta gratinée"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Poulet Madras aux raisins secs (curry indien aux épices douces, au lait de coco), Dahl de lentilles"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Hamburger au Steak de Betteraves et Boulghour, Brie, Légumes rôtis Sauce Fromagère"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Sashimi de Thon , Salade de chou, Riz de Konjac"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Poulet Madras (curry indien aux épices douces, au lait de coco), Chou fleur rôti"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Mini Buddha Bowl : Boulettes de légumineuses à l'Indienne, Concombres, Aubergines grillées, Papaye verte râpée, Salade Verte, Chou Kalé, Graines de sésame, Sauce Vinaigrette au Curry"
+              },
+              {
+                "meal_time": "gourmet_midi",
+                "description": "Confit de Canard à l'ail en chemise, Purée Aligot"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL :  Saumon cru et avocat, Riz de konjac au sésame, Concombres, Aubergines grillées, Papaye verte râpée, Salade Verte, Chou Kalé, Graines de sésame, Sauce vinaigrette au curry"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots verts persillés",
+              "Riz blanc",
+              "Riz de Konjac",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-12",
+            "label": "Vendredi 12 juin 2026",
+            "formule": "CD",
+            "plats": [
+              {
+                "meal_time": "midi",
+                "description": "Saucisses à L'Italienne, Purée de Pommes de Terre"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Tajine de Poulet aux Olives, Quinoa"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Tofu Mariné au Soyo & Pané aux Graines de sésame, Wok de légumes, Nouilles Chinoises aux Oignons Frits"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Curry vert Thaï de Thon et Marlin, Chop suey"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Tajine de Poulet aux Olives, Légumes rôtis"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Mini Buddha Bowl : Polenta au Bleu & au Noix, Fond d'artichaut, Carottes, Tomates, Salade Verte, Chou rouge, Olives Marinées,  Graines de Pavot, Vinaigrette Traditionnelle"
+              },
+              {
+                "meal_time": "gourmet_midi",
+                "description": "Escalope de Poulet fermier au Pesto de noix, Polenta Gratinée"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL :  Saumon cru et avocat, Riz de konjac au sésame, Fond d'artichaut, Carottes, Tomates, Salade Verte, Chou rouge,  Graines de Pavot, Sauce crémeuse au sésame"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Légumes rôtis",
+              "Riz blanc",
+              "Riz de Konjac",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
           }
         ]
       },
@@ -2237,138 +2237,6 @@
         "description": "Une formule basée sur la Chrono biologie adaptée à un mode d’alimentation Végétarien. Retrouvez le midi un plat comprenant des Protéines Végétales, Légumes et Féculents, cuisinés avec amour Pour le soir, un mini Buddha Bowl composé de protéines végétales, légumes cuits et/ou crus, fruits, graines & épices. Le tout accompagné d’une sauce savoureuse . Commandez à la Carte ou découvrez notre Journée Aqua’Chrono Végé",
         "days": [
           {
-            "date": "2026-05-18",
-            "label": "Lundi 18 mai 2026",
-            "formule": "VD",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Boulettes de Quinoa au Cheddar, Lamelles d'Aubergines, Risotto aux champignons"
-              }
-            ],
-            "supplements": [
-              "Butternut rôtie",
-              "Riz blanc",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-19",
-            "label": "Mardi 19 mai 2026",
-            "formule": "VD",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Croquettes d'épinards au Chèvre, Légumes du Soleil, Spaghettis au Pesto"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mini Buddha Bowl : Fallafels, Tomates, Aubergines marinées, Concombre, Salade Verte, Endives, Olives, Noix, Vinaigrette sauce Tahini"
-              }
-            ],
-            "supplements": [
-              "Légumes Chop suey",
-              "Polenta",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-20",
-            "label": "Mercredi 20 mai 2026",
-            "formule": "VD",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Hamburger au Steak de Quinoa, Lamelles de Carottes, Comté, salade, tomates, oignons Sauce Moutarde Miel"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mini Buddha Bowl : Boulettes de riz aux Cacahuètes & Sésames, Navets rôtis, Poivrons marinés, Betteraves, Salade Verte, Chou vert, Mimolette, Graines de courge, Sauce Cacahuètes"
-              }
-            ],
-            "supplements": [
-              "Epinards à l'ail",
-              "Riz blanc",
-              "Perles de konjac safranées",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-21",
-            "label": "Jeudi 21 mai 2026",
-            "formule": "VD",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Steak de Boulghour au tomates séchées et mix de Graines, légumes du soleil, Purée de Haricots blancs et son Coulis de Poivrons aux Noix"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mini Buddha Bowl : Boulettes de légumineuses à l'Indienne, Papayes, Squash rôtie, Tomates, Salade Verte, Endives, Oignons frits, Noix , Vinaigrette au curry"
-              }
-            ],
-            "supplements": [
-              "Riz Sauté",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-22",
-            "label": "Vendredi 22 mai 2026",
-            "formule": "VD",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Quiche aux légumes & mix de Graines, Salade de Lentilles Corails"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mini Buddha Bowl : Mini bruschettas aubergine chèvre, Carottes, Courgettes marinées à l'huile d'olive, Haricots verts , Salade Verte, Chou Vert, Emmental, Mix de graines, Vinaigrette César (aux anchois)"
-              }
-            ],
-            "supplements": [
-              "Courgettes rôties",
-              "Purée de pois cassés",
-              "Riz de Konjac",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
             "date": "2026-05-25",
             "label": "Lundi 25 mai 2026",
             "formule": "VD",
@@ -2407,7 +2275,7 @@
             ],
             "supplements": [
               "Carottes braisées",
-              "Petites fèves à la crème aux herbes",
+              "Flageolets à la crème aux herbes",
               "Pain Sans Gluten / Keto"
             ],
             "boissons": [
@@ -2429,7 +2297,7 @@
               },
               {
                 "meal_time": "unknown",
-                "description": "Mini Buddha Bowl : Taboulé de Quinoa, Salsa de tomates, Radis , Brocolis, Salade Verte, Endives, Gouda, Amandes, Vinaigrette au sésame & gingembre"
+                "description": "Mini Buddha Bowl : Taboulé, Salsa de tomates, Radis , Brocolis, Salade Verte, Endives, Gouda, Amandes, Vinaigrette au sésame & gingembre"
               }
             ],
             "supplements": [
@@ -2633,6 +2501,138 @@
               "Perrier 33 cl",
               "Eau Minérale Thonon 50cl"
             ]
+          },
+          {
+            "date": "2026-06-08",
+            "label": "Lundi 8 juin 2026",
+            "formule": "VD",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Steak de Quinoa et Courgettes au Chèvre, Tian de légumes, Risotto"
+              }
+            ],
+            "supplements": [
+              "Carottes",
+              "Riz Blanc",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "label": "Mardi 9 juin 2026",
+            "formule": "VD",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Couscous aux Falafels, Légumes Orientaux , Semoule dorée aux raisins secs"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Mini Buddha Bowl : Salade de Pommes de Terre au Maïs, Radis, Tomates, Poivrons rôtis marinés, Salade Verte, Endives, copeaux de parmesan, Graines de courge & Tournesol, Sauce Caesar"
+              }
+            ],
+            "supplements": [
+              "Haricots Verts Persillés",
+              "Riz blanc",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "label": "Mercredi 10 juin 2026",
+            "formule": "VD",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Curry de Boulettes de Lentilles à l'Indienne, Epinards, Riz"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Mini Buddha Bowl : Mini Bruschettas Aubergine & Chèvre, Betteraves, Concombre, Courgette grillée, Salade Verte, Chou Vert, Tomates confites, Cacahuètes, Vinaigrette à l'italienne"
+              }
+            ],
+            "supplements": [
+              "Haricots verts Persillés",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "label": "Jeudi 11 juin 2026",
+            "formule": "VD",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Hamburger au Steak de Betteraves et Boulghour, Brie, Légumes rôtis Sauce Fromagère"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Mini Buddha Bowl : Boulettes de légumineuses à l'Indienne, Concombres, Aubergines grillées, Papaye verte râpée, Salade Verte, Chou Kalé, Graines de sésame, Sauce Vinaigrette au Curry"
+              }
+            ],
+            "supplements": [
+              "Haricots verts persillés",
+              "Riz blanc",
+              "Riz de Konjac",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-12",
+            "label": "Vendredi 12 juin 2026",
+            "formule": "VD",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Tofu Mariné au Soyo & Pané aux Graines de sésame, Wok de légumes, Nouilles Chinoises aux Oignons Frits"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Mini Buddha Bowl : Polenta au Bleu & au Noix, Fond d'artichaut, Carottes, Tomates, Salade Verte, Chou rouge, Olives Marinées,  Graines de Pavot, Vinaigrette Traditionnelle"
+              }
+            ],
+            "supplements": [
+              "Légumes rôtis",
+              "Riz blanc",
+              "Riz de Konjac",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
           }
         ]
       },
@@ -2662,126 +2662,6 @@
       "menu": {
         "description": "Le régime méditerranéen, reconnu pour ses nombreux bienfaits sur la santé, est aussi une méthode efficace et naturelle pour perdre du poids durablement. Basé sur une alimentation riche en aliments frais et non transformés, il privilégie les fruits, légumes, légumineuses, céréales complètes, poissons maigres, noix et huiles d’olive, tout en limitant les produits raffinés, sucrés et riches en graisses saturées.",
         "days": [
-          {
-            "date": "2026-05-18",
-            "label": "Lundi 18 mai 2026",
-            "formule": "MD",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Salade de Lentilles, Tomates cerises, Feta, Œufs durs, Courgettes, Cranberries et Basilic, vinaigrette de Framboises"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Poulet Fermier aux tomates séchées, olives et romarin, Légumes du soleil rôtis au pesto"
-              }
-            ],
-            "supplements": [
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl"
-            ]
-          },
-          {
-            "date": "2026-05-19",
-            "label": "Mardi 19 mai 2026",
-            "formule": "MD",
-            "plats": [
-              {
-                "meal_time": "soir",
-                "description": "Quiche de légumes à la méditerranéenne (aux Poivrons, Tomates Confites et Parmesan), Salade du Sud - Chou & carottes à l'aïoli"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Effiloché de Souris d'Agneau confite, Tian de légumes, Purée de Pommes de Terre aux olives"
-              }
-            ],
-            "supplements": [
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl"
-            ]
-          },
-          {
-            "date": "2026-05-20",
-            "label": "Mercredi 20 mai 2026",
-            "formule": "MD",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Lasagnes méditerranéennes aux légumes rôtis, Chèvre et Miel"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Tartare de Thon jaune et Crevettes,  Guacamole, Caviar d'aubergines à la crétoise (aux olives & capres) et Toasts grillés"
-              }
-            ],
-            "supplements": [
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl"
-            ]
-          },
-          {
-            "date": "2026-05-21",
-            "label": "Jeudi 21 mai 2026",
-            "formule": "MD",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Salade de Pâtes Fusilli au Jambon cru, poivrons marinés, courgettes, mozza, olives et tomates séchées"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Crevettes à l'Aïoli , Salade d'Avocats, Endives,  Tomates cerises & Graines de courge"
-              }
-            ],
-            "supplements": [
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl"
-            ]
-          },
-          {
-            "date": "2026-05-22",
-            "label": "Vendredi 22 mai 2026",
-            "formule": "MD",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Moussaka gourmande aux Aubergines & Feta (aux œufs et Parmesan gratiné), Pommes Grenailles rôties"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Pavé de Mahi Mahi au beurre Passion, Poêlée de légumes verts croquants au citron & éclats de Noisettes"
-              }
-            ],
-            "supplements": [
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl"
-            ]
-          },
           {
             "date": "2026-05-25",
             "label": "Lundi 25 mai 2026",
@@ -3021,6 +2901,126 @@
               "Perrier Forever Citron Vert 25cl (Sans sucre)",
               "Perrier 33 cl"
             ]
+          },
+          {
+            "date": "2026-06-08",
+            "label": "Lundi 8 juin 2026",
+            "formule": "MD",
+            "plats": [
+              {
+                "meal_time": "soir",
+                "description": "Tajine de Boulettes de Lentilles et Chou Fleur sauce Orientale, Epinards au citron confit et raisins secs, Carottes rôtis"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Magret de Canard  au Chutney de figues, Squash au Four, Purée de Pommes de terre  aux olives"
+              }
+            ],
+            "supplements": [
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl"
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "label": "Mardi 9 juin 2026",
+            "formule": "MD",
+            "plats": [
+              {
+                "meal_time": "midi",
+                "description": "Salade de lentilles au Chèvre & crudités aux épices douces et graines de Courge"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Duo Méditerranéen de Thon jaune et Crevettes au Pesto, Aubergines rôties au Thym et Caviar de Poivrons"
+              }
+            ],
+            "supplements": [
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl"
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "label": "Mercredi 10 juin 2026",
+            "formule": "MD",
+            "plats": [
+              {
+                "meal_time": "midi",
+                "description": "Salade niçoise au Thon, Riz brun, vinaigrette à l'huile d'olive et au citron"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Poulet Fermier mijoté aux olives et au thym, Légumes rôtis"
+              }
+            ],
+            "supplements": [
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl"
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "label": "Jeudi 11 juin 2026",
+            "formule": "MD",
+            "plats": [
+              {
+                "meal_time": "midi",
+                "description": "Wrap de poulet, Feta, avocat, tomates confites, légumes du soleil, sauce Tzatzíki"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Tartare de Saumon & Thon jaune, citron, basilic, tomates séchées & Parmesan, Légumes méditerranéens grillés, huile d'olive & herbes"
+              }
+            ],
+            "supplements": [
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl"
+            ]
+          },
+          {
+            "date": "2026-06-12",
+            "label": "Vendredi 12 juin 2026",
+            "formule": "MD",
+            "plats": [
+              {
+                "meal_time": "soir",
+                "description": "Salade César au Poulet (vinaigrette César aux anchois)"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Duo de mahi mahi & Crevettes en persillade, Sauce rouille (mayonnaise à l'ail et au safran), légumes rôtis, Ecrasé de Patates douces"
+              }
+            ],
+            "supplements": [
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl"
+            ]
           }
         ]
       },
@@ -3050,214 +3050,6 @@
       "menu": {
         "description": "Vous souhaitez une alimentation Sans Gluten et à faible teneur en Lactose : vous retrouvez dans la formule AQUA’GOURMAND les savoureux plats chrono diet en version familiale équilibrée avec des portions plus généreuses.",
         "days": [
-          {
-            "date": "2026-05-18",
-            "label": "Lundi 18 mai 2026",
-            "formule": "GM",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Cassoulet  aux saucisses fumées"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Poulet au Pesto Rosso, Butternut rôtie, Polenta"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Rougail de Seiches, Achards de légumes & Squash au four, Riz blanc"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Magret de Canard caramélisé, Sauce Miel et Balsamique, Haricots verts persillés, Purée de Pommes de Terre"
-              }
-            ],
-            "supplements": [
-              "Butternut rôtie",
-              "Riz blanc",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-19",
-            "label": "Mardi 19 mai 2026",
-            "formule": "GM",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Boulettes de Veau crème au parmesan, Poêlée d'Aubergines, Pâtes sans Gluten"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Poulet grillé aux sésames & Cacahuètes, Légumes Chop suey, Nouilles Chinoises (Sans Gluten)"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mi Cuit de Thon Crème Citronnée, Poêlée de courgettes, Polenta"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet de Mahi Mahi et Crevettes au Pesto Rosso, Gratin de Poireaux au Parmesan, Risotto"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL : Crevettes, Riz à sushi, Tomates, Aubergines marinées, Concombre, Salade Verte, Endives, Noix, Vinaigrette sauce Tahini"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Légumes Chop suey",
-              "Polenta",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-20",
-            "label": "Mercredi 20 mai 2026",
-            "formule": "GM",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Blanquette de Veau, Carottes et champignons, Riz blanc"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Bami au Poulet"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mouclade (moules à la crème au curry), Epinards à l'ail , Riz blanc"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Tartare de Bœuf au Couteau à l'italienne (parmesan, basilic et tomates séchées), Escalivade (légumes du soleil marinés huile olive  herbes & câpres), Pommes de terre aux herbes"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL : Tartare de Thon Jaune et Saumon Fumé, Riz à sushi, Navets rôtis, Poivrons marinés, Betteraves, Salade Verte, Chou vert, Graines de courge, Sauce Cacahuètes"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Epinards à l'ail",
-              "Riz blanc",
-              "Perles de konjac safranées",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-21",
-            "label": "Jeudi 21 mai 2026",
-            "formule": "GM",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Sauté de veau à l'Espagnole (au chorizo & Olives), Légumes du soleil rôtis, Pâtes sans gluten"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Poulet Thai aux cacahuètes, Poivrons & Courgettes, Riz Sauté"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Roti de Thon mi-cuit en croûte de graines, Salade de chou et carottes, Houmous méditerranéen aux tomates et olives"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet mignon de Porc Sauce au Comté, Haricots verts persillés, Gratin Dauphinois"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL : Tartare de Thon Jaune et Saumon Fumé, Riz à sushi, Papayes, Squash rôtie, Tomates, Salade Verte, Endives, Oignons frits, Noix , Vinaigrette au curry"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Riz Sauté",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-22",
-            "label": "Vendredi 22 mai 2026",
-            "formule": "GM",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Steak Haché de Bœuf aux lardons, Sauce Béarnaise, Courgettes rôties, Purée de pois cassés"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Pollo al Limone (Poulet citron à l'italienne), Aubergines, courgettes et poivrons grillés au balsamique, Risotto"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Blanquette de Thon et Marlin, Carottes et Champignons, Riz Blanc"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Assiette de la mer (Crevettes, Tartare de Thon jaune, Rillettes de Thon & Saumon fumé), Escalivade, Riz sauvage"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL : Tartare de Thon Jaune et Saumon Fumé, Riz à sushi, Carottes, Courgettes marinées à l'huile d'olive, Haricots verts , Salade Verte, Chou Vert, Mix de graines, Vinaigrette Thaï"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Courgettes rôties",
-              "Purée de pois cassés",
-              "Riz de Konjac",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
           {
             "date": "2026-05-25",
             "label": "Lundi 25 mai 2026",
@@ -3308,7 +3100,7 @@
               },
               {
                 "meal_time": "unknown",
-                "description": "Mi cuit de Thon doré au Curry et Gingembre, Tian de légumes, Petites fèves à la crème aux herbes"
+                "description": "Mi cuit de Thon doré au Curry et Gingembre, Tian de légumes, Flageolets à la crème aux herbes"
               },
               {
                 "meal_time": "unknown",
@@ -3325,7 +3117,7 @@
             ],
             "supplements": [
               "Carottes braisées",
-              "Petites fèves à la crème aux herbes",
+              "Flageolets à la crème aux herbes",
               "Pain Sans Gluten / Keto"
             ],
             "boissons": [
@@ -3351,7 +3143,7 @@
               },
               {
                 "meal_time": "unknown",
-                "description": "Pavé de Marlin à la Chermoula (marinade marocaine aux herbes), Légumes rôtis façon escalivade aux câpres et huile d'olive , Quinoa doré"
+                "description": "Pavé de Marlin à la Chermoula (marinade marocaine aux herbes), Légumes rôtis façon escalivade aux câpres et huile d'olive, sarrasin doré"
               },
               {
                 "meal_time": "unknown",
@@ -3391,7 +3183,7 @@
               },
               {
                 "meal_time": "unknown",
-                "description": "Mafé de Poulet mijoté à la sénégalaise, sauce onctueuse au beurre de cacahuètes, Squash rôtie, Riz au coco"
+                "description": "Mafé de Poulet mijoté à la sénégalaise, sauce onctueuse au beurre de cacahuètes, Courgettes rôties, Riz au coco"
               },
               {
                 "meal_time": "unknown",
@@ -3675,6 +3467,214 @@
               "Perrier 33 cl",
               "Eau Minérale Thonon 50cl"
             ]
+          },
+          {
+            "date": "2026-06-08",
+            "label": "Lundi 8 juin 2026",
+            "formule": "GM",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Bœuf Bourguignon, Carottes, Pates sans gluten"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Poulet Crème au Parmesan, Courgettes grillées, Polenta"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Poêlée de seiches persillade, Poêlée méridionale de tomates et poivrons, Riz Blanc"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Tajine de Souris d'Agneau aux Olives, Légumes rôtis, Quinoa aux raisins secs"
+              }
+            ],
+            "supplements": [
+              "Carottes",
+              "Riz Blanc",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "label": "Mardi 9 juin 2026",
+            "formule": "GM",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Escalopes de Veau au  citron & câpres, façon piccata, Courgettes à l'ail, Pommes Grenaille rôties"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Rougail de Poulet à la Créole, Achards de légumes & Squash, Riz blanc"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Boulettes de Thon Sauce au pesto, Haricots Verts Persillés, Purée de Pommes de terre"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Mi-cuit de Thon Jaune au Pesto Rosso, Croquettes d'épinards à la mozza, Risotto aux champignons"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL : Crevettes, Riz à sushi, Radis, Tomates, Poivrons rôtis marinés, Salade Verte, Endives, Graines de courge & Tournesol, Sauce crémeuse au sésame"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots Verts Persillés",
+              "Riz blanc",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "label": "Mercredi 10 juin 2026",
+            "formule": "GM",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Escalope de Porc sauce Charcutière (Moutarde et cornichons), Haricots verts Persillés, Purée de Pommes de terre"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Boulettes de Poulet crème aux 3 fromages, Carottes Vichy, Pates sans gluten"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Mi Cuit de Thon et son aïoli Maison, Lamelles d'aubergines Fondante, Risotto"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Pavé de Saumon à la gremolata, Haricots verts persillés, Ecrasé de Patates douces"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL : Saumon cru et avocat, Riz à sushi, Betteraves, Concombre, Courgette grillée, Salade Verte, Chou Vert, Cacahuètes, Sauce crémeuse au Wasabi"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots verts Persillés",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "label": "Jeudi 11 juin 2026",
+            "formule": "GM",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Boulettes de Veau Crème aux Champignons, Haricots verts persillés, Polenta gratinée"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Poulet Madras aux raisins secs (curry indien aux épices douces, au lait de coco), Chou fleur rôti , Dahl de lentilles"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Sashimi de Thon , Salade de chou, Riz au sésame"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Confit de Canard à l'ail en chemise, Poêlée d'asperges vertes , Purée Aligot"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL : Saumon cru et avocat, Riz à sushi, Concombres, Aubergines grillées, Papaye verte râpée, Salade Verte, Chou Kalé, Graines de sésame, Sauce vinaigrette au curry"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots verts persillés",
+              "Riz blanc",
+              "Riz de Konjac",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-12",
+            "label": "Vendredi 12 juin 2026",
+            "formule": "GM",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Saucisses à L'Italienne, Légumes du soleil rôtis, Purée de Pommes de Terre"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Tajine de Poulet aux Olives, Légumes rôtis, Quinoa"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Curry vert Thaï de Thon et Marlin, Chop suey, Riz blanc"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Escalope de Poulet fermier au Pesto de noix, Palets de Brocolis au parmesan, Polenta Gratinée"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL : Saumon cru et avocat, Riz à sushi, Fond d'artichaut, Carottes, Tomates, Salade Verte, Chou rouge,  Graines de Pavot, Sauce crémeuse au sésame"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Légumes rôtis",
+              "Riz blanc",
+              "Riz de Konjac",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
           }
         ]
       },
@@ -3704,179 +3704,6 @@
       "menu": {
         "description": "Vous êtes Végétarien, la formule AQUA’VEGE vous propose des plats équilibrés en protéines végétales et légumes.",
         "days": [
-          {
-            "date": "2026-05-18",
-            "label": "Lundi 18 mai 2026",
-            "formule": "VG",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Boulettes de Quinoa au Cheddar, Lamelles d'Aubergines, Risotto aux champignons"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Lasagne Tex-Mex aux Légumes & Haricots Rouges (Tortillas façon lasagne, légumes mijotés, fromage fondant)"
-              }
-            ],
-            "supplements": [
-              "Butternut rôtie",
-              "Riz blanc",
-              "Energy balls : Chocolat, Pruneaux, Abricots, Riz soufflé, Noix",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-19",
-            "label": "Mardi 19 mai 2026",
-            "formule": "VG",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Croquettes d'épinards au Chèvre, Légumes du Soleil, Spaghettis au Pesto"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Chao men Végétarien"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Buddha Bowl : Fallafels, Tomates, Aubergines marinées, Concombre, Salade Verte, Endives, Olives, Noix, Vinaigrette sauce Tahini"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
-              }
-            ],
-            "supplements": [
-              "Légumes Chop suey",
-              "Polenta",
-              "Energy balls : Chocolat, Pruneaux, Abricots, Riz soufflé, Noix",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-20",
-            "label": "Mercredi 20 mai 2026",
-            "formule": "VG",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Hamburger au Steak de Quinoa, Lamelles de Carottes, Comté, salade, tomates, oignons Sauce Moutarde Miel"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Galette Frangipane  aux Epinards & Champignons, Houmous de flageolets à la citrouille & Feta"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Buddha Bowl : Boulettes de riz aux Cacahuètes & Sésames, Navets rôtis, Poivrons marinés, Betteraves, Salade Verte, Chou vert, Mimolette, Graines de courge, Sauce Cacahuètes"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
-              }
-            ],
-            "supplements": [
-              "Epinards à l'ail",
-              "Riz blanc",
-              "Energy balls : Chocolat, Pruneaux, Abricots, Riz soufflé, Noix",
-              "Perles de konjac safranées",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-21",
-            "label": "Jeudi 21 mai 2026",
-            "formule": "VG",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Steak de Boulghour au tomates séchées et mix de Graines, légumes du soleil, Purée de Haricots blancs et son Coulis de Poivrons aux Noix"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Nuggets de Haricots rouges à la mozza, Sauce Barbecue, Haricots verts persillés, Gratin Dauphinois"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Buddha Bowl : Boulettes de légumineuses à l'Indienne, Papayes, Squash rôtie, Tomates, Salade Verte, Endives, Oignons frits, Noix , Vinaigrette au curry"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
-              }
-            ],
-            "supplements": [
-              "Riz Sauté",
-              "Energy balls : Chocolat, Pruneaux, Abricots, Riz soufflé, Noix",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-22",
-            "label": "Vendredi 22 mai 2026",
-            "formule": "VG",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "Quiche aux légumes & mix de Graines, Salade de Lentilles Corails"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Risotto aux champignons, courgettes, épinards, tomates séchées et Parmesan"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Buddha Bowl : Mini bruschettas aubergine chèvre, Carottes, Courgettes marinées à l'huile d'olive, Haricots verts , Salade Verte, Chou Vert, Emmental, Mix de graines, Vinaigrette César (aux anchois)"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
-              }
-            ],
-            "supplements": [
-              "Courgettes rôties",
-              "Purée de pois cassés",
-              "Energy balls : Chocolat, Pruneaux, Abricots, Riz soufflé, Noix",
-              "Riz de Konjac",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
           {
             "date": "2026-05-25",
             "label": "Lundi 25 mai 2026",
@@ -3929,7 +3756,7 @@
             ],
             "supplements": [
               "Carottes braisées",
-              "Petites fèves à la crème aux herbes",
+              "Flageolets à la crème aux herbes",
               "Energy balls : Pruneaux, Chocolat, amandes, miel et riz soufflé",
               "Pain Sans Gluten / Keto"
             ],
@@ -3956,7 +3783,7 @@
               },
               {
                 "meal_time": "unknown",
-                "description": "Buddha Bowl : Taboulé de Quinoa, Salsa de tomates, Radis , Brocolis, Salade Verte, Endives, Gouda, Amandes, Vinaigrette au sésame & gingembre"
+                "description": "Buddha Bowl : Taboulé, Salsa de tomates, Radis , Brocolis, Salade Verte, Endives, Gouda, Amandes, Vinaigrette au sésame & gingembre"
               },
               {
                 "meal_time": "unknown",
@@ -3989,7 +3816,7 @@
               },
               {
                 "meal_time": "unknown",
-                "description": "Risotto aux Epinards, Chèvre et Noisettes"
+                "description": "Risotto aux Epinards, Chèvre et Cerneaux de Noix"
               },
               {
                 "meal_time": "unknown",
@@ -4224,6 +4051,179 @@
               "Perrier 33 cl",
               "Eau Minérale Thonon 50cl"
             ]
+          },
+          {
+            "date": "2026-06-08",
+            "label": "Lundi 8 juin 2026",
+            "formule": "VG",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Steak de Quinoa et Courgettes au Chèvre, Tian de légumes, Risotto"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Bouchées d'épinards à la mozza, Légumes du Soleil rôtis, Houmous au Pesto"
+              }
+            ],
+            "supplements": [
+              "Carottes",
+              "Riz Blanc",
+              "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "label": "Mardi 9 juin 2026",
+            "formule": "VG",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Couscous aux Falafels, Légumes Orientaux , Semoule dorée aux raisins secs"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Lasagnes à la Courge, crème de houmous et Mozzarella"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Buddha Bowl : Salade de Pommes de Terre au Maïs, Radis, Tomates, Poivrons rôtis marinés, Salade Verte, Endives, copeaux de parmesan, Graines de courge & Tournesol, Sauce Caesar"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots Verts Persillés",
+              "Riz blanc",
+              "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "label": "Mercredi 10 juin 2026",
+            "formule": "VG",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Curry de Boulettes de Lentilles à l'Indienne, Epinards, Riz"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Salade Italienne (Pâtes, Feta, Œuf, Tomates, Poivrons, Olives, Sauce Pesto Rosso)"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Buddha Bowl : Mini Bruschettas Aubergine & Chèvre, Betteraves, Concombre, Courgette grillée, Salade Verte, Chou Vert, Tomates confites, Cacahuètes, Vinaigrette à l'italienne"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots verts Persillés",
+              "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "label": "Jeudi 11 juin 2026",
+            "formule": "VG",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Hamburger au Steak de Betteraves et Boulghour, Brie, Légumes rôtis Sauce Fromagère"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Croquettes de Poivrons à l'emmental, Légumes du Soleil rôtis, Riz safrané"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Buddha Bowl : Boulettes de légumineuses à l'Indienne, Concombres, Aubergines grillées, Papaye verte râpée, Salade Verte, Chou Kalé, Graines de sésame, Sauce Vinaigrette au Curry"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots verts persillés",
+              "Riz blanc",
+              "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Riz de Konjac",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-12",
+            "label": "Vendredi 12 juin 2026",
+            "formule": "VG",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "Tofu Mariné au Soyo & Pané aux Graines de sésame, Wok de légumes, Nouilles Chinoises aux Oignons Frits"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Saucisses Végé à la Crème aux herbes, courges rôties, Gratin Dauphinois"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Buddha Bowl : Polenta au Bleu & au Noix, Fond d'artichaut, Carottes, Tomates, Salade Verte, Chou rouge, Olives Marinées,  Graines de Pavot, Vinaigrette Traditionnelle"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
+              }
+            ],
+            "supplements": [
+              "Légumes rôtis",
+              "Riz blanc",
+              "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Riz de Konjac",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
           }
         ]
       },
@@ -4237,189 +4237,6 @@
       "menu": {
         "description": "Le Low Carb de \"low carbohydrates\", en français \"pauvre en glucides\", est un régime qui consiste à manger moins de sucre et plus de gras naturel comme l'avocat ou le fromage. Eh oui ce n'est pas le gras qui fait grossir mais le sucre en revanche... ! Et par sucre on entend aussi les glucides raffinés comme le pain, les pâtes, les pommes de terre... Adopter ce type d'alimentation permet à l'organisme de brûler plus de graisses et à fonctionner plus efficacement ! Pas besoin de compter les calories !",
         "days": [
-          {
-            "date": "2026-05-18",
-            "label": "Lundi 18 mai 2026",
-            "formule": "LC",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Magret de Canard rôti, olives, tomates confites et herbes, Courgettes gratinées au Comté"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Poulet au Pesto Rosso, Butternut rôtie, Purée de Brocolis"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Rougail de Seiches, Achards de légumes, riz de chou fleur"
-              }
-            ],
-            "supplements": [
-              "Butternut rôtie",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-19",
-            "label": "Mardi 19 mai 2026",
-            "formule": "LC",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet de Mahi Mahi et Crevettes au Pesto Rosso, Gratin de Poireaux au Parmesan"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Boulettes de Veau crème au parmesan, Poêlée d'Aubergines, Purée de chou fleur"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mi Cuit de Thon Crème Citronnée, Poêlée de courgettes, Risotto de konjac aux champignons"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL :  Crevettes Riz de konjac au sésame Tomates, Aubergines marinées, Concombre, Salade Verte, Endives, Noix, Vinaigrette sauce Tahini"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Légumes Chop suey",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-20",
-            "label": "Mercredi 20 mai 2026",
-            "formule": "LC",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Tartare de Bœuf au Couteau à l'italienne (parmesan, basilic et tomates séchées), Escalivade (légumes du soleil marinés huile olive  herbes & câpres)"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Bami de Konjac au Poulet"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Mouclade (moules à la crème au curry), Epinards à l'ail , Perles de konjac safranées"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL : Tartare de Thon Jaune et Saumon Fumé   Riz de konjac au sésame Navets rôtis, Poivrons marinés, Betteraves, Salade Verte, Chou vert, Graines de courge, Sauce Cacahuètes"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Epinards à l'ail",
-              "Perles de konjac safranées",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-21",
-            "label": "Jeudi 21 mai 2026",
-            "formule": "LC",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet mignon de Porc Sauce au Comté, Gratin d'épinards"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Poulet Thai aux cacahuètes, Poivrons & Courgettes, Riz cantonais de konjac"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Roti de Thon mi-cuit en croûte de graines, Taboulé de chou fleur aux légumes citronnés"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL :  Tartare de Thon Jaune et Saumon Fumé, Riz de konjac au sésame, Papayes, Squash rôtie, Tomates, Salade Verte, EndivesOignons frits, Noix , Vinaigrette au curry"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-22",
-            "label": "Vendredi 22 mai 2026",
-            "formule": "LC",
-            "plats": [
-              {
-                "meal_time": "unknown",
-                "description": "GOURMET : Assiette de la mer (Crevettes, Tartare de Thon jaune, Rillettes de Thon & Saumon fumé), Escalivade, Riz de chou fleur"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Steak Haché de Bœuf aux lardons, Sauce Béarnaise, Riz de chou fleur"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "Pollo al Limone (Poulet citron à l'italienne), Aubergines, courgettes et poivrons grillés au balsamique, Riz de Konjac"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "POKE BOWL :  Tartare de Thon Jaune et Saumon Fumé, Riz de konjac au sésame, Carottes, Courgettes marinées à l'huile d'olive, Haricots verts , Salade Verte, Chou Vert, Mix de graines, Vinaigrette Thaï"
-              },
-              {
-                "meal_time": "unknown",
-                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
-              }
-            ],
-            "supplements": [
-              "Courgettes rôties",
-              "Riz de Konjac",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
           {
             "date": "2026-05-25",
             "label": "Lundi 25 mai 2026",
@@ -4538,7 +4355,7 @@
               },
               {
                 "meal_time": "unknown",
-                "description": "Mafé de Poulet mijoté à la sénégalaise, sauce onctueuse au beurre de cacahuètes, Squash rôtie, Riz de Konjac au coco"
+                "description": "Mafé de Poulet mijoté à la sénégalaise, sauce onctueuse au beurre de cacahuètes, Courgettes rôties, Riz de Konjac au coco"
               },
               {
                 "meal_time": "unknown",
@@ -4787,6 +4604,190 @@
               "Perrier 33 cl",
               "Eau Minérale Thonon 50cl"
             ]
+          },
+          {
+            "date": "2026-06-08",
+            "label": "Lundi 8 juin 2026",
+            "formule": "LC",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Tajine de Souris d'Agneau aux Olives, Légumes rôtis, Semoule de chou fleur"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Bœuf Bourguignon, Carottes, Tagliatelles de Konjac"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Poêlée de seiches persillade, Poêlée méridionale de tomates et poivrons, Riz de chou fleur"
+              }
+            ],
+            "supplements": [
+              "Carottes",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "label": "Mardi 9 juin 2026",
+            "formule": "LC",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Mi-cuit de Thon Jaune au Pesto Rosso, Croquettes d'épinards à la mozza, Risotto de konjac aux champignons"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Rougail de Poulet à la Créole, Achards de légumes et riz de konjac"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Boulettes de Thon Sauce au pesto, Légumes du soleil"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL :  Crevettes, Riz de konjac au sésame, Radis, Tomates, Poivrons rôtis marinés, Salade Verte, Endives, copeaux de parmesan, Graines de courge & Tournesol, Sauce crémeuse au sésame"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots Verts Persillés",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "label": "Mercredi 10 juin 2026",
+            "formule": "LC",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Pavé de Saumon à la gremolata, Haricots verts persillés, Riz de Konjac"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Escalope de Porc sauce Charcutière (Moutarde et cornichons), Haricots verts Persillés, Lamelles d'aubergines"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Boulettes de Poulet crème aux 3 fromages, Courgettes à l'ail, Tagliatelles de Konjac"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL : Saumon cru et avocat   Riz de konjac au sésame Betteraves, Concombre, Courgette grillée, Salade Verte, Chou Vert, Cacahuètes, Sauce crémeuse au Wasabi"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots verts Persillés",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "label": "Jeudi 11 juin 2026",
+            "formule": "LC",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Confit de Canard à l'ail en chemise, Poêlée d'asperges vertes , Purée aligot de chou fleur"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Boulettes de Veau Crème aux Champignons, Haricots verts persillés"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Sashimi de Thon , Salade de chou, Riz de Konjac"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL :  Saumon cru et avocat, Riz de konjac au sésame, Concombres, Aubergines grillées, Papaye verte râpée, Salade Verte, Chou Kalé, Graines de sésame, Sauce vinaigrette au curry"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Haricots verts persillés",
+              "Riz de Konjac",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-12",
+            "label": "Vendredi 12 juin 2026",
+            "formule": "LC",
+            "plats": [
+              {
+                "meal_time": "unknown",
+                "description": "GOURMET : Escalope de Poulet fermier au Pesto de noix, Palets de Brocolis au parmesan"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Saucisses à L'Italienne , Légumes du soleil rôtis"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "Curry vert Thaï de Thon et Marlin, Chop suey, Riz de Konjac"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "POKE BOWL :  Saumon cru et avocat, Riz de konjac au sésame, Fond d'artichaut, Carottes, Tomates, Salade Verte, Chou rouge,  Graines de Pavot, Sauce crémeuse au sésame"
+              },
+              {
+                "meal_time": "unknown",
+                "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
+              }
+            ],
+            "supplements": [
+              "Légumes rôtis",
+              "Riz de Konjac",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
           }
         ]
       },
@@ -4841,227 +4842,6 @@
       "menu": {
         "description": "Pour une alimentation adaptée à votre pratique sportive et à votre objectif physique.",
         "days": [
-          {
-            "date": "2026-05-18",
-            "label": "Lundi 18 mai 2026",
-            "formule": "SP",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Cassoulet  aux saucisses fumées"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Poulet au Pesto Rosso, Butternut rôtie, Polenta"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Rougail de Seiches, Achards de légumes & Squash au four, Riz blanc"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Poulet au Pesto Rosso, Purée de Brocolis"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Rougail de Seiches, Achards de légumes, riz de chou fleur"
-              },
-              {
-                "meal_time": "gourmet_midi",
-                "description": "Magret de Canard caramélisé, Sauce Miel et Balsamique, Haricots verts persillés, Purée de Pommes de Terre"
-              }
-            ],
-            "supplements": [
-              "Energy balls : Chocolat, Pruneaux, Abricots, Riz soufflé, Noix",
-              "Butternut rôtie",
-              "Riz blanc",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-19",
-            "label": "Mardi 19 mai 2026",
-            "formule": "SP",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Boulettes de Veau crème au parmesan, Poêlée d'Aubergines, Pâtes sans Gluten"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Poulet grillé aux sésames & Cacahuètes, Légumes Chop suey, Nouilles Chinoises (Sans Gluten)"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Mi Cuit de Thon Crème Citronnée, Poêlée de courgettes, Polenta"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Poulet grillé aux sésames & Cacahuètes, Légumes Chop suey"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Mi Cuit de Thon Crème Citronnée, Poêlée de courgettes"
-              },
-              {
-                "meal_time": "gourmet_soir",
-                "description": "Filet de Mahi Mahi et Crevettes au Pesto Rosso, Fondue de Poireaux"
-              }
-            ],
-            "supplements": [
-              "Energy balls : Chocolat, Pruneaux, Abricots, Riz soufflé, Noix",
-              "Légumes Chop suey",
-              "Polenta",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-20",
-            "label": "Mercredi 20 mai 2026",
-            "formule": "SP",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Blanquette de Veau, Carottes et champignons, Riz blanc"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Bami au Poulet"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Mouclade (moules à la crème au curry), Epinards à l'ail , Riz blanc"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Bami de Konjac au Poulet"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Mouclade (moules à la crème légère au curry), Epinards à l'ail , Perles de konjac safranées"
-              },
-              {
-                "meal_time": "gourmet_midi",
-                "description": "Tartare de Bœuf au Couteau à l'italienne (parmesan, basilic et tomates séchées), Escalivade (légumes du soleil marinés huile olive  herbes & câpres), Pommes de terre aux herbes"
-              }
-            ],
-            "supplements": [
-              "Energy balls : Chocolat, Pruneaux, Abricots, Riz soufflé, Noix",
-              "Epinards à l'ail",
-              "Riz blanc",
-              "Perles de konjac safranées",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-21",
-            "label": "Jeudi 21 mai 2026",
-            "formule": "SP",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Sauté de veau à l'Espagnole (au chorizo & Olives), Légumes du soleil rôtis, Pâtes sans gluten"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Poulet Thai aux cacahuètes, Poivrons & Courgettes, Riz Sauté"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Roti de Thon mi-cuit en croûte de graines, Salade de chou et carottes, Houmous méditerranéen aux tomates et olives"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Poulet Thai aux cacahuètes, Poivrons & Courgettes"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Roti de Thon mi-cuit en croûte de graines, Taboulé de chou fleur aux légumes citronnés"
-              },
-              {
-                "meal_time": "gourmet_midi",
-                "description": "Filet mignon de Porc Sauce au Comté, Haricots verts persillés, Gratin Dauphinois"
-              }
-            ],
-            "supplements": [
-              "Energy balls : Chocolat, Pruneaux, Abricots, Riz soufflé, Noix",
-              "Riz Sauté",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
-          {
-            "date": "2026-05-22",
-            "label": "Vendredi 22 mai 2026",
-            "formule": "SP",
-            "plats": [
-              {
-                "meal_time": "midi",
-                "description": "Steak Haché de Bœuf aux lardons, Sauce Béarnaise, Courgettes rôties, Purée de pois cassés"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Pollo al Limone (Poulet citron à l'italienne), Aubergines, courgettes et poivrons grillés au balsamique, Risotto"
-              },
-              {
-                "meal_time": "midi",
-                "description": "Blanquette de Thon et Marlin, Carottes et Champignons, Riz Blanc"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Pollo al Limone (Poulet citron à l'italienne), Aubergines, courgettes et poivrons grillés au balsamique"
-              },
-              {
-                "meal_time": "soir",
-                "description": "Blanquette de Thon et Marlin, Carottes et Champignons, Riz de Konjac"
-              },
-              {
-                "meal_time": "gourmet_soir",
-                "description": "Assiette de la mer (Crevettes, Tartare de Thon jaune, Rillettes de Thon & Saumon fumé), Escalivade"
-              }
-            ],
-            "supplements": [
-              "Energy balls : Chocolat, Pruneaux, Abricots, Riz soufflé, Noix",
-              "Courgettes rôties",
-              "Purée de pois cassés",
-              "Riz de Konjac",
-              "Pain Sans Gluten / Keto"
-            ],
-            "boissons": [
-              "Perrier Forever Fraise 25cl (Sans sucre)",
-              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
-              "Perrier Forever Citron Vert 25cl (Sans sucre)",
-              "Perrier 33 cl",
-              "Eau Minérale Thonon 50cl"
-            ]
-          },
           {
             "date": "2026-05-25",
             "label": "Lundi 25 mai 2026",
@@ -5121,7 +4901,7 @@
               },
               {
                 "meal_time": "midi",
-                "description": "Mi cuit de Thon doré au Curry et Gingembre, Tian de légumes, Petites fèves à la crème aux herbes"
+                "description": "Mi cuit de Thon doré au Curry et Gingembre, Tian de légumes, Flageolets à la crème aux herbes"
               },
               {
                 "meal_time": "soir",
@@ -5139,7 +4919,7 @@
             "supplements": [
               "Energy balls : Pruneaux, Chocolat, amandes, miel et riz soufflé",
               "Carottes braisées",
-              "Petites fèves à la crème aux herbes",
+              "Flageolets à la crème aux herbes",
               "Pain Sans Gluten / Keto"
             ],
             "boissons": [
@@ -5206,7 +4986,7 @@
               },
               {
                 "meal_time": "midi",
-                "description": "Mafé de Poulet mijoté à la sénégalaise, sauce onctueuse au beurre de cacahuètes, Squash rôtie, Riz au coco"
+                "description": "Mafé de Poulet mijoté à la sénégalaise, sauce onctueuse au beurre de cacahuètes, Courgettes rôties, Riz au coco"
               },
               {
                 "meal_time": "midi",
@@ -5214,7 +4994,7 @@
               },
               {
                 "meal_time": "soir",
-                "description": "Mafé de Poulet mijoté à la sénégalaise, sauce onctueuse au beurre de cacahuètes, Squash rôtie, Riz de Konjac au coco"
+                "description": "Mafé de Poulet mijoté à la sénégalaise, sauce onctueuse au beurre de cacahuètes, Courgettes rôties, Riz de Konjac au coco"
               },
               {
                 "meal_time": "soir",
@@ -5496,6 +5276,227 @@
               "Energy balls : Pruneaux, Chocolat, amandes, miel et riz soufflé",
               "Carottes & champignons",
               "Polenta",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-08",
+            "label": "Lundi 8 juin 2026",
+            "formule": "SP",
+            "plats": [
+              {
+                "meal_time": "midi",
+                "description": "Bœuf Bourguignon, Carottes, Pates sans gluten"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Poulet Crème au Parmesan, Courgettes grillées, Polenta"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Poêlée de seiches persillade, Poêlée méridionale de tomates et poivrons, Riz Blanc"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Poêlée de seiches persillade, Poêlée méridionale de tomates et poivrons, Tagliatelles de Konjac"
+              },
+              {
+                "meal_time": "gourmet_midi",
+                "description": "Tajine de Souris d'Agneau aux Olives, Légumes rôtis, Quinoa aux raisins secs"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Poulet crème légère moutardée à l'estragon, Courgettes grillées"
+              }
+            ],
+            "supplements": [
+              "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Carottes",
+              "Riz Blanc",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "label": "Mardi 9 juin 2026",
+            "formule": "SP",
+            "plats": [
+              {
+                "meal_time": "midi",
+                "description": "Escalopes de Veau au  citron & câpres, façon piccata, Courgettes à l'ail, Pommes Grenaille rôties"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Rougail de Poulet à la Créole, Achards de légumes & Squash, Riz blanc"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Boulettes de Thon Sauce au pesto, Haricots Verts Persillés, Purée de Pommes de terre"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Rougail de Poulet à la Créole, Achards de légumes et riz de konjac"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Boulettes de Thon Sauce au pesto, Légumes du soleil"
+              },
+              {
+                "meal_time": "gourmet_soir",
+                "description": "Mi-cuit de Thon Jaune au Pesto Rosso, Caviar de légumes méditerranéens"
+              }
+            ],
+            "supplements": [
+              "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Haricots Verts Persillés",
+              "Riz blanc",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "label": "Mercredi 10 juin 2026",
+            "formule": "SP",
+            "plats": [
+              {
+                "meal_time": "midi",
+                "description": "Escalope de Porc sauce Charcutière (Moutarde et cornichons), Haricots verts Persillés, Purée de Pommes de terre"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Boulettes de Poulet crème aux 3 fromages, Carottes Vichy, Pates sans gluten"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Mi Cuit de Thon et son aïoli Maison, Lamelles d'aubergines Fondante, Risotto"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Boulettes de Poulet crème légère au Poivre, Carottes Vichy"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Mi Cuit de Thon et son aïoli Maison, Lamelles d'aubergines Fondante"
+              },
+              {
+                "meal_time": "gourmet_soir",
+                "description": "Pavé de Saumon à la gremolata, Haricots verts persillés, Riz de Konjac"
+              }
+            ],
+            "supplements": [
+              "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Haricots verts Persillés",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "label": "Jeudi 11 juin 2026",
+            "formule": "SP",
+            "plats": [
+              {
+                "meal_time": "midi",
+                "description": "Boulettes de Veau Crème aux Champignons, Haricots verts persillés, Polenta gratinée"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Poulet Madras aux raisins secs (curry indien aux épices douces, au lait de coco), Chou fleur rôti , Dahl de lentilles"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Sashimi de Thon , Salade de chou, Riz au sésame"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Poulet Madras (curry indien aux épices douces, au lait de coco), Chou fleur rôti"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Sashimi de Thon , Salade de chou, Riz de Konjac"
+              },
+              {
+                "meal_time": "gourmet_midi",
+                "description": "Confit de Canard à l'ail en chemise, Poêlée d'asperges vertes , Purée Aligot"
+              }
+            ],
+            "supplements": [
+              "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Haricots verts persillés",
+              "Riz blanc",
+              "Riz de Konjac",
+              "Pain Sans Gluten / Keto"
+            ],
+            "boissons": [
+              "Perrier Forever Fraise 25cl (Sans sucre)",
+              "Perrier Forever Citron Gingembre 25cl (Sans sucre)",
+              "Perrier Forever Citron Vert 25cl (Sans sucre)",
+              "Perrier 33 cl",
+              "Eau Minérale Thonon 50cl"
+            ]
+          },
+          {
+            "date": "2026-06-12",
+            "label": "Vendredi 12 juin 2026",
+            "formule": "SP",
+            "plats": [
+              {
+                "meal_time": "midi",
+                "description": "Saucisses à L'Italienne, Légumes du soleil rôtis, Purée de Pommes de Terre"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Tajine de Poulet aux Olives, Légumes rôtis, Quinoa"
+              },
+              {
+                "meal_time": "midi",
+                "description": "Curry vert Thaï de Thon et Marlin, Chop suey, Riz blanc"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Tajine de Poulet aux Olives, Légumes rôtis"
+              },
+              {
+                "meal_time": "soir",
+                "description": "Curry vert Thaï de Thon et Marlin, Chop suey"
+              },
+              {
+                "meal_time": "gourmet_midi",
+                "description": "Escalope de Poulet fermier au Pesto de noix, Palets de Brocolis au parmesan, Polenta Gratinée"
+              }
+            ],
+            "supplements": [
+              "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Légumes rôtis",
+              "Riz blanc",
+              "Riz de Konjac",
               "Pain Sans Gluten / Keto"
             ],
             "boissons": [
