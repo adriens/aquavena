@@ -112,27 +112,11 @@ function formatDate(dateStr: string): string {
 
   <!-- Header -->
   <header class="sticky top-0 z-50 bg-teal-700 text-white shadow-md">
-    <div class="mx-auto max-w-4xl px-4 py-3 space-y-2">
-      <div class="flex items-center justify-between gap-3 flex-wrap">
-        <h1 class="text-lg font-bold leading-tight">
-          <i class="fa-solid fa-eye-low-vision mr-2 text-teal-200"></i>Aquavena
-        </h1>
-        <div class="no-print flex items-center gap-2">
-          <button id="btn-font-down" aria-label="Réduire la taille du texte"
-            class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm font-bold hover:bg-teal-600">A−</button>
-          <button id="btn-font-up" aria-label="Agrandir la taille du texte"
-            class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-base font-bold hover:bg-teal-600">A+</button>
-          <button id="btn-dark" aria-label="Basculer mode nuit"
-            class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm hover:bg-teal-600">
-            <i class="fa-solid fa-moon" id="dark-icon"></i>
-          </button>
-          <a href="/aquavena/about/" aria-label="À propos de ce site"
-            class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm hover:bg-teal-600">
-            <i class="fa-solid fa-circle-question"></i>
-          </a>
-        </div>
-      </div>
-      <div role="search" class="no-print relative">
+    <div class="mx-auto max-w-4xl px-4 py-3 flex items-center gap-3">
+      <h1 class="text-lg font-bold leading-tight shrink-0">
+        <i class="fa-solid fa-eye-low-vision mr-2 text-teal-200"></i>Aquavena
+      </h1>
+      <div role="search" class="no-print relative flex-1">
         <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-teal-200"></i>
         <input id="search-input" type="search" placeholder="Rechercher un plat… (Ctrl+K)"
           aria-label="Rechercher un plat dans les menus"
@@ -140,11 +124,25 @@ function formatDate(dateStr: string): string {
         <div id="search-results" class="absolute left-0 right-0 top-full z-50 mt-1 hidden space-y-2 rounded-xl p-2"
           style="background: var(--bg-card); border: 2px solid var(--border)"></div>
       </div>
+      <div class="no-print flex items-center gap-2 shrink-0">
+        <button id="btn-font-down" aria-label="Réduire la taille du texte"
+          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm font-bold hover:bg-teal-600">A−</button>
+        <button id="btn-font-up" aria-label="Agrandir la taille du texte"
+          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-base font-bold hover:bg-teal-600">A+</button>
+        <button id="btn-dark" aria-label="Basculer mode nuit"
+          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm hover:bg-teal-600">
+          <i class="fa-solid fa-moon" id="dark-icon"></i>
+        </button>
+        <a href="/aquavena/about/" aria-label="À propos de ce site"
+          class="rounded-lg border border-teal-500 bg-teal-800 px-3 py-1 text-sm hover:bg-teal-600">
+          <i class="fa-solid fa-circle-question"></i>
+        </a>
+      </div>
     </div>
   </header>
 
   <!-- Regime tabs -->
-  <nav class="no-print tabs nav-bg sticky top-24 z-40 overflow-x-auto border-b-2" aria-label="Régimes alimentaires">
+  <nav class="no-print tabs nav-bg sticky top-16 z-40 overflow-x-auto border-b-2" aria-label="Régimes alimentaires">
     <div class="flex min-w-max">
       {regimes.map((r: any) => (
         <button
