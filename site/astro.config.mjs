@@ -1,5 +1,5 @@
 import { defineConfig, fontProviders } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import VitePWA from '@vite-pwa/astro';
 
 export default defineConfig({
@@ -25,8 +25,10 @@ export default defineConfig({
     name: 'Atkinson Hyperlegible',
     cssVariable: '--font-atkinson',
   }],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   integrations: [
-    tailwind(),
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
