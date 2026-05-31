@@ -408,6 +408,90 @@ def main() -> None:
     plt.close(fig_art)
     print(f"  → {cover_png}", file=sys.stderr)
 
+    # ── Cluster-split small multiples (6 panels, same pos_art layout) ────
+    print("Rendering cluster-split panels ...", file=sys.stderr)
+    node_list = list(G.nodes())
+    all_xs = [pos_art[i][0] for i in node_list]
+    all_ys = [pos_art[i][1] for i in node_list]
+    pad_x  = (max(all_xs) - min(all_xs)) * 0.05
+    pad_y  = (max(all_ys) - min(all_ys)) * 0.05
+    xlim   = (min(all_xs) - pad_x, max(all_xs) + pad_x)
+    ylim   = (min(all_ys) - pad_y, max(all_ys) + pad_y)
+
+    pr_cl  = np.array([commits[i]["pagerank"] for i in node_list])
+    nsf_cl = (np.argsort(np.argsort(pr_cl)) / max(1, len(pr_cl) - 1)) ** 1.6
+
+    ncols  = 3
+    cl_ids = sorted({c["cluster"] for c in commits})
+    n_cl   = len(cl_ids)
+    nrows  = (n_cl + ncols - 1) // ncols
+
+    fig_cl, axes = plt.subplots(nrows, ncols,
+                                figsize=(ncols * 4.4, nrows * 4.4),
+                                facecolor=BG)
+    axes_flat = np.array(axes).flatten()
+
+    for panel_idx, cl_id in enumerate(cl_ids):
+        ax = axes_flat[panel_idx]
+        ax.set_facecolor(BG)
+        cl_color = luminescent.get(cl_id, "#cbd5e1")
+
+        # Edges: intra-cluster bright, bridge subtle, off-cluster near-invisible
+        for u, v, d in G.edges(data=True):
+            cu, cv = commits[u]["cluster"], commits[v]["cluster"]
+            xe = [pos_art[u][0], pos_art[v][0]]
+            ye = [pos_art[u][1], pos_art[v][1]]
+            if cu == cl_id and cv == cl_id:
+                ax.plot(xe, ye, color=cl_color, alpha=0.38, linewidth=0.65, zorder=1)
+            elif cu == cl_id or cv == cl_id:
+                ax.plot(xe, ye, color="#94a3b8", alpha=0.14, linewidth=0.30, zorder=1)
+            else:
+                ax.plot(xe, ye, color="#334155", alpha=0.05, linewidth=0.18, zorder=1)
+
+        # Nodes: full glow for this cluster, tiny grey for others
+        for k, i in enumerate(node_list):
+            c    = commits[i]
+            x, y = pos_art[i]
+            f    = float(nsf_cl[k])
+            if c["cluster"] == cl_id:
+                core_s = 14 + 1600 * f
+                ax.scatter(x, y, s=core_s * 9.0, color=cl_color, alpha=0.10, edgecolors="none", zorder=2)
+                ax.scatter(x, y, s=core_s * 3.0, color=cl_color, alpha=0.22, edgecolors="none", zorder=3)
+                ax.scatter(x, y, s=core_s,        color=cl_color, alpha=0.98,
+                           edgecolors="white", linewidths=0.5, zorder=4)
+            else:
+                ax.scatter(x, y, s=6, color="#334155", alpha=0.40, edgecolors="none", zorder=2)
+
+        # Anchor label (commit closest to cluster centroid)
+        anchor = anchors_per_cluster.get(cl_id)
+        if anchor:
+            a_node = next((i for i in node_list if commits[i]["sha"] == anchor["sha"]), None)
+            if a_node is not None:
+                lbl = anchor["subject"][:34] + ("…" if len(anchor["subject"]) > 34 else "")
+                ax.annotate(lbl, xy=pos_art[a_node],
+                            xytext=(6, 5), textcoords="offset points",
+                            fontsize=5.0, color="white",
+                            bbox=dict(boxstyle="round,pad=0.15", fc="#1e293b",
+                                      ec=cl_color, lw=0.5, alpha=0.90), zorder=5)
+
+        cl_info   = next((ci for ci in clusters_info if ci["id"] == cl_id), None)
+        top_terms = " · ".join(cl_info["terms"][:2]) if cl_info else ""
+        ax.set_title(f"C{cl_id}  {top_terms}", fontsize=7.5, fontweight="bold",
+                     color=cl_color, pad=4)
+        ax.set_xticks([]); ax.set_yticks([])
+        for spine in ax.spines.values(): spine.set_visible(False)
+        ax.set_xlim(*xlim); ax.set_ylim(*ylim)
+
+    for j in range(n_cl, len(axes_flat)):
+        axes_flat[j].set_visible(False)
+
+    fig_cl.tight_layout(pad=0.6)
+    clusters_png = Path(__file__).resolve().parents[1] / "quarto" / "commit_graph_clusters.png"
+    fig_cl.savefig(clusters_png, dpi=200, bbox_inches="tight",
+                   facecolor=BG, edgecolor="none", pad_inches=0.15)
+    plt.close(fig_cl)
+    print(f"  → {clusters_png}", file=sys.stderr)
+
     # ── Export to GEXF for Gephi ─────────────────────────────────────────
     print("Writing Gephi-ready GEXF ...", file=sys.stderr)
     # GEXF rejects None — sanitise everything to strings/numbers

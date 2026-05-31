@@ -1733,6 +1733,8 @@ Gephi without re-running the pipeline.
 
 ![Commit-similarity graph — **ForceAtlas2** layout (Gephi native algorithm, `fa2-modified` port, 1 400 iterations) · node colour = semantic cluster · node size = PageRank (percentile-scaled, ≈80× area ratio) · edges = cosine similarity ≥ 0.55](commit_graph_cover.png){width=92% fig-align="center"}
 
+![Cluster-split view — same ForceAtlas2 positions as above · each panel spotlights one semantic cluster (full glow) while the rest fade to grey · intra-cluster edges are coloured, bridge edges are muted · anchor label = commit closest to centroid](commit_graph_clusters.png){width=100% fig-align="center"}
+
 ```{r anchors-bridges}
 anchors <- dbGetQuery(con, "
   WITH ranked AS (
