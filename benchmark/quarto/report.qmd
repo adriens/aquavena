@@ -4134,6 +4134,15 @@ applied instantiation of broader design-thinking principles. The reference
 below is a foundational reading for anyone wanting to combine **human-centered
 design** with engineering discipline:
 
+- Sinek, Simon. *Start With Why: How Great Leaders Inspire Everyone to Take
+  Action*. Portfolio/Penguin, 2009.
+  ISBN 978-1-59184-280-4. URL: \href{https://www.goodreads.com/book/show/7108725-start-with-why}{\texttt{goodreads.com/book/show/7108725}}.
+  *— The WHY behind Aquavena is simple and personal: a family member with low
+  vision struggling with an inaccessible site. Sinek's central argument — that
+  purpose-driven action outlasts motivation-driven action — is what turned a
+  weekend observation into a published pipeline. The report you are reading is
+  the HOW and WHAT; this book is the reason the WHY was worth pursuing.*
+
 - Brown, Tim. *Change by Design: How Design Thinking Transforms Organizations
   and Inspires Innovation*. Harper Business, 2009.
   ISBN 978-0-06-176608-4. URL: \href{https://www.goodreads.com/book/show/6671664-change-by-design}{\texttt{goodreads.com/book/show/6671664}}.
