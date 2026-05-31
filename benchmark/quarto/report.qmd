@@ -989,7 +989,7 @@ accessible front door to a service my mother loves.
 
 This dashboard reads directly from `benchmark.duckdb` at render time and produces
 the KPIs most relevant to a delivery committee: classical **EVM** (Earned Value
-Management), modern **DORA** elite-performance indicators, the **WCAG defect
+Management), modern **DORA** (DevOps Research and Assessment) elite-performance indicators, the **WCAG defect
 burndown**, the **sprint velocity** profile, and the **strategic gap** between our
 work and the source site. Nothing in the charts below is hardcoded — every figure
 is computed live from the six FK-linked tables described in the appendix. Re-running
@@ -1260,6 +1260,12 @@ ggplot(vel, aes(x = idx)) +
 ```
 
 ## DORA metrics — elite performance
+
+The **DORA** acronym used throughout this report stands for **DevOps Research
+and Assessment** — the Google research programme that defines the four key
+software-delivery metrics (Deployment Frequency, Lead Time for Changes, Change
+Failure Rate, MTTR). This is distinct from the EU financial regulation of the
+same acronym (Digital Operational Resilience Act, 2022/2554).
 
 The DORA metrics (DevOps Research and Assessment) are computed from the timestamps
 stored in `gh_releases.published_at_ts` and from the `ci_runs` table.
@@ -1807,9 +1813,8 @@ The metadata already lived in every commit message — the pipeline simply
 reads it. This is the core argument for conventional commits: they turn git
 history into a queryable KPI source with zero developer overhead.
 
-```{r retro-gantt, fig.height=5.2, fig.width=7.0, fig.align="center"}
-# BUILD = feat: commits + docs(benchmark): (the report is a deliverable)
-# RUN   = everything else: fix:, style:, chore:, ci:, refactor:, other docs:
+```{r retro-gantt, fig.height=3.8, fig.width=7.0, fig.align="center"}
+# BUILD = feat: + docs(benchmark):  |  RUN = everything else
 commits_br <- dbGetQuery(con, "
   SELECT gc.git_sha, gc.commit_ts,
          cc.commit_type,
@@ -1827,14 +1832,14 @@ commits_br$commit_ts <- as.POSIXct(commits_br$commit_ts, tz = "UTC")
 attr(commits_br$commit_ts, "tzone") <- "Pacific/Noumea"
 commits_br$activity <- factor(commits_br$activity, levels = c("BUILD", "RUN"))
 
-# Time-spent per commit: gap since previous commit across ALL commits, capped at 30 min.
-GAP_CAP <- 30L * 60L
-ord     <- order(commits_br$commit_ts)
-gaps    <- c(0L, pmin(as.integer(diff(commits_br$commit_ts[ord]), units = "secs"), GAP_CAP))
-commits_br$time_secs           <- 0L
-commits_br$time_secs[ord]      <- gaps
+# Time-spent: inter-commit gap capped at 30 min, attributed to each commit
+GAP_CAP  <- 30L * 60L
+ord      <- order(commits_br$commit_ts)
+gaps     <- c(0L, pmin(as.integer(diff(commits_br$commit_ts[ord]), units = "secs"), GAP_CAP))
+commits_br$time_secs      <- 0L
+commits_br$time_secs[ord] <- gaps
 
-# 2-hour intensity bins
+# 2-hour bins; RUN bars go negative (mirror chart)
 BIN_SECS <- 2L * 3600L
 commits_br$time_bin <- as.POSIXct(
   floor(as.numeric(commits_br$commit_ts) / BIN_SECS) * BIN_SECS,
@@ -1842,56 +1847,81 @@ commits_br$time_bin <- as.POSIXct(
 )
 intensity <- commits_br |>
   dplyr::group_by(activity, time_bin) |>
-  dplyr::summarise(active_min = sum(time_secs) / 60, .groups = "drop")
+  dplyr::summarise(active_min = sum(time_secs) / 60, .groups = "drop") |>
+  dplyr::mutate(active_signed = ifelse(activity == "BUILD", active_min, -active_min))
 
-# Release markers
+# Sequential bin index — removes empty days between bursts
+all_bins   <- sort(unique(intensity$time_bin))
+n_bins     <- length(all_bins)
+bin_to_idx <- setNames(seq_len(n_bins), as.character(all_bins))
+intensity$bin_idx <- bin_to_idx[as.character(intensity$time_bin)]
+
+# Map any timestamp to the nearest active bin index
+ts_to_idx <- function(ts) {
+  vapply(ts, function(t)
+    which.min(abs(as.numeric(difftime(t, all_bins, units = "secs")))),
+    integer(1))
+}
+
+# X-axis: one label per calendar day (at its first active bin)
+bin_dates     <- as.Date(all_bins)
+day_first_idx <- which(!duplicated(bin_dates))
+x_brk <- day_first_idx
+x_lbl <- format(all_bins[day_first_idx], "%d %b")
+
+# Summary totals for direct labels
+totals <- commits_br |>
+  dplyr::group_by(activity) |>
+  dplyr::summarise(total_min = round(sum(time_secs) / 60), .groups = "drop")
+build_min <- totals$total_min[totals$activity == "BUILD"]
+run_min   <- totals$total_min[totals$activity == "RUN"]
+
+# Releases mapped to bin indices
 releases_br <- dbGetQuery(con,
   "SELECT tag, published_at_ts FROM gh_releases ORDER BY published_at_ts")
 releases_br$published_at_ts <- as.POSIXct(releases_br$published_at_ts, tz = "UTC")
 attr(releases_br$published_at_ts, "tzone") <- "Pacific/Noumea"
+releases_br$bin_idx <- ts_to_idx(releases_br$published_at_ts)
 
-type_pal <- c(feat = "#0f766e", fix = "#dc2626", style = "#f59e0b",
-              chore = "#9ca3af", docs = "#0891b2", ci = "#7c3aed",
-              refactor = "#db2777")
+key_tags <- c("v0.1.1", "v0.1.5", "v1.4.0", "v1.7.0", "v1.12.0", "v1.14.0")
+releases_key <- releases_br[releases_br$tag %in% key_tags, ]
+releases_key <- releases_key[order(releases_key$bin_idx), ]
+# Alternating heights to avoid label overlap
+releases_key$y_mult <- ifelse(seq_len(nrow(releases_key)) %% 2 == 1, 1.08, 1.22)
+
 swim_pal <- c(BUILD = "#0f766e", RUN = "#dc2626")
+y_max    <- max(intensity$active_min, na.rm = TRUE)
 
 ggplot() +
   geom_col(data = intensity,
-           aes(x = time_bin, y = active_min, fill = activity),
-           width = BIN_SECS * 0.82, alpha = 0.55) +
+           aes(x = bin_idx, y = active_signed, fill = activity),
+           width = 0.80, alpha = 0.65) +
+  geom_hline(yintercept = 0, colour = "#64748b", linewidth = 0.4) +
   geom_vline(data = releases_br,
-             aes(xintercept = published_at_ts),
-             linetype = "dashed", colour = "#64748b",
-             alpha = 0.50, linewidth = 0.28) +
-  geom_rug(data = commits_br,
-           aes(x = commit_ts, colour = commit_type),
-           sides = "b", linewidth = 0.85,
-           length = unit(0.07, "npc"), alpha = 0.85) +
-  geom_text(data = releases_br,
-            aes(x = published_at_ts, y = Inf, label = tag),
-            angle = 60, hjust = 0, vjust = 0.5,
-            size = 1.9, colour = "#475569", fontface = "bold",
-            inherit.aes = FALSE) +
+             aes(xintercept = bin_idx),
+             linetype = "dashed", colour = "#94a3b8",
+             alpha = 0.38, linewidth = 0.20) +
+  geom_text(data = releases_key,
+            aes(x = bin_idx, y = y_max * y_mult, label = tag),
+            size = 2.1, colour = "#475569", fontface = "bold", hjust = 0.5) +
+  annotate("text", x = -1.8,
+           y =  y_max * 0.52, label = sprintf("BUILD\n%d min", build_min),
+           size = 2.5, colour = "#0f766e", fontface = "bold", hjust = 1) +
+  annotate("text", x = -1.8,
+           y = -y_max * 0.52, label = sprintf("RUN\n%d min", run_min),
+           size = 2.5, colour = "#dc2626", fontface = "bold", hjust = 1) +
   scale_fill_manual(values = swim_pal, guide = "none") +
-  scale_colour_manual(values = type_pal, name = NULL,
-                      guide = guide_legend(nrow = 1,
-                                           keywidth  = unit(0.55, "cm"),
-                                           keyheight = unit(0.35, "cm"))) +
-  facet_grid(activity ~ ., scales = "free_y") +
-  scale_x_datetime(date_breaks = "1 day", date_labels = "%a %d %b",
-                   expand = expansion(mult = c(0.01, 0.06))) +
+  scale_x_continuous(breaks = x_brk, labels = x_lbl,
+                     expand = expansion(add = c(4, 1))) +
+  scale_y_continuous(labels = abs, name = "active min") +
   coord_cartesian(clip = "off") +
-  labs(title = "BUILD vs RUN — hackathon intensity over time",
-       subtitle = paste0("BUILD = feat: + docs(benchmark): · RUN = fix:/style:/chore:/ci: · ",
-                         "bars = active minutes per 2 h window · rug = individual commits"),
-       x = NULL, y = "active minutes") +
+  labs(title = "BUILD vs RUN — hackathon intensity",
+       subtitle = "↑ BUILD (feat + report)  ·  ↓ RUN (fix/style/chore)  ·  bars = active min per 2 h  ·  dashed = releases",
+       x = NULL) +
   theme_minimal(base_size = 9) +
   theme(panel.grid.minor   = element_blank(),
         panel.grid.major.x = element_blank(),
-        strip.text  = element_text(face = "bold", size = 9),
-        legend.position = "bottom",
-        plot.margin = margin(30, 10, 6, 6),
-        axis.text.x = element_text(angle = 40, hjust = 1))
+        plot.margin = margin(42, 6, 4, 52))
 ```
 
 **Reading the chart.** Each bar is the sum of time-spent (inter-commit gaps
