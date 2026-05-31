@@ -6,6 +6,20 @@ export default defineConfig({
   site: 'https://adriens.github.io',
   base: '/aquavena',
   output: 'static',
+  security: {
+    csp: {
+      algorithm: 'SHA-256',
+      directives: [
+        "default-src 'self'",
+        "font-src 'self' https://cdnjs.cloudflare.com",
+        "img-src 'self' data:",
+        "worker-src 'self'",
+      ],
+      styleDirective: {
+        resources: ["'self'", "https://cdnjs.cloudflare.com"],
+      },
+    },
+  },
   fonts: [{
     provider: fontProviders.google(),
     name: 'Atkinson Hyperlegible',
