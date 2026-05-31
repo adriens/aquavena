@@ -1731,7 +1731,7 @@ degree, type, scope, timestamp) and edge weights, so the graph can be
 explored interactively (ForceAtlas2 layout, community detection, etc.) in
 Gephi without re-running the pipeline.
 
-![Commit-similarity graph — **ForceAtlas2** layout (Gephi's native algorithm, `fa2-modified` port) · node colour = cluster · node size = PageRank (normalised, ≈20× ratio) · edges = cosine similarity ≥ 0.55](commit_graph.png){width=92% fig-align="center"}
+![Commit-similarity graph — **ForceAtlas2** layout (Gephi native algorithm, `fa2-modified` port, 1 400 iterations) · node colour = semantic cluster · node size = PageRank (percentile-scaled, ≈80× area ratio) · edges = cosine similarity ≥ 0.55](commit_graph_cover.png){width=92% fig-align="center"}
 
 ```{r anchors-bridges}
 anchors <- dbGetQuery(con, "
