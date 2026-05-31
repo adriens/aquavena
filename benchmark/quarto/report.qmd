@@ -1491,11 +1491,9 @@ for (s in unique(tag_rows$session)) {
 }
 apport <- dplyr::bind_rows(apport)
 
-# Derive chronological tag order from commit timestamps (avoids hardcoded list → no NA)
-tag_chron <- tag_rows |>
-  dplyr::distinct(tag, commit_ts) |>
-  dplyr::arrange(commit_ts) |>
-  dplyr::pull(tag)
+# Derive tag order by semantic version using package_version() — handles multi-digit minors
+tags_unique <- unique(tag_rows$tag)
+tag_chron   <- tags_unique[order(package_version(sub("^v", "", tags_unique)))]
 apport$tag <- factor(apport$tag, levels = tag_chron)
 
 # Cumulative tokens per tag (summed across models), in chronological order
@@ -1535,10 +1533,16 @@ p <- ggplot() +
   geom_point(data = cum_df,
              aes(x = tag, y = cumulative / 1e6 * scale_fac),
              colour = "#f59e0b", size = 2.2) +
-  geom_text(data = cum_df,
+  ggrepel::geom_text_repel(
+            data = cum_df,
             aes(x = tag, y = cumulative / 1e6 * scale_fac,
                 label = paste0(sprintf("%.0f", cumulative / 1e6), "M")),
-            colour = "#92400e", size = 2.4, fontface = "bold", vjust = -1) +
+            colour = "#92400e", size = 2.2, fontface = "bold",
+            nudge_y = max_bar * 0.08,
+            direction = "x", segment.size = 0.3,
+            segment.colour = "#d97706", min.segment.length = 0.2,
+            max.overlaps = Inf) +
+  scale_x_discrete(limits = tag_chron) +
   scale_fill_manual(values = c(
     "claude-opus-4-7"   = "#7c3aed",
     "claude-sonnet-4-6" = "#0f766e"
