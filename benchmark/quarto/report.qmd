@@ -1279,6 +1279,15 @@ cat("```{=latex}
 DORA 2023 Elite tier: on-demand deploys, lead time < 1\,h.
 \end{center}
 
+\begin{center}
+\begin{minipage}{0.82\textwidth}
+\small\color{gray!60!black}
+\textbf{Lead Time for Changes} — time between consecutive releases (commit merged → live on GitHub Pages).
+Measured here as the median gap between release timestamps.
+A short lead time means fixes and features reach users quickly.
+\end{minipage}
+\end{center}
+
 ## Development activity heatmap
 
 Every commit from `git_commits.commit_ts` (converted to **Pacific/Noumea local
