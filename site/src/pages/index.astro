@@ -178,8 +178,8 @@ function formatDate(dateStr: string): string {
 
           {days.length > 0 && (
             <button class="speak-week-btn mb-5 flex items-center gap-2 rounded-xl bg-teal-700 px-5 py-3 text-lg font-bold text-white shadow hover:bg-teal-800 transition-colors"
-              aria-label="Lire toute la semaine à voix haute">
-              <i class="fa-solid fa-volume-high"></i>Lire toute la semaine
+              aria-label="Lire semaine à voix haute">
+              <i class="fa-solid fa-volume-high"></i>Lire semaine
             </button>
           )}
 
@@ -438,12 +438,12 @@ function formatDate(dateStr: string): string {
       });
     });
 
-    // "Lire toute la semaine"
+    // "Lire semaine"
     function speakWeek(btn) {
       if (!window.speechSynthesis) return;
       if (window.speechSynthesis.speaking) {
         window.speechSynthesis.cancel();
-        btn.innerHTML = '<i class="fa-solid fa-volume-high"></i>Lire toute la semaine';
+        btn.innerHTML = '<i class="fa-solid fa-volume-high"></i>Lire semaine';
         btn.disabled = false;
         if (activeSpeakBtn) { activeSpeakBtn.innerHTML = '<i class="fa-solid fa-volume-high mr-1"></i>Lire'; activeSpeakBtn = null; }
         return;
@@ -456,7 +456,7 @@ function formatDate(dateStr: string): string {
       let i = 0;
       function next() {
         if (i >= texts.length) {
-          btn.innerHTML = '<i class="fa-solid fa-volume-high"></i>Lire toute la semaine';
+          btn.innerHTML = '<i class="fa-solid fa-volume-high"></i>Lire semaine';
           return;
         }
         const utter = new SpeechSynthesisUtterance(texts[i++]);
@@ -466,7 +466,7 @@ function formatDate(dateStr: string): string {
         const frVoice = voices.find(v => v.lang.startsWith('fr'));
         if (frVoice) utter.voice = frVoice;
         utter.onend = next;
-        utter.onerror = () => { btn.innerHTML = '<i class="fa-solid fa-volume-high"></i>Lire toute la semaine'; };
+        utter.onerror = () => { btn.innerHTML = '<i class="fa-solid fa-volume-high"></i>Lire semaine'; };
         window.speechSynthesis.speak(utter);
       }
       next();
