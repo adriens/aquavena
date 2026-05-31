@@ -1,5 +1,6 @@
 # aquavena
 
+[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Tests](https://github.com/adriens/aquavena/actions/workflows/tests.yml/badge.svg)](https://github.com/adriens/aquavena/actions/workflows/tests.yml)
 [![PyPI version](https://badge.fury.io/py/aquavena-sdk.svg)](https://pypi.org/project/aquavena-sdk/)
 
