@@ -1213,8 +1213,26 @@ vel$idx   <- seq_len(nrow(vel))
 avg_v     <- round(mean(vel$lines_delta), 0)
 scale_factor <- max(vel$lines_delta) / max(vel$cum)
 
+# Tailwind v4 migration story: v1.14.0 = upgrade (regression), v1.4.0 = CSP fix
+vel$bar_fill <- dplyr::case_when(
+  vel$tag == "v1.14.0" ~ "tailwind",
+  vel$tag == "v1.4.0"  ~ "fix",
+  TRUE ~ "normal"
+)
+idx_tw  <- vel$idx[vel$tag == "v1.14.0"]
+idx_fix <- vel$idx[vel$tag == "v1.4.0"]
+max_y   <- max(vel$lines_delta)
+
 ggplot(vel, aes(x = idx)) +
-  geom_col(aes(y = lines_delta), fill = "#0f766e", width = 0.55) +
+  geom_col(aes(y = lines_delta, fill = bar_fill), width = 0.55) +
+  scale_fill_manual(values = c(normal = "#0f766e", tailwind = "#f59e0b", fix = "#6366f1"),
+                    guide = "none") +
+  annotate("text", x = idx_tw,  y = max_y * 0.55,
+           label = "Tailwind v4\nmigration ↓", size = 2.3,
+           colour = "#b45309", hjust = 0.5, fontface = "bold") +
+  annotate("text", x = idx_fix, y = max_y * 0.75,
+           label = "CSP regression\nfix ↓",  size = 2.3,
+           colour = "#4338ca", hjust = 0.5, fontface = "bold") +
   geom_text(aes(y = lines_delta,
                 label = format(lines_delta, big.mark = ",", trim = TRUE)),
             vjust = -0.4, size = 2.5, colour = "grey25") +
@@ -1243,10 +1261,11 @@ ggplot(vel, aes(x = idx)) +
 
 ## DORA metrics — elite performance
 
-The four DORA metrics (DevOps Research and Assessment, *Accelerate State of
-DevOps Report*) are computed from the timestamps stored in `gh_releases.published_at_ts`
-and from the `ci_runs` table. All four land in the **Elite** tier of DORA's
-2023 benchmark.
+The DORA metrics (DevOps Research and Assessment) are computed from the timestamps
+stored in `gh_releases.published_at_ts` and from the `ci_runs` table.
+Results land in the **Elite** tier as defined by Forsgren et al.,
+*Accelerate State of DevOps Report 2023* (Google Cloud / DORA,
+\href{https://dora.dev/research/2023/dora-report/}{dora.dev/research/2023}).
 
 ```{r dora-panel, results="asis"}
 ts <- dbGetQuery(con, "
@@ -1276,7 +1295,8 @@ cat("```{=latex}
 ```
 
 \begin{center}\small\itshape
-DORA 2023 Elite tier: on-demand deploys, lead time < 1\,h.
+Forsgren et al., \textit{Accelerate State of DevOps Report 2023}, Google Cloud / DORA ---
+Elite tier: on-demand deploys, lead time $<$ 1\,h.
 \end{center}
 
 \begin{center}
