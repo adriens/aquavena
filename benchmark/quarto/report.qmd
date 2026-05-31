@@ -1277,17 +1277,27 @@ median_lead     <- round(median(gap_mins), 1)
 total_hours     <- as.numeric(difftime(max(ts), min(ts), units = "hours"))
 deploys_per_day <- round(length(ts) / (total_hours / 24), 1)
 
+# MTTR: time between v1.14.0 (Tailwind regression) and v1.4.0 (CSP fix)
+mttr_ts <- dbGetQuery(con, "
+  SELECT tag, published_at_ts FROM gh_releases
+  WHERE tag IN ('v1.14.0', 'v1.4.0')
+")
+t_incident <- as.POSIXct(mttr_ts$published_at_ts[mttr_ts$tag == "v1.14.0"], tz = "UTC")
+t_restore  <- as.POSIXct(mttr_ts$published_at_ts[mttr_ts$tag == "v1.4.0"],  tz = "UTC")
+mttr_mins  <- round(as.numeric(difftime(t_restore, t_incident, units = "mins")), 0)
+
 cat("```{=latex}
 \\begin{center}
 \\renewcommand{\\arraystretch}{1.35}
-\\begin{tabular}{>{\\centering\\arraybackslash}p{0.35\\textwidth}>{\\centering\\arraybackslash}p{0.35\\textwidth}}
+\\begin{tabular}{>{\\centering\\arraybackslash}p{0.28\\textwidth}>{\\centering\\arraybackslash}p{0.28\\textwidth}>{\\centering\\arraybackslash}p{0.28\\textwidth}}
 \\toprule
 {\\Huge\\color{teal700}\\faRocket} &
-{\\Huge\\color{teal700}\\faClock} \\\\
-", sprintf("{\\Large\\textbf{%s/day}} & {\\Large\\textbf{%s\\,min}} \\\\\n",
-  deploys_per_day, median_lead),
-"Deployment Frequency & Lead Time for Changes \\\\
-\\small\\color{teal700}\\itshape Elite & \\small\\color{teal700}\\itshape Elite \\\\
+{\\Huge\\color{teal700}\\faClock} &
+{\\Huge\\color{teal700}\\faWrench} \\\\
+", sprintf("{\\Large\\textbf{%s/day}} & {\\Large\\textbf{%s\\,min}} & {\\Large\\textbf{%s\\,min}} \\\\\n",
+  deploys_per_day, median_lead, mttr_mins),
+"Deployment Frequency & Lead Time for Changes & MTTR (Tailwind regression) \\\\
+\\small\\color{teal700}\\itshape Elite & \\small\\color{teal700}\\itshape Elite & \\small\\color{teal700}\\itshape Elite \\\\
 \\bottomrule
 \\end{tabular}
 \\end{center}
@@ -1296,7 +1306,7 @@ cat("```{=latex}
 
 \begin{center}\small\itshape
 Forsgren et al., \textit{Accelerate State of DevOps Report 2023}, Google Cloud / DORA ---
-Elite tier: on-demand deploys, lead time $<$ 1\,h.
+Elite tier: on-demand deploys, lead time $<$ 1\,h, MTTR $<$ 1\,h.
 \end{center}
 
 \begin{center}
