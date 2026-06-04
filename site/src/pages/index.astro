@@ -196,21 +196,36 @@ function formatDate(dateStr: string): string {
             <div class="space-y-5">
               {days.filter((day: any) => day.date >= firstDisplayDate).map((day: any) => {
                 const isToday = day.date === today;
+                const entrees = day.entrees ?? [];
                 const midi    = day.plats.filter((p: any) => p.meal_time === 'midi');
                 const soir    = day.plats.filter((p: any) => p.meal_time === 'soir');
                 const gourmet = day.plats.filter((p: any) => p.meal_time.startsWith('gourmet'));
+                const vege    = day.plats.filter((p: any) => p.meal_time === 'vege');
+                const fresh   = day.plats.filter((p: any) => p.meal_time === 'fresh');
+                const kids    = day.plats.filter((p: any) => p.meal_time === 'kids');
                 const autres  = day.plats.filter((p: any) => p.meal_time === 'unknown');
+                const desserts = day.desserts ?? [];
                 const speechParts: string[] = [`Menus du ${formatDate(day.date)}, régime ${r.name}.`];
+                if (entrees.length)          speechParts.push(`Entrées : ${entrees.join(', ')}.`);
                 if (midi.length)             speechParts.push(`Midi : ${midi.map((d: any) => d.description).join(', ')}.`);
                 if (soir.length)             speechParts.push(`Soir : ${soir.map((d: any) => d.description).join(', ')}.`);
                 if (gourmet.length)          speechParts.push(`Gourmet : ${gourmet.map((d: any) => d.description).join(', ')}.`);
+                if (vege.length)             speechParts.push(`Végétarien : ${vege.map((d: any) => d.description).join(', ')}.`);
+                if (fresh.length)            speechParts.push(`Fresh : ${fresh.map((d: any) => d.description).join(', ')}.`);
+                if (kids.length)             speechParts.push(`Enfants : ${kids.map((d: any) => d.description).join(', ')}.`);
                 if (autres.length)           speechParts.push(`Plats : ${autres.map((d: any) => d.description).join(', ')}.`);
+                if (desserts.length)         speechParts.push(`Desserts : ${desserts.join(', ')}.`);
                 if (day.supplements?.length) speechParts.push(`Suppléments : ${day.supplements.join(', ')}.`);
                 const waLines: string[] = [`🥗 Aquavena — ${r.name}`, `📅 ${formatDate(day.date)}`];
-                if (midi.length)    waLines.push(`🌞 Midi : ${midi.map((d: any) => d.description).join(', ')}`);
-                if (soir.length)    waLines.push(`🌙 Soir : ${soir.map((d: any) => d.description).join(', ')}`);
-                if (gourmet.length) waLines.push(`⭐ Gourmet : ${gourmet.map((d: any) => d.description).join(', ')}`);
-                if (autres.length)  waLines.push(`🍽️ Plats : ${autres.map((d: any) => d.description).join(', ')}`);
+                if (entrees.length)  waLines.push(`🥗 Entrées : ${entrees.join(', ')}`);
+                if (midi.length)     waLines.push(`🌞 Midi : ${midi.map((d: any) => d.description).join(', ')}`);
+                if (soir.length)     waLines.push(`🌙 Soir : ${soir.map((d: any) => d.description).join(', ')}`);
+                if (gourmet.length)  waLines.push(`⭐ Gourmet : ${gourmet.map((d: any) => d.description).join(', ')}`);
+                if (vege.length)     waLines.push(`🌿 Végé : ${vege.map((d: any) => d.description).join(', ')}`);
+                if (fresh.length)    waLines.push(`🥗 Fresh : ${fresh.map((d: any) => d.description).join(', ')}`);
+                if (kids.length)     waLines.push(`👶 Enfants : ${kids.map((d: any) => d.description).join(', ')}`);
+                if (autres.length)   waLines.push(`🍽️ Plats : ${autres.map((d: any) => d.description).join(', ')}`);
+                if (desserts.length) waLines.push(`🍮 Desserts : ${desserts.join(', ')}`);
                 waLines.push('', '👉 Commander sur https://www.aquavena.nc');
                 const waUrl = `https://wa.me/?text=${encodeURIComponent(waLines.join('\n'))}`;
                 return (
@@ -237,6 +252,12 @@ function formatDate(dateStr: string): string {
                       </div>
                     </div>
                     <div class="p-4 space-y-3">
+                      {entrees.length > 0 && (
+                        <div class="rounded-xl border border-rose-200 bg-rose-50 p-4">
+                          <h4 class="text-lg font-bold text-rose-800 mb-2"><i class="fa-solid fa-egg mr-1"></i>Entrée</h4>
+                          {entrees.map((e: string) => <p class="text-xl leading-relaxed text-gray-800">{e}</p>)}
+                        </div>
+                      )}
                       {midi.length > 0 && (
                         <div class="rounded-xl border border-green-200 bg-green-50 p-4">
                           <h4 class="text-lg font-bold text-green-800 mb-2"><i class="fa-solid fa-sun mr-1"></i>Midi</h4>
@@ -255,10 +276,34 @@ function formatDate(dateStr: string): string {
                           {gourmet.map((d: any) => <p class="text-xl leading-relaxed text-gray-800">{d.description}</p>)}
                         </div>
                       )}
+                      {vege.length > 0 && (
+                        <div class="rounded-xl border border-lime-200 bg-lime-50 p-4">
+                          <h4 class="text-lg font-bold text-lime-800 mb-2"><i class="fa-solid fa-seedling mr-1"></i>Végétarien</h4>
+                          {vege.map((d: any) => <p class="text-xl leading-relaxed text-gray-800">{d.description}</p>)}
+                        </div>
+                      )}
+                      {fresh.length > 0 && (
+                        <div class="rounded-xl border border-cyan-200 bg-cyan-50 p-4">
+                          <h4 class="text-lg font-bold text-cyan-800 mb-2"><i class="fa-solid fa-leaf mr-1"></i>Fresh</h4>
+                          {fresh.map((d: any) => <p class="text-xl leading-relaxed text-gray-800">{d.description}</p>)}
+                        </div>
+                      )}
+                      {kids.length > 0 && (
+                        <div class="rounded-xl border border-pink-200 bg-pink-50 p-4">
+                          <h4 class="text-lg font-bold text-pink-800 mb-2"><i class="fa-solid fa-child mr-1"></i>Enfants</h4>
+                          {kids.map((d: any) => <p class="text-xl leading-relaxed text-gray-800">{d.description}</p>)}
+                        </div>
+                      )}
                       {autres.length > 0 && (
                         <div class="rounded-xl border border-teal-200 bg-teal-50 p-4">
                           <h4 class="text-lg font-bold text-teal-800 mb-2"><i class="fa-solid fa-utensils mr-1"></i>Plats</h4>
                           {autres.map((d: any) => <p class="text-xl leading-relaxed text-gray-800">{d.description}</p>)}
+                        </div>
+                      )}
+                      {desserts.length > 0 && (
+                        <div class="rounded-xl border border-purple-200 bg-purple-50 p-4">
+                          <h4 class="text-lg font-bold text-purple-800 mb-2"><i class="fa-solid fa-ice-cream mr-1"></i>Dessert</h4>
+                          {desserts.map((d: string) => <p class="text-xl leading-relaxed text-gray-800">{d}</p>)}
                         </div>
                       )}
                       {day.supplements?.length > 0 && (
