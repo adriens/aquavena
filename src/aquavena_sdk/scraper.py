@@ -23,8 +23,16 @@ DEFAULT_HEADERS = {
 _MEAL_TIME_PREFIXES: list[tuple[str, MealTime]] = [
     ("GOURMET MIDI", MealTime.GOURMET_MIDI),
     ("GOURMET SOIR", MealTime.GOURMET_SOIR),
+    ("MÉDITERRANÉEN MIDI", MealTime.MIDI),
+    ("MÉDITERRANÉEN SOIR", MealTime.SOIR),
+    ("MÉDITERRANÉEN", MealTime.MIDI),
+    ("GOURMET", MealTime.GOURMET),
     ("MIDI", MealTime.MIDI),
     ("SOIR", MealTime.SOIR),
+    ("VEGE", MealTime.VEGE),
+    ("VÉGÉ", MealTime.VEGE),
+    ("FRESH", MealTime.FRESH),
+    ("AQUA'KIDS", MealTime.KIDS),
 ]
 
 

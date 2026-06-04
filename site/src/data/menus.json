@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-05T10:00:37",
+  "generated_at": "2026-06-05T10:05:40",
   "today": "2026-06-05",
   "regimes": [
     {
@@ -254,32 +254,32 @@
                 "description": "Spaghettis au Poulet crème aux champignons, Haricots verts Persillade"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Magret de Canard aux Pommes caramélisées et au Cidre, Carottes glacées, Ecrasé de Patates douces"
+                "meal_time": "gourmet",
+                "description": "Magret de Canard aux Pommes caramélisées et au Cidre, Carottes glacées, Ecrasé de Patates douces"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Melanzana alla parmigiana (Gratin d'aubergines et tomates au parmesan) , Riz Sauvage"
+                "meal_time": "midi",
+                "description": "Melanzana alla parmigiana (Gratin d'aubergines et tomates au parmesan) , Riz Sauvage"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Pavé de saumon au Pesto de Noix , Tian de légumes"
+                "meal_time": "soir",
+                "description": "Pavé de saumon au Pesto de Noix , Tian de légumes"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Saucisses de Poireaux à la mimolette et son confit d'oignons, Légumes Rôtis , Purée de Pois cassés"
+                "meal_time": "vege",
+                "description": "Saucisses de Poireaux à la mimolette et son confit d'oignons, Légumes Rôtis , Purée de Pois cassés"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Tajine de Boulettes de Lentilles corail, Légumes Orientaux, Semoule aux raisins secs"
+                "meal_time": "vege",
+                "description": "Tajine de Boulettes de Lentilles corail, Légumes Orientaux, Semoule aux raisins secs"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade de Pois Chiches, Poulet Grillé, Concombres, Tomates cerises, Feta & Oignons Rouge"
+                "meal_time": "fresh",
+                "description": "Salade de Pois Chiches, Poulet Grillé, Concombres, Tomates cerises, Feta & Oignons Rouge"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Spaghettis au Poulet crème aux champignons, Haricots verts Persillade"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Spaghettis au Poulet crème aux champignons, Haricots verts Persillade"
               }
             ],
             "supplements": [
@@ -317,32 +317,32 @@
                 "description": "Lasagnes au Poulet, Chèvre, Miel & courge butternut"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Gratin de Saumon et Crevettes, Poivrons marinés, Riz blanc"
+                "meal_time": "gourmet",
+                "description": "Gratin de Saumon et Crevettes, Poivrons marinés, Riz blanc"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Salade Niçoise au Thon, œufs durs et anchois"
+                "meal_time": "soir",
+                "description": "Salade Niçoise au Thon, œufs durs et anchois"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Poulet Fermier sauce crémeuse aux tomates confites, olives et herbes fraiches, Légumes rôtis à l'ail et persil, Polenta"
+                "meal_time": "midi",
+                "description": "Poulet Fermier sauce crémeuse aux tomates confites, olives et herbes fraiches, Légumes rôtis à l'ail et persil, Polenta"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Lasagnes aux légumes du soleil, Mozzarella et Mix de Graines"
+                "meal_time": "vege",
+                "description": "Lasagnes aux légumes du soleil, Mozzarella et Mix de Graines"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Galettes indiennes oignons & épinards Sauce Yaourt à la Menthe, Squash rôtie, Kitchari (Riz aux haricots mungo)"
+                "meal_time": "vege",
+                "description": "Galettes indiennes oignons & épinards Sauce Yaourt à la Menthe, Squash rôtie, Kitchari (Riz aux haricots mungo)"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade de lentilles, Squash Rôtie, Chèvre, Noix et Lardons croustillant, Sauce au miel et moutarde"
+                "meal_time": "fresh",
+                "description": "Salade de lentilles, Squash Rôtie, Chèvre, Noix et Lardons croustillant, Sauce au miel et moutarde"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Poêlée de Thon au Saumon fumé , Gratin de Citrouille & épinards, Pommes de Terre vapeur Persillé"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Poêlée de Thon au Saumon fumé , Gratin de Citrouille & épinards, Pommes de Terre vapeur Persillé"
               },
               {
                 "meal_time": "unknown",
@@ -397,32 +397,32 @@
                 "description": "Salade de Thon &  Saumon Fumé aux Agrumes, Légumes croquants (carottes, concombres & radis), Riz blanc"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Poulpe grillé au beurre ail et persil, Tomates cerises rôties & chou-fleur rôti, Risotto"
+                "meal_time": "gourmet",
+                "description": "Poulpe grillé au beurre ail et persil, Tomates cerises rôties & chou-fleur rôti, Risotto"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Gratin Méditerranéen aux tomates confites & Parmesan (Champignons, Légumes du soleil et Mozarella) / Pommes de terre Grenailles rôties"
+                "meal_time": "midi",
+                "description": "Gratin Méditerranéen aux tomates confites & Parmesan (Champignons, Légumes du soleil et Mozarella) / Pommes de terre Grenailles rôties"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Crevettes Sautées Ail & Persil, Escalivade (légumes du soleil marinés à l'huile olive et aux herbes)"
+                "meal_time": "soir",
+                "description": "Crevettes Sautées Ail & Persil, Escalivade (légumes du soleil marinés à l'huile olive et aux herbes)"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Hachis parmentier façon Tandoori aux protéines de Soja (aux pommes de terre et Citrouille)"
+                "meal_time": "vege",
+                "description": "Hachis parmentier façon Tandoori aux protéines de Soja (aux pommes de terre et Citrouille)"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Scones salés Potiron & Graines , Légumes du Soleil rôtis, Risotto crémeux"
+                "meal_time": "vege",
+                "description": "Scones salés Potiron & Graines , Légumes du Soleil rôtis, Risotto crémeux"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade de pâtes au Jambon Cru, Courgettes, Poivrons, Tomates Confites, Mozzarella, Amandes effilées & Pesto Rosso"
+                "meal_time": "fresh",
+                "description": "Salade de pâtes au Jambon Cru, Courgettes, Poivrons, Tomates Confites, Mozzarella, Amandes effilées & Pesto Rosso"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Porc Caramélisé à l'ananas, Chop suey de légumes, Riz cantonais"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Porc Caramélisé à l'ananas, Chop suey de légumes, Riz cantonais"
               },
               {
                 "meal_time": "unknown",
@@ -477,32 +477,32 @@
                 "description": "Poulet mijoté aux abricots et au miel, carottes rôties, Semoule"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Pavé de Mahi Mahi  au Pesto de Noix, Tian de légumes , Ecrasé de Pommes de terre aux herbes"
+                "meal_time": "gourmet",
+                "description": "Pavé de Mahi Mahi  au Pesto de Noix, Tian de légumes , Ecrasé de Pommes de terre aux herbes"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Salade de Poulet aux tomates séchées sauce César, Rougail de Tomates, Greek houmous (aux épinards et Feta) et ses toasts"
+                "meal_time": "midi",
+                "description": "Salade de Poulet aux tomates séchées sauce César, Rougail de Tomates, Greek houmous (aux épinards et Feta) et ses toasts"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Tataki de Thon jaune en croute de graines, Avocat, Emincé de chou vert et tomates cerises au citron, gingembre et huile d'olive"
+                "meal_time": "soir",
+                "description": "Tataki de Thon jaune en croute de graines, Avocat, Emincé de chou vert et tomates cerises au citron, gingembre et huile d'olive"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Steak de Lentilles & Chou Fleur aux graines, Compotée de Poivrons, Purée de Pommes de terre & Carottes à la mozzarella"
+                "meal_time": "vege",
+                "description": "Steak de Lentilles & Chou Fleur aux graines, Compotée de Poivrons, Purée de Pommes de terre & Carottes à la mozzarella"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Frittata de Poireaux, pommes de terre & Fourme d'Ambert (spécialité italienne aux œufs), Légumes rôtis"
+                "meal_time": "vege",
+                "description": "Frittata de Poireaux, pommes de terre & Fourme d'Ambert (spécialité italienne aux œufs), Légumes rôtis"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Wrap au Poulet, œufs durs, emmental, salade, tomate Sauce fromage frais ail & fines herbes"
+                "meal_time": "fresh",
+                "description": "Wrap au Poulet, œufs durs, emmental, salade, tomate Sauce fromage frais ail & fines herbes"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Poulet mijoté aux abricots et au miel, Carottes rôties, Semoule"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Poulet mijoté aux abricots et au miel, Carottes rôties, Semoule"
               },
               {
                 "meal_time": "unknown",
@@ -556,32 +556,32 @@
                 "description": "Lasagnes gourmandes à l'effiloché de bœuf, légumes rôtis et mozzarella"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet mignon de Porc rôti crème aux champignons, Squash au four, Gratin dauphinois"
+                "meal_time": "gourmet",
+                "description": "Filet mignon de Porc rôti crème aux champignons, Squash au four, Gratin dauphinois"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Lasagnes aux épinards, Tomates, Mozza, au Chèvre et aux noix"
+                "meal_time": "midi",
+                "description": "Lasagnes aux épinards, Tomates, Mozza, au Chèvre et aux noix"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Suprême de Poulet Fermier, Caponata Sicilienne (Aubergines marinées rôties au Olives, Parmesan, raisins et amandes effilées)"
+                "meal_time": "soir",
+                "description": "Suprême de Poulet Fermier, Caponata Sicilienne (Aubergines marinées rôties au Olives, Parmesan, raisins et amandes effilées)"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Mie goreng au Tofu : plat indonésien à base de pâtes jaunes, Tofu, légumes et Oignons Grillés"
+                "meal_time": "vege",
+                "description": "Mie goreng au Tofu : plat indonésien à base de pâtes jaunes, Tofu, légumes et Oignons Grillés"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Hamburger au Steak de Quinoa et Betteraves, Aubergines Grillés, Tomates, Salade, Oignons & Cheddar Sauce au Miel & Noix"
+                "meal_time": "vege",
+                "description": "Hamburger au Steak de Quinoa et Betteraves, Aubergines Grillés, Tomates, Salade, Oignons & Cheddar Sauce au Miel & Noix"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade de pâtes méditerranéenne au Thon & légumes grillés"
+                "meal_time": "fresh",
+                "description": "Salade de pâtes méditerranéenne au Thon & légumes grillés"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Lasagnes gourmandes à l'effiloché de bœuf, légumes rôtis et mozzarella"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Lasagnes gourmandes à l'effiloché de bœuf, légumes rôtis et mozzarella"
               },
               {
                 "meal_time": "unknown",
@@ -635,32 +635,32 @@
                 "description": "Lasagnes au Poulet, Epinards, Mozzarella et Parmesan"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Tajine de Souris d'Agneau aux Olives, Légumes rôtis, Semoule aux raisins secs"
+                "meal_time": "gourmet",
+                "description": "Tajine de Souris d'Agneau aux Olives, Légumes rôtis, Semoule aux raisins secs"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir:  Tajine de Boulettes de Lentilles et Chou Fleur sauce Orientale, Epinards au citron confit et raisins secs, Carottes rôtis"
+                "meal_time": "soir",
+                "description": "Tajine de Boulettes de Lentilles et Chou Fleur sauce Orientale, Epinards au citron confit et raisins secs, Carottes rôtis"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Magret de Canard  au Chutney de figues, Squash au Four, Purée de Pommes de terre  aux olives"
+                "meal_time": "midi",
+                "description": "Magret de Canard  au Chutney de figues, Squash au Four, Purée de Pommes de terre  aux olives"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Steak de Quinoa et Courgettes au Chèvre, Tian de légumes, Risotto"
+                "meal_time": "vege",
+                "description": "Steak de Quinoa et Courgettes au Chèvre, Tian de légumes, Risotto"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Bouchées d'épinards à la mozza, Légumes du Soleil rôtis, Houmous au Pesto"
+                "meal_time": "vege",
+                "description": "Bouchées d'épinards à la mozza, Légumes du Soleil rôtis, Houmous au Pesto"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade de Quinoa Citronné, Pois chiches & Feta  (aux Poivrons, Œufs  dur)"
+                "meal_time": "fresh",
+                "description": "Salade de Quinoa Citronné, Pois chiches & Feta  (aux Poivrons, Œufs  dur)"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Lasagnes au Poulet, Epinards, Mozzarella et Parmesan"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Lasagnes au Poulet, Epinards, Mozzarella et Parmesan"
               }
             ],
             "supplements": [
@@ -698,32 +698,32 @@
                 "description": "Gratin de Patates douces et Squash au Chèvre et lardons"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Mi-cuit de Thon Jaune au Pesto Rosso, Croquettes d'épinards à la mozza, Risotto aux champignons"
+                "meal_time": "gourmet",
+                "description": "Mi-cuit de Thon Jaune au Pesto Rosso, Croquettes d'épinards à la mozza, Risotto aux champignons"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Salade de lentilles au Chèvre & crudités aux épices douces et graines de Courge"
+                "meal_time": "midi",
+                "description": "Salade de lentilles au Chèvre & crudités aux épices douces et graines de Courge"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Duo Méditerranéen de Thon jaune et Crevettes au Pesto, Aubergines rôties au Thym et Caviar de Poivrons"
+                "meal_time": "soir",
+                "description": "Duo Méditerranéen de Thon jaune et Crevettes au Pesto, Aubergines rôties au Thym et Caviar de Poivrons"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Couscous aux Falafels, Légumes Orientaux , Semoule dorée aux raisins secs"
+                "meal_time": "vege",
+                "description": "Couscous aux Falafels, Légumes Orientaux , Semoule dorée aux raisins secs"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Lasagnes à la Courge, crème de houmous et Mozzarella"
+                "meal_time": "vege",
+                "description": "Lasagnes à la Courge, crème de houmous et Mozzarella"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade de Pâtes façon César au Poulet grillé (parmesan, tomates, croûtons, anchois)"
+                "meal_time": "fresh",
+                "description": "Salade de Pâtes façon César au Poulet grillé (parmesan, tomates, croûtons, anchois)"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Gratin de Patates douces et Squash au Chèvre et lardons"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Gratin de Patates douces et Squash au Chèvre et lardons"
               },
               {
                 "meal_time": "unknown",
@@ -777,32 +777,32 @@
                 "description": "Raviolis à la Carbonara, Haricots Verts Persillade"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Pavé de Saumon à la gremolata, Haricots verts persillés, Ecrasé de Patates douces"
+                "meal_time": "gourmet",
+                "description": "Pavé de Saumon à la gremolata, Haricots verts persillés, Ecrasé de Patates douces"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Salade niçoise au Thon, Riz brun, vinaigrette à l'huile d'olive et au citron"
+                "meal_time": "midi",
+                "description": "Salade niçoise au Thon, Riz brun, vinaigrette à l'huile d'olive et au citron"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Poulet Fermier mijoté aux olives et au thym, Légumes rôtis"
+                "meal_time": "soir",
+                "description": "Poulet Fermier mijoté aux olives et au thym, Légumes rôtis"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Curry de Boulettes de Lentilles à l'Indienne, Epinards, Riz"
+                "meal_time": "vege",
+                "description": "Curry de Boulettes de Lentilles à l'Indienne, Epinards, Riz"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Salade Italienne (Pâtes, Feta, Œuf, Tomates, Poivrons, Olives, Sauce Pesto Rosso)"
+                "meal_time": "vege",
+                "description": "Salade Italienne (Pâtes, Feta, Œuf, Tomates, Poivrons, Olives, Sauce Pesto Rosso)"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade de Lentilles au Poulet, Butternut, Noix torrefiées et Feta - FRESH"
+                "meal_time": "fresh",
+                "description": "Salade de Lentilles au Poulet, Butternut, Noix torrefiées et Feta - FRESH"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Raviolis à la Carbonara, Haricots Verts Persillade"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Raviolis à la Carbonara, Haricots Verts Persillade"
               },
               {
                 "meal_time": "unknown",
@@ -855,32 +855,32 @@
                 "description": "Porc au Sucre, Chop Suey, Riz blanc"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Confit de Canard à l'ail en chemise, Poêlée d'asperges vertes , Purée Aligot"
+                "meal_time": "gourmet",
+                "description": "Confit de Canard à l'ail en chemise, Poêlée d'asperges vertes , Purée Aligot"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi :  Wrap de poulet, Feta, avocat, tomates confites, légumes du soleil, sauce Tzatzíki"
+                "meal_time": "midi",
+                "description": "Wrap de poulet, Feta, avocat, tomates confites, légumes du soleil, sauce Tzatzíki"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Tartare de Saumon & Thon jaune, citron, basilic, tomates séchées & Parmesan, Légumes méditerranéens grillés, huile d'olive & herbes"
+                "meal_time": "soir",
+                "description": "Tartare de Saumon & Thon jaune, citron, basilic, tomates séchées & Parmesan, Légumes méditerranéens grillés, huile d'olive & herbes"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Hamburger au Steak de Betteraves et Boulghour, Brie, Légumes rôtis Sauce Fromagère"
+                "meal_time": "vege",
+                "description": "Hamburger au Steak de Betteraves et Boulghour, Brie, Légumes rôtis Sauce Fromagère"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Croquettes de Poivrons à l'emmental, Légumes du Soleil rôtis, Riz safrané"
+                "meal_time": "vege",
+                "description": "Croquettes de Poivrons à l'emmental, Légumes du Soleil rôtis, Riz safrané"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Quiche aux épinards et saumon fumé / Taboulé Libanais aux Noix & Graines"
+                "meal_time": "fresh",
+                "description": "Quiche aux épinards et saumon fumé / Taboulé Libanais aux Noix & Graines"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Porc au Sucre, Chop Suey, Riz blanc"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Porc au Sucre, Chop Suey, Riz blanc"
               },
               {
                 "meal_time": "unknown",
@@ -935,32 +935,32 @@
                 "description": "Risotto crémeux au Boudin noir,  champignons & Parmesan"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Escalope de Poulet fermier au Pesto de noix, Palets de Brocolis au parmesan, Polenta Gratinée"
+                "meal_time": "gourmet",
+                "description": "Escalope de Poulet fermier au Pesto de noix, Palets de Brocolis au parmesan, Polenta Gratinée"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Salade César au Poulet (vinaigrette César aux anchois)"
+                "meal_time": "soir",
+                "description": "Salade César au Poulet (vinaigrette César aux anchois)"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Duo de mahi mahi & Crevettes en persillade, Sauce rouille (mayonnaise à l'ail et au safran), légumes rôtis, Ecrasé de Patates douces"
+                "meal_time": "midi",
+                "description": "Duo de mahi mahi & Crevettes en persillade, Sauce rouille (mayonnaise à l'ail et au safran), légumes rôtis, Ecrasé de Patates douces"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Tofu Mariné au Soyo & Pané aux Graines de sésame, Wok de légumes, Nouilles Chinoises aux Oignons Frits"
+                "meal_time": "vege",
+                "description": "Tofu Mariné au Soyo & Pané aux Graines de sésame, Wok de légumes, Nouilles Chinoises aux Oignons Frits"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Saucisses Végé à la Crème aux herbes, courges rôties, Gratin Dauphinois"
+                "meal_time": "vege",
+                "description": "Saucisses Végé à la Crème aux herbes, courges rôties, Gratin Dauphinois"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade de Pâtes au Jambon Cru, Chèvre, Tomates, courgettes au Pesto"
+                "meal_time": "fresh",
+                "description": "Salade de Pâtes au Jambon Cru, Chèvre, Tomates, courgettes au Pesto"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Saucisses à L'Italienne, Légumes du soleil rôtis, Purée de Pommes de Terre"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Saucisses à L'Italienne, Légumes du soleil rôtis, Purée de Pommes de Terre"
               },
               {
                 "meal_time": "unknown",
@@ -1015,32 +1015,32 @@
                 "description": "Gratin de Gnocchis au jambon, tomates, courgettes Gratinée à la mozzarella"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Saumon poêlé et sa compotée de tomates et olives, Courgettes Persillées, Ecrasé de Pommes de Terre"
+                "meal_time": "gourmet",
+                "description": "Saumon poêlé et sa compotée de tomates et olives, Courgettes Persillées, Ecrasé de Pommes de Terre"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Lasagnes alla Putanesca (aux aubergines, Mascarpone, anchois, olives et câpres)"
+                "meal_time": "midi",
+                "description": "Lasagnes alla Putanesca (aux aubergines, Mascarpone, anchois, olives et câpres)"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Crevettes flambées au Pastis, Semoule de chou fleur aux légumes rôtis citronnés"
+                "meal_time": "soir",
+                "description": "Crevettes flambées au Pastis, Semoule de chou fleur aux légumes rôtis citronnés"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Mafé Végétarien (Plat africain de légumes et pois chiches au beurre de cacahuètes), Riz blanc"
+                "meal_time": "vege",
+                "description": "Mafé Végétarien (Plat africain de légumes et pois chiches au beurre de cacahuètes), Riz blanc"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Parmentier de Potiron aux lentilles, Bleu et Noix"
+                "meal_time": "vege",
+                "description": "Parmentier de Potiron aux lentilles, Bleu et Noix"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Poulet mariné, Taboulé aux abricots, amandes et Cacahuètes, petits légumes & herbes fraîches"
+                "meal_time": "fresh",
+                "description": "Poulet mariné, Taboulé aux abricots, amandes et Cacahuètes, petits légumes & herbes fraîches"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Gratin de Gnocchis au jambon, tomates, courgettes Gratinée à la mozzarella"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Gratin de Gnocchis au jambon, tomates, courgettes Gratinée à la mozzarella"
               }
             ],
             "supplements": [
@@ -1078,32 +1078,32 @@
                 "description": "Hachis Parmentier (Bœuf, Pommes de terre, Potiron et Parmesan)"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet mignon de Porc sauce moutarde à l'ancienne, Haricots verts Extra fins, Gratin dauphinois"
+                "meal_time": "gourmet",
+                "description": "Filet mignon de Porc sauce moutarde à l'ancienne, Haricots verts Extra fins, Gratin dauphinois"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Salade Grecque de Quinoa à la Feta & légumes croquants (tomates cerises, carottes, poivrons, concombres oignons rouges)"
+                "meal_time": "midi",
+                "description": "Salade Grecque de Quinoa à la Feta & légumes croquants (tomates cerises, carottes, poivrons, concombres oignons rouges)"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Tartare de Saumon et Thon jaune, Caponata (Aubergines fondantes aux tomates, olives et capres)"
+                "meal_time": "soir",
+                "description": "Tartare de Saumon et Thon jaune, Caponata (Aubergines fondantes aux tomates, olives et capres)"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Tofu du Général Tao, aux Tomates, Poivrons, Riz Cantonais Végétarien"
+                "meal_time": "vege",
+                "description": "Tofu du Général Tao, aux Tomates, Poivrons, Riz Cantonais Végétarien"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Galettines de Quinoa au Brocolis Sauce Raclette, Poêlée de légumes, Ecrasé de Pommes de terre"
+                "meal_time": "vege",
+                "description": "Galettines de Quinoa au Brocolis Sauce Raclette, Poêlée de légumes, Ecrasé de Pommes de terre"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade de Pâtes à la Crétoise (Feta, Concombre, Tomates, Olives noires, œufs)"
+                "meal_time": "fresh",
+                "description": "Salade de Pâtes à la Crétoise (Feta, Concombre, Tomates, Olives noires, œufs)"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Hachis Parmentier (Bœuf, Pommes de terre, Potiron et Parmesan)"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Hachis Parmentier (Bœuf, Pommes de terre, Potiron et Parmesan)"
               },
               {
                 "meal_time": "unknown",
@@ -1158,32 +1158,32 @@
                 "description": "Lasagnes au Thon et Saumon Fumé aux épinards"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Parmentier de Confit de Canard au Crumble d'amandes & parmesan (aux Pommes de terre et Potiron)"
+                "meal_time": "gourmet",
+                "description": "Parmentier de Confit de Canard au Crumble d'amandes & parmesan (aux Pommes de terre et Potiron)"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Wrap aux Légumes rôtis, Mozzarella, houmous Méditerranéen de lupins aux tomates & olives, Pesto de noix"
+                "meal_time": "soir",
+                "description": "Wrap aux Légumes rôtis, Mozzarella, houmous Méditerranéen de lupins aux tomates & olives, Pesto de noix"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Poulet Fermier à la sicilienne (aux câpres et anchois, raisins secs et amandes effilées), Poivrons à l'ail et origan, Pommes de terre persillées"
+                "meal_time": "midi",
+                "description": "Poulet Fermier à la sicilienne (aux câpres et anchois, raisins secs et amandes effilées), Poivrons à l'ail et origan, Pommes de terre persillées"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Tajine Végétarien au Citron confit, Figues & Légumes (aux Protéines de soja), Semoule dorée"
+                "meal_time": "vege",
+                "description": "Tajine Végétarien au Citron confit, Figues & Légumes (aux Protéines de soja), Semoule dorée"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Tatin d'oignons rouge au chèvre,  Salade de Pommes de Terre, Feta et Crudités aux mix de Graines"
+                "meal_time": "vege",
+                "description": "Tatin d'oignons rouge au chèvre,  Salade de Pommes de Terre, Feta et Crudités aux mix de Graines"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Wrap au chèvre, houmous, avocats, tomates, Carottes & courgettes"
+                "meal_time": "fresh",
+                "description": "Wrap au chèvre, houmous, avocats, tomates, Carottes & courgettes"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Lasagnes au Thon et Saumon Fumé aux épinards"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Lasagnes au Thon et Saumon Fumé aux épinards"
               },
               {
                 "meal_time": "unknown",
@@ -1236,32 +1236,32 @@
                 "description": "Poulet au Caramel, Légumes chop suey, Riz blanc"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Pavé de Mahi Mahi Sauce Vierge, Légumes du soleil rôtis, Risotto"
+                "meal_time": "gourmet",
+                "description": "Pavé de Mahi Mahi Sauce Vierge, Légumes du soleil rôtis, Risotto"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Salade de Pâtes au Poulet, Avocat, Tomates & Chèvre"
+                "meal_time": "midi",
+                "description": "Salade de Pâtes au Poulet, Avocat, Tomates & Chèvre"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Filet de Saumon des dieux au Pesto Rosso, Courgettes et Poivrons rôtis"
+                "meal_time": "soir",
+                "description": "Filet de Saumon des dieux au Pesto Rosso, Courgettes et Poivrons rôtis"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Spaghettis aux Boulettes d'Aubergines & haricots blancs, Sauce Tomate & basilic"
+                "meal_time": "vege",
+                "description": "Spaghettis aux Boulettes d'Aubergines & haricots blancs, Sauce Tomate & basilic"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Hamburger avec steak de Quinoa & Potiron,  Cheddar, tomate, salade, oignons, Crème aux fromage frais, miel, balsamique & Noix"
+                "meal_time": "vege",
+                "description": "Hamburger avec steak de Quinoa & Potiron,  Cheddar, tomate, salade, oignons, Crème aux fromage frais, miel, balsamique & Noix"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade César au Poulet (Vinaigrette César aux Anchois)"
+                "meal_time": "fresh",
+                "description": "Salade César au Poulet (Vinaigrette César aux Anchois)"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Poulet au Caramel, Légumes chop suey, Riz blanc"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Poulet au Caramel, Légumes chop suey, Riz blanc"
               },
               {
                 "meal_time": "unknown",
@@ -1316,32 +1316,32 @@
                 "description": "Blanquette de veau à l'ancienne (aux carottes et champignons), Riz blanc"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet d'Agneau à la Mozzarella & Tomates séchées, Légumes du soleil rôtis , Polenta gratinée"
+                "meal_time": "gourmet",
+                "description": "Filet d'Agneau à la Mozzarella & Tomates séchées, Légumes du soleil rôtis , Polenta gratinée"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Salade de lentilles Corails au Saumon Fumé, Crudités et graines de courge"
+                "meal_time": "midi",
+                "description": "Salade de lentilles Corails au Saumon Fumé, Crudités et graines de courge"
               },
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Soir : Filet de Mahi Mahi Crème de citron confit au paprika doux , Légumes du soleil et champignons rôtis à l'origan"
+                "meal_time": "soir",
+                "description": "Filet de Mahi Mahi Crème de citron confit au paprika doux , Légumes du soleil et champignons rôtis à l'origan"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Steak de Polenta au lait de coco Tomates Confites & Graines, Dahl de lentilles & légumes"
+                "meal_time": "vege",
+                "description": "Steak de Polenta au lait de coco Tomates Confites & Graines, Dahl de lentilles & légumes"
               },
               {
-                "meal_time": "unknown",
-                "description": "VEGE : Gratin de Pâtes aux Légumes, Brie, Parmesan & Amandes"
+                "meal_time": "vege",
+                "description": "Gratin de Pâtes aux Légumes, Brie, Parmesan & Amandes"
               },
               {
-                "meal_time": "unknown",
-                "description": "FRESH : Salade de Riz au Thon, œuf durs, tomates, poivrons marinés et Olives"
+                "meal_time": "fresh",
+                "description": "Salade de Riz au Thon, œuf durs, tomates, poivrons marinés et Olives"
               },
               {
-                "meal_time": "unknown",
-                "description": "Aqua'Kids (Portion Enfant) : Boulettes de Poulet  Sauce Barbecue Maison, Squash rôties, Potatoes"
+                "meal_time": "kids",
+                "description": "(Portion Enfant) : Boulettes de Poulet  Sauce Barbecue Maison, Squash rôties, Potatoes"
               },
               {
                 "meal_time": "unknown",
@@ -2708,8 +2708,8 @@
             "formule": "MD",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "Méditerranéen Midi : Gratin Méditerranéen aux tomates confites & Parmesan (Champignons, Légumes du soleil et Mozarella) / Pommes de terre Grenailles rôties"
+                "meal_time": "midi",
+                "description": "Gratin Méditerranéen aux tomates confites & Parmesan (Champignons, Légumes du soleil et Mozarella) / Pommes de terre Grenailles rôties"
               },
               {
                 "meal_time": "soir",
@@ -3060,8 +3060,8 @@
                 "description": "Poêlée de Thon et Marlin au Pesto Rosso, Légumes Rôtis , Purée de Lentilles Corail"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Magret de Canard aux Pommes caramélisées et au Cidre, Carottes glacées, Ecrasé de Patates douces"
+                "meal_time": "gourmet",
+                "description": "Magret de Canard aux Pommes caramélisées et au Cidre, Carottes glacées, Ecrasé de Patates douces"
               }
             ],
             "supplements": [
@@ -3095,8 +3095,8 @@
                 "description": "Poêlée de Thon au Saumon fumé , Gratin de Citrouille & épinards, Pommes de Terre vapeur Persillé"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Gratin de Saumon et Crevettes, Poivrons marinés, Riz blanc"
+                "meal_time": "gourmet",
+                "description": "Gratin de Saumon et Crevettes, Poivrons marinés, Riz blanc"
               },
               {
                 "meal_time": "unknown",
@@ -3139,8 +3139,8 @@
                 "description": "Tajine de Calamars aux olives , Légumes rôtis, Quinoa doré"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Poulpe grillé au beurre ail et persil, Tomates cerises rôties & chou-fleur rôti, Risotto"
+                "meal_time": "gourmet",
+                "description": "Poulpe grillé au beurre ail et persil, Tomates cerises rôties & chou-fleur rôti, Risotto"
               },
               {
                 "meal_time": "unknown",
@@ -3183,8 +3183,8 @@
                 "description": "Mi-cuit de Thon mariné au Citron vert & Combawa, Légumes chop suey, Riz blanc"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Pavé de Mahi Mahi  au Pesto de Noix, Tian de légumes , Ecrasé de Pommes de terre aux herbes"
+                "meal_time": "gourmet",
+                "description": "Pavé de Mahi Mahi  au Pesto de Noix, Tian de légumes , Ecrasé de Pommes de terre aux herbes"
               },
               {
                 "meal_time": "unknown",
@@ -3226,8 +3226,8 @@
                 "description": "Sashimi de Thon Sauce vierge, Salade Croquantes de tomates cerises, concombres & radis aux herbes, Riz au vinaigre de riz et sésame"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet mignon de Porc rôti crème aux champignons, Squash au four, Gratin dauphinois"
+                "meal_time": "gourmet",
+                "description": "Filet mignon de Porc rôti crème aux champignons, Squash au four, Gratin dauphinois"
               },
               {
                 "meal_time": "unknown",
@@ -3269,8 +3269,8 @@
                 "description": "Poêlée de seiches persillade, Poêlée méridionale de tomates et poivrons, Riz Blanc"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Tajine de Souris d'Agneau aux Olives, Légumes rôtis, Quinoa aux raisins secs"
+                "meal_time": "gourmet",
+                "description": "Tajine de Souris d'Agneau aux Olives, Légumes rôtis, Quinoa aux raisins secs"
               }
             ],
             "supplements": [
@@ -3304,8 +3304,8 @@
                 "description": "Boulettes de Thon Sauce au pesto, Haricots Verts Persillés, Purée de Pommes de terre"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Mi-cuit de Thon Jaune au Pesto Rosso, Croquettes d'épinards à la mozza, Risotto aux champignons"
+                "meal_time": "gourmet",
+                "description": "Mi-cuit de Thon Jaune au Pesto Rosso, Croquettes d'épinards à la mozza, Risotto aux champignons"
               },
               {
                 "meal_time": "unknown",
@@ -3347,8 +3347,8 @@
                 "description": "Mi Cuit de Thon et son aïoli Maison, Lamelles d'aubergines Fondante, Risotto"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Pavé de Saumon à la gremolata, Haricots verts persillés, Ecrasé de Patates douces"
+                "meal_time": "gourmet",
+                "description": "Pavé de Saumon à la gremolata, Haricots verts persillés, Ecrasé de Patates douces"
               },
               {
                 "meal_time": "unknown",
@@ -3389,8 +3389,8 @@
                 "description": "Sashimi de Thon , Salade de chou, Riz au sésame"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Confit de Canard à l'ail en chemise, Poêlée d'asperges vertes , Purée Aligot"
+                "meal_time": "gourmet",
+                "description": "Confit de Canard à l'ail en chemise, Poêlée d'asperges vertes , Purée Aligot"
               },
               {
                 "meal_time": "unknown",
@@ -3433,8 +3433,8 @@
                 "description": "Curry vert Thaï de Thon et Marlin, Chop suey, Riz blanc"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Escalope de Poulet fermier au Pesto de noix, Palets de Brocolis au parmesan, Polenta Gratinée"
+                "meal_time": "gourmet",
+                "description": "Escalope de Poulet fermier au Pesto de noix, Palets de Brocolis au parmesan, Polenta Gratinée"
               },
               {
                 "meal_time": "unknown",
@@ -3477,8 +3477,8 @@
                 "description": "Steak haché de Thon aux oignons et estragon,  Sauce Tartare, Escalivade (légumes du soleil marinés huile olive et herbes) aux capres, Houmous"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Saumon poêlé et sa compotée de tomates et olives, Courgettes Persillées, Ecrasé de Pommes de Terre"
+                "meal_time": "gourmet",
+                "description": "Saumon poêlé et sa compotée de tomates et olives, Courgettes Persillées, Ecrasé de Pommes de Terre"
               }
             ],
             "supplements": [
@@ -3512,8 +3512,8 @@
                 "description": "Moules au Curry Rouge Thaï, Papayes rôties au citron vert, Riz Jasmin"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet mignon de Porc sauce moutarde à l'ancienne, Haricots verts Extra fins, Gratin dauphinois"
+                "meal_time": "gourmet",
+                "description": "Filet mignon de Porc sauce moutarde à l'ancienne, Haricots verts Extra fins, Gratin dauphinois"
               },
               {
                 "meal_time": "unknown",
@@ -3556,8 +3556,8 @@
                 "description": "Assiette de la Mer : Sashimi de Thon, rillettes de Thon au Saumon fumé  & Galette à la poudre d'amandes, Chou croquant aux sésames, Taboulé de Quinoa"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Parmentier de Confit de Canard au Crumble d'amandes & parmesan (aux Pommes de terre et Potiron)"
+                "meal_time": "gourmet",
+                "description": "Parmentier de Confit de Canard au Crumble d'amandes & parmesan (aux Pommes de terre et Potiron)"
               },
               {
                 "meal_time": "unknown",
@@ -3598,8 +3598,8 @@
                 "description": "Joue de Saumon des Dieux Sauce béarnaise, Gratin de Courgettes & Epinards, Pommes de Terre Persillées"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Pavé de Mahi Mahi Sauce Vierge, Légumes du soleil rôtis, Risotto"
+                "meal_time": "gourmet",
+                "description": "Pavé de Mahi Mahi Sauce Vierge, Légumes du soleil rôtis, Risotto"
               },
               {
                 "meal_time": "unknown",
@@ -3642,8 +3642,8 @@
                 "description": "Roti de Thon mi cuit en croute de graines, Chutney de Papayes, Riz blanc"
               },
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet d'Agneau à la Mozzarella & Tomates séchées, Légumes du soleil rôtis , Polenta gratinée"
+                "meal_time": "gourmet",
+                "description": "Filet d'Agneau à la Mozzarella & Tomates séchées, Légumes du soleil rôtis , Polenta gratinée"
               },
               {
                 "meal_time": "unknown",
@@ -4235,8 +4235,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Magret de Canard crème au cidre, Haricots verts Persillade, Risotto de konjac"
+                "meal_time": "gourmet",
+                "description": "Magret de Canard crème au cidre, Haricots verts Persillade, Risotto de konjac"
               },
               {
                 "meal_time": "unknown",
@@ -4265,8 +4265,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Gratin de Saumon et Crevettes, Poivrons marinés, Riz de Konjac"
+                "meal_time": "gourmet",
+                "description": "Gratin de Saumon et Crevettes, Poivrons marinés, Riz de Konjac"
               },
               {
                 "meal_time": "unknown",
@@ -4304,8 +4304,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Poulpe grillé au beurre ail et persil, Tomates cerises rôties & chou-fleur rôti, Risotto de perles de konjac"
+                "meal_time": "gourmet",
+                "description": "Poulpe grillé au beurre ail et persil, Tomates cerises rôties & chou-fleur rôti, Risotto de perles de konjac"
               },
               {
                 "meal_time": "unknown",
@@ -4343,8 +4343,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Pavé de Mahi Mahi  au Pesto de Noix, Tian de légumes"
+                "meal_time": "gourmet",
+                "description": "Pavé de Mahi Mahi  au Pesto de Noix, Tian de légumes"
               },
               {
                 "meal_time": "unknown",
@@ -4381,8 +4381,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet mignon de Porc rôti crème aux champignons, Gratin d'épinards et Butternut"
+                "meal_time": "gourmet",
+                "description": "Filet mignon de Porc rôti crème aux champignons, Gratin d'épinards et Butternut"
               },
               {
                 "meal_time": "unknown",
@@ -4419,8 +4419,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Tajine de Souris d'Agneau aux Olives, Légumes rôtis, Semoule de chou fleur"
+                "meal_time": "gourmet",
+                "description": "Tajine de Souris d'Agneau aux Olives, Légumes rôtis, Semoule de chou fleur"
               },
               {
                 "meal_time": "unknown",
@@ -4449,8 +4449,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Mi-cuit de Thon Jaune au Pesto Rosso, Croquettes d'épinards à la mozza, Risotto de konjac aux champignons"
+                "meal_time": "gourmet",
+                "description": "Mi-cuit de Thon Jaune au Pesto Rosso, Croquettes d'épinards à la mozza, Risotto de konjac aux champignons"
               },
               {
                 "meal_time": "unknown",
@@ -4487,8 +4487,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Pavé de Saumon à la gremolata, Haricots verts persillés, Riz de Konjac"
+                "meal_time": "gourmet",
+                "description": "Pavé de Saumon à la gremolata, Haricots verts persillés, Riz de Konjac"
               },
               {
                 "meal_time": "unknown",
@@ -4525,8 +4525,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Confit de Canard à l'ail en chemise, Poêlée d'asperges vertes , Purée aligot de chou fleur"
+                "meal_time": "gourmet",
+                "description": "Confit de Canard à l'ail en chemise, Poêlée d'asperges vertes , Purée aligot de chou fleur"
               },
               {
                 "meal_time": "unknown",
@@ -4564,8 +4564,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Escalope de Poulet fermier au Pesto de noix, Palets de Brocolis au parmesan"
+                "meal_time": "gourmet",
+                "description": "Escalope de Poulet fermier au Pesto de noix, Palets de Brocolis au parmesan"
               },
               {
                 "meal_time": "unknown",
@@ -4603,8 +4603,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Saumon poêlé et sa compotée de tomates et olives, Courgettes Persillées, Semoule de chou fleur aux poivrons"
+                "meal_time": "gourmet",
+                "description": "Saumon poêlé et sa compotée de tomates et olives, Courgettes Persillées, Semoule de chou fleur aux poivrons"
               },
               {
                 "meal_time": "unknown",
@@ -4634,8 +4634,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet mignon de Porc sauce moutarde à l'ancienne, Gratin de légumes"
+                "meal_time": "gourmet",
+                "description": "Filet mignon de Porc sauce moutarde à l'ancienne, Gratin de légumes"
               },
               {
                 "meal_time": "unknown",
@@ -4673,8 +4673,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Parmentier de Confit de Canard au Crumble d'amandes & parmesan (au Chou fleur & Potiron)"
+                "meal_time": "gourmet",
+                "description": "Parmentier de Confit de Canard au Crumble d'amandes & parmesan (au Chou fleur & Potiron)"
               },
               {
                 "meal_time": "unknown",
@@ -4711,8 +4711,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Pavé de Mahi Mahi Sauce Vierge, Légumes du soleil rôtis, Risotto de konjac"
+                "meal_time": "gourmet",
+                "description": "Pavé de Mahi Mahi Sauce Vierge, Légumes du soleil rôtis, Risotto de konjac"
               },
               {
                 "meal_time": "unknown",
@@ -4750,8 +4750,8 @@
             "formule": "LC",
             "plats": [
               {
-                "meal_time": "unknown",
-                "description": "GOURMET : Filet d'Agneau à la Mozzarella & Tomates séchées, Gratin Dauphinois de Navets & Courgettes"
+                "meal_time": "gourmet",
+                "description": "Filet d'Agneau à la Mozzarella & Tomates séchées, Gratin Dauphinois de Navets & Courgettes"
               },
               {
                 "meal_time": "unknown",

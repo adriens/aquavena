@@ -24,6 +24,10 @@ class MealTime(str, Enum):
     SOIR = "soir"
     GOURMET_MIDI = "gourmet_midi"
     GOURMET_SOIR = "gourmet_soir"
+    GOURMET = "gourmet"
+    VEGE = "vege"
+    FRESH = "fresh"
+    KIDS = "kids"
     UNKNOWN = "unknown"
 
 
@@ -53,7 +57,7 @@ class DayMenu:
         return [d for d in self.plats if d.meal_time == MealTime.SOIR]
 
     def gourmet(self) -> list[Dish]:
-        return [d for d in self.plats if d.meal_time in (MealTime.GOURMET_MIDI, MealTime.GOURMET_SOIR)]
+        return [d for d in self.plats if d.meal_time in (MealTime.GOURMET_MIDI, MealTime.GOURMET_SOIR, MealTime.GOURMET)]
 
 
 @dataclass
