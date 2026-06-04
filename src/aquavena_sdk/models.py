@@ -45,7 +45,9 @@ class DayMenu:
     date: str          # ISO format: "2026-05-18"
     label: str         # "Lundi 18 mai 2026"
     formule: str       # e.g. "CD"
+    entrees: list[str] = field(default_factory=list)
     plats: list[Dish] = field(default_factory=list)
+    desserts: list[str] = field(default_factory=list)
     supplements: list[str] = field(default_factory=list)
     boissons: list[str] = field(default_factory=list)
     boutique: list[str] = field(default_factory=list)

@@ -154,6 +154,13 @@ BIEN_ETRE_HTML = """
     <div class="text-center">
       <div>
         <div class="text-center">
+          <h3><span class="type-plat-menu">Entrée</span></h3>
+          <div class="text-center">
+            <p class="desc-plat">Flan Saumon fumé, Chèvre &amp; Basilic</p>
+            <p class="desc-plat">Pizza Margherita</p>
+          </div>
+        </div>
+        <div class="text-center">
           <h3><span class="type-plat-menu">Plat</span></h3>
           <div class="text-center">
             <p class="desc-plat">Bœuf Bourguignon, Carottes, Spaghettis</p>
@@ -163,6 +170,18 @@ BIEN_ETRE_HTML = """
             <p class="desc-plat">VEGE : Steak de Quinoa et Courgettes au Chèvre</p>
             <p class="desc-plat">FRESH : Salade de Quinoa Citronné, Pois chiches et Feta</p>
             <p class="desc-plat">Aqua'Kids (Portion Enfant) : Lasagnes au Poulet</p>
+          </div>
+        </div>
+        <div class="text-center">
+          <h3><span class="type-plat-menu">Dessert</span></h3>
+          <div class="text-center">
+            <p class="desc-plat">Crème Vanille Coulis caramel</p>
+          </div>
+        </div>
+        <div class="text-center">
+          <h3><span class="type-plat-menu">Dessert Sans Sucre / Sans Gluten</span></h3>
+          <div class="text-center">
+            <p class="desc-plat">Pannacotta au coulis de Framboises</p>
           </div>
         </div>
       </div>
@@ -217,3 +236,17 @@ def test_bien_etre_standard_plat_is_unknown():
     day = _parse_regime_menu(BIEN_ETRE_HTML, "aqua-bien-être-family").days[0]
     unknown = [d for d in day.plats if d.meal_time == MealTime.UNKNOWN]
     assert any("Bœuf" in d.description for d in unknown)
+
+
+def test_bien_etre_entrees():
+    day = _parse_regime_menu(BIEN_ETRE_HTML, "aqua-bien-être-family").days[0]
+    assert len(day.entrees) == 2
+    assert any("Saumon fumé" in e for e in day.entrees)
+    assert any("Pizza" in e for e in day.entrees)
+
+
+def test_bien_etre_desserts():
+    day = _parse_regime_menu(BIEN_ETRE_HTML, "aqua-bien-être-family").days[0]
+    assert len(day.desserts) == 2
+    assert any("Crème Vanille" in d for d in day.desserts)
+    assert any("Pannacotta" in d for d in day.desserts)

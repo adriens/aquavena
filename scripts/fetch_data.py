@@ -22,7 +22,9 @@ def _day(day: DayMenu) -> dict:
         "date": day.date,
         "label": day.label,
         "formule": day.formule,
+        "entrees": day.entrees,
         "plats": [{"meal_time": d.meal_time.value, "description": d.description} for d in day.plats],
+        "desserts": day.desserts,
         "supplements": day.supplements,
         "boissons": day.boissons,
     }

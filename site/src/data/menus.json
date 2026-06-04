@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-05T10:05:40",
+  "generated_at": "2026-06-05T10:08:51",
   "today": "2026-06-05",
   "regimes": [
     {
@@ -14,7 +14,9 @@
             "date": "2026-06-01",
             "label": "Lundi 1 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -28,7 +30,9 @@
             "date": "2026-06-02",
             "label": "Mardi 2 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -42,7 +46,9 @@
             "date": "2026-06-03",
             "label": "Mercredi 3 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -56,7 +62,9 @@
             "date": "2026-06-04",
             "label": "Jeudi 4 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -70,7 +78,9 @@
             "date": "2026-06-05",
             "label": "Vendredi 5 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -84,7 +94,9 @@
             "date": "2026-06-08",
             "label": "Lundi 8 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -98,7 +110,9 @@
             "date": "2026-06-09",
             "label": "Mardi 9 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -112,7 +126,9 @@
             "date": "2026-06-10",
             "label": "Mercredi 10 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -126,7 +142,9 @@
             "date": "2026-06-11",
             "label": "Jeudi 11 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -140,7 +158,9 @@
             "date": "2026-06-12",
             "label": "Vendredi 12 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -154,7 +174,9 @@
             "date": "2026-06-15",
             "label": "Lundi 15 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -168,7 +190,9 @@
             "date": "2026-06-16",
             "label": "Mardi 16 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -182,7 +206,9 @@
             "date": "2026-06-17",
             "label": "Mercredi 17 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -196,7 +222,9 @@
             "date": "2026-06-18",
             "label": "Jeudi 18 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -210,7 +238,9 @@
             "date": "2026-06-19",
             "label": "Vendredi 19 juin 2026",
             "formule": "BO",
+            "entrees": [],
             "plats": [],
+            "desserts": [],
             "supplements": [],
             "boissons": [
               "Perrier Forever Fraise 25cl (Sans sucre)",
@@ -236,6 +266,10 @@
             "date": "2026-06-01",
             "label": "Lundi 1 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Quiche au Saumon Fumé et Epinards",
+              "Salade Composée, Œuf dur, Figues et Noix"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -282,6 +316,12 @@
                 "description": "(Portion Enfant) : Spaghettis au Poulet crème aux champignons, Haricots verts Persillade"
               }
             ],
+            "desserts": [
+              "Poe Citrouille & Banane au Coco",
+              "Energy Ball : Pruneaux, Chocolat, amandes, miel et riz soufflé",
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Légumes chop Suey",
               "Purée de Lentilles Corail",
@@ -299,6 +339,10 @@
             "date": "2026-06-02",
             "label": "Mardi 2 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Brick au Thon et citron confit aux herbes",
+              "Tarte aux Trois fromages"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -361,6 +405,12 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Mousse au chocolat",
+              "Energy Ball : Pruneaux, Chocolat, amandes, miel et riz soufflé",
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Légumes rôtis",
               "Lentilles",
@@ -379,6 +429,10 @@
             "date": "2026-06-03",
             "label": "Mercredi 3 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Feuilleté au Chèvre et Confit d'oignons aux Pommes",
+              "Panna Cotta à la crème d'avocat & Tomates fraîches"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -441,6 +495,12 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Clafoutis aux fruits rouges",
+              "Energy Ball : Pruneaux, Chocolat, amandes, miel et riz soufflé",
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Légumes rôtis",
               "Nouilles Chinoises",
@@ -459,6 +519,10 @@
             "date": "2026-06-04",
             "label": "Jeudi 4 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Quiche Lorraine",
+              "Pizza Aubergines Chèvre et miel"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -521,6 +585,12 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Croustade aux Pommes",
+              "Energy Ball : Pruneaux, Chocolat, amandes, miel et riz soufflé",
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Carottes rôties",
               "Riz blanc",
@@ -538,6 +608,10 @@
             "date": "2026-06-05",
             "label": "Vendredi 5 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Rillettes de Thon au citron, Carottes croquantes au gingembre et sésame & Toasts",
+              "Feuilleté à la Tomate, mozzarella et Pesto"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -600,6 +674,12 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Flan pâtissier",
+              "Energy Ball : Pruneaux, Chocolat, amandes, miel et riz soufflé",
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Carottes & champignons",
               "Polenta",
@@ -617,6 +697,10 @@
             "date": "2026-06-08",
             "label": "Lundi 8 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Flammekueche",
+              "Quiche Aubergine Chèvre miel"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -663,6 +747,12 @@
                 "description": "(Portion Enfant) : Lasagnes au Poulet, Epinards, Mozzarella et Parmesan"
               }
             ],
+            "desserts": [
+              "Crumble aux Pommes",
+              "Energy Ball : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Carottes",
               "Riz Blanc",
@@ -680,6 +770,10 @@
             "date": "2026-06-09",
             "label": "Mardi 9 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Galettes de Poulet Sauce Tzatzíki",
+              "Flan aux légumes du soleil & Parmesan"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -742,6 +836,12 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Tarte Bourdaloue (Poires & Amandes)",
+              "Energy Ball : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Haricots Verts Persillés",
               "Riz blanc",
@@ -759,6 +859,10 @@
             "date": "2026-06-10",
             "label": "Mercredi 10 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Salade Thaï de Poulet, papayes vertes, carottes & cacahuètes",
+              "Pizza fine Raclette et champignons"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -821,6 +925,12 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Mousse au Chocolat",
+              "Energy Ball : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Haricots verts Persillés",
               "Pain Sans Gluten / Keto"
@@ -837,6 +947,10 @@
             "date": "2026-06-11",
             "label": "Jeudi 11 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Brick au jambon et emmental",
+              "Tarte Feuilletée aux légumes du soleil, chèvre au Miel & Thym"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -899,6 +1013,12 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Tiramisu",
+              "Energy Ball : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Haricots verts persillés",
               "Riz blanc",
@@ -917,6 +1037,10 @@
             "date": "2026-06-12",
             "label": "Vendredi 12 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Wrap au Thon, crudités, œuf dur, salade Mayonnaise",
+              "Brick aux épinards et Feta"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -979,6 +1103,12 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Riz au Lait, caramel au beurre salé",
+              "Energy Ball : Chocolat, Amandes, miel, pruneaux et abricots",
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Légumes rôtis",
               "Riz blanc",
@@ -997,6 +1127,10 @@
             "date": "2026-06-15",
             "label": "Lundi 15 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Flan Saumon fumé,  Chèvre & Basilic",
+              "Pizza Margherita (tomate, mozzarella, basilic)"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -1043,6 +1177,12 @@
                 "description": "(Portion Enfant) : Gratin de Gnocchis au jambon, tomates, courgettes Gratinée à la mozzarella"
               }
             ],
+            "desserts": [
+              "Crème Vanille Coulis caramel beurre salé",
+              "Energy Ball : Chocolat, cranberries, raisins secs, amandes, noix, Graines de Chia, vanille",
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Carottes braisées",
               "Tagliatelles de Konjac",
@@ -1060,6 +1200,10 @@
             "date": "2026-06-16",
             "label": "Mardi 16 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Flammekueche",
+              "Croquettes de légumes à l'emmental"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -1122,6 +1266,12 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Tarte aux Poires",
+              "Energy Ball : Chocolat, cranberries, raisins secs, amandes, noix, Graines de Chia, vanille",
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Epinards à l'indienne",
               "Purée de pois cassés",
@@ -1140,6 +1290,10 @@
             "date": "2026-06-17",
             "label": "Mercredi 17 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Brick Poireaux, Lardons & Mozza",
+              "Salade de Pois chiches & Butternut rôti, à la Feta & Graines de courge"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -1202,6 +1356,12 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Mousse au chocolat",
+              "Energy Ball : Chocolat, cranberries, raisins secs, amandes, noix, Graines de Chia, vanille",
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Haricots verts persillés",
               "Pain Sans Gluten / Keto"
@@ -1218,6 +1378,10 @@
             "date": "2026-06-18",
             "label": "Jeudi 18 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Salade de foies de volaille aux figues rôties au miel",
+              "Tarte Feuilleté aux épinards & Chèvre"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -1280,6 +1444,12 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Tiramisu",
+              "Energy Ball : Chocolat, cranberries, raisins secs, amandes, noix, Graines de Chia, vanille",
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Poêlée de Courgettes",
               "Polenta Gratinée",
@@ -1298,6 +1468,10 @@
             "date": "2026-06-19",
             "label": "Vendredi 19 juin 2026",
             "formule": "BE",
+            "entrees": [
+              "Quiche lorraine",
+              "Bruschettas Mexicaine avocat & tomates"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -1360,6 +1534,12 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Mousse aux fruits rouges",
+              "Energy Ball : Chocolat, cranberries, raisins secs, amandes, noix, Graines de Chia, vanille",
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Squash rôties",
               "Potatoes",
@@ -1416,6 +1596,7 @@
             "date": "2026-06-01",
             "label": "Lundi 1 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -1442,6 +1623,7 @@
                 "description": "Magret de Canard crème au cidre, Ecrasé de Patates douces"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Légumes chop Suey",
               "Purée de Lentilles Corail",
@@ -1459,6 +1641,7 @@
             "date": "2026-06-02",
             "label": "Mardi 2 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -1497,6 +1680,7 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Légumes rôtis",
               "Lentilles",
@@ -1515,6 +1699,7 @@
             "date": "2026-06-03",
             "label": "Mercredi 3 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -1553,6 +1738,7 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Légumes rôtis",
               "Nouilles Chinoises",
@@ -1571,6 +1757,7 @@
             "date": "2026-06-04",
             "label": "Jeudi 4 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -1609,6 +1796,7 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Carottes rôties",
               "Riz blanc",
@@ -1626,6 +1814,7 @@
             "date": "2026-06-05",
             "label": "Vendredi 5 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -1664,6 +1853,7 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Carottes & champignons",
               "Polenta",
@@ -1681,6 +1871,7 @@
             "date": "2026-06-08",
             "label": "Lundi 8 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -1707,6 +1898,7 @@
                 "description": "Poulet crème légère moutardée à l'estragon, Courgettes grillées"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Carottes",
               "Riz Blanc",
@@ -1724,6 +1916,7 @@
             "date": "2026-06-09",
             "label": "Mardi 9 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -1762,6 +1955,7 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Haricots Verts Persillés",
               "Riz blanc",
@@ -1779,6 +1973,7 @@
             "date": "2026-06-10",
             "label": "Mercredi 10 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -1817,6 +2012,7 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Haricots verts Persillés",
               "Pain Sans Gluten / Keto"
@@ -1833,6 +2029,7 @@
             "date": "2026-06-11",
             "label": "Jeudi 11 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -1871,6 +2068,7 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Haricots verts persillés",
               "Riz blanc",
@@ -1889,6 +2087,7 @@
             "date": "2026-06-12",
             "label": "Vendredi 12 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -1927,6 +2126,7 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Légumes rôtis",
               "Riz blanc",
@@ -1945,6 +2145,7 @@
             "date": "2026-06-15",
             "label": "Lundi 15 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -1971,6 +2172,7 @@
                 "description": "Saumon poêlé et sa compotée de tomates et olives, Courgettes Persillées, Semoule de chou fleur aux poivrons"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Carottes braisées",
               "Tagliatelles de Konjac",
@@ -1988,6 +2190,7 @@
             "date": "2026-06-16",
             "label": "Mardi 16 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2022,6 +2225,7 @@
                 "description": "POKE BOWL :  Crevettes Riz de konjac au sésame Tomates, Aubergines marinées, Concombre, Salade Verte, Endives, Noix, Vinaigrette sauce Tahini"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Epinards à l'indienne",
               "Purée de pois cassés",
@@ -2040,6 +2244,7 @@
             "date": "2026-06-17",
             "label": "Mercredi 17 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2074,6 +2279,7 @@
                 "description": "POKE BOWL : Tartare de Thon Jaune et Saumon Fumé   Riz de konjac au sésame Navets rôtis, Poivrons marinés, Betteraves, Salade Verte, Chou vert, Graines de courge, Sauce Cacahuètes"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Haricots verts persillés",
               "Pain Sans Gluten / Keto"
@@ -2090,6 +2296,7 @@
             "date": "2026-06-18",
             "label": "Jeudi 18 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2124,6 +2331,7 @@
                 "description": "POKE BOWL :  Tartare de Thon Jaune et Saumon Fumé, Riz de konjac au sésame, Papayes, Squash rôtie, Tomates, Salade Verte, Endives, Oignons frits, Cacahuètes, Vinaigrette au curry"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Poêlée de Courgettes",
               "Polenta Gratinée",
@@ -2142,6 +2350,7 @@
             "date": "2026-06-19",
             "label": "Vendredi 19 juin 2026",
             "formule": "CD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2176,6 +2385,7 @@
                 "description": "POKE BOWL :  Tartare de Thon Jaune et Saumon Fumé, Riz de konjac au sésame, Carottes, Courgettes marinées à l'huile d'olive, Haricots verts , Salade Verte, Chou Vert, Mix de graines, Vinaigrette Thaï"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Squash rôties",
               "Potatoes",
@@ -2232,12 +2442,14 @@
             "date": "2026-06-01",
             "label": "Lundi 1 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
                 "description": "Saucisses de Poireaux à la mimolette et son confit d'oignons, Légumes Rôtis , Purée de Pois cassés"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Légumes chop Suey",
               "Purée de Lentilles Corail",
@@ -2255,6 +2467,7 @@
             "date": "2026-06-02",
             "label": "Mardi 2 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -2265,6 +2478,7 @@
                 "description": "Mini Buddha Bowl : Toast de Chèvre, Fonds d'artichauts, Poivrons, Concombres, Salade verte, Chou vert, Pommes, Noix, Vinaigrette Balsamique et Miel"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Légumes rôtis",
               "Lentilles",
@@ -2283,6 +2497,7 @@
             "date": "2026-06-03",
             "label": "Mercredi 3 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -2293,6 +2508,7 @@
                 "description": "Mini Buddha Bowl : Salade de Quinoa et pois chiches, Haricots verts, Citrouille rôtie, Tomates , Salade Verte, Chou kalé, Olives marinées , fruits secs, Mix de graines, Sauce Cacahuètes"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Légumes rôtis",
               "Nouilles Chinoises",
@@ -2311,6 +2527,7 @@
             "date": "2026-06-04",
             "label": "Jeudi 4 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -2321,6 +2538,7 @@
                 "description": "Mini Buddha Bowl : Houmous de Haricots Blanc aux sésames, Toasts grillés, Brocolis, Courgettes marinées, Carottes, Salade Verte, Choux Rouge, Fruits secs, cacahuètes, Vinaigrette Citron, Ail & Persil"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Carottes rôties",
               "Riz blanc",
@@ -2338,6 +2556,7 @@
             "date": "2026-06-05",
             "label": "Vendredi 5 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -2348,6 +2567,7 @@
                 "description": "Mini Buddha Bowl : Palets de Quinoa au Chèvre, Tomates, Aubergines poêlées, Choux-fleurs, Salade Verte, Endives, Olives marinées , Amandes, Vinaigrette au pesto"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Carottes & champignons",
               "Polenta",
@@ -2365,12 +2585,14 @@
             "date": "2026-06-08",
             "label": "Lundi 8 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
                 "description": "Steak de Quinoa et Courgettes au Chèvre, Tian de légumes, Risotto"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Carottes",
               "Riz Blanc",
@@ -2388,6 +2610,7 @@
             "date": "2026-06-09",
             "label": "Mardi 9 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -2398,6 +2621,7 @@
                 "description": "Mini Buddha Bowl : Salade de Pommes de Terre au Maïs, Radis, Tomates, Poivrons rôtis marinés, Salade Verte, Endives, copeaux de parmesan, Graines de courge & Tournesol, Sauce Caesar"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Haricots Verts Persillés",
               "Riz blanc",
@@ -2415,6 +2639,7 @@
             "date": "2026-06-10",
             "label": "Mercredi 10 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -2425,6 +2650,7 @@
                 "description": "Mini Buddha Bowl : Mini Bruschettas Aubergine & Chèvre, Betteraves, Concombre, Courgette grillée, Salade Verte, Chou Vert, Tomates confites, Cacahuètes, Vinaigrette à l'italienne"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Haricots verts Persillés",
               "Pain Sans Gluten / Keto"
@@ -2441,6 +2667,7 @@
             "date": "2026-06-11",
             "label": "Jeudi 11 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -2451,6 +2678,7 @@
                 "description": "Mini Buddha Bowl : Boulettes de légumineuses à l'Indienne, Concombres, Aubergines grillées, Papaye verte râpée, Salade Verte, Chou Kalé, Graines de sésame, Sauce Vinaigrette au Curry"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Haricots verts persillés",
               "Riz blanc",
@@ -2469,6 +2697,7 @@
             "date": "2026-06-12",
             "label": "Vendredi 12 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -2479,6 +2708,7 @@
                 "description": "Mini Buddha Bowl : Polenta au Bleu & au Noix, Fond d'artichaut, Carottes, Tomates, Salade Verte, Chou rouge, Olives Marinées,  Graines de Pavot, Vinaigrette Traditionnelle"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Légumes rôtis",
               "Riz blanc",
@@ -2497,12 +2727,14 @@
             "date": "2026-06-15",
             "label": "Lundi 15 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
                 "description": "Mafé Végétarien (Plat africain de légumes et pois chiches au beurre de cacahuètes), Riz blanc"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Carottes braisées",
               "Tagliatelles de Konjac",
@@ -2520,6 +2752,7 @@
             "date": "2026-06-16",
             "label": "Mardi 16 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -2530,6 +2763,7 @@
                 "description": "Mini Buddha Bowl : Fallafels, Riz à sushi, Tomates, Aubergines marinées, Concombre, Salade Verte, Endives, Olives, Noix, Vinaigrette sauce Tahini"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Epinards à l'indienne",
               "Purée de pois cassés",
@@ -2548,6 +2782,7 @@
             "date": "2026-06-17",
             "label": "Mercredi 17 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -2558,6 +2793,7 @@
                 "description": "Mini Buddha Bowl : Boulettes de riz aux Cacahuètes & Sésames, Riz à sushi, Navets rôtis, Poivrons marinés, Betteraves, Salade Verte, Chou vert, Mimolette, Graines de courge, Sauce Cacahuètes"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Haricots verts persillés",
               "Pain Sans Gluten / Keto"
@@ -2574,6 +2810,7 @@
             "date": "2026-06-18",
             "label": "Jeudi 18 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -2584,6 +2821,7 @@
                 "description": "Mini Buddha Bowl : Boulettes de légumineuses à l'Indienne, Riz à sushi, Papayes, Squash rôtie, Tomates, Salade Verte, Endives, , Cacahuètes, Vinaigrette au curry"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Poêlée de Courgettes",
               "Polenta Gratinée",
@@ -2602,6 +2840,7 @@
             "date": "2026-06-19",
             "label": "Vendredi 19 juin 2026",
             "formule": "VD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -2612,6 +2851,7 @@
                 "description": "Mini Buddha Bowl : Mini bruschettas aubergine chèvre, Riz à sushi, Carottes, Courgettes marinées à l'huile d'olive, Haricots verts , Salade Verte, Chou Vert, Emmental, Mix de graines, Vinaigrette César (aux anchois)"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Squash rôties",
               "Potatoes",
@@ -2658,6 +2898,7 @@
             "date": "2026-06-01",
             "label": "Lundi 1 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2668,6 +2909,7 @@
                 "description": "Pavé de saumon au Pesto de Noix , Tian de légumes"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2682,6 +2924,7 @@
             "date": "2026-06-02",
             "label": "Mardi 2 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "soir",
@@ -2692,6 +2935,7 @@
                 "description": "Poulet Fermier sauce crémeuse aux tomates confites, olives et herbes fraiches, Légumes rôtis à l'ail et persil, Polenta"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2706,6 +2950,7 @@
             "date": "2026-06-03",
             "label": "Mercredi 3 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2716,6 +2961,7 @@
                 "description": "Crevettes Sautées Ail & Persil, Escalivade (légumes du soleil marinés à l'huile olive et aux herbes)"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2730,6 +2976,7 @@
             "date": "2026-06-04",
             "label": "Jeudi 4 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2740,6 +2987,7 @@
                 "description": "Tataki de Thon jaune en croute de graines, Avocat, Emincé de chou vert et tomates cerises au citron, gingembre et huile d'olive"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2754,6 +3002,7 @@
             "date": "2026-06-05",
             "label": "Vendredi 5 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2764,6 +3013,7 @@
                 "description": "Suprême de Poulet Fermier, Caponata Sicilienne (Aubergines marinées rôties au Olives, Parmesan, raisins et amandes effilées)"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2778,6 +3028,7 @@
             "date": "2026-06-08",
             "label": "Lundi 8 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "soir",
@@ -2788,6 +3039,7 @@
                 "description": "Magret de Canard  au Chutney de figues, Squash au Four, Purée de Pommes de terre  aux olives"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2802,6 +3054,7 @@
             "date": "2026-06-09",
             "label": "Mardi 9 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2812,6 +3065,7 @@
                 "description": "Duo Méditerranéen de Thon jaune et Crevettes au Pesto, Aubergines rôties au Thym et Caviar de Poivrons"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2826,6 +3080,7 @@
             "date": "2026-06-10",
             "label": "Mercredi 10 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2836,6 +3091,7 @@
                 "description": "Poulet Fermier mijoté aux olives et au thym, Légumes rôtis"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2850,6 +3106,7 @@
             "date": "2026-06-11",
             "label": "Jeudi 11 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2860,6 +3117,7 @@
                 "description": "Tartare de Saumon & Thon jaune, citron, basilic, tomates séchées & Parmesan, Légumes méditerranéens grillés, huile d'olive & herbes"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2874,6 +3132,7 @@
             "date": "2026-06-12",
             "label": "Vendredi 12 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "soir",
@@ -2884,6 +3143,7 @@
                 "description": "Duo de mahi mahi & Crevettes en persillade, Sauce rouille (mayonnaise à l'ail et au safran), légumes rôtis, Ecrasé de Patates douces"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2898,6 +3158,7 @@
             "date": "2026-06-15",
             "label": "Lundi 15 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2908,6 +3169,7 @@
                 "description": "Crevettes flambées au Pastis, Semoule de chou fleur aux légumes rôtis citronnés"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2922,6 +3184,7 @@
             "date": "2026-06-16",
             "label": "Mardi 16 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2932,6 +3195,7 @@
                 "description": "Tartare de Saumon et Thon jaune, Caponata (Aubergines fondantes aux tomates, olives et capres)"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2946,6 +3210,7 @@
             "date": "2026-06-17",
             "label": "Mercredi 17 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "soir",
@@ -2956,6 +3221,7 @@
                 "description": "Poulet Fermier à la sicilienne (aux câpres et anchois, raisins secs et amandes effilées), Poivrons à l'ail et origan, Pommes de terre persillées"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2970,6 +3236,7 @@
             "date": "2026-06-18",
             "label": "Jeudi 18 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -2980,6 +3247,7 @@
                 "description": "Filet de Saumon des dieux au Pesto Rosso, Courgettes et Poivrons rôtis"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -2994,6 +3262,7 @@
             "date": "2026-06-19",
             "label": "Vendredi 19 juin 2026",
             "formule": "MD",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -3004,6 +3273,7 @@
                 "description": "Filet de Mahi Mahi Crème de citron confit au paprika doux , Légumes du soleil et champignons rôtis à l'origan"
               }
             ],
+            "desserts": [],
             "supplements": [
               "Pain Sans Gluten / Keto"
             ],
@@ -3046,6 +3316,7 @@
             "date": "2026-06-01",
             "label": "Lundi 1 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3064,6 +3335,10 @@
                 "description": "Magret de Canard aux Pommes caramélisées et au Cidre, Carottes glacées, Ecrasé de Patates douces"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Légumes chop Suey",
               "Purée de Lentilles Corail",
@@ -3081,6 +3356,7 @@
             "date": "2026-06-02",
             "label": "Mardi 2 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3107,6 +3383,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Légumes rôtis",
               "Lentilles",
@@ -3125,6 +3405,7 @@
             "date": "2026-06-03",
             "label": "Mercredi 3 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3151,6 +3432,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Légumes rôtis",
               "Nouilles Chinoises",
@@ -3169,6 +3454,7 @@
             "date": "2026-06-04",
             "label": "Jeudi 4 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3195,6 +3481,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Carottes rôties",
               "Riz blanc",
@@ -3212,6 +3502,7 @@
             "date": "2026-06-05",
             "label": "Vendredi 5 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3238,6 +3529,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Carottes & champignons",
               "Polenta",
@@ -3255,6 +3550,7 @@
             "date": "2026-06-08",
             "label": "Lundi 8 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3273,6 +3569,10 @@
                 "description": "Tajine de Souris d'Agneau aux Olives, Légumes rôtis, Quinoa aux raisins secs"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Carottes",
               "Riz Blanc",
@@ -3290,6 +3590,7 @@
             "date": "2026-06-09",
             "label": "Mardi 9 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3316,6 +3617,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Haricots Verts Persillés",
               "Riz blanc",
@@ -3333,6 +3638,7 @@
             "date": "2026-06-10",
             "label": "Mercredi 10 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3359,6 +3665,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Haricots verts Persillés",
               "Pain Sans Gluten / Keto"
@@ -3375,6 +3685,7 @@
             "date": "2026-06-11",
             "label": "Jeudi 11 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3401,6 +3712,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Haricots verts persillés",
               "Riz blanc",
@@ -3419,6 +3734,7 @@
             "date": "2026-06-12",
             "label": "Vendredi 12 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3445,6 +3761,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Légumes rôtis",
               "Riz blanc",
@@ -3463,6 +3783,7 @@
             "date": "2026-06-15",
             "label": "Lundi 15 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3481,6 +3802,10 @@
                 "description": "Saumon poêlé et sa compotée de tomates et olives, Courgettes Persillées, Ecrasé de Pommes de Terre"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Carottes braisées",
               "Tagliatelles de Konjac",
@@ -3498,6 +3823,7 @@
             "date": "2026-06-16",
             "label": "Mardi 16 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3524,6 +3850,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Epinards à l'indienne",
               "Purée de pois cassés",
@@ -3542,6 +3872,7 @@
             "date": "2026-06-17",
             "label": "Mercredi 17 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3568,6 +3899,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Haricots verts persillés",
               "Pain Sans Gluten / Keto"
@@ -3584,6 +3919,7 @@
             "date": "2026-06-18",
             "label": "Jeudi 18 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3610,6 +3946,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Poêlée de Courgettes",
               "Polenta Gratinée",
@@ -3628,6 +3968,7 @@
             "date": "2026-06-19",
             "label": "Vendredi 19 juin 2026",
             "formule": "GM",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3653,6 +3994,10 @@
                 "meal_time": "unknown",
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
+            ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
             ],
             "supplements": [
               "Squash rôties",
@@ -3700,6 +4045,9 @@
             "date": "2026-06-01",
             "label": "Lundi 1 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Salade Composée, Œuf dur, Figues et Noix"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3709,6 +4057,11 @@
                 "meal_time": "unknown",
                 "description": "Tajine de Boulettes de Lentilles corail, Légumes Orientaux, Semoule aux raisins secs"
               }
+            ],
+            "desserts": [
+              "Poe Citrouille & Papaye au Coco",
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
             ],
             "supplements": [
               "Légumes chop Suey",
@@ -3728,6 +4081,9 @@
             "date": "2026-06-02",
             "label": "Mardi 2 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Tarte aux Trois fromages"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3745,6 +4101,11 @@
                 "meal_time": "unknown",
                 "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
               }
+            ],
+            "desserts": [
+              "Mousse au chocolat",
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
             ],
             "supplements": [
               "Légumes rôtis",
@@ -3765,6 +4126,9 @@
             "date": "2026-06-03",
             "label": "Mercredi 3 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Panna Cotta à la crème d'avocat & Tomates fraîches"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3782,6 +4146,11 @@
                 "meal_time": "unknown",
                 "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
               }
+            ],
+            "desserts": [
+              "Clafoutis aux fruits rouges",
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
             ],
             "supplements": [
               "Légumes rôtis",
@@ -3802,6 +4171,9 @@
             "date": "2026-06-04",
             "label": "Jeudi 4 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Pizza Aubergines Chèvre et miel"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3819,6 +4191,11 @@
                 "meal_time": "unknown",
                 "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
               }
+            ],
+            "desserts": [
+              "Croustade aux Pommes",
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
             ],
             "supplements": [
               "Carottes rôties",
@@ -3838,6 +4215,9 @@
             "date": "2026-06-05",
             "label": "Vendredi 5 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Feuilleté à la Tomate, mozzarella et Pesto"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3855,6 +4235,11 @@
                 "meal_time": "unknown",
                 "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
               }
+            ],
+            "desserts": [
+              "Flan pâtissier",
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
             ],
             "supplements": [
               "Carottes & champignons",
@@ -3874,6 +4259,9 @@
             "date": "2026-06-08",
             "label": "Lundi 8 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Quiche Aubergine Chèvre miel"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3883,6 +4271,11 @@
                 "meal_time": "unknown",
                 "description": "Bouchées d'épinards à la mozza, Légumes du Soleil rôtis, Houmous au Pesto"
               }
+            ],
+            "desserts": [
+              "Crumble aux Pommes",
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
             ],
             "supplements": [
               "Carottes",
@@ -3902,6 +4295,9 @@
             "date": "2026-06-09",
             "label": "Mardi 9 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Flan aux légumes du soleil & Parmesan"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3919,6 +4315,11 @@
                 "meal_time": "unknown",
                 "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
               }
+            ],
+            "desserts": [
+              "Tarte Bourdaloue (Poires & Amandes)",
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
             ],
             "supplements": [
               "Haricots Verts Persillés",
@@ -3938,6 +4339,9 @@
             "date": "2026-06-10",
             "label": "Mercredi 10 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Pizza fine Raclette et champignons"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3956,6 +4360,11 @@
                 "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
               }
             ],
+            "desserts": [
+              "Mousse au Chocolat",
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Haricots verts Persillés",
               "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
@@ -3973,6 +4382,9 @@
             "date": "2026-06-11",
             "label": "Jeudi 11 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Tarte Feuilletée aux légumes du soleil, chèvre au Miel & Thym"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -3990,6 +4402,11 @@
                 "meal_time": "unknown",
                 "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
               }
+            ],
+            "desserts": [
+              "Tiramisu",
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
             ],
             "supplements": [
               "Haricots verts persillés",
@@ -4010,6 +4427,9 @@
             "date": "2026-06-12",
             "label": "Vendredi 12 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Brick aux épinards et Feta"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -4027,6 +4447,11 @@
                 "meal_time": "unknown",
                 "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
               }
+            ],
+            "desserts": [
+              "Riz au Lait, caramel au beurre salé",
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
             ],
             "supplements": [
               "Légumes rôtis",
@@ -4047,6 +4472,9 @@
             "date": "2026-06-15",
             "label": "Lundi 15 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Pizza Margherita (tomate, mozzarella, basilic)"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -4056,6 +4484,11 @@
                 "meal_time": "unknown",
                 "description": "Parmentier de Potiron aux lentilles, Bleu et Noix"
               }
+            ],
+            "desserts": [
+              "Crème Vanille Coulis caramel beurre salé",
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
             ],
             "supplements": [
               "Carottes braisées",
@@ -4075,6 +4508,9 @@
             "date": "2026-06-16",
             "label": "Mardi 16 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Croquettes de légumes à l'emmental"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -4092,6 +4528,11 @@
                 "meal_time": "unknown",
                 "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
               }
+            ],
+            "desserts": [
+              "Tarte aux Poires",
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
             ],
             "supplements": [
               "Epinards à l'indienne",
@@ -4112,6 +4553,9 @@
             "date": "2026-06-17",
             "label": "Mercredi 17 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Salade de Pois chiches & Butternut rôti, à la Feta & Graines de courge"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -4130,6 +4574,11 @@
                 "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
               }
             ],
+            "desserts": [
+              "Mousse au chocolat",
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Haricots verts persillés",
               "Energy balls : Chocolat, cranberries, raisins secs, amandes, noix, Graines de Chia, vanille",
@@ -4147,6 +4596,9 @@
             "date": "2026-06-18",
             "label": "Jeudi 18 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Tarte Feuilleté aux épinards & Chèvre"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -4164,6 +4616,11 @@
                 "meal_time": "unknown",
                 "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
               }
+            ],
+            "desserts": [
+              "Tiramisu",
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
             ],
             "supplements": [
               "Poêlée de Courgettes",
@@ -4184,6 +4641,9 @@
             "date": "2026-06-19",
             "label": "Vendredi 19 juin 2026",
             "formule": "VG",
+            "entrees": [
+              "Bruschettas Mexicaine avocat & tomates"
+            ],
             "plats": [
               {
                 "meal_time": "unknown",
@@ -4201,6 +4661,11 @@
                 "meal_time": "unknown",
                 "description": "MINI BUDDHA BOWL (même composition que le Buddha Bowl)"
               }
+            ],
+            "desserts": [
+              "Mousse aux fruits rouges",
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
             ],
             "supplements": [
               "Squash rôties",
@@ -4233,6 +4698,7 @@
             "date": "2026-06-01",
             "label": "Lundi 1 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4246,6 +4712,10 @@
                 "meal_time": "unknown",
                 "description": "Poêlée de Thon et Marlin au Pesto Rosso, Légumes Rôtis"
               }
+            ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
             ],
             "supplements": [
               "Légumes chop Suey",
@@ -4263,6 +4733,7 @@
             "date": "2026-06-02",
             "label": "Mardi 2 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4285,6 +4756,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Légumes rôtis",
               "Perles de Konjac",
@@ -4302,6 +4777,7 @@
             "date": "2026-06-03",
             "label": "Mercredi 3 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4324,6 +4800,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Légumes rôtis",
               "Riz de Konjac",
@@ -4341,6 +4821,7 @@
             "date": "2026-06-04",
             "label": "Jeudi 4 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4363,6 +4844,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Carottes rôties",
               "Pain Sans Gluten / Keto"
@@ -4379,6 +4864,7 @@
             "date": "2026-06-05",
             "label": "Vendredi 5 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4401,6 +4887,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Carottes & champignons",
               "Pain Sans Gluten / Keto"
@@ -4417,6 +4907,7 @@
             "date": "2026-06-08",
             "label": "Lundi 8 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4430,6 +4921,10 @@
                 "meal_time": "unknown",
                 "description": "Poêlée de seiches persillade, Poêlée méridionale de tomates et poivrons, Riz de chou fleur"
               }
+            ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
             ],
             "supplements": [
               "Carottes",
@@ -4447,6 +4942,7 @@
             "date": "2026-06-09",
             "label": "Mardi 9 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4469,6 +4965,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Haricots Verts Persillés",
               "Pain Sans Gluten / Keto"
@@ -4485,6 +4985,7 @@
             "date": "2026-06-10",
             "label": "Mercredi 10 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4507,6 +5008,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Haricots verts Persillés",
               "Pain Sans Gluten / Keto"
@@ -4523,6 +5028,7 @@
             "date": "2026-06-11",
             "label": "Jeudi 11 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4545,6 +5051,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Haricots verts persillés",
               "Riz de Konjac",
@@ -4562,6 +5072,7 @@
             "date": "2026-06-12",
             "label": "Vendredi 12 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4584,6 +5095,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Légumes rôtis",
               "Riz de Konjac",
@@ -4601,6 +5116,7 @@
             "date": "2026-06-15",
             "label": "Lundi 15 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4614,6 +5130,10 @@
                 "meal_time": "unknown",
                 "description": "Fricassée de Poulet aux foies de volaille à l'ail et fines herbes, Fondue de poireaux, Risotto de konjac"
               }
+            ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
             ],
             "supplements": [
               "Carottes braisées",
@@ -4632,6 +5152,7 @@
             "date": "2026-06-16",
             "label": "Mardi 16 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4654,6 +5175,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Epinards à l'indienne",
               "Riz de konjac",
@@ -4671,6 +5196,7 @@
             "date": "2026-06-17",
             "label": "Mercredi 17 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4693,6 +5219,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Haricots verts persillés",
               "Pain Sans Gluten / Keto"
@@ -4709,6 +5239,7 @@
             "date": "2026-06-18",
             "label": "Jeudi 18 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4731,6 +5262,10 @@
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Poêlée de Courgettes",
               "Perles de konjac safrané",
@@ -4748,6 +5283,7 @@
             "date": "2026-06-19",
             "label": "Vendredi 19 juin 2026",
             "formule": "LC",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "gourmet",
@@ -4769,6 +5305,10 @@
                 "meal_time": "unknown",
                 "description": "MINI POKE BOWL (même composition que le Poke Bowl)"
               }
+            ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
             ],
             "supplements": [
               "Squash rôties",
@@ -4840,6 +5380,7 @@
             "date": "2026-06-01",
             "label": "Lundi 1 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -4866,6 +5407,10 @@
                 "description": "Magret de Canard aux Pommes caramélisées et au Cidre, Carottes glacées, Ecrasé de Patates douces"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Energy balls : Pruneaux, Chocolat, amandes, miel et riz soufflé",
               "Légumes chop Suey",
@@ -4884,6 +5429,7 @@
             "date": "2026-06-02",
             "label": "Mardi 2 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -4910,6 +5456,10 @@
                 "description": "Saumon Poêlé et sa Compotée de Tomates & olives, Poivrons marinés, Riz de Konjac"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Energy balls : Pruneaux, Chocolat, amandes, miel et riz soufflé",
               "Légumes rôtis",
@@ -4929,6 +5479,7 @@
             "date": "2026-06-03",
             "label": "Mercredi 3 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -4955,6 +5506,10 @@
                 "description": "Poulpe grillé en persillade, Tomates cerises rôties & chou-fleur rôti"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Energy balls : Pruneaux, Chocolat, amandes, miel et riz soufflé",
               "Légumes rôtis",
@@ -4974,6 +5529,7 @@
             "date": "2026-06-04",
             "label": "Jeudi 4 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -5000,6 +5556,10 @@
                 "description": "Pavé de Mahi Mahi  au Pesto de Noix, Tian de légumes"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Energy balls : Pruneaux, Chocolat, amandes, miel et riz soufflé",
               "Carottes rôties",
@@ -5018,6 +5578,7 @@
             "date": "2026-06-05",
             "label": "Vendredi 5 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -5044,6 +5605,10 @@
                 "description": "Filet mignon de Porc rôti crème aux champignons, Squash au four, Gratin dauphinois"
               }
             ],
+            "desserts": [
+              "Panna cotta au coulis de Framboises",
+              "Fondant au chocolat 100% Cacao (Meilleur chauffé 30 sec au micro-onde)"
+            ],
             "supplements": [
               "Energy balls : Pruneaux, Chocolat, amandes, miel et riz soufflé",
               "Carottes & champignons",
@@ -5062,6 +5627,7 @@
             "date": "2026-06-08",
             "label": "Lundi 8 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -5088,6 +5654,10 @@
                 "description": "Poulet crème légère moutardée à l'estragon, Courgettes grillées"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
               "Carottes",
@@ -5106,6 +5676,7 @@
             "date": "2026-06-09",
             "label": "Mardi 9 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -5132,6 +5703,10 @@
                 "description": "Mi-cuit de Thon Jaune au Pesto Rosso, Caviar de légumes méditerranéens"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
               "Haricots Verts Persillés",
@@ -5150,6 +5725,7 @@
             "date": "2026-06-10",
             "label": "Mercredi 10 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -5176,6 +5752,10 @@
                 "description": "Pavé de Saumon à la gremolata, Haricots verts persillés, Riz de Konjac"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
               "Haricots verts Persillés",
@@ -5193,6 +5773,7 @@
             "date": "2026-06-11",
             "label": "Jeudi 11 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -5219,6 +5800,10 @@
                 "description": "Confit de Canard à l'ail en chemise, Poêlée d'asperges vertes , Purée Aligot"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
               "Haricots verts persillés",
@@ -5238,6 +5823,7 @@
             "date": "2026-06-12",
             "label": "Vendredi 12 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -5264,6 +5850,10 @@
                 "description": "Escalope de Poulet fermier au Pesto de noix, Palets de Brocolis au parmesan, Polenta Gratinée"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Mousse au Chocolat et Beurre de Cacahuètes"
+            ],
             "supplements": [
               "Energy balls : Chocolat, Amandes, miel, pruneaux et abricots",
               "Légumes rôtis",
@@ -5283,6 +5873,7 @@
             "date": "2026-06-15",
             "label": "Lundi 15 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -5309,6 +5900,10 @@
                 "description": "Saumon poêlé et sa compotée de tomates et olives, Courgettes Persillées, Semoule de chou fleur aux poivrons"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Energy balls : Chocolat, cranberries, raisins secs, amandes, noix, Graines de Chia, vanille",
               "Carottes braisées",
@@ -5327,6 +5922,7 @@
             "date": "2026-06-16",
             "label": "Mardi 16 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -5353,6 +5949,10 @@
                 "description": "Filet mignon de Porc sauce moutarde à l'ancienne, Haricots verts Extra fins, Gratin dauphinois"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Energy balls : Chocolat, cranberries, raisins secs, amandes, noix, Graines de Chia, vanille",
               "Epinards à l'indienne",
@@ -5372,6 +5972,7 @@
             "date": "2026-06-17",
             "label": "Mercredi 17 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -5398,6 +5999,10 @@
                 "description": "Parmentier de Confit de Canard au Crumble d'amandes & parmesan (aux Pommes de terre et Potiron)"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Energy balls : Chocolat, cranberries, raisins secs, amandes, noix, Graines de Chia, vanille",
               "Haricots verts persillés",
@@ -5415,6 +6020,7 @@
             "date": "2026-06-18",
             "label": "Jeudi 18 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -5441,6 +6047,10 @@
                 "description": "Pavé de Mahi Mahi Sauce Vierge, Légumes du soleil rôtis"
               }
             ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
+            ],
             "supplements": [
               "Energy balls : Chocolat, cranberries, raisins secs, amandes, noix, Graines de Chia, vanille",
               "Poêlée de Courgettes",
@@ -5460,6 +6070,7 @@
             "date": "2026-06-19",
             "label": "Vendredi 19 juin 2026",
             "formule": "SP",
+            "entrees": [],
             "plats": [
               {
                 "meal_time": "midi",
@@ -5485,6 +6096,10 @@
                 "meal_time": "gourmet_midi",
                 "description": "Filet d'Agneau à la Mozzarella & Tomates séchées, Légumes du soleil rôtis , Polenta gratinée"
               }
+            ],
+            "desserts": [
+              "Pannacotta au coulis de Framboises",
+              "Flan Pâtissier"
             ],
             "supplements": [
               "Energy balls : Chocolat, cranberries, raisins secs, amandes, noix, Graines de Chia, vanille",
