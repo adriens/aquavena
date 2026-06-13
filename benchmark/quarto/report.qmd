@@ -40,7 +40,11 @@ format:
       - design thinking
     include-in-header:
       text: |
+        \input{git-sha.tex}
         \usepackage{fontawesome5}
+        \newcommand{\kwpill}[1]{%
+          \mbox{\colorbox{teal100}{\footnotesize\color{teal700}\strut\,#1\,}}\hspace{3pt}%
+        }
         \usepackage{xcolor}
         \usepackage{hyperref}
         \usepackage{tikz}
@@ -129,16 +133,27 @@ format:
           {\color{teal700}\faGithub}~\href{https://github.com/adriens/aquavena}{\texttt{github.com/adriens/aquavena}}
 
           \vspace{0.8cm}
-          {\large\today}
+          {\small\color{gray!60!black}{\faCodeBranch}~\texttt{\gitsha}}
 
-          \vspace{1.4cm}
+          \end{titlepage}
 
-          \begin{center}
-          \textbf{Abstract}
-          \end{center}
-          \begin{center}
-          \begin{minipage}{0.85\textwidth}
-          \centering\small\itshape
+          % ─── Abstract page ────────────────────────────────────────────────
+          \begin{titlepage}
+          \centering
+          \vspace*{3cm}
+
+          {\color{teal700}\rule{0.5\textwidth}{1.5pt}}
+
+          \vspace{1.2cm}
+
+          {\fontsize{18}{22}\selectfont\bfseries\color{teal700} Abstract}
+
+          \vspace{1.2cm}
+
+          \begin{minipage}{0.78\textwidth}
+          \setlength{\parindent}{0pt}
+          \setlength{\parskip}{0.8em}
+          \normalsize\itshape
           This report automatically compares the web accessibility of
           \textbf{\textit{adriens.github.io/aquavena}} — designed for visually
           impaired users — against the source website \textbf{\textit{aquavena.nc}},
@@ -147,13 +162,30 @@ format:
           Results show a \textbf{\textit{100/100 Lighthouse score and 0 WCAG 2.1 AA
           errors}} for our site, versus 91/100 and 67~errors for the official website.
           All audit data is persisted in a DuckDB database for longitudinal tracking.
-          \\ \vspace{0.6em}
-          {\normalfont\small \textbf{Keywords:} civitech, tech for good, inclusive design,
-          digital inclusion, accessibility, WCAG, visually impaired, social impact,
-          assistive technology, elderly care, aging population, senior accessibility,
-          human-centered design, design thinking, New Caledonia.}
+
+          \vspace{1.5em}
           \end{minipage}
-          \end{center}
+          \begin{minipage}{0.82\textwidth}
+          \raggedright
+          \kwpill{civitech}%
+          \kwpill{tech for good}%
+          \kwpill{inclusive design}%
+          \kwpill{digital inclusion}%
+          \kwpill{accessibility}%
+          \kwpill{WCAG}%
+          \kwpill{visually impaired}%
+          \kwpill{social impact}%
+          \kwpill{assistive technology}%
+          \kwpill{elderly care}%
+          \kwpill{aging population}%
+          \kwpill{senior accessibility}%
+          \kwpill{human-centered design}%
+          \kwpill{design thinking}%
+          \kwpill{New Caledonia}%
+          \end{minipage}
+
+          \vspace{1.5cm}
+          {\color{teal700}\rule{0.5\textwidth}{1.5pt}}
 
           \end{titlepage}
           \newpage
@@ -510,13 +542,54 @@ if (nrow(new_lh) > 0) dbAppendTable(con, "lighthouse_audits", new_lh)
 # — checks out each tag, builds, serves and audits the same menu page) override
 # these values when the file is present.
 sh_data <- tibble::tibble(
-  tag          = c("aquavena.nc","v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0","v1.7.0","v1.8.0","v1.9.0"),
-  git_sha      = c(NA_character_, "0fdeff3","76658ae","9a5ca91","81fba2b","a59d12d","eccabc3","534854c","2e5e47e","9dc1a0b","dd2a22b"),
-  audit_date   = as.Date(c("2026-05-30","2026-05-29","2026-05-30","2026-05-30",
-                            "2026-05-30","2026-05-30","2026-05-30","2026-05-30","2026-05-30","2026-05-31","2026-05-31")),
-  lh_score     = c(91L, 82L, 86L, 89L, 93L, 96L, 98L, 100L, 100L, 100L, 100L),
-  pa11y_errors = c(67L,  5L,  3L,  2L,  1L,  0L,  0L,   0L,   0L,   0L,   0L),
-  lines_delta  = c(0L, 17352L, 13L, 28L, 10L, 95L, 308L, 1240L, 919L, 0L, 0L)
+  tag          = c(
+    "aquavena.nc",
+    "v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5",
+    "v1.4.0","v1.5.0","v1.6.0","v1.7.0","v1.8.0","v1.9.0",
+    "v1.10.0","v1.11.0","v1.11.1","v1.11.2",
+    "v1.12.0","v1.12.1","v1.12.2","v1.12.3","v1.12.4","v1.12.5","v1.12.6",
+    "v1.13.0","v1.13.1","v1.14.0"
+  ),
+  git_sha      = c(
+    NA_character_,
+    "0fdeff3","76658ae","9a5ca91","81fba2b","a59d12d",
+    "6b3a9ea","805481b","308cd78","2e5e47e","9dc1a0b","dd2a22b",
+    "a5d9ba7","6f5334f","d4b70eb","e7fd200",
+    "56e8c1c","ad1732a","589ab14","cd352ba","138caa8","50922d3","326b2af",
+    "98e65f8","919f36a","52fc47b"
+  ),
+  audit_date   = as.Date(c(
+    "2026-05-30",
+    "2026-05-29","2026-05-30","2026-05-30","2026-05-30","2026-05-30",
+    "2026-05-31","2026-05-31","2026-05-31","2026-05-30","2026-05-31","2026-05-31",
+    "2026-05-31","2026-05-31","2026-05-31","2026-05-31",
+    "2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31",
+    "2026-05-31","2026-05-31","2026-05-31"
+  )),
+  lh_score     = c(
+    91L,
+    82L, 86L, 89L, 93L, 96L,
+    100L, 100L, 100L, 100L, 100L, 100L,
+    100L, 100L, 100L, 100L,
+    100L, 100L, 100L, 100L, 100L, 100L, 100L,
+    100L, 100L, 100L
+  ),
+  pa11y_errors = c(
+    67L,
+    5L, 3L, 2L, 1L, 0L,
+    0L, 0L, 0L, 0L, 0L, 0L,
+    0L, 0L, 0L, 0L,
+    0L, 0L, 0L, 0L, 0L, 0L, 0L,
+    0L, 0L, 0L
+  ),
+  lines_delta  = c(
+    0L,
+    1356L, 13L, 28L, 10L, 95L,
+    215L, 8L, 18L, 179L, 0L, 0L,
+    15L, 24L, 0L, 7L,
+    107L, 2L, 42L, 12L, 1L, 21L, 1L,
+    14L, 0L, 13L
+  )
 )
 
 # Override lh_score with real measurements when available
@@ -563,49 +636,112 @@ new_sh <- sh_data |> filter(!tag %in% existing_sh)
 if (nrow(new_sh) > 0) dbAppendTable(con, "score_history", new_sh)
 
 gr_data <- tibble::tibble(
-  tag          = c("v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0","v1.7.0","v1.8.0","v1.9.0"),
+  tag          = c(
+    "v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5",
+    "v1.4.0","v1.5.0","v1.6.0","v1.7.0","v1.8.0","v1.9.0",
+    "v1.10.0","v1.11.0","v1.11.1","v1.11.2",
+    "v1.12.0","v1.12.1","v1.12.2","v1.12.3","v1.12.4","v1.12.5","v1.12.6",
+    "v1.13.0","v1.13.1","v1.14.0"
+  ),
   release_name = c(
     "v0.1.1 - Contraste WCAG AA & menus Aqua-Chrono-Vege",
     "v0.1.2 - Onglets regimes lisibles en mode nuit",
     "v0.1.3 - Audit accessibilite WCAG2AA en ligne de commande",
     "v0.1.4 - Contraste bouton Lire + audit local renforce",
     "v0.1.5 - Rapport accessibilite complet : Lighthouse 100/100",
-    "v1.5.0 - Score accessibilite 100/100 : toutes violations WCAG corrigees + benchmark/",
-    "v1.6.0 - Benchmark : graphiques pipeline, cycle d'amelioration et discipline de release",
+    "v1.4.0 - Correction affichage menus",
+    "v1.5.0 - Navigation amelioree",
+    "v1.6.0 - Boutons A+/A- visibles sur mobile",
     "v1.7.0 - Schema FK, glossaire, outils, trend chart",
     "v1.8.0 - Executive Dashboard, ML semantic analysis & full audit replay",
-    "v1.9.0 - Graph DS, retro Gantt, edge bundling & artistic cover"
+    "v1.9.0 - Graph DS, retro Gantt, edge bundling & artistic cover",
+    "v1.10.0 - Affichage intelligent des menus commandables",
+    "v1.11.0 - Navigation horizontale : fleches clavier et swipe tactile",
+    "v1.11.1 - Dependabot active (npm + pip)",
+    "v1.11.2 - Affichage epure + fleches clavier corrigees",
+    "v1.12.0 - Astro v6, Fonts API locale, header repense",
+    "v1.12.1 - Titre header simplifie",
+    "v1.12.2 - Recherche dans la barre de titre",
+    "v1.12.3 - Label bouton raccourci",
+    "v1.12.4 - Suppression des codes formule",
+    "v1.12.5 - Swipe horizontal corrige sur ecran tactile laptop",
+    "v1.12.6 - Page noire au swipe supprimee",
+    "v1.13.0 - Content Security Policy activee",
+    "v1.13.1 - Licence AGPL v3",
+    "v1.14.0 - Migration Tailwind CSS v3 -> v4"
   ),
-  published_at    = as.Date(c("2026-05-29","2026-05-30","2026-05-30","2026-05-30",
-                               "2026-05-30","2026-05-30","2026-05-30","2026-05-30","2026-05-31","2026-05-31")),
-  published_at_ts = as.POSIXct(c("2026-05-29 23:58:03","2026-05-30 00:02:20","2026-05-30 00:14:10",
-                                  "2026-05-30 00:17:29","2026-05-30 00:21:35","2026-05-30 00:43:38",
-                                  "2026-05-30 03:52:36","2026-05-30 04:26:04","2026-05-30 17:49:08","2026-05-31 17:55:00"), tz = "UTC"),
+  published_at    = as.Date(c(
+    "2026-05-29","2026-05-30","2026-05-30","2026-05-30","2026-05-30",
+    "2026-05-31","2026-05-31","2026-05-31","2026-05-30","2026-05-31","2026-05-31",
+    "2026-05-31","2026-05-31","2026-05-31","2026-05-31",
+    "2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31",
+    "2026-05-31","2026-05-31","2026-05-31"
+  )),
+  published_at_ts = as.POSIXct(c(
+    "2026-05-29 23:58:03","2026-05-30 00:02:20","2026-05-30 00:14:10",
+    "2026-05-30 00:17:29","2026-05-30 00:21:35",
+    "2026-05-31 05:54:38","2026-05-31 05:59:21","2026-05-31 06:05:11",
+    "2026-05-30 04:26:04","2026-05-30 17:49:08","2026-05-30 18:49:55",
+    "2026-05-31 04:28:11","2026-05-31 04:31:33","2026-05-31 04:35:08","2026-05-31 04:40:34",
+    "2026-05-31 04:50:28","2026-05-31 04:55:12","2026-05-31 04:57:39","2026-05-31 04:59:49",
+    "2026-05-31 05:04:08","2026-05-31 05:07:16","2026-05-31 05:10:07",
+    "2026-05-31 05:14:37","2026-05-31 05:19:09","2026-05-31 05:28:51"
+  ), tz = "UTC"),
   url           = c(
     "https://github.com/adriens/aquavena/releases/tag/v0.1.1",
     "https://github.com/adriens/aquavena/releases/tag/v0.1.2",
     "https://github.com/adriens/aquavena/releases/tag/v0.1.3",
     "https://github.com/adriens/aquavena/releases/tag/v0.1.4",
     "https://github.com/adriens/aquavena/releases/tag/v0.1.5",
+    "https://github.com/adriens/aquavena/releases/tag/v1.4.0",
     "https://github.com/adriens/aquavena/releases/tag/v1.5.0",
     "https://github.com/adriens/aquavena/releases/tag/v1.6.0",
     "https://github.com/adriens/aquavena/releases/tag/v1.7.0",
     "https://github.com/adriens/aquavena/releases/tag/v1.8.0",
-    "https://github.com/adriens/aquavena/releases/tag/v1.9.0"
+    "https://github.com/adriens/aquavena/releases/tag/v1.9.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.10.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.11.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.11.1",
+    "https://github.com/adriens/aquavena/releases/tag/v1.11.2",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.1",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.2",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.3",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.4",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.5",
+    "https://github.com/adriens/aquavena/releases/tag/v1.12.6",
+    "https://github.com/adriens/aquavena/releases/tag/v1.13.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.13.1",
+    "https://github.com/adriens/aquavena/releases/tag/v1.14.0"
   ),
-  author        = rep("adriens", 10),
-  is_prerelease = rep(FALSE, 10),
+  author        = rep("adriens", 25),
+  is_prerelease = rep(FALSE, 25),
   body_excerpt  = c(
     "Corrections contraste WCAG AA theme clair — tous les composants menus (Aqua, Chrono, Vege) passent desormais le ratio 4.5:1.",
     "Correction contraste onglets regimes en mode nuit — les noms de regime sont desormais lisibles sur fond sombre.",
     "Nouvel audit WCAG2AA automatise via npm run a11y (pa11y-ci) — integration dans le pipeline de validation.",
     "Correction contraste bouton Lire sur jours ordinaires + renforcement de l'audit local.",
     "Rapport accessibilite complet via npm run report : pa11y-ci + Lighthouse. Score Lighthouse 100/100.",
-    "Score 100/100 Lighthouse, 0 erreur pa11y. Ajout dossier benchmark/ avec pipeline d'audit automatise.",
-    "Benchmark enrichi : graphiques ggplot2 pipeline de donnees, cycle d'amelioration, discipline de release semantique.",
+    "Desactivation CSP — bug Astro v6 bloquait le JavaScript et masquait tous les menus.",
+    "Navigation circulaire entre onglets (fleches + swipe). Suppression du prefixe Aqua dans les noms d'onglets.",
+    "Boutons A+ et A- deplaces sous le titre Aquavena pour les rendre visibles sur mobile.",
     "Schema DuckDB avec cles etrangeres, diagramme SchemaCrawler, glossaire, section outils, chart de tendance.",
     "Executive Dashboard PMI, analyse semantique ML (bge-m3 multilingue), audits HTML/poids/privacy, replay historique, schema 12 tables.",
-    "Graph data science (PageRank + betweenness), retro Gantt avec temps actif, ForceAtlas2 + datashader bundling, couverture galactique, CC BY-SA 4.0."
+    "Graph data science (PageRank + betweenness), retro Gantt avec temps actif, ForceAtlas2 + datashader bundling, couverture galactique, CC BY-SA 4.0.",
+    "N'afficher que les menus commandables selon le jour de consultation.",
+    "Navigation horizontale entre regimes via fleches clavier et swipe tactile.",
+    "Activation Dependabot pour npm et pip.",
+    "Suppression description regime et correction fleches clavier PC.",
+    "Migration Astro v6, API Fonts locale, refonte du header, nettoyage UI.",
+    "Titre header simplifie — Aquavena avec icone malvoyants.",
+    "Recherche alignee sur la meme ligne que le titre dans le header.",
+    "Label Lire semaine (etait Lire toute la semaine).",
+    "Suppression du code formule (MD, VG, LC) dans les cartes menu.",
+    "Swipe horizontal corrige sur ecran tactile laptop.",
+    "Suppression page noire au swipe sur mobile.",
+    "Activation Content Security Policy via Astro v6.",
+    "Ajout licence AGPL v3.",
+    "Migration Tailwind CSS v3 -> v4 (CSS-first, sans fichier de config)."
   )
 )
 existing_gr <- dbGetQuery(con, "SELECT tag FROM gh_releases")$tag
@@ -853,7 +989,7 @@ accessible front door to a service my mother loves.
 
 This dashboard reads directly from `benchmark.duckdb` at render time and produces
 the KPIs most relevant to a delivery committee: classical **EVM** (Earned Value
-Management), modern **DORA** elite-performance indicators, the **WCAG defect
+Management), modern **DORA** (DevOps Research and Assessment) elite-performance indicators, the **WCAG defect
 burndown**, the **sprint velocity** profile, and the **strategic gap** between our
 work and the source site. Nothing in the charts below is hardcoded — every figure
 is computed live from the six FK-linked tables described in the appendix. Re-running
@@ -1077,8 +1213,26 @@ vel$idx   <- seq_len(nrow(vel))
 avg_v     <- round(mean(vel$lines_delta), 0)
 scale_factor <- max(vel$lines_delta) / max(vel$cum)
 
+# Tailwind v4 migration story: v1.14.0 = upgrade (regression), v1.4.0 = CSP fix
+vel$bar_fill <- dplyr::case_when(
+  vel$tag == "v1.14.0" ~ "tailwind",
+  vel$tag == "v1.4.0"  ~ "fix",
+  TRUE ~ "normal"
+)
+idx_tw  <- vel$idx[vel$tag == "v1.14.0"]
+idx_fix <- vel$idx[vel$tag == "v1.4.0"]
+max_y   <- max(vel$lines_delta)
+
 ggplot(vel, aes(x = idx)) +
-  geom_col(aes(y = lines_delta), fill = "#0f766e", width = 0.55) +
+  geom_col(aes(y = lines_delta, fill = bar_fill), width = 0.55) +
+  scale_fill_manual(values = c(normal = "#0f766e", tailwind = "#f59e0b", fix = "#6366f1"),
+                    guide = "none") +
+  annotate("text", x = idx_tw,  y = max_y * 0.55,
+           label = "Tailwind v4\nmigration ↓", size = 2.3,
+           colour = "#b45309", hjust = 0.5, fontface = "bold") +
+  annotate("text", x = idx_fix, y = max_y * 0.75,
+           label = "CSP regression\nfix ↓",  size = 2.3,
+           colour = "#4338ca", hjust = 0.5, fontface = "bold") +
   geom_text(aes(y = lines_delta,
                 label = format(lines_delta, big.mark = ",", trim = TRUE)),
             vjust = -0.4, size = 2.5, colour = "grey25") +
@@ -1107,10 +1261,17 @@ ggplot(vel, aes(x = idx)) +
 
 ## DORA metrics — elite performance
 
-The four DORA metrics (DevOps Research and Assessment, *Accelerate State of
-DevOps Report*) are computed from the timestamps stored in `gh_releases.published_at_ts`
-and from the `ci_runs` table. All four land in the **Elite** tier of DORA's
-2023 benchmark.
+The **DORA** acronym used throughout this report stands for **DevOps Research
+and Assessment** — the Google research programme that defines the four key
+software-delivery metrics (Deployment Frequency, Lead Time for Changes, Change
+Failure Rate, MTTR). This is distinct from the EU financial regulation of the
+same acronym (Digital Operational Resilience Act, 2022/2554).
+
+The DORA metrics (DevOps Research and Assessment) are computed from the timestamps
+stored in `gh_releases.published_at_ts` and from the `ci_runs` table.
+Results land in the **Elite** tier as defined by Forsgren et al.,
+*Accelerate State of DevOps Report 2023* (Google Cloud / DORA,
+\href{https://dora.dev/research/2023/dora-report/}{dora.dev/research/2023}).
 
 ```{r dora-panel, results="asis"}
 ts <- dbGetQuery(con, "
@@ -1121,22 +1282,28 @@ gap_mins        <- as.numeric(diff(ts), units = "mins")
 median_lead     <- round(median(gap_mins), 1)
 total_hours     <- as.numeric(difftime(max(ts), min(ts), units = "hours"))
 deploys_per_day <- round(length(ts) / (total_hours / 24), 1)
-cfr_pct         <- 0     # zero rollbacks / hotfixes across all releases
-mttr_label      <- "n/a"  # no incidents → no MTTR to report
+
+# MTTR: time between v1.14.0 (Tailwind regression) and v1.4.0 (CSP fix)
+mttr_ts <- dbGetQuery(con, "
+  SELECT tag, published_at_ts FROM gh_releases
+  WHERE tag IN ('v1.14.0', 'v1.4.0')
+")
+t_incident <- as.POSIXct(mttr_ts$published_at_ts[mttr_ts$tag == "v1.14.0"], tz = "UTC")
+t_restore  <- as.POSIXct(mttr_ts$published_at_ts[mttr_ts$tag == "v1.4.0"],  tz = "UTC")
+mttr_mins  <- round(as.numeric(difftime(t_restore, t_incident, units = "mins")), 0)
 
 cat("```{=latex}
 \\begin{center}
 \\renewcommand{\\arraystretch}{1.35}
-\\begin{tabular}{>{\\centering\\arraybackslash}p{0.20\\textwidth}>{\\centering\\arraybackslash}p{0.20\\textwidth}>{\\centering\\arraybackslash}p{0.20\\textwidth}>{\\centering\\arraybackslash}p{0.20\\textwidth}}
+\\begin{tabular}{>{\\centering\\arraybackslash}p{0.28\\textwidth}>{\\centering\\arraybackslash}p{0.28\\textwidth}>{\\centering\\arraybackslash}p{0.28\\textwidth}}
 \\toprule
 {\\Huge\\color{teal700}\\faRocket} &
 {\\Huge\\color{teal700}\\faClock} &
-{\\Huge\\color{teal700}\\faBug} &
 {\\Huge\\color{teal700}\\faWrench} \\\\
-", sprintf("{\\Large\\textbf{%s/day}} & {\\Large\\textbf{%s\\,min}} & {\\Large\\textbf{%s\\%%}} & {\\Large\\textbf{%s}} \\\\\n",
-  deploys_per_day, median_lead, cfr_pct, mttr_label),
-"Deployment Frequency & Lead Time for Changes & Change Failure Rate & MTTR \\\\
-\\small\\color{teal700}\\itshape Elite & \\small\\color{teal700}\\itshape Elite & \\small\\color{teal700}\\itshape Elite & \\small\\color{teal700}\\itshape Elite \\\\
+", sprintf("{\\Large\\textbf{%s/day}} & {\\Large\\textbf{%s\\,min}} & {\\Large\\textbf{%s\\,min}} \\\\\n",
+  deploys_per_day, median_lead, mttr_mins),
+"Deployment Frequency & Lead Time for Changes & MTTR (Tailwind regression) \\\\
+\\small\\color{teal700}\\itshape Elite & \\small\\color{teal700}\\itshape Elite & \\small\\color{teal700}\\itshape Elite \\\\
 \\bottomrule
 \\end{tabular}
 \\end{center}
@@ -1144,18 +1311,22 @@ cat("```{=latex}
 ```
 
 \begin{center}\small\itshape
-DORA 2023 Elite tier: on-demand deploys, lead time < 1\,h, CFR 0–15\%, MTTR < 1\,h.
+Forsgren et al., \textit{Accelerate State of DevOps Report 2023}, Google Cloud / DORA ---
+Elite tier: on-demand deploys, lead time $<$ 1\,h, MTTR $<$ 1\,h.
 \end{center}
 
-## Development activity heatmap
+\begin{center}
+\begin{minipage}{0.82\textwidth}
+\small\color{gray!60!black}
+\textbf{Lead Time for Changes} — time between consecutive releases (commit merged → live on GitHub Pages).
+Measured here as the median gap between release timestamps.
+A short lead time means fixes and features reach users quickly.
+\end{minipage}
+\end{center}
 
-Every commit from `git_commits.commit_ts` (converted to **Pacific/Noumea local
-time**) is binned into a day × hour grid. Cell intensity = commit count. This
-makes the *when* and the *how intensive* of the work immediately visible: the
-project ran in concentrated bursts, mostly late evenings and early mornings,
-with a peak hour during the rebuild sprint.
+## Development intensity
 
-```{r activity-heatmap, fig.height=4.2, fig.width=6.5, fig.align="center"}
+```{r activity-heatmap, fig.height=2.8, fig.width=6.5, fig.align="center"}
 commits <- dbGetQuery(con, "
   SELECT commit_ts FROM git_commits WHERE commit_ts IS NOT NULL
 ")
@@ -1165,97 +1336,46 @@ attr(ts_local, "tzone") <- "Pacific/Noumea"
 heat <- tibble::tibble(
   date = as.Date(ts_local, tz = "Pacific/Noumea"),
   hour = as.integer(format(ts_local, "%H", tz = "Pacific/Noumea"))
-) |>
-  dplyr::count(date, hour, name = "commits")
+) |> dplyr::count(date, hour, name = "commits")
 
-# Build a complete grid so empty cells render as 0 (clean visual)
 all_dates <- seq(min(heat$date), max(heat$date), by = "day")
 grid <- tidyr::expand_grid(date = all_dates, hour = 0:23) |>
   dplyr::left_join(heat, by = c("date", "hour")) |>
   dplyr::mutate(commits = tidyr::replace_na(commits, 0L))
 
-peak <- heat |> dplyr::slice_max(commits, n = 1)
+peak          <- heat |> dplyr::slice_max(commits, n = 1)
 total_commits <- nrow(commits)
 active_days   <- length(unique(heat$date))
 
-# Day/night classification (Pacific/Noumea) for the y-axis side panel
-DAY_START <- 6; DAY_END <- 18   # 06h–18h = daylight, otherwise = night
-
-# Commit totals per day-vs-night bucket
-period_totals <- grid |>
-  dplyr::mutate(period = ifelse(hour >= DAY_START & hour < DAY_END,
-                                 "Daylight", "Night")) |>
-  dplyr::group_by(period) |>
-  dplyr::summarise(commits = sum(commits), .groups = "drop")
-day_total   <- sum(period_totals$commits[period_totals$period == "Daylight"])
-night_total <- sum(period_totals$commits[period_totals$period == "Night"])
-day_pct     <- round(100 * day_total   / total_commits, 1)
-night_pct   <- round(100 * night_total / total_commits, 1)
-
-# Vertical "Day/Night" stripe on the LEFT to make the contrast explicit
-date_min <- min(grid$date)
-date_max <- max(grid$date)
-n_dates  <- length(unique(grid$date))
-stripe_x_min <- date_min - 0.95
-stripe_x_max <- date_min - 0.20
-stripe_mid_x <- date_min - 0.575   # midpoint between stripe_x_min and stripe_x_max
-
 ggplot(grid, aes(x = date, y = hour)) +
-  # Day/Night stripe + labels on the left margin
-  annotate("rect",
-           xmin = stripe_x_min, xmax = stripe_x_max,
-           ymin = -0.5,         ymax = DAY_START - 0.5,
-           fill = "#312e81", alpha = 0.18) +
-  annotate("rect",
-           xmin = stripe_x_min, xmax = stripe_x_max,
-           ymin = DAY_START - 0.5, ymax = DAY_END - 0.5,
-           fill = "#fde68a", alpha = 0.55) +
-  annotate("rect",
-           xmin = stripe_x_min, xmax = stripe_x_max,
-           ymin = DAY_END - 0.5, ymax = 23.5,
-           fill = "#312e81", alpha = 0.18) +
-  annotate("text",
-           x = stripe_mid_x,
-           y = (DAY_START + DAY_END) / 2,
-           label = sprintf("☼  Day\n%d commits\n(%g%%)",
-                            day_total, day_pct),
-           size = 2.4, fontface = "bold", colour = "#92400e",
-           lineheight = 0.95) +
-  annotate("text",
-           x = stripe_mid_x,
-           y = (DAY_END + 23.5 + 1) / 2 + 0.5,
-           label = sprintf("☾  Night\n%d commits\n(%g%%)",
-                            night_total, night_pct),
-           size = 2.4, fontface = "bold", colour = "#1e1b4b",
-           lineheight = 0.95) +
-  # The heatmap tiles themselves
-  geom_tile(aes(fill = commits), colour = "white", linewidth = 0.4) +
+  geom_tile(aes(fill = commits), colour = "white", linewidth = 0.3) +
   scale_fill_gradientn(
-    colours = c("#f8fafc", "#ccfbf1", "#5eead4", "#0f766e", "#134e4a"),
-    values  = scales::rescale(c(0, 1, 3, 6, max(grid$commits))),
-    name    = "Commits",
-    guide   = guide_colourbar(barwidth = 8, barheight = 0.5)
+    colours = c("#f1f5f9", "#99f6e4", "#0f766e", "#134e4a"),
+    values  = scales::rescale(c(0, 1, 4, max(grid$commits))),
+    name    = "commits",
+    guide   = guide_colourbar(barwidth = 6, barheight = 0.4,
+                               title.position = "left", title.vjust = 0.8)
   ) +
-  # Subtle horizontal dashed lines marking the daylight boundary on the heatmap
-  geom_hline(yintercept = DAY_START - 0.5,
-             linetype = "dotted", colour = "#f59e0b", linewidth = 0.5) +
-  geom_hline(yintercept = DAY_END - 0.5,
-             linetype = "dotted", colour = "#f59e0b", linewidth = 0.5) +
+  geom_hline(yintercept = 5.5,  linetype = "dotted", colour = "#94a3b8", linewidth = 0.4) +
+  geom_hline(yintercept = 17.5, linetype = "dotted", colour = "#94a3b8", linewidth = 0.4) +
+  annotate("text", x = min(grid$date), y = 11.5,
+           label = "day", size = 2.2, colour = "#94a3b8", hjust = -0.1) +
+  annotate("text", x = min(grid$date), y = 21,
+           label = "night", size = 2.2, colour = "#94a3b8", hjust = -0.1) +
   scale_x_date(breaks = unique(grid$date),
-               labels = format(unique(grid$date), "%a %d %b"),
-               limits = c(stripe_x_min - 0.10, date_max + 0.5),
-               expand = c(0, 0)) +
-  scale_y_reverse(breaks = c(0, 6, 9, 12, 15, 18, 21, 23),
-                  labels = c("00h","06h","09h","12h","15h","18h","21h","23h")) +
-  labs(title = sprintf("Development intensity — %d commits across %d active days",
-                        total_commits, active_days),
-       subtitle = sprintf("Local time (Pacific/Noumea, UTC+11). Peak: %d commits in one hour. Yellow zone = daylight (06h–18h).",
-                          peak$commits[1]),
-       x = NULL, y = "Hour of day") +
-  theme_minimal(base_size = 9) +
-  theme(panel.grid = element_blank(),
+               labels = format(unique(grid$date), "%a\n%d %b"),
+               expand = c(0.01, 0)) +
+  scale_y_reverse(breaks = c(0, 6, 12, 18, 23),
+                  labels = c("00h","06h","12h","18h","23h"),
+                  expand = c(0.01, 0)) +
+  labs(title = sprintf("%d commits · %d active days · peak %d/h",
+                       total_commits, active_days, peak$commits[1]),
+       x = NULL, y = NULL) +
+  theme_minimal(base_size = 8.5) +
+  theme(panel.grid    = element_blank(),
         legend.position = "bottom",
-        axis.text.x = element_text(angle = 0, hjust = 0.5))
+        legend.margin   = margin(t = -4),
+        plot.title      = element_text(size = 8.5, colour = "grey30"))
 ```
 
 ## AI-assisted delivery — Claude token consumption
@@ -1386,32 +1506,42 @@ for (s in unique(tag_rows$session)) {
   }
 }
 apport <- dplyr::bind_rows(apport)
-tag_levels <- c("v0.1.1","v0.1.2","v0.1.3","v0.1.4","v0.1.5","v1.5.0","v1.6.0","v1.7.0","v1.8.0")
-apport$tag <- factor(apport$tag, levels = tag_levels)
 
-# Cumulative tokens per tag (summed across models)
+# Derive tag order by semantic version using package_version() — handles multi-digit minors
+tags_unique <- unique(tag_rows$tag)
+tag_chron   <- tags_unique[order(package_version(sub("^v", "", tags_unique)))]
+apport$tag <- factor(apport$tag, levels = tag_chron)
+
+# Cumulative tokens per tag (summed across models), in chronological order
 cum_df <- apport |>
   dplyr::group_by(tag) |>
   dplyr::summarise(per_tag = sum(tokens), .groups = "drop") |>
+  dplyr::mutate(tag = factor(tag, levels = tag_chron)) |>
   dplyr::arrange(tag) |>
   dplyr::mutate(cumulative = cumsum(per_tag))
 
-# Scale the cumulative line onto the bar y-axis (millions of tokens)
-max_bar    <- max(cum_df$per_tag, na.rm = TRUE) / 1e6
-max_cum    <- max(cum_df$cumulative, na.rm = TRUE) / 1e6
-scale_fac  <- max_bar / max_cum
+# Bar totals for top labels
+bar_totals <- apport |>
+  dplyr::group_by(tag) |>
+  dplyr::summarise(total = sum(tokens), .groups = "drop")
 
-ggplot() +
+# Scale the cumulative line onto the bar y-axis (millions of tokens)
+max_bar   <- max(cum_df$per_tag, na.rm = TRUE) / 1e6
+max_cum   <- max(cum_df$cumulative, na.rm = TRUE) / 1e6
+scale_fac <- max_bar / max_cum
+
+# Tailwind v4 x-position (numeric index in factor)
+tw_idx <- which(tag_chron == "v1.14.0")
+
+p <- ggplot() +
   geom_col(data = apport,
            aes(x = tag, y = tokens / 1e6, fill = model),
            width = 0.6) +
-  geom_text(data = apport,
-            aes(x = tag, y = tokens / 1e6,
-                label = ifelse(tokens / 1e6 >= 1,
-                                paste0(sprintf("%.1f", tokens / 1e6), "M"),
-                                "")),
-            position = position_stack(vjust = 0.5),
-            colour = "white", fontface = "bold", size = 2.5) +
+  # Total label above each bar (avoids in-bar overlap on small bars)
+  geom_text(data = bar_totals,
+            aes(x = tag, y = total / 1e6,
+                label = paste0(sprintf("%.0f", total / 1e6), "M")),
+            vjust = -0.4, size = 2.3, colour = "grey30") +
   # Cumulative line (amber, secondary scale)
   geom_line(data = cum_df,
             aes(x = tag, y = cumulative / 1e6 * scale_fac, group = 1),
@@ -1419,11 +1549,16 @@ ggplot() +
   geom_point(data = cum_df,
              aes(x = tag, y = cumulative / 1e6 * scale_fac),
              colour = "#f59e0b", size = 2.2) +
-  geom_text(data = cum_df,
+  ggrepel::geom_text_repel(
+            data = cum_df,
             aes(x = tag, y = cumulative / 1e6 * scale_fac,
                 label = paste0(sprintf("%.0f", cumulative / 1e6), "M")),
-            colour = "#92400e", size = 2.4, fontface = "bold",
-            vjust = -1) +
+            colour = "#92400e", size = 2.2, fontface = "bold",
+            nudge_y = max_bar * 0.08,
+            direction = "x", segment.size = 0.3,
+            segment.colour = "#d97706", min.segment.length = 0.2,
+            max.overlaps = Inf) +
+  scale_x_discrete(limits = tag_chron) +
   scale_fill_manual(values = c(
     "claude-opus-4-7"   = "#7c3aed",
     "claude-sonnet-4-6" = "#0f766e"
@@ -1447,11 +1582,22 @@ ggplot() +
         panel.grid.major.x = element_blank(),
         axis.text.x = element_text(face = "bold", angle = 35, hjust = 1),
         axis.title.y.right = element_text(colour = "#f59e0b"))
+
+# Pin Tailwind v4 migration if the tag is present in the data
+if (length(tw_idx) > 0) {
+  p <- p +
+    geom_vline(xintercept = tw_idx, linetype = "dashed",
+               colour = "#f59e0b", linewidth = 0.6) +
+    annotate("text", x = tw_idx + 0.15, y = max_bar * 0.95,
+             label = "Tailwind v4\nmigration", hjust = 0,
+             size = 2.2, colour = "#b45309", fontface = "bold", lineheight = 0.9)
+}
+p
 ```
 
 ## Semantic analysis of commit messages
 
-All **81 commit messages** were embedded with the
+All **83 commit messages** were embedded with the
 `BAAI/bge-m3` model (1024-dimensional **multilingual** embeddings — handles
 the project's mix of French and English commit messages),
 clustered with K-Means into 6 groups, and projected to 2D with PCA. The
@@ -1549,6 +1695,19 @@ p_types + p_map
 The cluster terms below come from per-cluster TF-IDF; each row's exemplar is
 the commit closest to the cluster centroid in embedding space.
 
+\begin{center}
+\begin{minipage}{0.82\textwidth}
+\small\color{gray!60!black}
+\textbf{TF-IDF} (Term Frequency – Inverse Document Frequency) measures how
+characteristic a word is to one cluster compared to all others.
+A term scores high when it appears often \emph{inside} a cluster (TF) but
+rarely across the other clusters (IDF).
+It is what makes ``accessibility'' a top term for the feature cluster but not
+for the fix or chore clusters — even if the word appears everywhere, the IDF
+weight penalises it unless it is truly distinctive.
+\end{minipage}
+\end{center}
+
 ```{r commit-clusters-table}
 ct <- dbGetQuery(con, "
   SELECT cluster_id                     AS cluster,
@@ -1578,7 +1737,9 @@ degree, type, scope, timestamp) and edge weights, so the graph can be
 explored interactively (ForceAtlas2 layout, community detection, etc.) in
 Gephi without re-running the pipeline.
 
-![Commit-similarity graph — **ForceAtlas2** layout (Gephi's native algorithm, `fa2-modified` port) · node colour = cluster · node size = PageRank (normalised, ≈20× ratio) · edges = cosine similarity ≥ 0.55](commit_graph.png){width=92% fig-align="center"}
+![Commit-similarity graph — **ForceAtlas2** layout (Gephi native algorithm, `fa2-modified` port, 1 400 iterations) · node colour = semantic cluster · node size = PageRank (percentile-scaled, ≈80× area ratio) · edges = cosine similarity ≥ 0.55](commit_graph_cover.png){width=92% fig-align="center"}
+
+![Cluster-split view — same ForceAtlas2 positions as above · each panel spotlights one semantic cluster (full glow) while the rest fade to grey · intra-cluster edges are coloured, bridge edges are muted · anchor label = commit closest to centroid](commit_graph_clusters.png){width=100% fig-align="center"}
 
 ```{r anchors-bridges}
 anchors <- dbGetQuery(con, "
@@ -1636,189 +1797,181 @@ the codebase. Both are signals an experienced reviewer would notice manually
 — this method makes them queryable.
 :::
 
-### Retrospective Gantt — workstream activity over time
+### BUILD vs RUN — hackathon intensity over time
 
-Combining `git_commits.commit_ts`, `commit_classification.cluster_id`, and
-`gh_releases.published_at_ts` lets us reconstruct **when each semantic
-workstream was active** and overlay the release tags shipped along the way.
-Each horizontal bar spans the **first → last commit** of one cluster; each
-short vertical tick on the bar is an individual commit; the dashed vertical
-lines are **release tags** with their labels at the top. Local time is
-Pacific/Noumea (UTC+11).
+The chart below answers three questions at once: **when** was effort delivered,
+**what kind** of work it was (BUILD = new value, RUN = maintenance), and **how
+intense** the sessions were.
 
-```{r retro-gantt, fig.height=4.6, fig.width=7.0, fig.align="center"}
-cluster_palette <- c("0" = "#0f766e", "1" = "#dc2626", "2" = "#0891b2",
-                     "3" = "#7c3aed", "4" = "#f59e0b", "5" = "#059669")
+**Why conventional commits with scope make this possible.**
+A plain `fix:` or `docs:` tells you the type but not the topic.
+The `scope` field is what makes classification precise and automatic:
+`docs(benchmark):` lands in BUILD because the benchmark report is a
+deliverable; a bare `docs:` (release notes, README) stays in RUN.
+**No time-tracking tool was filled in. No spreadsheet was maintained.**
+The metadata already lived in every commit message — the pipeline simply
+reads it. This is the core argument for conventional commits: they turn git
+history into a queryable KPI source with zero developer overhead.
 
-# Per-cluster start/end of activity
-cluster_windows <- dbGetQuery(con, "
-  SELECT cc.cluster_id,
-         MIN(gc.commit_ts) AS start_ts,
-         MAX(gc.commit_ts) AS end_ts,
-         COUNT(*)          AS n
-  FROM commit_classification cc
-  JOIN git_commits gc USING (git_sha)
-  GROUP BY cc.cluster_id
-  ORDER BY cluster_id
-")
-# Short label per cluster (top 3 TF-IDF terms)
-cluster_labels <- dbGetQuery(con, "
-  SELECT cluster_id, array_to_string(terms[1:3], ', ') AS short_label
-  FROM commit_clusters
-")
-cluster_windows <- dplyr::left_join(cluster_windows, cluster_labels,
-                                     by = "cluster_id")
-cluster_windows$y_label <- sprintf("C%d · %s",
-                                    cluster_windows$cluster_id,
-                                    cluster_windows$short_label)
-cluster_windows$y_label <- factor(cluster_windows$y_label,
-                                   levels = rev(cluster_windows$y_label))
-cluster_windows$start_ts <- as.POSIXct(cluster_windows$start_ts, tz = "UTC")
-cluster_windows$end_ts   <- as.POSIXct(cluster_windows$end_ts,   tz = "UTC")
-attr(cluster_windows$start_ts, "tzone") <- "Pacific/Noumea"
-attr(cluster_windows$end_ts,   "tzone") <- "Pacific/Noumea"
-
-# Per-commit tick marks
-ticks <- dbGetQuery(con, "
-  SELECT cc.cluster_id, gc.commit_ts
-  FROM commit_classification cc
-  JOIN git_commits gc USING (git_sha)
+```{r retro-gantt, fig.height=3.8, fig.width=7.0, fig.align="center"}
+# BUILD = feat: + docs(benchmark):  |  RUN = everything else
+commits_br <- dbGetQuery(con, "
+  SELECT gc.git_sha, gc.commit_ts,
+         cc.commit_type,
+         COALESCE(cc.scope, '') AS scope,
+         CASE
+           WHEN cc.commit_type = 'feat' THEN 'BUILD'
+           WHEN cc.commit_type = 'docs' AND cc.scope = 'benchmark' THEN 'BUILD'
+           ELSE 'RUN'
+         END AS activity
+  FROM git_commits gc
+  JOIN commit_classification cc USING (git_sha)
   ORDER BY gc.commit_ts
 ")
-ticks$commit_ts <- as.POSIXct(ticks$commit_ts, tz = "UTC")
-attr(ticks$commit_ts, "tzone") <- "Pacific/Noumea"
-ticks <- dplyr::left_join(ticks, cluster_windows[, c("cluster_id", "y_label")],
-                          by = "cluster_id")
+commits_br$commit_ts <- as.POSIXct(commits_br$commit_ts, tz = "UTC")
+attr(commits_br$commit_ts, "tzone") <- "Pacific/Noumea"
+commits_br$activity <- factor(commits_br$activity, levels = c("BUILD", "RUN"))
 
-# Time-spent estimation per cluster: each commit's "work time" =
-# elapsed time since previous commit (any cluster), capped at 30 minutes
-# (longer gaps are assumed to be breaks, not active work).
-GAP_CAP_SECS <- 30 * 60   # 30 min cap per inter-commit gap
-ticks_ordered <- ticks |> dplyr::arrange(commit_ts)
-ticks_ordered$gap_secs <- c(0, as.numeric(diff(ticks_ordered$commit_ts),
-                                          units = "secs"))
-ticks_ordered$gap_secs <- pmin(ticks_ordered$gap_secs, GAP_CAP_SECS)
-time_per_cluster <- ticks_ordered |>
-  dplyr::group_by(cluster_id) |>
-  dplyr::summarise(active_minutes = sum(gap_secs) / 60, .groups = "drop")
-cluster_windows <- dplyr::left_join(cluster_windows, time_per_cluster,
-                                     by = "cluster_id")
-cluster_windows$time_label <- sprintf("  %d commits · %.0f min",
-                                       cluster_windows$n,
-                                       cluster_windows$active_minutes)
+# Time-spent: inter-commit gap capped at 30 min, attributed to each commit
+GAP_CAP  <- 30L * 60L
+ord      <- order(commits_br$commit_ts)
+gaps     <- c(0L, pmin(as.integer(diff(commits_br$commit_ts[ord]), units = "secs"), GAP_CAP))
+commits_br$time_secs      <- 0L
+commits_br$time_secs[ord] <- gaps
 
-# Release markers
-releases <- dbGetQuery(con, "
-  SELECT tag, published_at_ts FROM gh_releases ORDER BY published_at_ts
-")
-releases$published_at_ts <- as.POSIXct(releases$published_at_ts, tz = "UTC")
-attr(releases$published_at_ts, "tzone") <- "Pacific/Noumea"
+# 2-hour bins; RUN bars go negative (mirror chart)
+BIN_SECS <- 2L * 3600L
+commits_br$time_bin <- as.POSIXct(
+  floor(as.numeric(commits_br$commit_ts) / BIN_SECS) * BIN_SECS,
+  origin = "1970-01-01", tz = "Pacific/Noumea"
+)
+intensity <- commits_br |>
+  dplyr::group_by(activity, time_bin) |>
+  dplyr::summarise(active_min = sum(time_secs) / 60, .groups = "drop") |>
+  dplyr::mutate(active_signed = ifelse(activity == "BUILD", active_min, -active_min))
 
-x_min <- min(cluster_windows$start_ts) - 60 * 60
-x_max <- max(cluster_windows$end_ts)   + 60 * 60
+# Sequential bin index — removes empty days between bursts
+all_bins   <- sort(unique(intensity$time_bin))
+n_bins     <- length(all_bins)
+bin_to_idx <- setNames(seq_len(n_bins), as.character(all_bins))
+intensity$bin_idx <- bin_to_idx[as.character(intensity$time_bin)]
+
+# Map any timestamp to the nearest active bin index
+ts_to_idx <- function(ts) {
+  vapply(ts, function(t)
+    which.min(abs(as.numeric(difftime(t, all_bins, units = "secs")))),
+    integer(1))
+}
+
+# X-axis: one label per calendar day (at its first active bin)
+bin_dates     <- as.Date(all_bins)
+day_first_idx <- which(!duplicated(bin_dates))
+x_brk <- day_first_idx
+x_lbl <- format(all_bins[day_first_idx], "%d %b")
+
+# Summary totals for direct labels
+totals <- commits_br |>
+  dplyr::group_by(activity) |>
+  dplyr::summarise(total_min = round(sum(time_secs) / 60), .groups = "drop")
+build_min <- totals$total_min[totals$activity == "BUILD"]
+run_min   <- totals$total_min[totals$activity == "RUN"]
+
+# Releases mapped to bin indices
+releases_br <- dbGetQuery(con,
+  "SELECT tag, published_at_ts FROM gh_releases ORDER BY published_at_ts")
+releases_br$published_at_ts <- as.POSIXct(releases_br$published_at_ts, tz = "UTC")
+attr(releases_br$published_at_ts, "tzone") <- "Pacific/Noumea"
+releases_br$bin_idx <- ts_to_idx(releases_br$published_at_ts)
+
+key_tags <- c("v0.1.1", "v0.1.5", "v1.4.0", "v1.7.0", "v1.12.0", "v1.14.0")
+releases_key <- releases_br[releases_br$tag %in% key_tags, ]
+releases_key <- releases_key[order(releases_key$bin_idx), ]
+# Alternating heights to avoid label overlap
+releases_key$y_mult <- ifelse(seq_len(nrow(releases_key)) %% 2 == 1, 1.08, 1.22)
+
+swim_pal <- c(BUILD = "#0f766e", RUN = "#dc2626")
+y_max    <- max(intensity$active_min, na.rm = TRUE)
 
 ggplot() +
-  # Release-tag vertical lines
-  geom_vline(data = releases,
-             aes(xintercept = published_at_ts),
-             linetype = "dashed", colour = "#0f766e",
-             alpha = 0.45, linewidth = 0.35) +
-  # Cluster activity bars
-  geom_segment(data = cluster_windows,
-               aes(x = start_ts, xend = end_ts,
-                   y = y_label, yend = y_label,
-                   colour = factor(cluster_id)),
-               linewidth = 7.5, alpha = 0.32, lineend = "round") +
-  geom_segment(data = cluster_windows,
-               aes(x = start_ts, xend = end_ts,
-                   y = y_label, yend = y_label,
-                   colour = factor(cluster_id)),
-               linewidth = 1.2, alpha = 1.0) +
-  # Per-commit tick marks
-  geom_point(data = ticks,
-             aes(x = commit_ts, y = y_label, colour = factor(cluster_id)),
-             shape = "|", size = 4.5, stroke = 1.2) +
-  # Cluster size + estimated active time labels at the right end of each bar
-  geom_text(data = cluster_windows,
-            aes(x = end_ts, y = y_label,
-                label = time_label,
-                colour = factor(cluster_id)),
-            hjust = 0, size = 2.5, fontface = "bold") +
-  # Release-tag labels at the very top of the plot
-  geom_text(data = releases,
-            aes(x = published_at_ts,
-                y = length(unique(cluster_windows$y_label)) + 0.7,
-                label = tag),
-            angle = 60, hjust = 0, vjust = 0.5, size = 2.2,
-            colour = "#0f766e", fontface = "bold") +
-  scale_colour_manual(values = cluster_palette, guide = "none") +
-  scale_x_datetime(date_breaks = "1 day", date_labels = "%a %d %b",
-                   limits = c(x_min, x_max),
-                   expand = expansion(mult = c(0.02, 0.10))) +
+  geom_col(data = intensity,
+           aes(x = bin_idx, y = active_signed, fill = activity),
+           width = 0.80, alpha = 0.65) +
+  geom_hline(yintercept = 0, colour = "#64748b", linewidth = 0.4) +
+  geom_vline(data = releases_br,
+             aes(xintercept = bin_idx),
+             linetype = "dashed", colour = "#94a3b8",
+             alpha = 0.38, linewidth = 0.20) +
+  geom_text(data = releases_key,
+            aes(x = bin_idx, y = y_max * y_mult, label = tag),
+            size = 2.1, colour = "#475569", fontface = "bold", hjust = 0.5) +
+  annotate("text", x = -1.8,
+           y =  y_max * 0.52, label = sprintf("BUILD\n%d min", build_min),
+           size = 2.5, colour = "#0f766e", fontface = "bold", hjust = 1) +
+  annotate("text", x = -1.8,
+           y = -y_max * 0.52, label = sprintf("RUN\n%d min", run_min),
+           size = 2.5, colour = "#dc2626", fontface = "bold", hjust = 1) +
+  scale_fill_manual(values = swim_pal, guide = "none") +
+  scale_x_continuous(breaks = x_brk, labels = x_lbl,
+                     expand = expansion(add = c(4, 1))) +
+  scale_y_continuous(labels = abs, name = "active min") +
   coord_cartesian(clip = "off") +
-  labs(title = "Retro Gantt — semantic workstreams over time",
-       subtitle = "Bars = first→last commit of each cluster · ticks = individual commits · dashed lines = release tags",
-       x = NULL, y = NULL) +
+  labs(title = "BUILD vs RUN — hackathon intensity",
+       subtitle = "↑ BUILD (feat + report)  ·  ↓ RUN (fix/style/chore)  ·  bars = active min per 2 h  ·  dashed = releases",
+       x = NULL) +
   theme_minimal(base_size = 9) +
-  theme(panel.grid.minor = element_blank(),
-        panel.grid.major.y = element_blank(),
-        plot.margin = margin(40, 18, 6, 6),
-        axis.text.y = element_text(face = "bold"))
+  theme(panel.grid.minor   = element_blank(),
+        panel.grid.major.x = element_blank(),
+        plot.margin = margin(42, 6, 4, 52))
 ```
 
-**Estimated active time per cluster.** Each cluster bar is now annotated
-with **both** the commit count and the estimated **active minutes** spent on
-that workstream. The estimate is computed as the sum of inter-commit gaps
-attributed to each commit's cluster, **capped at 30 minutes per gap** —
-longer gaps are assumed to be breaks rather than active work. The values
-underlying the bars are queryable directly:
+**Reading the chart.** Each bar is the sum of time-spent (inter-commit gaps
+capped at 30 min) falling in a 2-hour window. A tall bar means a focused
+session; a flat stretch means a break or a day off. The rug marks at the
+bottom of each lane show individual commits coloured by type — the mix of
+colours reveals whether a burst was feature-driven (`feat`, teal) or
+fire-fighting (`fix`, red).
+
+**The queryable source of truth.**
+The active-time estimate underlying the bars is directly queryable:
 
 ```sql
 WITH ordered AS (
-  SELECT cc.cluster_id, gc.commit_ts,
+  SELECT CASE WHEN commit_type = 'feat'                        THEN 'BUILD'
+              WHEN commit_type = 'docs' AND scope = 'benchmark' THEN 'BUILD'
+              ELSE 'RUN' END          AS activity,
+         gc.commit_ts,
          LAG(gc.commit_ts) OVER (ORDER BY gc.commit_ts) AS prev_ts
   FROM commit_classification cc JOIN git_commits gc USING (git_sha)
 )
-SELECT cluster_id,
+SELECT activity,
        ROUND(SUM(LEAST(1800,
-              GREATEST(0, EXTRACT(EPOCH FROM (commit_ts - prev_ts)))
-              )) / 60.0, 1) AS minutes_active
-FROM ordered GROUP BY cluster_id ORDER BY minutes_active DESC;
+             GREATEST(0, EXTRACT(EPOCH FROM (commit_ts - prev_ts)))
+             )) / 60.0, 1) AS minutes_active
+FROM ordered GROUP BY activity ORDER BY activity;
 ```
 
-**Why this matters in a professional setting.** This per-cluster active-time
-estimate is exactly the shape of payload a **time-tracking tool** (Jira
-Tempo, Toggl, Harvest, Clockify, etc.) consumes. The pipeline already
-captures the work category (`commit_type`/`scope`/`cluster`) and the
-duration; a thin adapter could **auto-create Jira worklog entries** from
-every commit, with the cluster as the activity tag and the capped gap as
-the duration. The benchmark `DuckDB` becomes the source of truth for
-**how engineering time is actually allocated** — fixing the chronic problem
-that manually-filled timesheets diverge from real work patterns.
-
 ::: {.callout-note appearance="simple"}
-## \faStream\ What the retro Gantt reveals
+## \faStream\ What the BUILD/RUN split reveals
 
-**Two distinct work epochs.** The chart splits visibly into a **first
-intense burst (May 24–25)** — during which clusters C0/C1/C2/C3 (style,
-RSS, About-page, accessibility/Claude) were all active in parallel —
-followed by the **measurement epoch (May 30–31)** dominated by cluster C4
-(benchmark) with C5 (fix) interleaved.
+**Conventional commits eliminate time-tracking overhead.** The BUILD/RUN
+classification is derived entirely from `commit_type` and `scope` — two
+fields that every developer writes anyway. No Jira worklog. No Toggl timer.
+No spreadsheet. The git history *is* the timesheet, and the pipeline reads
+it automatically. This is the strongest practical argument for adopting
+conventional commits on any project: they turn a developer's natural commit
+habit into a queryable KPI source at zero extra cost.
 
-**Parallel vs. sequential workstreams.** During the first epoch, four
-clusters overlapped — a classic *broad-front* exploratory phase. The second
-epoch is narrower: the team converged on the benchmark/reporting strand,
-with brief returns to fixes as needed.
+**The scope field is the precision layer.** A bare `docs:` commit would
+be misclassified as RUN. `docs(benchmark):` correctly lands in BUILD because
+the scope carries the topic. Without scope, the classification degrades to a
+coarse type-only split. With scope, it is surgically accurate — and entirely
+machine-readable.
 
-**Release cadence.** The dashed lines cluster tightly around the early
-work (v0.1.1–v0.1.5 in the first night) and reappear at the end of the
-benchmark epoch (v1.5.0–v1.8.0). The classic "ship-then-instrument" arc
-is visible at a glance.
-
-**What this confirms.** The semantic clustering, the activity heatmap, and
-this Gantt — three independent views — all agree on the same project
-narrative: a short coding sprint, then an extended measurement sprint,
-with every commit traceable to a workstream and a release.
+**The marathon is visible.** The intensity bars do not lie: the hackathon
+weekend appears as a sustained sequence of tall BUILD bars, not a polite
+9-to-5 profile. That kind of effort is invisible in a story-point count or
+a commit-count chart; it surfaces only when you measure *time actually
+spent at the keyboard*.
 :::
 
 ### Tokens consumed by category
@@ -1829,7 +1982,7 @@ every `fix:`, every semantic cluster, etc. This is the **first ML-adjacent
 insight from the real data**: it reveals which kinds of work are
 token-cheap versus token-expensive.
 
-```{r tokens-per-category, fig.height=4.4, fig.width=7.0, fig.align="center"}
+```{r tokens-per-category, fig.height=3.2, fig.width=7.0, fig.align="center"}
 tok_type <- dbGetQuery(con, "
   WITH per_commit AS (
     SELECT git_sha, SUM(total_tokens) AS toks
@@ -1901,12 +2054,32 @@ p_c <- panel(tok_cluster,
              "By semantic cluster",
              "Each cluster = commits with similar embedding vectors",
              "#7c3aed")
-p_s <- panel(tok_scope,
-             "By commit scope — where the report-writing effort lives",
-             "Scopes from feat(scope): / fix(scope): — `benchmark` = analysis report",
-             "#d97706")
 
-p_t / p_c / p_s
+p_t / p_c
+```
+
+```{r tokens-per-scope, fig.height=3.6, fig.width=7.0, fig.align="center"}
+# Scope panel gets its own full height (12 scopes need room to breathe)
+panel_scope <- function(df, ttitle, sub, fill_col) {
+  df$category <- factor(df$category, levels = rev(df$category))
+  ggplot(df, aes(y = category)) +
+    geom_col(aes(x = total_M), fill = fill_col, width = 0.65) +
+    geom_text(aes(x = total_M,
+                  label = sprintf("%.1f M  ·  %d commits", total_M, n)),
+              hjust = -0.06, size = 2.5, colour = "grey20") +
+    scale_x_continuous(expand = expansion(mult = c(0, 0.40)),
+                       labels = function(x) paste0(x, " M")) +
+    labs(title = ttitle, subtitle = sub, x = "Total tokens consumed", y = NULL) +
+    theme_minimal(base_size = 9) +
+    theme(panel.grid.minor  = element_blank(),
+          panel.grid.major.y = element_blank(),
+          axis.text.y = element_text(face = "bold", size = 8))
+}
+
+panel_scope(tok_scope,
+            "By commit scope — where the report-writing effort lives",
+            "Scopes from feat(scope): / fix(scope): — `benchmark` = analysis report  ·  `(none)` = no scope declared",
+            "#d97706")
 ```
 
 ```{r tokens-key-numbers, results="asis"}
@@ -3921,7 +4094,7 @@ multi-site data, two derived graphs become valuable:
 
 ## Deepen the commit-semantics work
 
-This report already embeds 81 commits with sentence-transformers and clusters
+This report already embeds 83 commits with sentence-transformers and clusters
 them into 6 groups. At a 10× volume:
 
 - **Topic drift over time** — track how the cluster mix shifts release after
@@ -3946,7 +4119,7 @@ accessibility evolution on the New Caledonia web — a publishable dataset.
 |---|---|---|
 | Site clustering | ~30 sites | 2 |
 | Co-failure community detection | ~50 sites | 2 |
-| Embedding-based effort prediction | ~500 commits | 81 |
+| Embedding-based effort prediction | ~500 commits | 83 |
 | Time-series forecasting | ~50 releases | 9 |
 | Anomaly detection (regressions) | ~20 weekly audits | 1 |
 
@@ -3960,6 +4133,15 @@ to computable signals, and iterating against a measurable target* — is one
 applied instantiation of broader design-thinking principles. The reference
 below is a foundational reading for anyone wanting to combine **human-centered
 design** with engineering discipline:
+
+- Sinek, Simon. *Start With Why: How Great Leaders Inspire Everyone to Take
+  Action*. Portfolio/Penguin, 2009.
+  ISBN 978-1-59184-280-4. URL: \href{https://www.goodreads.com/book/show/7108725-start-with-why}{\texttt{goodreads.com/book/show/7108725}}.
+  *— The WHY behind Aquavena is simple and personal: a family member with low
+  vision struggling with an inaccessible site. Sinek's central argument — that
+  purpose-driven action outlasts motivation-driven action — is what turned a
+  weekend observation into a published pipeline. The report you are reading is
+  the HOW and WHAT; this book is the reason the WHY was worth pursuing.*
 
 - Brown, Tim. *Change by Design: How Design Thinking Transforms Organizations
   and Inspires Innovation*. Harper Business, 2009.
