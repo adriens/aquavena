@@ -683,6 +683,29 @@ function formatDate(dateStr: string): string {
           return JSON.stringify(result.length ? result : { message: "Aucun menu disponible aujourd'hui." });
         }
       });
+      navigator.modelContext.registerTool({
+        name: 'get_contact',
+        description: "Retourne les coordonnées complètes d'Aquavena : adresse physique, téléphone, email, site officiel, Facebook et horaires d'ouverture.",
+        parameters: { type: 'object', properties: {}, required: [] },
+        execute: () => JSON.stringify({
+          nom: 'Aquavena',
+          adresse: '13, rue de Charleroi, 98800 Nouméa, Nouvelle-Calédonie',
+          telephone: '+687 23 65 95',
+          email: 'contact@aquavena.nc',
+          site_officiel: 'https://www.aquavena.nc',
+          contact: 'https://www.aquavena.nc/content/contactez-nous',
+          facebook: 'https://www.facebook.com/Aquavena.nc',
+          instagram: 'https://www.instagram.com/aquavena.nc/',
+          google_maps: 'https://share.google/GY8JlFdlRVvtlkF3M',
+          horaires: {
+            lundi_jeudi: '06h30 – 16h30',
+            vendredi: '06h30 – 16h00',
+            samedi_dimanche: 'fermé',
+            retrait_livraison: 'à partir de 6h du matin',
+            commande: 'avant le mercredi minuit pour la semaine suivante'
+          }
+        })
+      });
     }
 
   </script>
