@@ -4187,7 +4187,7 @@ WebMCP infrastructure already in place.
                 minimum width=3.0cm, minimum height=0.7cm, align=center},
   box/.style={draw=gray!60, fill=gray!6, rounded corners=4pt,
               minimum width=3.2cm, align=center, inner sep=6pt},
-  db/.style={draw=amber!80!black, fill=amber!10, cylinder, shape border rotate=90,
+  db/.style={draw=orange!80!black, fill=orange!10, cylinder, shape border rotate=90,
              aspect=0.25, minimum width=2.2cm, minimum height=0.8cm, align=center},
   arr/.style={-{Stealth[length=5pt]}, gray!70, line width=0.8pt},
   thick arr/.style={-{Stealth[length=6pt]}, teal!60!black, line width=1.2pt},
@@ -4226,7 +4226,7 @@ WebMCP infrastructure already in place.
 \draw[thick arr] (scout.south) -- node[right,font=\footnotesize]{persist} (db.north);
 
 % ── Human test (bottom right) ────────────────────────────────────────────────
-\node[box,draw=rose!60!black,fill=rose!6] (human) at (9.2,-0.8)
+\node[box,draw=red!40!black,fill=red!5] (human) at (9.2,-0.8)
   {\faUser\ Test humain\\verbatim};
 \draw[arr] (db.south) -- (human.north);
 
