@@ -619,6 +619,72 @@ function formatDate(dateStr: string): string {
     const initial = (hashSlug && slugs.includes(hashSlug)) ? hashSlug : (saved && slugs.includes(saved)) ? saved : defaultSlug;
     if (initial) showRegime(initial);
 
+    // WebMCP — outils pour agents IA (invisibles, aucun impact sur l'UI)
+    if (navigator.modelContext) {
+      navigator.modelContext.registerTool({
+        name: 'list_regimes',
+        description: 'Liste tous les régimes alimentaires Aquavena disponibles cette semaine.',
+        parameters: { type: 'object', properties: {}, required: [] },
+        execute: () => JSON.stringify(allRegimes.map(r => ({ slug: r.slug, name: r.name })))
+      });
+      navigator.modelContext.registerTool({
+        name: 'get_week_menu',
+        description: 'Retourne les menus de la semaine pour un régime Aquavena donné (slug).',
+        parameters: {
+          type: 'object',
+          properties: {
+            regime_slug: { type: 'string', description: 'Slug du régime, ex: aqua-méditerranéen' }
+          },
+          required: ['regime_slug']
+        },
+        execute: ({ regime_slug }) => {
+          const r = allRegimes.find(r => r.slug === regime_slug);
+          return r
+            ? JSON.stringify({ regime: r.name, days: r.days })
+            : JSON.stringify({ error: `Régime inconnu : ${regime_slug}` });
+        }
+      });
+      navigator.modelContext.registerTool({
+        name: 'search_dish',
+        description: 'Recherche un plat par mot-clé dans tous les régimes et toute la semaine.',
+        parameters: {
+          type: 'object',
+          properties: {
+            query: { type: 'string', description: 'Mot-clé à rechercher dans les descriptions de plats' }
+          },
+          required: ['query']
+        },
+        execute: ({ query }) => {
+          const q = query.toLowerCase();
+          const hits = [];
+          for (const r of allRegimes) {
+            for (const day of r.days) {
+              for (const plat of day.plats) {
+                if (plat.description.toLowerCase().includes(q)) {
+                  hits.push({ regime: r.name, slug: r.slug, date: day.date, dish: plat.description, meal_time: plat.meal_time });
+                }
+              }
+            }
+          }
+          return JSON.stringify(hits);
+        }
+      });
+      navigator.modelContext.registerTool({
+        name: 'get_today_menus',
+        description: "Retourne les plats disponibles aujourd'hui dans tous les régimes Aquavena.",
+        parameters: { type: 'object', properties: {}, required: [] },
+        execute: () => {
+          const today = new Date().toISOString().slice(0, 10);
+          const result = [];
+          for (const r of allRegimes) {
+            const day = r.days.find(d => d.date === today);
+            if (day) result.push({ regime: r.name, slug: r.slug, ...day });
+          }
+          return JSON.stringify(result.length ? result : { message: "Aucun menu disponible aujourd'hui." });
+        }
+      });
+    }
+
   </script>
 
 </body>
