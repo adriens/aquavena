@@ -24,6 +24,10 @@ class MealTime(str, Enum):
     SOIR = "soir"
     GOURMET_MIDI = "gourmet_midi"
     GOURMET_SOIR = "gourmet_soir"
+    GOURMET = "gourmet"
+    VEGE = "vege"
+    FRESH = "fresh"
+    KIDS = "kids"
     UNKNOWN = "unknown"
 
 
@@ -41,7 +45,9 @@ class DayMenu:
     date: str          # ISO format: "2026-05-18"
     label: str         # "Lundi 18 mai 2026"
     formule: str       # e.g. "CD"
+    entrees: list[str] = field(default_factory=list)
     plats: list[Dish] = field(default_factory=list)
+    desserts: list[str] = field(default_factory=list)
     supplements: list[str] = field(default_factory=list)
     boissons: list[str] = field(default_factory=list)
     boutique: list[str] = field(default_factory=list)
@@ -53,7 +59,7 @@ class DayMenu:
         return [d for d in self.plats if d.meal_time == MealTime.SOIR]
 
     def gourmet(self) -> list[Dish]:
-        return [d for d in self.plats if d.meal_time in (MealTime.GOURMET_MIDI, MealTime.GOURMET_SOIR)]
+        return [d for d in self.plats if d.meal_time in (MealTime.GOURMET_MIDI, MealTime.GOURMET_SOIR, MealTime.GOURMET)]
 
 
 @dataclass

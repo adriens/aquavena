@@ -23,8 +23,16 @@ DEFAULT_HEADERS = {
 _MEAL_TIME_PREFIXES: list[tuple[str, MealTime]] = [
     ("GOURMET MIDI", MealTime.GOURMET_MIDI),
     ("GOURMET SOIR", MealTime.GOURMET_SOIR),
+    ("MÉDITERRANÉEN MIDI", MealTime.MIDI),
+    ("MÉDITERRANÉEN SOIR", MealTime.SOIR),
+    ("MÉDITERRANÉEN", MealTime.MIDI),
+    ("GOURMET", MealTime.GOURMET),
     ("MIDI", MealTime.MIDI),
     ("SOIR", MealTime.SOIR),
+    ("VEGE", MealTime.VEGE),
+    ("VÉGÉ", MealTime.VEGE),
+    ("FRESH", MealTime.FRESH),
+    ("AQUA'KIDS", MealTime.KIDS),
 ]
 
 
@@ -57,20 +65,25 @@ def _parse_section(section_div: Tag) -> tuple[str, list[str]]:
     return name, items
 
 
-def _parse_day_block(day_div: Tag) -> tuple[list[Dish], list[str], list[str], list[str]]:
+def _parse_day_block(day_div: Tag) -> tuple[list[str], list[Dish], list[str], list[str], list[str], list[str]]:
+    entrees: list[str] = []
     plats: list[Dish] = []
+    desserts: list[str] = []
     supplements: list[str] = []
     boissons: list[str] = []
     boutique: list[str] = []
 
     for section in day_div.find_all("div", class_="text-center", recursive=False):
-        # Each section has an h3 with type-plat-menu span
         name, items = _parse_section(section)
         key = name.lower()
-        if key == "plat":
+        if key == "entrée":
+            entrees.extend(items)
+        elif key == "plat":
             for item in items:
                 meal_time, desc = _parse_meal_time(item)
                 plats.append(Dish(meal_time=meal_time, description=desc))
+        elif key.startswith("dessert"):
+            desserts.extend(items)
         elif key == "supplément":
             supplements.extend(items)
         elif key == "boisson":
@@ -78,7 +91,7 @@ def _parse_day_block(day_div: Tag) -> tuple[list[Dish], list[str], list[str], li
         elif key == "boutique":
             boutique.extend(items)
 
-    return plats, supplements, boissons, boutique
+    return entrees, plats, desserts, supplements, boissons, boutique
 
 
 def _parse_description(soup: BeautifulSoup) -> str:
@@ -122,13 +135,15 @@ def _parse_regime_menu(html: str, slug: str) -> RegimeMenu:
         inner = block.find("div")
         if not inner:
             continue
-        plats, supplements, boissons, boutique = _parse_day_block(inner)
+        entrees, plats, desserts, supplements, boissons, boutique = _parse_day_block(inner)
         days.append(
             DayMenu(
                 date=date,
                 label=label,
                 formule=formule,
+                entrees=entrees,
                 plats=plats,
+                desserts=desserts,
                 supplements=supplements,
                 boissons=boissons,
                 boutique=boutique,
