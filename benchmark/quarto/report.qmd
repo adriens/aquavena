@@ -48,7 +48,7 @@ format:
         \usepackage{xcolor}
         \usepackage{hyperref}
         \usepackage{tikz}
-        \usetikzlibrary{positioning}
+        \usetikzlibrary{positioning,shapes.geometric,shapes.multipart,arrows.meta,fit,backgrounds}
         \definecolor{teal700}{RGB}{15,118,110}
         \definecolor{teal100}{RGB}{204,251,241}
 
@@ -3662,10 +3662,11 @@ features <- tibble(
     "PWA — installable, works offline",
     "RSS feeds per diet",
     "iCal calendars per diet",
-    "Claude skill (MCP)"
+    "Claude skill (MCP)",
+    "WebMCP — 5 browser-native AI tools"
   ),
-  `Our site`    = rep("Yes", 10),
-  `aquavena.nc` = rep("No",  10)
+  `Our site`    = rep("Yes", 11),
+  `aquavena.nc` = rep("No",  11)
 )
 kable(features, booktabs = TRUE, linesep = "", align = c("l", "c", "c")) |>
   kable_styling(latex_options = c("striped", "hold_position"), font_size = 10)
@@ -4054,6 +4055,62 @@ WHERE curr.lh_score < prev.lh_score;
 : A TeX engine that supports Unicode and modern OpenType fonts natively. Used by
   Quarto to compile this report to PDF.
 
+# \faRobot\ WebMCP — The Site as an Agentic Interface
+
+Beyond human-readable accessibility, this project takes a further step: making
+the site **machine-readable by AI agents** without scraping, screenshots, or
+prompt engineering on raw HTML. This is achieved through
+**WebMCP** (Web Model Context Protocol), a W3C Draft standard that lets a
+website declare callable tools directly in the browser via
+`navigator.modelContext`.
+
+## Why WebMCP?
+
+Traditional automated accessibility audits (Lighthouse, pa11y-ci) measure
+*what the HTML says*. They cannot answer questions that require
+**reasoning over structured content** — *"Is there a fish dish available this
+week for a low-carb diet?"*, *"What time does the kitchen close on Fridays?"*
+WebMCP bridges this gap: the site becomes an MCP server hosted inside the
+browser tab itself, with no backend required.
+
+For a visually impaired user, this means any AI assistant running in the
+browser can answer natural-language questions about the menus directly — the
+same way a sighted person skims the page.
+
+## Implementation
+
+Five tools are registered at page load via the **Imperative API**
+(`navigator.modelContext.registerTool()`), each with a JSON Schema:
+
+| Tool | Description |
+|---|---|
+| `list_regimes` | Lists all available diet plans (slug + name) |
+| `get_week_menu` | Full week menu for a given diet slug |
+| `search_dish` | Keyword search across all diets and all days |
+| `get_today_menus` | All dishes available on the current date |
+| `get_contact` | Address, phone, email, social links, opening hours |
+
+The implementation is **invisible to the user** — no UI change, no additional
+HTTP request, zero impact on Lighthouse or WCAG scores. A
+`navigator.modelContext?.registerTool()` optional-chain ensures graceful
+degradation on unsupported browsers.
+
+A **Chrome 149 Origin Trial token** is embedded in the `<head>` of both
+pages, activating the API for all Chrome 149+ visitors without any flag
+manipulation. The token is valid until September 2026.
+
+## What It Brings
+
+- **Agents can query the site** without DOM scraping or vision models
+- **88\% token savings** compared to passing raw HTML to an LLM (structured
+  tool output vs. full-page context)
+- **Future-proof**: as browser agents mature (Gemini in Chrome, Edge Copilot,
+  Claude agentic mode), the site is already compliant
+- **Transferable pattern**: any static Astro / Next.js / Hugo site can adopt
+  the same approach — no server required
+
+---
+
 # \faProjectDiagram\ Future Work — ML & Graph Data Science Roadmap
 
 The current dataset (one site, eight tagged releases, ~80 commits) was
@@ -4112,6 +4169,91 @@ aquavena.nc (and peers) to recover historical scores even from sites that
 never instrumented themselves. Combined with the existing
 `replay_audits.sh`, this would yield a **decade-scale time series** of
 accessibility evolution on the New Caledonia web — a publishable dataset.
+
+## AI-Agent Accessibility Testing Pipeline
+
+The next frontier goes beyond static audits: **AI agents simulating real
+disability profiles** — blind, dyslexic, low-vision, colorblind — interact
+with the site and report perceived issues, not just rule violations. The
+diagram below illustrates this envisioned pipeline, directly inspired by the
+WebMCP infrastructure already in place.
+
+```{=latex}
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  every node/.style={font=\small},
+  agent/.style={draw=teal!70!black, fill=teal!8, rounded corners=4pt,
+                minimum width=3.0cm, minimum height=0.7cm, align=center},
+  box/.style={draw=gray!60, fill=gray!6, rounded corners=4pt,
+              minimum width=3.2cm, align=center, inner sep=6pt},
+  db/.style={draw=amber!80!black, fill=amber!10, cylinder, shape border rotate=90,
+             aspect=0.25, minimum width=2.2cm, minimum height=0.8cm, align=center},
+  arr/.style={-{Stealth[length=5pt]}, gray!70, line width=0.8pt},
+  thick arr/.style={-{Stealth[length=6pt]}, teal!60!black, line width=1.2pt},
+]
+
+% ── AI agents (left column) ──────────────────────────────────────────────────
+\node[agent] (blind)    at (0, 4.2) {Agent aveugle};
+\node[agent] (dyslexic) at (0, 3.2) {Agent dyslexique};
+\node[agent] (lowvis)   at (0, 2.2) {Agent malvoyant};
+\node[agent] (color)    at (0, 1.2) {Agent daltonien};
+\node[agent,draw=violet!60,fill=violet!6] (custom) at (0, 0.2) {Agent custom X};
+
+% fine-tuning label
+\node[align=center, font=\footnotesize\itshape, text=gray] (ft) at (0, 5.1)
+  {Fine-tuning par profil};
+\draw[arr] (ft.south) -- ++(0,-0.35);
+
+% ── Multimodal scene (centre) ────────────────────────────────────────────────
+\node[box, minimum height=2.8cm] (scene) at (4.8, 2.2) {
+  \textbf{Interface multimodale}\\[4pt]
+  \faVolumeUp\ voix\\
+  \faImage\ image\\
+  \faFont\ texte\\[4pt]
+  \faPlug\ \texttt{WebMCP}
+};
+
+% arrows agents → scene
+\foreach \ag in {blind,dyslexic,lowvis,color,custom}
+  \draw[arr] (\ag.east) -- (scene.west |- \ag);
+
+% ── Scout + PA11y (right) ────────────────────────────────────────────────────
+\node[box] (scout) at (9.2, 3.4) {\textbf{Scout}\\pa11y-ci\\Lighthouse};
+\node[db]  (db)    at (9.2, 1.2) {\textbf{DuckDB}\\score\_history};
+
+\draw[thick arr] (scene.east) -- node[above,font=\footnotesize]{audit} (scout.west);
+\draw[thick arr] (scout.south) -- node[right,font=\footnotesize]{persist} (db.north);
+
+% ── Human test (bottom right) ────────────────────────────────────────────────
+\node[box,draw=rose!60!black,fill=rose!6] (human) at (9.2,-0.8)
+  {\faUser\ Test humain\\verbatim};
+\draw[arr] (db.south) -- (human.north);
+
+% ── Feedback loop ────────────────────────────────────────────────────────────
+\draw[thick arr, bend right=35]
+  (human.west) to node[below,font=\footnotesize\itshape]{feedback \& verbatim} (ft.east |- blind.south);
+
+% ── Top banner ───────────────────────────────────────────────────────────────
+\node[draw=teal!80!black, fill=teal!15, rounded corners=4pt,
+      minimum width=11.5cm, minimum height=0.7cm, align=center,
+      font=\bfseries\small] at (4.8, 5.6)
+  {\faRobot\ AI-Actual Test — profils utilisateurs simulés};
+
+\end{tikzpicture}
+\caption{Pipeline envisagé : agents IA spécialisés par profil de handicap,
+  interface multimodale WebMCP, audit automatisé et boucle de feedback humain.}
+\end{figure}
+```
+
+The key insight is that **WebMCP is the natural interface** between the
+site and these agents: instead of navigating a DOM, an agent calls
+`get_week_menu` or `search_dish` and receives structured data — exactly as
+a sighted user would read the page, but in machine-consumable form.
+
+Each agent version is tagged with a dedicated semantic (e.g.
+`agent-blind-v1.2`) so that score regressions can be attributed to a
+specific simulation profile and retested in isolation.
 
 ## Honest data requirements
 
