@@ -619,6 +619,95 @@ function formatDate(dateStr: string): string {
     const initial = (hashSlug && slugs.includes(hashSlug)) ? hashSlug : (saved && slugs.includes(saved)) ? saved : defaultSlug;
     if (initial) showRegime(initial);
 
+    // WebMCP — outils pour agents IA (invisibles, aucun impact sur l'UI)
+    if (navigator.modelContext) {
+      navigator.modelContext.registerTool({
+        name: 'list_regimes',
+        description: 'Liste tous les régimes alimentaires Aquavena disponibles cette semaine.',
+        parameters: { type: 'object', properties: {}, required: [] },
+        execute: () => JSON.stringify(allRegimes.map(r => ({ slug: r.slug, name: r.name })))
+      });
+      navigator.modelContext.registerTool({
+        name: 'get_week_menu',
+        description: 'Retourne les menus de la semaine pour un régime Aquavena donné (slug).',
+        parameters: {
+          type: 'object',
+          properties: {
+            regime_slug: { type: 'string', description: 'Slug du régime, ex: aqua-méditerranéen' }
+          },
+          required: ['regime_slug']
+        },
+        execute: ({ regime_slug }) => {
+          const r = allRegimes.find(r => r.slug === regime_slug);
+          return r
+            ? JSON.stringify({ regime: r.name, days: r.days })
+            : JSON.stringify({ error: `Régime inconnu : ${regime_slug}` });
+        }
+      });
+      navigator.modelContext.registerTool({
+        name: 'search_dish',
+        description: 'Recherche un plat par mot-clé dans tous les régimes et toute la semaine.',
+        parameters: {
+          type: 'object',
+          properties: {
+            query: { type: 'string', description: 'Mot-clé à rechercher dans les descriptions de plats' }
+          },
+          required: ['query']
+        },
+        execute: ({ query }) => {
+          const q = query.toLowerCase();
+          const hits = [];
+          for (const r of allRegimes) {
+            for (const day of r.days) {
+              for (const plat of day.plats) {
+                if (plat.description.toLowerCase().includes(q)) {
+                  hits.push({ regime: r.name, slug: r.slug, date: day.date, dish: plat.description, meal_time: plat.meal_time });
+                }
+              }
+            }
+          }
+          return JSON.stringify(hits);
+        }
+      });
+      navigator.modelContext.registerTool({
+        name: 'get_today_menus',
+        description: "Retourne les plats disponibles aujourd'hui dans tous les régimes Aquavena.",
+        parameters: { type: 'object', properties: {}, required: [] },
+        execute: () => {
+          const today = new Date().toISOString().slice(0, 10);
+          const result = [];
+          for (const r of allRegimes) {
+            const day = r.days.find(d => d.date === today);
+            if (day) result.push({ regime: r.name, slug: r.slug, ...day });
+          }
+          return JSON.stringify(result.length ? result : { message: "Aucun menu disponible aujourd'hui." });
+        }
+      });
+      navigator.modelContext.registerTool({
+        name: 'get_contact',
+        description: "Retourne les coordonnées complètes d'Aquavena : adresse physique, téléphone, email, site officiel, Facebook et horaires d'ouverture.",
+        parameters: { type: 'object', properties: {}, required: [] },
+        execute: () => JSON.stringify({
+          nom: 'Aquavena',
+          adresse: '13, rue de Charleroi, 98800 Nouméa, Nouvelle-Calédonie',
+          telephone: '+687 23 65 95',
+          email: 'contact@aquavena.nc',
+          site_officiel: 'https://www.aquavena.nc',
+          contact: 'https://www.aquavena.nc/content/contactez-nous',
+          facebook: 'https://www.facebook.com/Aquavena.nc',
+          instagram: 'https://www.instagram.com/aquavena.nc/',
+          google_maps: 'https://share.google/GY8JlFdlRVvtlkF3M',
+          horaires: {
+            lundi_jeudi: '06h30 – 16h30',
+            vendredi: '06h30 – 16h00',
+            samedi_dimanche: 'fermé',
+            retrait_livraison: 'à partir de 6h du matin',
+            commande: 'avant le mercredi minuit pour la semaine suivante'
+          }
+        })
+      });
+    }
+
   </script>
 
 </body>
