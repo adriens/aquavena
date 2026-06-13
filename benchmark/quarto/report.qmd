@@ -48,7 +48,7 @@ format:
         \usepackage{xcolor}
         \usepackage{hyperref}
         \usepackage{tikz}
-        \usetikzlibrary{positioning,shapes.geometric,shapes.multipart,arrows.meta,fit,backgrounds}
+        \usetikzlibrary{positioning,shapes.geometric,shapes.multipart,arrows.meta,fit,backgrounds,calc}
         \definecolor{teal700}{RGB}{15,118,110}
         \definecolor{teal100}{RGB}{204,251,241}
 
@@ -4170,90 +4170,193 @@ never instrumented themselves. Combined with the existing
 `replay_audits.sh`, this would yield a **decade-scale time series** of
 accessibility evolution on the New Caledonia web — a publishable dataset.
 
-## AI-Agent Accessibility Testing Pipeline
+## AI-Agent Universal Accessibility Pipeline
 
-The next frontier goes beyond static audits: **AI agents simulating real
-disability profiles** — blind, dyslexic, low-vision, colorblind — interact
-with the site and report perceived issues, not just rule violations. The
-diagram below illustrates this envisioned pipeline, directly inspired by the
-WebMCP infrastructure already in place.
+Web accessibility is **not only about low vision**. The WCAG 2.1
+standard covers a wide spectrum of impairments — visual, motor, cognitive,
+auditory — each requiring different design choices. The next frontier
+goes beyond static rule-based audits: **a fleet of AI agents, each
+simulating a specific disability profile**, interacts with the site and
+reports perceived issues with that profile's lived constraints in mind.
+
+Each agent is specialised:
+
+- **Blind agent** — navigates via ARIA semantics and screen-reader output
+- **Dyslexic agent** — stresses typography, spacing and heading structure
+- **Low-vision agent** — zooms to 200\% and tracks focus visibility
+- **Colourblind agent** — checks colour-only information channels and contrast
+- **Custom agent** — fine-tuned for any other profile (motor, cognitive, elderly)
+
+A critical design decision: agents **do not all live in the browser**.
+The same tools (`list_regimes`, `get_week_menu`, `search_dish`, `get_today_menus`,
+`get_contact`) are exposed through **two complementary channels**:
+
+- **WebMCP** (`navigator.modelContext`) — for agents embedded in the browser
+  page itself (Gemini in Chrome, Edge Copilot, browser extensions)
+- **MCP server** (Hugging Face Spaces) — for headless interfaces:
+  voice assistants (Alexa, Google Assistant), home robots, **refreshable
+  braille displays** (via a screen reader or an agent that pipes the JSON
+  response straight to the braille bus), accessibility appliances, IoT
+  devices, Claude Desktop, custom CLI agents
+
+This dual exposure is what makes the pipeline **truly universal**: a blind
+user reading menus on a refreshable braille display, another blind user
+querying a smart speaker, a low-vision user with a tablet browser, and a
+motor-impaired user with a robot companion all consume the **same canonical
+tools** — only the transport and the physical rendering surface differ.
 
 ```{=latex}
 \begin{figure}[H]
 \centering
+\resizebox{\textwidth}{!}{%
 \begin{tikzpicture}[
   every node/.style={font=\small},
-  agent/.style={draw=teal!70!black, fill=teal!8, rounded corners=4pt,
-                minimum width=3.0cm, minimum height=0.7cm, align=center},
-  box/.style={draw=gray!60, fill=gray!6, rounded corners=4pt,
-              minimum width=3.2cm, align=center, inner sep=6pt},
-  db/.style={draw=orange!80!black, fill=orange!10, cylinder, shape border rotate=90,
-             aspect=0.25, minimum width=2.2cm, minimum height=0.8cm, align=center},
-  arr/.style={-{Stealth[length=5pt]}, gray!70, line width=0.8pt},
+  agent/.style={draw=teal!70!black, fill=teal!8, rounded corners=3pt,
+                minimum width=3.2cm, minimum height=1.0cm, align=center,
+                inner sep=4pt},
+  custom/.style={draw=violet!60!black, fill=violet!6, rounded corners=3pt,
+                 minimum width=3.2cm, minimum height=1.0cm, align=center,
+                 inner sep=4pt},
+  channel/.style={draw=teal!70!black, fill=teal!10, rounded corners=4pt,
+                  align=center, inner sep=6pt, font=\footnotesize,
+                  minimum width=3.0cm, minimum height=1.7cm},
+  mcpchannel/.style={draw=violet!60!black, fill=violet!10, rounded corners=4pt,
+                     align=center, inner sep=6pt, font=\footnotesize,
+                     minimum width=3.0cm, minimum height=1.7cm},
+  tools/.style={draw=orange!70!black, fill=orange!8, rounded corners=4pt,
+                align=center, inner sep=6pt, font=\bfseries\footnotesize,
+                minimum width=2.9cm, minimum height=2.4cm},
+  scoutbox/.style={draw=teal!70!black, fill=teal!6, rounded corners=4pt,
+                   align=center, inner sep=6pt, font=\bfseries\footnotesize,
+                   minimum width=2.4cm, minimum height=1.4cm},
+  db/.style={draw=orange!80!black, fill=orange!12, cylinder, shape border rotate=90,
+             aspect=0.22, minimum width=2.2cm, minimum height=0.8cm, align=center,
+             font=\footnotesize},
+  human/.style={draw=red!50!black, fill=red!5, rounded corners=3pt,
+                align=center, inner sep=5pt, font=\footnotesize,
+                minimum width=2.6cm, minimum height=0.9cm},
+  arr/.style={-{Stealth[length=4pt]}, gray!70, line width=0.7pt},
   thick arr/.style={-{Stealth[length=6pt]}, teal!60!black, line width=1.2pt},
+  fb arr/.style={-{Stealth[length=5pt]}, red!50!black, line width=1pt, dashed},
 ]
 
-% ── AI agents (left column) ──────────────────────────────────────────────────
-\node[agent] (blind)    at (0, 4.2) {Agent aveugle};
-\node[agent] (dyslexic) at (0, 3.2) {Agent dyslexique};
-\node[agent] (lowvis)   at (0, 2.2) {Agent malvoyant};
-\node[agent] (color)    at (0, 1.2) {Agent daltonien};
-\node[agent,draw=violet!60,fill=violet!6] (custom) at (0, 0.2) {Agent custom X};
+% ── Top banner ───────────────────────────────────────────────────────────────
+\node[draw=teal!70!black, fill=teal!15, rounded corners=4pt,
+      minimum width=18cm, minimum height=0.7cm, align=center,
+      font=\bfseries\small] at (8.5, 6.2)
+  {\faUniversalAccess\ Universal Accessibility Pipeline — multi-profile AI agents};
 
-% fine-tuning label
-\node[align=center, font=\footnotesize\itshape, text=gray] (ft) at (0, 5.1)
-  {Fine-tuning par profil};
-\draw[arr] (ft.south) -- ++(0,-0.35);
+% ── 1. Agents column (criteria UNDER each agent name) ────────────────────────
+\node[agent] (blind) at (0, 4.6)
+  {\textbf{\footnotesize Aveugle}\\[2pt]
+   \scriptsize\itshape\color{gray!60!black} ARIA · alt\\ screen-reader};
 
-% ── Multimodal scene (centre) ────────────────────────────────────────────────
-\node[box, minimum height=2.8cm] (scene) at (4.8, 2.2) {
-  \textbf{Interface multimodale}\\[4pt]
-  \faVolumeUp\ voix\\
-  \faImage\ image\\
-  \faFont\ texte\\[4pt]
-  \faPlug\ \texttt{WebMCP}
+\node[agent] (dyslexic) at (0, 3.2)
+  {\textbf{\footnotesize Dyslexique}\\[2pt]
+   \scriptsize\itshape\color{gray!60!black} typo · spacing\\ structure h1-h6};
+
+\node[agent] (lowvis) at (0, 1.8)
+  {\textbf{\footnotesize Malvoyant}\\[2pt]
+   \scriptsize\itshape\color{gray!60!black} zoom 200\%\\ focus · text size};
+
+\node[agent] (color) at (0, 0.4)
+  {\textbf{\footnotesize Daltonien}\\[2pt]
+   \scriptsize\itshape\color{gray!60!black} contrast\\ colour-only info};
+
+\node[custom] (custom) at (0, -1.0)
+  {\textbf{\footnotesize Custom X}\\[2pt]
+   \scriptsize\itshape\color{violet!50!black} fine-tuned\\ per profile};
+
+% Column label
+\node[rotate=90, font=\footnotesize\bfseries, text=gray!70!black]
+  at (-2.2, 1.8) {Agents IA spécialisés};
+
+% ── 2. TWO channels (centre-left) ────────────────────────────────────────────
+\node[channel] (webmcp) at (5.0, 3.9) {
+  \faChrome\ \textbf{WebMCP}\\[2pt]
+  \scriptsize\mdseries
+  in-browser\\
+  \texttt{navigator.}\\
+  \texttt{modelContext}\\[2pt]
+  \scriptsize\itshape (Chrome 149+)
 };
 
-% arrows agents → scene
-\foreach \ag in {blind,dyslexic,lowvis,color,custom}
-  \draw[arr] (\ag.east) -- (scene.west |- \ag);
+\node[mcpchannel] (mcp) at (5.0, 0.5) {
+  \faServer\ \textbf{MCP server}\\[2pt]
+  \scriptsize\mdseries
+  HuggingFace\\
+  robots · voice asst.\\
+  braille displays\\
+  IoT · Claude Desktop
+};
 
-% ── Scout + PA11y (right) ────────────────────────────────────────────────────
-\node[box] (scout) at (9.2, 3.4) {\textbf{Scout}\\pa11y-ci\\Lighthouse};
-\node[db]  (db)    at (9.2, 1.2) {\textbf{DuckDB}\\score\_history};
+% arrows agents → channels (simplified, grouped)
+\draw[arr] (blind.east)    -- (webmcp.west |- blind);
+\draw[arr] (dyslexic.east) -- (webmcp.west |- dyslexic);
+\draw[arr] (lowvis.east)   -- (webmcp.west |- lowvis);
+\draw[arr] (color.east)    -- (mcp.west |- color);
+\draw[arr] (custom.east)   -- (mcp.west |- custom);
 
-\draw[thick arr] (scene.east) -- node[above,font=\footnotesize]{audit} (scout.west);
-\draw[thick arr] (scout.south) -- node[right,font=\footnotesize]{persist} (db.north);
+% ── 3. Canonical tools (centre-right) ────────────────────────────────────────
+\node[tools] (canonical) at (9.5, 2.2) {
+  \faToolbox\ Canonical tools\\[3pt]
+  \scriptsize\mdseries\itshape
+  list\_regimes\\
+  get\_week\_menu\\
+  search\_dish\\
+  get\_today\_menus\\
+  get\_contact
+};
 
-% ── Human test (bottom right) ────────────────────────────────────────────────
-\node[box,draw=red!40!black,fill=red!5] (human) at (9.2,-0.8)
-  {\faUser\ Test humain\\verbatim};
-\draw[arr] (db.south) -- (human.north);
+\draw[thick arr] (webmcp.east) -- (canonical.west |- webmcp);
+\draw[thick arr] (mcp.east) -- (canonical.west |- mcp);
 
-% ── Feedback loop ────────────────────────────────────────────────────────────
-\draw[thick arr, bend right=35]
-  (human.west) to node[below,font=\footnotesize\itshape]{feedback \& verbatim} (ft.east |- blind.south);
+% ── 4. Scout multi-audit (right top) ─────────────────────────────────────────
+\node[scoutbox] (scout) at (13.5, 3.9) {
+  \faSearchPlus\ Scout\\[1pt]
+  \scriptsize\mdseries
+  pa11y-ci\\
+  Lighthouse\\
+  custom checks
+};
 
-% ── Top banner ───────────────────────────────────────────────────────────────
-\node[draw=teal!80!black, fill=teal!15, rounded corners=4pt,
-      minimum width=11.5cm, minimum height=0.7cm, align=center,
-      font=\bfseries\small] at (4.8, 5.6)
-  {\faRobot\ AI-Actual Test — profils utilisateurs simulés};
+% ── 5. DuckDB (right middle) ─────────────────────────────────────────────────
+\node[db] (db) at (13.5, 1.2) {\textbf{DuckDB}\\score\_history};
 
-\end{tikzpicture}
-\caption{Pipeline envisagé : agents IA spécialisés par profil de handicap,
-  interface multimodale WebMCP, audit automatisé et boucle de feedback humain.}
+% audit + persist (label ABOVE the arrow, between canonical and scout)
+\draw[thick arr] (canonical.east |- scout) -- node[font=\scriptsize, above=2pt, midway]{audit} (scout.west);
+\draw[thick arr] (scout.south) -- node[right=1pt,font=\scriptsize]{persist} (db.north);
+
+% ── 6. Human validation (right bottom) ───────────────────────────────────────
+\node[human] (h) at (13.5, -1.3) {\faUser\ \textbf{Test humain}\\\scriptsize\itshape verbatim utilisateur};
+\draw[arr] (db.south) -- (h.north);
+
+% ── Feedback loop (dashed, clean arc below everything) ───────────────────────
+\draw[fb arr] (h.west) -| ($(custom.south)+(0,-0.8)$) -- (custom.south);
+\node[font=\scriptsize\itshape, text=red!50!black] at (7.0, -2.4)
+  {feedback \& verbatim → fine-tuning par profil};
+
+\end{tikzpicture}%
+}
+\caption{Universal Accessibility Pipeline: each AI agent simulates a
+  specific WCAG profile and consumes the same canonical tools
+  through either WebMCP (in-browser) or the MCP server (robots, voice
+  assistants, braille displays, IoT). Scout audits the responses against
+  multi-criterion rules; human verbatim closes the loop by fine-tuning
+  each agent profile.}
 \end{figure}
 ```
 
-The key insight is that **WebMCP is the natural interface** between the
-site and these agents: instead of navigating a DOM, an agent calls
-`get_week_menu` or `search_dish` and receives structured data — exactly as
-a sighted user would read the page, but in machine-consumable form.
+The key insight is that the **canonical tools are the contract**, not the
+transport. The same five tools serve all five profiles across both
+WebMCP and the MCP server; the difference lies in **how each agent
+interprets the response** against its disability constraints, and in
+which physical interface delivers it to the user — a browser, a smart
+speaker, a robot, or an assistive appliance.
 
 Each agent version is tagged with a dedicated semantic (e.g.
-`agent-blind-v1.2`) so that score regressions can be attributed to a
-specific simulation profile and retested in isolation.
+`agent-blind-v1.2`, `agent-dyslexic-v0.4`) so that score regressions can
+be attributed to a specific simulation profile and retested in isolation.
 
 ## Honest data requirements
 
