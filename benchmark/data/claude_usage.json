@@ -1,14 +1,14 @@
 {
   "total": {
-    "input": 5823,
-    "output": 2732145,
-    "cache_read": 579361764,
-    "cache_write": 6636542,
-    "total": 588736274
+    "input": 7880,
+    "output": 3403667,
+    "cache_read": 695528966,
+    "cache_write": 12562852,
+    "total": 711503365
   },
-  "n_sessions": 5,
-  "user_messages": 2141,
-  "assistant_messages": 3304,
+  "n_sessions": 6,
+  "user_messages": 2760,
+  "assistant_messages": 4198,
   "models": [
     "<synthetic>",
     "claude-opus-4-7",
@@ -48,16 +48,33 @@
     {
       "session": "5eb8edd2-1f21-435f-abb7-530874677297",
       "started_at": "2026-05-31T04:23:30.777000+00:00",
-      "ended_at": "2026-05-31T06:12:57.319000+00:00",
-      "user_messages": 329,
-      "assistant_messages": 497,
-      "input": 698,
-      "output": 323637,
-      "cache_read": 43665399,
-      "cache_write": 833568,
-      "total": 44823302,
+      "ended_at": "2026-05-31T10:52:55.188000+00:00",
+      "user_messages": 592,
+      "assistant_messages": 892,
+      "input": 1280,
+      "output": 689242,
+      "cache_read": 76563305,
+      "cache_write": 1428426,
+      "total": 78682253,
       "models": [
         "<synthetic>",
+        "claude-sonnet-4-6"
+      ]
+    },
+    {
+      "session": "782b65c0-3508-45e0-a0d3-a5374c9668c7",
+      "started_at": "2026-06-13T21:10:57.042000+00:00",
+      "ended_at": "2026-06-14T03:19:37.225000+00:00",
+      "user_messages": 356,
+      "assistant_messages": 499,
+      "input": 1475,
+      "output": 305917,
+      "cache_read": 83269296,
+      "cache_write": 5331452,
+      "total": 88908140,
+      "models": [
+        "<synthetic>",
+        "claude-opus-4-7",
         "claude-sonnet-4-6"
       ]
     },
@@ -119,15 +136,45 @@
     {
       "session": "5eb8edd2-1f21-435f-abb7-530874677297",
       "model": "claude-sonnet-4-6",
-      "assistant_messages": 496,
-      "input": 698,
-      "output": 323637,
-      "cache_read": 43665399,
-      "cache_write": 833568,
-      "total": 44823302
+      "assistant_messages": 890,
+      "input": 1280,
+      "output": 689242,
+      "cache_read": 76563305,
+      "cache_write": 1428426,
+      "total": 78682253
     },
     {
       "session": "5eb8edd2-1f21-435f-abb7-530874677297",
+      "model": "<synthetic>",
+      "assistant_messages": 2,
+      "input": 0,
+      "output": 0,
+      "cache_read": 0,
+      "cache_write": 0,
+      "total": 0
+    },
+    {
+      "session": "782b65c0-3508-45e0-a0d3-a5374c9668c7",
+      "model": "claude-sonnet-4-6",
+      "assistant_messages": 356,
+      "input": 1123,
+      "output": 129178,
+      "cache_read": 43776002,
+      "cache_write": 1827621,
+      "total": 45733924
+    },
+    {
+      "session": "782b65c0-3508-45e0-a0d3-a5374c9668c7",
+      "model": "claude-opus-4-7",
+      "assistant_messages": 142,
+      "input": 352,
+      "output": 176739,
+      "cache_read": 39493294,
+      "cache_write": 3503831,
+      "total": 43174216
+    },
+    {
+      "session": "782b65c0-3508-45e0-a0d3-a5374c9668c7",
       "model": "<synthetic>",
       "assistant_messages": 1,
       "input": 0,
@@ -214,11 +261,27 @@
     },
     {
       "date": "2026-05-31",
-      "total": 44823302,
-      "input": 698,
-      "output": 323637,
-      "cache_read": 43665399,
-      "cache_write": 833568
+      "total": 78682253,
+      "input": 1280,
+      "output": 689242,
+      "cache_read": 76563305,
+      "cache_write": 1428426
+    },
+    {
+      "date": "2026-06-13",
+      "total": 77178141,
+      "input": 1377,
+      "output": 277501,
+      "cache_read": 74266742,
+      "cache_write": 2632521
+    },
+    {
+      "date": "2026-06-14",
+      "total": 11729999,
+      "input": 98,
+      "output": 28416,
+      "cache_read": 9002554,
+      "cache_write": 2698931
     }
   ]
 }
