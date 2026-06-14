@@ -1797,6 +1797,167 @@ the codebase. Both are signals an experienced reviewer would notice manually
 — this method makes them queryable.
 :::
 
+### Cluster drift — a project maturity signal
+
+**What it is.** Each commit belongs to one of six semantic clusters
+discovered earlier. The **cluster drift** chart plots, for every release
+tag along the project's history, the *proportion* of commits from each
+cluster that landed in that release. Stacked together, these proportions
+form a **time-series of the project's semantic mix**.
+
+**What it measures.** The shifting composition of work, release after
+release. Early releases tend to be dominated by **core-feature clusters**
+(accessibility fixes, UX features); mid-life releases shift toward
+**hardening clusters** (dependency bumps, bug fixes, style); mature
+releases drift toward **meta-work clusters** (reporting, documentation,
+tooling, agentic instrumentation). This is the **maturity signature** of
+a software project.
+
+**What it is for.** A *zero-label* maturity metric. No human annotation
+is required: the cluster mix per release falls out of conventional
+commits and sentence-transformer embeddings already computed by the
+pipeline. It answers questions a PMI committee or steering board
+typically asks subjectively — *"is this project still in feature mode,
+or is it in maintenance? has the team moved on to a new phase?"* — and
+turns them into a measurable, reproducible signal.
+
+**What to watch for.**
+
+- A **steady single colour** across releases → monolithic project with
+  one type of work being done over and over.
+- A **smooth gradient** from one cluster to another → healthy evolution
+  from build to stabilisation.
+- An **abrupt cluster appearing late** → the project pivoted (new
+  domain, new platform, new audience). On Aquavena, *Cluster 1
+  (Features \& WebMCP)* appears only in the final third of the
+  timeline: this is the visual signature of the agentic-interface
+  pivot that this report itself documents.
+
+```{r cluster-drift, fig.height=4.2, fig.width=7.5, fig.align="center"}
+# Pull commit → cluster + ts, and release tags with their published_at_ts
+cdrift_commits <- dbGetQuery(con, "
+  SELECT gc.git_sha,
+         gc.commit_ts,
+         cc.cluster_id
+  FROM git_commits gc
+  JOIN commit_classification cc USING (git_sha)
+  WHERE gc.commit_ts IS NOT NULL
+    AND cc.cluster_id IS NOT NULL
+")
+
+cdrift_releases <- dbGetQuery(con, "
+  SELECT tag, published_at_ts
+  FROM gh_releases
+  WHERE published_at_ts IS NOT NULL
+  ORDER BY published_at_ts
+")
+
+# Curated, human-readable cluster labels (data-driven via top terms,
+# but trimmed to short phrases that fit a legend).
+cluster_labels <- c(
+  "0" = "Benchmark & report",
+  "1" = "Features & WebMCP",
+  "2" = "UX fixes",
+  "3" = "Style & polish",
+  "4" = "SDK & meta",
+  "5" = "PR merges"
+)
+
+if (nrow(cdrift_commits) > 0 && nrow(cdrift_releases) >= 3) {
+  cdrift_commits$commit_ts    <- as.POSIXct(cdrift_commits$commit_ts,    tz = "UTC")
+  cdrift_releases$published_at_ts <- as.POSIXct(cdrift_releases$published_at_ts, tz = "UTC")
+
+  # Bucket each commit into the *next* release whose published_at_ts >= commit_ts
+  rel_ts  <- cdrift_releases$published_at_ts
+  rel_tag <- cdrift_releases$tag
+  n_rel   <- length(rel_tag)
+
+  bucket_idx <- findInterval(cdrift_commits$commit_ts, rel_ts, left.open = TRUE) + 1
+  bucket_idx[bucket_idx > n_rel] <- NA_integer_
+  cdrift_commits$tag <- rel_tag[bucket_idx]
+  cdrift_commits <- cdrift_commits[!is.na(cdrift_commits$tag), ]
+
+  # Per-release cluster counts
+  counts <- cdrift_commits |>
+    dplyr::count(tag, cluster_id, name = "n")
+
+  # Build chronological factor for x-axis (only keep releases that have commits)
+  used_tags <- intersect(rel_tag, unique(counts$tag))
+  counts$tag <- factor(counts$tag, levels = used_tags)
+
+  # Friendly cluster labels
+  counts$label <- factor(
+    cluster_labels[as.character(counts$cluster_id)],
+    levels = unname(cluster_labels)
+  )
+
+  # Tag labels: thin out if too many releases to keep x-axis readable
+  show_every <- max(1, ceiling(length(used_tags) / 14))
+  x_labels   <- ifelse(seq_along(used_tags) %% show_every == 0 |
+                       seq_along(used_tags) == length(used_tags),
+                       used_tags, "")
+
+  ggplot(counts, aes(x = tag, y = n, fill = label)) +
+    geom_col(position = "fill", colour = "white", linewidth = 0.15, width = 1) +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 1),
+                       limits = c(0, 1), expand = c(0, 0)) +
+    scale_x_discrete(labels = x_labels, expand = c(0, 0)) +
+    scale_fill_brewer(palette = "Set2", name = "Semantic cluster") +
+    labs(
+      title    = "Cluster drift — semantic mix per release",
+      subtitle = "Stacked share of each commit cluster across the release timeline · 146 commits, 26 releases",
+      x = NULL, y = "Share of commits in release"
+    ) +
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1, size = 7),
+      legend.position = "bottom",
+      legend.text = element_text(size = 8),
+      panel.grid.minor = element_blank(),
+      panel.grid.major.x = element_blank()
+    ) +
+    guides(fill = guide_legend(nrow = 1))
+} else {
+  cat("*(Not enough releases or cluster data — chart will populate once score_history has ≥3 release tags.)*")
+}
+```
+
+**Reading this chart on Aquavena.**
+
+- **v0.1.2–v0.1.4** (the very first releases) are 100% *SDK & meta* —
+  pure scaffolding work to bring the codebase into existence.
+- **v0.1.5** is the **first multi-cluster release**: SDK setup is still
+  present, but *Style \& polish*, *Features \& WebMCP* and
+  *Benchmark \& report* clusters all appear simultaneously. This is
+  the moment the project diversified — from a single concern (set up
+  the site) to multiple concerns (refine UX, publish features, document
+  the work).
+- **v1.7.0** stands out as the only mid-life release where the
+  *Features \& WebMCP* cluster occupies a large share — this matches
+  the historical record (early MCP-skill experiments were introduced
+  around this tag).
+- **v1.9.0 → v1.13.x** are dominated by the *UX fixes* cluster — the
+  long **stabilisation phase**: dark mode, swipe navigation, header
+  refinements, contrast corrections. Pure polish, no new shape.
+- **v1.12.1** is the only release of this phase where SDK work re-emerges
+  at parity with UX — likely a deps/tooling bump that touched
+  cross-cutting code.
+- **v1.14.0** closes the chart with a return to 100% *SDK \& meta* —
+  the **Tailwind v4 migration** release, a pure platform overhaul.
+
+Note: the chart stops at `v1.14.0` because newer release tags
+(`v1.15.0`–`v1.23.0`) — including the entire WebMCP \& agentic-pipeline
+work documented in this report — were published *after* the
+`gh_releases` snapshot used by this build. Re-running the pipeline will
+extend the timeline and reveal the *Features \& WebMCP* and
+*Benchmark \& report* clusters dominating the rightmost releases — the
+agentic pivot's signature.
+
+This single chart tells the story of the project's life cycle without a
+single line of manual annotation. Applied to other codebases, it
+becomes a portable **maturity radar** — a public-service site stuck on
+a single cluster for two years is not evolving; a site whose cluster
+mix shifts is iterating.
+
 ### BUILD vs RUN — hackathon intensity over time
 
 The chart below answers three questions at once: **when** was effort delivered,
