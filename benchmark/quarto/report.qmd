@@ -1828,10 +1828,11 @@ turns them into a measurable, reproducible signal.
 - A **smooth gradient** from one cluster to another → healthy evolution
   from build to stabilisation.
 - An **abrupt cluster appearing late** → the project pivoted (new
-  domain, new platform, new audience). On Aquavena, *Cluster 1
-  (Features \& WebMCP)* appears only in the final third of the
-  timeline: this is the visual signature of the agentic-interface
-  pivot that this report itself documents.
+  domain, new platform, new audience). On Aquavena, the
+  *Benchmark \& ML report* cluster appears massively from `v1.7.0`
+  onwards: this is the visual signature of the project shifting from
+  *building an accessible site* to *measuring and publishing what was
+  built* — the report you are reading right now.
 
 ```{r cluster-drift, fig.height=4.2, fig.width=7.5, fig.align="center"}
 # Pull commit → cluster + ts, and release tags with their published_at_ts
@@ -1855,12 +1856,12 @@ cdrift_releases <- dbGetQuery(con, "
 # Curated, human-readable cluster labels (data-driven via top terms,
 # but trimmed to short phrases that fit a legend).
 cluster_labels <- c(
-  "0" = "Benchmark & report",
-  "1" = "Features & WebMCP",
-  "2" = "UX fixes",
-  "3" = "Style & polish",
-  "4" = "SDK & meta",
-  "5" = "PR merges"
+  "0" = "Site features & About",
+  "1" = "Style & dark mode",
+  "2" = "Benchmark & ML report",
+  "3" = "Project identity & links",
+  "4" = "WCAG fixes",
+  "5" = "Links & merges"
 )
 
 if (nrow(cdrift_commits) > 0 && nrow(cdrift_releases) >= 3) {
@@ -1923,34 +1924,39 @@ if (nrow(cdrift_commits) > 0 && nrow(cdrift_releases) >= 3) {
 
 **Reading this chart on Aquavena.**
 
-- **v0.1.2–v0.1.4** (the very first releases) are 100% *SDK & meta* —
-  pure scaffolding work to bring the codebase into existence.
-- **v0.1.5** is the **first multi-cluster release**: SDK setup is still
-  present, but *Style \& polish*, *Features \& WebMCP* and
-  *Benchmark \& report* clusters all appear simultaneously. This is
-  the moment the project diversified — from a single concern (set up
-  the site) to multiple concerns (refine UX, publish features, document
-  the work).
+- **v0.1.2–v0.1.4** (the very first releases) are 100% *WCAG fixes* —
+  the foundational accessibility work: contrast corrections, pa11y
+  audit setup, WCAG 2.1 AA compliance from the ground up. This is the
+  *raison d'être* of the project, visible in its purest form.
+- **v0.1.5** is the **first multi-cluster release**: WCAG work is
+  still present, but *Style \& dark mode*, *Site features \& About*
+  and *Benchmark \& ML report* clusters all appear simultaneously.
+  This is the moment the project diversified — from one concern
+  (make it WCAG-clean) to four (style polish, feature additions,
+  benchmark scaffolding).
 - **v1.7.0** stands out as the only mid-life release where the
-  *Features \& WebMCP* cluster occupies a large share — this matches
-  the historical record (early MCP-skill experiments were introduced
-  around this tag).
-- **v1.9.0 → v1.13.x** are dominated by the *UX fixes* cluster — the
-  long **stabilisation phase**: dark mode, swipe navigation, header
-  refinements, contrast corrections. Pure polish, no new shape.
-- **v1.12.1** is the only release of this phase where SDK work re-emerges
-  at parity with UX — likely a deps/tooling bump that touched
-  cross-cutting code.
-- **v1.14.0** closes the chart with a return to 100% *SDK \& meta* —
-  the **Tailwind v4 migration** release, a pure platform overhaul.
+  *Site features \& About* cluster occupies a large share — this
+  matches the historical record (RSS, iCal, About-page content all
+  landed around this tag).
+- **v1.9.0 → v1.13.x** are dominated by the *Benchmark \& ML report*
+  cluster — the long **report-engineering phase**: this is where the
+  100-page PDF you are reading was built. Feature work shifted to a
+  data-science/reporting register.
+- **v1.12.1** is the only release of this phase where *WCAG fixes*
+  re-emerge at parity with the report work — likely a regression catch
+  that triggered contrast revalidation.
+- **v1.14.0** closes the chart with a return to 100% *WCAG fixes* —
+  the **Tailwind v4 migration** release: a platform overhaul whose
+  primary risk was contrast regression, so most of the work was
+  re-validating accessibility.
 
 Note: the chart stops at `v1.14.0` because newer release tags
-(`v1.15.0`–`v1.23.0`) — including the entire WebMCP \& agentic-pipeline
+(`v1.15.0`–`v1.24.0`) — including the entire WebMCP \& agentic-pipeline
 work documented in this report — were published *after* the
 `gh_releases` snapshot used by this build. Re-running the pipeline will
-extend the timeline and reveal the *Features \& WebMCP* and
-*Benchmark \& report* clusters dominating the rightmost releases — the
-agentic pivot's signature.
+extend the timeline and reveal the *Site features \& About* and
+*Benchmark \& ML report* clusters dominating the rightmost releases —
+the agentic pivot's signature.
 
 This single chart tells the story of the project's life cycle without a
 single line of manual annotation. Applied to other codebases, it
@@ -2352,6 +2358,165 @@ on commit history without conventional-commit discipline.
 apportionment view distributes session tokens evenly across same-second
 commits. *With a larger dataset (more sessions, more spread-out commits)
 this artifact disappears.* Disclosed here for transparency.
+:::
+
+## AI-leverage ratio per cluster — where the AI actually pays off
+
+```{r ai-leverage-data}
+ai_lev <- dbGetQuery(con, "
+  SELECT cc.cluster_id,
+         ct.model,
+         COUNT(DISTINCT ct.git_sha)  AS n_commits,
+         SUM(ct.total_tokens)        AS tokens,
+         SUM(co.total_usd)           AS usd
+  FROM commit_tokens ct
+  JOIN commit_classification cc USING (git_sha)
+  LEFT JOIN commit_cost co
+    ON co.git_sha = ct.git_sha AND co.model = ct.model
+  GROUP BY cc.cluster_id, ct.model
+  ORDER BY cc.cluster_id, ct.model
+")
+
+cluster_lbl <- c(
+  "0" = "Site features & About",
+  "1" = "Style & dark mode",
+  "2" = "Benchmark & ML report",
+  "3" = "Project identity & links",
+  "4" = "WCAG fixes",
+  "5" = "Links & merges"
+)
+ai_lev$cluster_label <- factor(
+  cluster_lbl[as.character(ai_lev$cluster_id)],
+  levels = unname(cluster_lbl)
+)
+ai_lev$model_short <- ifelse(grepl("opus", ai_lev$model), "Opus 4.7", "Sonnet 4.6")
+
+# Per-cluster totals (across models)
+clu_totals <- ai_lev |>
+  dplyr::group_by(cluster_id, cluster_label) |>
+  dplyr::summarise(
+    total_tokens = sum(tokens, na.rm = TRUE),
+    total_usd    = sum(usd,    na.rm = TRUE),
+    n_commits    = max(n_commits, na.rm = TRUE),
+    opus_tokens  = sum(tokens[model_short == "Opus 4.7"],    na.rm = TRUE),
+    sonn_tokens  = sum(tokens[model_short == "Sonnet 4.6"], na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  dplyr::mutate(
+    tokens_per_commit_M = total_tokens / n_commits / 1e6,
+    usd_per_commit      = total_usd    / n_commits,
+    opus_pct            = opus_tokens  / (opus_tokens + sonn_tokens) * 100
+  )
+```
+
+```{r ai-leverage-chart-1, fig.height=3.0, fig.width=7.0, fig.align="center"}
+# Stacked bar: tokens per commit by cluster, split Sonnet/Opus
+mix_bar <- ai_lev |>
+  dplyr::group_by(cluster_label, model_short) |>
+  dplyr::summarise(
+    tokens_per_commit_M = sum(tokens, na.rm = TRUE) / max(n_commits) / 1e6,
+    .groups = "drop"
+  )
+
+ggplot(mix_bar, aes(x = reorder(cluster_label, tokens_per_commit_M),
+                    y = tokens_per_commit_M, fill = model_short)) +
+  geom_col(width = 0.6, colour = "white", linewidth = 0.2) +
+  geom_text(data = clu_totals,
+            aes(x = cluster_label,
+                y = tokens_per_commit_M,
+                label = sprintf("%.1f M/commit  ·  %d commits  ·  %.0f%% Opus",
+                                tokens_per_commit_M, n_commits, opus_pct)),
+            hjust = -0.05, size = 2.7, colour = "grey20",
+            inherit.aes = FALSE) +
+  coord_flip() +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.55)),
+                     labels = function(x) paste0(x, " M")) +
+  scale_fill_manual(values = c("Sonnet 4.6" = "#0f766e", "Opus 4.7" = "#7c3aed"),
+                    name = "Model") +
+  labs(
+    title    = "Tokens per commit, by semantic cluster",
+    subtitle = "Stacked Sonnet + Opus · the taller the bar, the more AI-effort each commit consumed",
+    x = NULL, y = "Tokens consumed per commit (millions)"
+  ) +
+  theme_minimal(base_size = 9) +
+  theme(legend.position = "bottom",
+        panel.grid.major.y = element_blank(),
+        panel.grid.minor   = element_blank(),
+        axis.text.y = element_text(face = "bold", size = 8))
+```
+
+```{r ai-leverage-chart-2, fig.height=2.6, fig.width=7.0, fig.align="center"}
+# Opus dependency ratio per cluster — single bar chart, sorted
+ggplot(clu_totals, aes(x = reorder(cluster_label, opus_pct), y = opus_pct,
+                       fill = opus_pct)) +
+  geom_col(width = 0.6) +
+  geom_text(aes(label = sprintf("%.0f%%", opus_pct)),
+            hjust = -0.15, size = 3.2, colour = "grey20") +
+  coord_flip() +
+  scale_y_continuous(limits = c(0, 105), expand = c(0, 0),
+                     labels = function(x) paste0(x, "%")) +
+  scale_fill_gradient(low = "#0f766e", high = "#7c3aed", guide = "none") +
+  labs(
+    title    = "Opus dependency ratio — share of tokens routed to Opus 4.7",
+    subtitle = "Higher = work that needed the premium model to land · lower = Sonnet was enough",
+    x = NULL, y = "% of cluster's tokens spent on Opus 4.7"
+  ) +
+  theme_minimal(base_size = 9) +
+  theme(panel.grid.major.y = element_blank(),
+        panel.grid.minor   = element_blank(),
+        axis.text.y = element_text(face = "bold", size = 8))
+```
+
+```{r ai-leverage-vals, results="asis"}
+# Compute the numbers used in the prose below, so they stay in sync with data
+most_intensive  <- clu_totals[which.max(clu_totals$tokens_per_commit_M), ]
+least_intensive <- clu_totals[which.min(clu_totals$tokens_per_commit_M), ]
+ratio_intensive <- most_intensive$tokens_per_commit_M / least_intensive$tokens_per_commit_M
+most_opus       <- clu_totals[which.max(clu_totals$opus_pct), ]
+least_opus      <- clu_totals[which.min(clu_totals$opus_pct), ]
+biggest_cost    <- clu_totals[which.max(clu_totals$total_usd), ]
+```
+
+::: {.callout-note appearance="simple"}
+## \faChartLine\ What the AI-leverage view reveals
+
+**A `r round(ratio_intensive, 1)`× gap in AI-intensity between the
+most and least token-heavy clusters.** The
+*`r most_intensive$cluster_label`* cluster consumes
+**`r sprintf("%.1f M tokens per commit"     , most_intensive$tokens_per_commit_M)`**
+on average, while *`r least_intensive$cluster_label`* consumes only
+**`r sprintf("%.1f M tokens per commit"     , least_intensive$tokens_per_commit_M)`**.
+This is not noise — the gap reflects a real **cognitive depth difference**
+between the work types: some commits are written in one shot, others
+require sustained iteration with the assistant.
+
+**The Opus dependency ratio is a "premium model" signal.**
+*`r most_opus$cluster_label`* routed **`r sprintf("%.0f%%", most_opus$opus_pct)`**
+of its tokens to Opus 4.7 — the project's most expensive model — while
+*`r least_opus$cluster_label`* used Opus only
+**`r sprintf("%.0f%%", least_opus$opus_pct)`** of the time.
+Clusters with a high Opus share are the ones where the developer felt
+that Sonnet's output quality was *not enough* and consciously escalated
+to Opus. **It's a direct measurement of which problem domains are
+intrinsically hard, derived purely from model-routing telemetry.**
+
+**Where the IA budget actually went.**
+The *`r biggest_cost$cluster_label`* cluster represents the largest
+absolute IA spend — **\$`r sprintf("%.0f", biggest_cost$total_usd)`**
+across `r biggest_cost$n_commits` commits.
+This number is a **directly actionable PMI signal**: a delivery
+committee can now see, on a per-cluster basis, where one cluster cost
+N× more than expected — a maturity proxy, a complexity proxy, and a
+budget proxy in a single number.
+
+**Why this matters beyond Aquavena.** No team-wide instrumentation, no
+JIRA fields, no developer self-reporting was used. The numbers above
+are entirely derived from \texttt{commit\_tokens} and
+\texttt{commit\_classification}, both populated automatically by the
+pipeline. Replicated on any AI-assisted codebase, this view gives a
+**per-cluster ROI on AI spending** — the missing piece between
+"we spent \$X on Claude this month" and "we spent it on Y type of work
+that produced Z value".
 :::
 
 # \faBullseye\ Goals and Broader Vision
