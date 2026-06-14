@@ -1,0 +1,72 @@
+{
+  "n_nodes": 146,
+  "n_edges": 967,
+  "n_features": 13,
+  "feature_names": [
+    "pagerank",
+    "betweenness",
+    "degree",
+    "commit_type::chore",
+    "commit_type::ci",
+    "commit_type::data",
+    "commit_type::docs",
+    "commit_type::feat",
+    "commit_type::fix",
+    "commit_type::merge",
+    "commit_type::other",
+    "commit_type::refactor",
+    "commit_type::style"
+  ],
+  "n_classes": 6,
+  "model": "GraphSAGE-2layer-h32",
+  "epochs": 200,
+  "train_acc": 0.9195402264595032,
+  "val_acc": 0.7586206793785095,
+  "test_acc": 0.7333333333333333,
+  "test_balanced_acc": 0.6736111111111112,
+  "test_macro_f1": 0.6690416065416066,
+  "majority_baseline": 0.06666667014360428,
+  "lift_over_baseline": 0.666666663189729,
+  "best_confused_pair": {
+    "true": "WCAG fixes",
+    "predicted": "Project identity & links",
+    "count": 2
+  },
+  "per_class_recall": [
+    {
+      "cluster": "Site features & About",
+      "recall": 0.5,
+      "support": 2
+    },
+    {
+      "cluster": "Style & dark mode",
+      "recall": 0.8333333333333334,
+      "support": 12
+    },
+    {
+      "cluster": "Benchmark & ML report",
+      "recall": 0.875,
+      "support": 8
+    },
+    {
+      "cluster": "Project identity & links",
+      "recall": 0.5,
+      "support": 4
+    },
+    {
+      "cluster": "WCAG fixes",
+      "recall": 0.3333333333333333,
+      "support": 3
+    },
+    {
+      "cluster": "Links & merges",
+      "recall": 1.0,
+      "support": 1
+    }
+  ],
+  "split_sizes": {
+    "train": 87,
+    "val": 29,
+    "test": 30
+  }
+}
