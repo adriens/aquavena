@@ -3050,6 +3050,71 @@ The DAG is also a **map for future hypotheses**: every directed edge is
 an A/B test waiting to happen; every dashed edge is a measurement gap to
 close.
 
+### Concept emergence timeline — when each idea first surfaced
+
+**What it is.** For each major *idea* of the project — *WCAG fixes*,
+*Tailwind v4*, *WebMCP*, *Reachy Mini*, *CausalImpact*, *GraphSAGE*,
+and so on — we ask the question:
+
+> *When does the project first commit something that talks about this
+> concept, even loosely?*
+
+The answer is purely **data-driven** and zero-annotation. Each concept
+is described by a short English sentence (e.g. *"GraphSAGE graph neural
+network predicting commit clusters"*). That sentence is embedded with
+the same **BAAI/bge-m3** model used everywhere else in the report. Then
+every commit subject is embedded with the same model. The earliest
+commit whose embedding has **cosine similarity ≥ 0.55** with the
+concept description is its *first surfacing*.
+
+```{=latex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{concept_emergence.png}
+\caption{Each label is a key project concept. Its position on the
+  x-axis is the timestamp of the first commit whose subject is
+  semantically close to the concept description (cosine ≥ 0.55 on
+  BAAI/bge-m3). \textbf{Teal} = clear above-floor match (the concept
+  was named in the subject). \textbf{Red} = best match below the
+  floor (the concept's foundation existed but it was not yet named —
+  the timestamp marks the *forerunner* commit). Multi-level vertical
+  layout chosen to keep neighbours legible.}
+\end{figure}
+```
+
+**Reading the timeline as a storyline.** Three clear waves emerge from
+the data alone:
+
+1. **Founding wave (24–25 May).** *WCAG fixes*, *RSS / iCal*, *MCP /
+   Claude skill*, *Reachy Mini* — the original concepts of the
+   project, articulated explicitly on day one. The site is born and
+   already imagined as both an accessible interface and a
+   tool-callable surface.
+
+2. **Analysis wave (29–31 May).** *Benchmark report*, *Tailwind v4*,
+   *Cluster drift*, *Causal DAG*, *CausalImpact / BSTS*, *Markov
+   chain*, *Burnout detector*, *GraphSAGE* — the explosion of
+   data-science concepts when the project pivots from "ship a site"
+   to "measure and publish what was shipped". Note the red tags: the
+   methodological vocabulary (*BSTS*, *Markov*, *DAG*) had not yet
+   landed in subjects on those dates — the *foundational* commit is
+   shown instead.
+
+3. **Agentic wave (13–14 June).** *WebMCP browser*, *Origin Trial*,
+   *Agentic pipeline* — the third life of the project: the site
+   becomes an agentic surface, exposing its tools to in-browser AI
+   agents. Origin Trial scores 0.80 because the commit explicitly
+   names it; WebMCP scores 0.60 (still well above the floor).
+
+**Why this is interesting beyond aesthetics.** The timeline turns the
+**git history into a semantic chronology**, with no manual labelling.
+It is what a software-historian would build by hand reading every
+commit message — produced in seconds by reusing the embeddings we
+already have. Applied to a multi-year codebase, it answers questions
+like *"when did distributed tracing first appear in this repo?"* or
+*"in what commit did the team first talk about chaos engineering?"*
+without any documentation effort.
+
 ### BUILD vs RUN — hackathon intensity over time
 
 The chart below answers three questions at once: **when** was effort delivered,
