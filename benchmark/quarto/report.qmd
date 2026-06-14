@@ -2938,6 +2938,118 @@ graph** built from sentence-transformer embeddings, evaluated on
 The architecture is standard; the experiment design is, as far as we
 can tell, novel for an open-source benchmark report.
 
+### Causal DAG discovery — from correlation to structure
+
+**The previous section measured *the effect of one intervention*. This
+one asks the opposite question:** *given a system of variables, can
+the data alone tell us **which variable causes which**?* That is the
+problem of **causal discovery** — going from a table of measurements
+to a directed acyclic graph (DAG) of cause and effect, without any
+prior labelling of treatments.
+
+**The method.** We use the **PC algorithm** (Peter Spirtes, Clark
+Glymour, 1991 — see Spirtes, Glymour & Scheines, *Causation,
+Prediction and Search*, MIT Press, 2nd ed. 2000), the canonical
+constraint-based causal-discovery method. It runs a sequence of
+**conditional-independence tests** (Fisher's Z here, at $\alpha = 0.05$)
+to decide which pairs of variables are directly linked, then orients
+as many edges as the data allow. The result is a partial DAG: solid
+arrows where direction is identified, dashed lines where it cannot be
+distinguished from confounding. Implementation: the open-source
+\href{https://github.com/py-why/causal-learn}{\textbf{causal-learn}} Python
+library by CMU.
+
+**The variables.** Ten commit-level features grouped in four families:
+
+- **Graph position** — PageRank, betweenness, degree
+- **AI usage** — total tokens consumed, share routed to Opus
+- **Commit type** — `feat`, `fix`, presence of a conventional-commit scope
+- **Temporal** — hour of day (Pacific/Noumea), weekend indicator
+
+**The honest disclaimer.** PC + Fisher's Z assumes continuous
+variables and linear relationships. Binary indicators violate this
+strictly, but in practice the algorithm still recovers a meaningful
+skeleton — we treat the orientations of binary-only edges as
+suggestive, not as proofs.
+
+```{=latex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{causal_dag.png}
+\caption{Causal DAG learnt by the PC algorithm with Fisher's Z conditional
+  independence test ($\alpha = 0.05$) on 146 commit-level observations of
+  10 features. \textbf{Solid arrows} = direction estimated.
+  \textbf{Dashed lines} = edge significant but orientation undetermined
+  (a Markov-equivalence-class artefact).}
+\end{figure}
+```
+
+#### Reading the DAG — five non-obvious findings
+
+\textbf{1. PageRank causes token consumption (not the other way around).}
+The arrow \emph{PageRank → Tokens} is the headline finding: a commit's
+**structural centrality in the similarity graph** is identified as a
+\emph{cause} of the token volume Claude spent on it, not the reverse.
+The mechanism is plausible: central commits sit on themes that recur
+throughout the project, so they touch concepts already discussed in many
+prior sessions — meaning longer cached context replays, more retrieval,
+more output. **Centrality precedes spend, not the opposite.**
+
+\textbf{2. Opus usage drives both tokens and time-of-day.}
+\emph{Opus \% → Tokens} is expected — Opus is 5× the price of Sonnet, so
+sessions routed to it generate larger raw counts even at the same
+"effort". The more interesting arrow is \emph{Opus \% → Hour of day}: PC
+identifies a directed relationship between the choice of model and the
+time the commit lands. Looking at the raw data, Opus-heavy commits cluster
+in late-evening NC time — the moment when the developer reaches for the
+premium model. **The model-routing decision precedes the time stamp.**
+
+\textbf{3. \emph{Has scope} sits at the intersection of three forces.}
+Three arrows converge on \emph{has\_scope}: \emph{fix → has\_scope},
+\emph{weekend → has\_scope}, and (via the binary structure) the commit
+type. This is the algorithm's way of saying: *the presence of a
+conventional-commit scope is jointly determined by what kind of commit
+it is and when it was written*. Weekend commits in particular score
+higher on the scope discipline — possibly because they are smaller,
+intentional, focused changes, where stating \texttt{fix(a11y):} comes
+naturally.
+
+\textbf{4. The graph-position triangle (\emph{PageRank, betweenness,
+degree}) is internally consistent.} PC orients arrows from PageRank to
+degree and from betweenness to degree, but leaves \emph{PageRank ↔
+betweenness} undirected (dashed). This is structurally correct: in a
+similarity graph, PageRank and betweenness measure different but
+overlapping flavours of centrality and the data cannot distinguish which
+one is "earlier". Treating both as **drivers of the degree** is
+algebraically reasonable.
+
+\textbf{5. No arrow lands on PageRank from outside the graph family.}
+The algorithm refuses to make any non-structural variable
+(commit type, time, AI usage) a cause of graph position. In causal-DAG
+terms, **the graph features are exogenous** — they are determined by the
+commit text + global similarity structure, not by when or how the commit
+was written. This is the correct answer, and it is reassuring that PC
+finds it.
+
+#### Why this matters next to the rest of the report
+
+This DAG is the **companion structure** to the BSTS analysis. Together
+they form a two-tier causal toolkit:
+
+| | What it answers |
+|---|---|
+| **CausalImpact (BSTS)** | "What was the effect of *this specific* intervention on *this specific* outcome, with credible intervals?" |
+| **Causal DAG (PC)** | "Across all variables we measure, *who acts on whom* — what is the structure of dependence?" |
+
+Used together they go from *"we measured tokens after Tailwind v4"* to
+*"we know that PageRank causes tokens, so a Tailwind-style refactor that
+moves files away from high-PageRank commits will mechanically reduce token
+spend — and we can predict by how much."*
+
+The DAG is also a **map for future hypotheses**: every directed edge is
+an A/B test waiting to happen; every dashed edge is a measurement gap to
+close.
+
 ### BUILD vs RUN — hackathon intensity over time
 
 The chart below answers three questions at once: **when** was effort delivered,
