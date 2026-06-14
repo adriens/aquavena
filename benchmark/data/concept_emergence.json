@@ -1,0 +1,173 @@
+{
+  "n_commits_searched": 145,
+  "n_concepts": 15,
+  "similarity_floor": 0.55,
+  "model": "BAAI/bge-m3 (normalised, cosine)",
+  "concepts": [
+    {
+      "concept": "WCAG fixes",
+      "description": "Fix accessibility contrast and pa11y WCAG 2.1 AA errors",
+      "first_ts": "2026-05-24T23:34:16+11:00",
+      "first_sha": "52cdfed",
+      "first_subject": "fix: contraste WCAG AA — éliminer tous les gris trop clairs",
+      "similarity": 0.6553103923797607,
+      "matches_above_floor": 8,
+      "flag": "ok",
+      "cluster_id": 4
+    },
+    {
+      "concept": "Benchmark report",
+      "description": "Build the Quarto PDF benchmark report with charts",
+      "first_ts": "2026-05-30T14:20:52+11:00",
+      "first_sha": "df7ef90",
+      "first_subject": "feat(benchmark): rapport en anglais, page de titre LaTeX, diagramme TikZ, schéma DB, Taskfile",
+      "similarity": 0.5716273784637451,
+      "matches_above_floor": 3,
+      "flag": "ok",
+      "cluster_id": 2
+    },
+    {
+      "concept": "Tailwind v4",
+      "description": "Migrate Tailwind CSS from version 3 to version 4",
+      "first_ts": "2026-05-31T16:26:48+11:00",
+      "first_sha": "52fc47b",
+      "first_subject": "feat(deps): migration Tailwind CSS v3 → v4",
+      "similarity": 0.8188769817352295,
+      "matches_above_floor": 4,
+      "flag": "ok",
+      "cluster_id": 0
+    },
+    {
+      "concept": "MCP / Claude skill",
+      "description": "Claude Code MCP server skill for menus on Hugging Face",
+      "first_ts": "2026-05-25T00:53:45+11:00",
+      "first_sha": "4912599",
+      "first_subject": "docs: add shields for site, accessibility, feeds, HF Space and Claude skill",
+      "similarity": 0.5827343463897705,
+      "matches_above_floor": 3,
+      "flag": "ok",
+      "cluster_id": 0
+    },
+    {
+      "concept": "RSS / iCal",
+      "description": "RSS feeds and iCal calendars per regime",
+      "first_ts": "2026-05-24T23:27:12+11:00",
+      "first_sha": "1e3ad26",
+      "first_subject": "feat: flux RSS + icônes par régime + méditerranéen par défaut",
+      "similarity": 0.6478722095489502,
+      "matches_above_floor": 8,
+      "flag": "ok",
+      "cluster_id": 0
+    },
+    {
+      "concept": "WebMCP browser",
+      "description": "WebMCP API navigator.modelContext tool registration in browser",
+      "first_ts": "2026-06-14T08:30:35+11:00",
+      "first_sha": "1eb14a1",
+      "first_subject": "feat(webmcp): enregistrement des outils WebMCP pour agents IA",
+      "similarity": 0.601885199546814,
+      "matches_above_floor": 2,
+      "flag": "ok",
+      "cluster_id": 1
+    },
+    {
+      "concept": "Reachy Mini robot",
+      "description": "Reachy Mini robot calls Aquavena MCP tools to read menus aloud",
+      "first_ts": "2026-05-25T06:32:58+11:00",
+      "first_sha": "3995f4d",
+      "first_subject": "feat(about): lien PyPI aquavena-sdk dans la section \"Comment ça fonctionne ?\"",
+      "similarity": 0.5610803365707397,
+      "matches_above_floor": 1,
+      "flag": "ok",
+      "cluster_id": 3
+    },
+    {
+      "concept": "Causal Impact BSTS",
+      "description": "Bayesian structural time series CausalImpact for intervention effects",
+      "first_ts": "2026-05-31T17:43:05+11:00",
+      "first_sha": "c03b4d6",
+      "first_subject": "docs(benchmark): explication Lead Time for Changes sous le panneau DORA",
+      "similarity": 0.47005385160446167,
+      "matches_above_floor": 0,
+      "flag": "below-floor",
+      "cluster_id": 0
+    },
+    {
+      "concept": "GraphSAGE GNN",
+      "description": "GraphSAGE graph neural network predicting commit clusters",
+      "first_ts": "2026-05-31T18:24:15+11:00",
+      "first_sha": "3ad68f5",
+      "first_subject": "feat(benchmark): cluster-split panels — 6 small multiples galactiques",
+      "similarity": 0.5058363080024719,
+      "matches_above_floor": 0,
+      "flag": "below-floor",
+      "cluster_id": 0
+    },
+    {
+      "concept": "Cluster drift",
+      "description": "Cluster drift maturity signal across release timeline",
+      "first_ts": "2026-05-30T14:52:13+11:00",
+      "first_sha": "534854c",
+      "first_subject": "feat(benchmark): pipeline flow chart, improvement cycle with score bars, release discipline",
+      "similarity": 0.4896814227104187,
+      "matches_above_floor": 0,
+      "flag": "below-floor",
+      "cluster_id": 2
+    },
+    {
+      "concept": "Markov chain",
+      "description": "Markov transition matrix between commit semantic clusters",
+      "first_ts": "2026-05-31T18:24:15+11:00",
+      "first_sha": "3ad68f5",
+      "first_subject": "feat(benchmark): cluster-split panels — 6 small multiples galactiques",
+      "similarity": 0.4768948554992676,
+      "matches_above_floor": 0,
+      "flag": "below-floor",
+      "cluster_id": 0
+    },
+    {
+      "concept": "Burnout detector",
+      "description": "Burnout window detector friction signal from token telemetry",
+      "first_ts": "2026-05-30T15:25:49+11:00",
+      "first_sha": "2e5e47e",
+      "first_subject": "feat(benchmark): FK schema, tools section, glossary, score trend chart + lines panel",
+      "similarity": 0.4761822819709778,
+      "matches_above_floor": 0,
+      "flag": "below-floor",
+      "cluster_id": 2
+    },
+    {
+      "concept": "Causal DAG",
+      "description": "Causal DAG discovery via PC algorithm conditional independence",
+      "first_ts": "2026-05-31T15:34:56+11:00",
+      "first_sha": "d4b70eb",
+      "first_subject": "chore(ci): activer Dependabot pour npm et pip",
+      "similarity": 0.47364541888237,
+      "matches_above_floor": 0,
+      "flag": "below-floor",
+      "cluster_id": 2
+    },
+    {
+      "concept": "Origin Trial",
+      "description": "Chrome Origin Trial token for WebMCP in HTML head",
+      "first_ts": "2026-06-14T08:50:11+11:00",
+      "first_sha": "2e63b6f",
+      "first_subject": "feat(webmcp): Origin Trial token WebMCP Chrome 149+",
+      "similarity": 0.801120936870575,
+      "matches_above_floor": 2,
+      "flag": "ok",
+      "cluster_id": 1
+    },
+    {
+      "concept": "Agentic pipeline",
+      "description": "Universal agentic accessibility pipeline AI agents specialised",
+      "first_ts": "2026-06-14T10:00:10+11:00",
+      "first_sha": "255c650",
+      "first_subject": "feat(report): refonte du diagramme Universal Accessibility Pipeline",
+      "similarity": 0.5825687646865845,
+      "matches_above_floor": 2,
+      "flag": "ok",
+      "cluster_id": 1
+    }
+  ]
+}
