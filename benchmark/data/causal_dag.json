@@ -1,0 +1,132 @@
+{
+  "n_samples": 153,
+  "n_features": 10,
+  "features": [
+    {
+      "key": "tokens_M",
+      "label": "Tokens",
+      "family": "usage"
+    },
+    {
+      "key": "opus_pct",
+      "label": "Opus %",
+      "family": "usage"
+    },
+    {
+      "key": "pagerank",
+      "label": "PageRank",
+      "family": "graph"
+    },
+    {
+      "key": "betweenness",
+      "label": "Between-\nness",
+      "family": "graph"
+    },
+    {
+      "key": "degree",
+      "label": "Degree",
+      "family": "graph"
+    },
+    {
+      "key": "is_feat",
+      "label": "feat",
+      "family": "type"
+    },
+    {
+      "key": "is_fix",
+      "label": "fix",
+      "family": "type"
+    },
+    {
+      "key": "has_scope",
+      "label": "has\nscope",
+      "family": "type"
+    },
+    {
+      "key": "hour",
+      "label": "Hour",
+      "family": "time"
+    },
+    {
+      "key": "is_weekend",
+      "label": "Weekend",
+      "family": "time"
+    }
+  ],
+  "alpha": 0.05,
+  "algorithm": "PC (Peter-Clark) with Fisher's Z",
+  "edges_directed": [
+    {
+      "from": "opus_pct",
+      "to": "tokens_M",
+      "from_label": "Opus %",
+      "to_label": "Tokens"
+    },
+    {
+      "from": "pagerank",
+      "to": "tokens_M",
+      "from_label": "PageRank",
+      "to_label": "Tokens"
+    },
+    {
+      "from": "opus_pct",
+      "to": "hour",
+      "from_label": "Opus %",
+      "to_label": "Hour"
+    },
+    {
+      "from": "pagerank",
+      "to": "degree",
+      "from_label": "PageRank",
+      "to_label": "Degree"
+    },
+    {
+      "from": "pagerank",
+      "to": "is_feat",
+      "from_label": "PageRank",
+      "to_label": "feat"
+    },
+    {
+      "from": "betweenness",
+      "to": "degree",
+      "from_label": "Between-\nness",
+      "to_label": "Degree"
+    },
+    {
+      "from": "has_scope",
+      "to": "degree",
+      "from_label": "has\nscope",
+      "to_label": "Degree"
+    },
+    {
+      "from": "is_fix",
+      "to": "is_feat",
+      "from_label": "fix",
+      "to_label": "feat"
+    },
+    {
+      "from": "is_fix",
+      "to": "has_scope",
+      "from_label": "fix",
+      "to_label": "has\nscope"
+    },
+    {
+      "from": "is_weekend",
+      "to": "has_scope",
+      "from_label": "Weekend",
+      "to_label": "has\nscope"
+    },
+    {
+      "from": "is_weekend",
+      "to": "hour",
+      "from_label": "Weekend",
+      "to_label": "Hour"
+    }
+  ],
+  "edges_undirected": [
+    {
+      "a": "pagerank",
+      "b": "betweenness"
+    }
+  ]
+}
