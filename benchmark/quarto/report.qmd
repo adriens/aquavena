@@ -1275,17 +1275,52 @@ ggplot(vel, aes(x = idx)) +
 
 ## DORA metrics — elite performance
 
-The **DORA** acronym used throughout this report stands for **DevOps Research
-and Assessment** — the Google research programme that defines the four key
-software-delivery metrics (Deployment Frequency, Lead Time for Changes, Change
-Failure Rate, MTTR). This is distinct from the EU financial regulation of the
-same acronym (Digital Operational Resilience Act, 2022/2554).
+### Origin
 
-The DORA metrics (DevOps Research and Assessment) are computed from the timestamps
-stored in `gh_releases.published_at_ts` and from the `ci_runs` table.
-Results land in the **Elite** tier as defined by Forsgren et al.,
-*Accelerate State of DevOps Report 2023* (Google Cloud / DORA,
-\href{https://dora.dev/research/2023/dora-report/}{dora.dev/research/2023}).
+**DORA = DevOps Research and Assessment**. Founded in 2013 by **Nicole
+Forsgren**, **Jez Humble** and **Gene Kim** as an independent research
+programme initially published with Puppet, then spun out as an autonomous
+company. **Acquired by Google Cloud in 2018**, where it continues to publish
+the annual *Accelerate State of DevOps Report*. The programme is the
+empirical foundation of modern DevOps benchmarking and the source of the
+four metrics used in this section.
+
+\textbf{Note on the homonymy.} The acronym DORA is also widely used in
+another context: the \textbf{Digital Operational Resilience Act}, a European
+Union regulatory framework (Regulation EU 2022/2554) designed to fortify the
+\textbf{financial sector} against information and communication technology
+(ICT) threats. It is unrelated to the software-delivery metrics used in this
+report. For the EU regulation see
+\href{https://www.eiopa.europa.eu/digital-operational-resilience-act-dora_en}{eiopa.europa.eu/digital-operational-resilience-act-dora}.
+
+### The four metrics
+
+| Metric | Definition |
+|---|---|
+| **Deployment Frequency** | How often a team successfully releases to production |
+| **Lead Time for Changes** | Time from code commit to running in production |
+| **Change Failure Rate** | \% of deployments causing a production failure (rollback, hotfix) |
+| **Mean Time to Recovery (MTTR)** | Average time to restore service after a production incident |
+
+### Performance tiers (Accelerate State of DevOps Report 2023)
+
+The four metrics are mapped to four performance tiers. Aquavena lands in the
+**Elite** column on all three measured indicators:
+
+| Metric | **Elite** | High | Medium | Low |
+|---|---|---|---|---|
+| Deployment Frequency | **On-demand** (multiple/day) | 1/day to 1/week | 1/week to 1/month | < 1/month |
+| Lead Time for Changes | **< 1 day** | 1 day to 1 week | 1 week to 1 month | > 1 month |
+| Change Failure Rate | **0–5\%** | 10–15\% | 16–30\% | 64–75\% |
+| MTTR / Recovery time | **< 1 hour** | < 1 day | < 1 week | > 1 week |
+
+Note: the 2025 DORA report moved away from tier ranking in favour of seven
+\emph{team archetypes} that integrate human factors (burnout, friction,
+perceived value). The Elite/High/Medium/Low grid above remains the canonical
+reference for cross-team benchmarking.
+
+The DORA metrics in this report are computed from the timestamps stored in
+`gh_releases.published_at_ts` and from the `ci_runs` table.
 
 ```{r dora-panel, results="asis"}
 ts <- dbGetQuery(con, "
@@ -1337,6 +1372,24 @@ Measured here as the median gap between release timestamps.
 A short lead time means fixes and features reach users quickly.
 \end{minipage}
 \end{center}
+
+### Verifiable references
+
+For independent verification of the DORA framework and the Elite-tier
+thresholds used above:
+
+- **Foundational book** — Forsgren, Humble, Kim. *Accelerate: The Science
+  of Lean Software and DevOps: Building and Scaling High Performing
+  Technology Organizations.* IT Revolution, 2018. ISBN 978-1942788331.
+- **Official site** —
+  \href{https://dora.dev/}{dora.dev}
+  (current research programme home).
+- **2023 report — Infographic PDF (canonical Elite/High/Medium/Low table)** —
+  \href{https://dora.dev/research/2023/2023-DORA-Report-Infographic.v10.pdf}{dora.dev/research/2023/2023-DORA-Report-Infographic.v10.pdf}.
+- **2023 report — Google Cloud announcement** —
+  \href{https://cloud.google.com/blog/products/devops-sre/announcing-the-2023-state-of-devops-report}{cloud.google.com/blog/products/devops-sre/announcing-the-2023-state-of-devops-report}.
+- **Wikipedia (history and acquisitions)** —
+  \href{https://en.wikipedia.org/wiki/DevOps_Research_and_Assessment}{en.wikipedia.org/wiki/DevOps\_Research\_and\_Assessment}.
 
 ## Development intensity
 
@@ -1985,6 +2038,145 @@ single line of manual annotation. Applied to other codebases, it
 becomes a portable **maturity radar** — a public-service site stuck on
 a single cluster for two years is not evolving; a site whose cluster
 mix shifts is iterating.
+
+### Markov transition matrix — what naturally follows what
+
+**What it is.** Sort all 146 commits in chronological order, then for every
+consecutive pair (commit\_$i$, commit\_$i+1$) record the directed transition
+between their semantic clusters. Counting transitions gives a 6×6 matrix; row-normalising it yields a **first-order Markov chain** — a matrix of
+conditional probabilities $P(\text{next cluster} = j \mid \text{previous cluster} = i)$.
+
+**What it measures.** The *empirical routines* of the developer. The cluster
+drift chart above shows the long-run mix of work; the Markov chain shows
+the **short-term flow** — which type of commit naturally precedes which.
+
+**What it is for.**
+
+- A behavioural fingerprint of how the team works.
+- An input to **agentic pipelines**: the AI agents from Section
+  *Universal Accessibility Pipeline* can pre-warm a context for the
+  likely next commit type — e.g. after a *WCAG fixes* commit, the agent
+  loads contrast-audit tools because $P(\text{next} = \text{WCAG fixes})$
+  is high.
+- A regression detector at the **process level**: if the empirical mix
+  diverges from the historical Markov chain (e.g. a sudden burst of
+  *Style \& dark mode* after a *Benchmark \& ML report* commit), it
+  flags an unusual work session.
+
+```{r markov-transitions, fig.height=4.5, fig.width=6.0, fig.align="center"}
+# Pull all commits chronologically with their cluster_id
+markov_df <- dbGetQuery(con, "
+  SELECT gc.git_sha, gc.commit_ts, cc.cluster_id
+  FROM git_commits gc
+  JOIN commit_classification cc USING (git_sha)
+  WHERE gc.commit_ts IS NOT NULL AND cc.cluster_id IS NOT NULL
+")
+markov_df$commit_ts <- as.POSIXct(markov_df$commit_ts, tz = "UTC")
+markov_df <- markov_df[order(markov_df$commit_ts), ]
+
+# Cluster id → friendly label (consistent with the rest of the report)
+markov_labels <- c(
+  "0" = "Site features\n& About",
+  "1" = "Style &\ndark mode",
+  "2" = "Benchmark\n& ML report",
+  "3" = "Project identity\n& links",
+  "4" = "WCAG fixes",
+  "5" = "Links &\nmerges"
+)
+
+n <- nrow(markov_df)
+if (n >= 20) {
+  trans <- data.frame(
+    from = markov_df$cluster_id[1:(n - 1)],
+    to   = markov_df$cluster_id[2:n]
+  )
+  trans_counts <- trans |>
+    dplyr::count(from, to, name = "n") |>
+    dplyr::group_by(from) |>
+    dplyr::mutate(prob = n / sum(n)) |>
+    dplyr::ungroup()
+
+  # Ensure every (from, to) pair exists so the heatmap is a full 6×6 grid
+  all_pairs <- expand.grid(from = 0:5, to = 0:5)
+  trans_counts <- all_pairs |>
+    dplyr::left_join(trans_counts, by = c("from", "to")) |>
+    dplyr::mutate(
+      n    = tidyr::replace_na(n, 0L),
+      prob = tidyr::replace_na(prob, 0)
+    )
+
+  trans_counts$from_lbl <- factor(markov_labels[as.character(trans_counts$from)],
+                                  levels = unname(markov_labels))
+  trans_counts$to_lbl   <- factor(markov_labels[as.character(trans_counts$to)],
+                                  levels = unname(markov_labels))
+
+  ggplot(trans_counts, aes(x = to_lbl, y = from_lbl, fill = prob)) +
+    geom_tile(colour = "white", linewidth = 0.6) +
+    geom_text(aes(label = ifelse(prob == 0, "",
+                                 sprintf("%.0f%%", prob * 100))),
+              size = 2.9,
+              colour = ifelse(trans_counts$prob > 0.35, "white", "grey20"),
+              fontface = "bold") +
+    scale_fill_gradientn(
+      colours = c("#f1f5f9", "#a7f3d0", "#0f766e", "#134e4a"),
+      values  = scales::rescale(c(0, 0.05, 0.25, 0.6, 1)),
+      labels  = scales::percent_format(accuracy = 1),
+      name    = "P(next | previous)",
+      guide   = guide_colourbar(barwidth = 10, barheight = 0.4,
+                                title.position = "top", title.hjust = 0)
+    ) +
+    labs(
+      title    = "Markov transition matrix — what naturally follows what",
+      subtitle = "Probability of moving from each cluster (row) to each next cluster (column) · 146 commits",
+      x = "Next commit's cluster", y = "Previous commit's cluster"
+    ) +
+    theme_minimal(base_size = 9) +
+    theme(
+      panel.grid       = element_blank(),
+      axis.text.x      = element_text(angle = 0, size = 7, lineheight = 0.9),
+      axis.text.y      = element_text(size = 7, lineheight = 0.9),
+      axis.title       = element_text(size = 8, face = "italic", colour = "grey40"),
+      legend.position  = "bottom"
+    )
+} else {
+  cat("*(Not enough commits with cluster assignments yet — Markov estimation needs ≥ 20.)*")
+}
+```
+
+```{r markov-insights, results="asis"}
+# Compute the headline numbers used in the prose so they stay live
+if (exists("trans_counts") && nrow(trans_counts) > 0) {
+  diag_df <- trans_counts |> dplyr::filter(from == to)
+  most_persistent <- diag_df[which.max(diag_df$prob), ]
+  off_diag <- trans_counts |> dplyr::filter(from != to, prob > 0)
+  if (nrow(off_diag) > 0) {
+    top_offdiag <- off_diag[which.max(off_diag$prob), ]
+  } else {
+    top_offdiag <- NULL
+  }
+}
+```
+
+**Reading the matrix.**
+
+- The **diagonal** measures *persistence*: how likely the developer is to
+  stay in the same cluster for the next commit. A high diagonal value means
+  the developer works in focused sessions, not by jumping between topics.
+  On Aquavena, the *`r as.character(most_persistent$from_lbl)`* cluster has
+  the highest self-loop at **`r sprintf("%.0f%%", most_persistent$prob * 100)`** —
+  this is the cluster the developer "stays in" the longest.
+`r if (!is.null(top_offdiag)) sprintf("- The **strongest off-diagonal transition** is **%s → %s** at **%.0f%%**. This is the dominant *flow* of the project — the routine the developer falls into most often when changing topics.", as.character(top_offdiag$from_lbl), as.character(top_offdiag$to_lbl), top_offdiag$prob * 100) else ""`
+- A **sparse row** (mostly zeros) means a cluster acts as a *terminal state*
+  — once entered, the developer rarely transitions out of it without a
+  break.
+- A **dense row** means the cluster is a *hub* — it leads naturally to
+  many other types of work.
+
+This is the same mathematical object used in 1990s NLP for letter-bigram
+language models, in queuing theory for system performance, and in
+reinforcement-learning environments. Here it gives a **fingerprint of how
+the project is actually built** — not how the developer says they work,
+but what the timeline shows.
 
 ### BUILD vs RUN — hackathon intensity over time
 
