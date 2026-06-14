@@ -2178,6 +2178,335 @@ reinforcement-learning environments. Here it gives a **fingerprint of how
 the project is actually built** — not how the developer says they work,
 but what the timeline shows.
 
+#### The same matrix viewed as a graph
+
+A Markov transition matrix is, by construction, the **weighted
+adjacency matrix of a directed graph**: nodes are clusters, edges are
+the conditional probabilities. Reading the matrix gives precision; reading
+the graph gives **structure**. The chart below renders the chain as a
+graph — only transitions with $P \geq 12\%$ are drawn so the layout stays
+legible. Self-loops are shown as small annotations next to each node.
+
+```{r markov-graph, fig.height=5.0, fig.width=6.5, fig.align="center"}
+# Build node positions on a circle so the graph is symmetric and predictable
+n_nodes  <- 6
+angles   <- seq(pi/2, pi/2 - 2*pi + (2*pi/n_nodes), length.out = n_nodes)
+nodes <- data.frame(
+  cluster = 0:5,
+  x       = cos(angles),
+  y       = sin(angles),
+  label   = unname(markov_labels)
+)
+
+# Threshold for edge visibility — keeps the graph readable
+EDGE_MIN <- 0.12
+
+# Self-loops: diagonal entries above threshold, rendered as a labelled
+# arc + percentage tag placed just outside the node
+selfloops <- trans_counts |>
+  dplyr::filter(from == to, prob >= EDGE_MIN) |>
+  dplyr::left_join(nodes, by = c("from" = "cluster")) |>
+  dplyr::mutate(
+    x_lbl = x * 1.32,
+    y_lbl = y * 1.32
+  )
+
+# Off-diagonal edges
+edges <- trans_counts |>
+  dplyr::filter(from != to, prob >= EDGE_MIN) |>
+  dplyr::left_join(
+    nodes |> dplyr::rename(x_from = x, y_from = y, lbl_from = label),
+    by = c("from" = "cluster")
+  ) |>
+  dplyr::left_join(
+    nodes |> dplyr::rename(x_to = x, y_to = y, lbl_to = label),
+    by = c("to" = "cluster")
+  ) |>
+  # Trim line ends so arrows don't disappear under the node markers
+  dplyr::mutate(
+    dx = x_to - x_from,
+    dy = y_to - y_from,
+    len = sqrt(dx*dx + dy*dy),
+    pad = 0.16,
+    x_from2 = x_from + dx / len * pad,
+    y_from2 = y_from + dy / len * pad,
+    x_to2   = x_to   - dx / len * pad,
+    y_to2   = y_to   - dy / len * pad
+  )
+
+ggplot() +
+  # Curved directed edges, weight = probability
+  # Arrows drawn bigger and in dark teal so the direction is unmistakable
+  geom_curve(
+    data = edges,
+    aes(x = x_from2, y = y_from2, xend = x_to2, yend = y_to2,
+        colour = prob, linewidth = prob),
+    curvature = 0.22,
+    arrow = grid::arrow(length = unit(0.30, "cm"), angle = 22, type = "closed"),
+    lineend = "round", alpha = 0.95
+  ) +
+  geom_text(
+    data = edges,
+    aes(x = (x_from2 + x_to2) / 2 + (y_to2 - y_from2) * 0.10,
+        y = (y_from2 + y_to2) / 2 - (x_to2 - x_from2) * 0.10,
+        label = sprintf("%.0f%%", prob * 100)),
+    size = 2.4, colour = "grey25", fontface = "bold"
+  ) +
+  # Self-loop markers (small circles next to the node, with the persistence %)
+  geom_point(
+    data = selfloops,
+    aes(x = x_lbl, y = y_lbl, size = prob),
+    shape = 21, fill = "#fef3c7", colour = "#b45309", stroke = 1.1
+  ) +
+  geom_text(
+    data = selfloops,
+    aes(x = x_lbl, y = y_lbl, label = sprintf("%.0f%%", prob * 100)),
+    size = 2.3, fontface = "bold", colour = "#92400e"
+  ) +
+  # Cluster nodes
+  geom_point(
+    data = nodes, aes(x = x, y = y),
+    size = 18, colour = "#0f766e", fill = "#0d9488",
+    shape = 21, stroke = 1.2
+  ) +
+  geom_text(
+    data = nodes, aes(x = x, y = y, label = label),
+    size = 2.5, colour = "white", fontface = "bold", lineheight = 0.92
+  ) +
+  scale_colour_gradient(low = "#a7f3d0", high = "#134e4a",
+                        labels = scales::percent_format(accuracy = 1),
+                        name   = "P(next | previous)") +
+  scale_linewidth_continuous(range = c(0.4, 2.2), guide = "none") +
+  scale_size_continuous(range = c(8, 14), guide = "none") +
+  coord_fixed(xlim = c(-1.55, 1.55), ylim = c(-1.55, 1.55)) +
+  labs(
+    title    = "Markov chain — directed graph view",
+    subtitle = sprintf("Nodes = clusters · arrows = transitions (only P ≥ %d%% shown) · loops = persistence",
+                       round(EDGE_MIN * 100))
+  ) +
+  theme_void(base_size = 9) +
+  theme(
+    plot.title    = element_text(face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(hjust = 0.5, colour = "grey40"),
+    legend.position = "bottom",
+    plot.margin     = margin(5, 10, 5, 10)
+  )
+```
+
+**Reading the graph.**
+
+- A **thick, dark arrow** between two clusters means the developer
+  routinely flows from one to the other. The graph makes these *highways*
+  immediately visible — the heatmap shows them too, but the eye has to
+  scan a 6×6 grid; the graph hands them to you.
+- A **node with a large amber loop** is a "sticky" cluster — the dev
+  enters and tends to stay there.
+- A **node with mostly outgoing arrows and a small loop** is a *hub*
+  cluster — a routing point in the workflow rather than a destination.
+- **Isolated nodes** (no in/out edges above threshold) would mean a
+  cluster that is sampled but never strongly connected — none here, which
+  confirms a coherent project.
+
+The matrix and the graph carry the **same information**; the graph
+trades precision for shape recognition. In a real engineering review the
+two are complementary — heatmap for the audit, graph for the briefing.
+
+### Workflow entropy — how predictable is the next commit?
+
+**What it is.** **Shannon entropy** is a number, in bits, that measures
+how *uncertain* a probability distribution is. For each row of the
+Markov matrix (i.e. for each starting cluster) we compute
+$$H(\text{next} \mid \text{previous} = i) \;=\; -\sum_{j} P_{ij} \,\log_{2} P_{ij}.$$
+A row with entropy $\boldsymbol{H = 0\,\text{bit}}$ means the next commit
+is **fully determined** — the developer always goes to the same place
+after this cluster. A row with $\boldsymbol{H = \log_{2}(6) \approx 2.58\,
+\text{bit}}$ means the next commit is **maximally uncertain** — the
+developer could go anywhere.
+
+**Why it matters.** Entropy is the canonical mathematical measure of
+*predictability*. In compression theory it tells you how many bits you
+need to encode the next symbol; here it tells you how much "surprise"
+the next commit holds. Two practical readings:
+
+- **A low-entropy cluster is a routine.** Once the developer enters it,
+  the next step is almost scripted. These clusters are good candidates
+  for **automation** — a CI agent could pre-stage tools or files for the
+  predictable next action.
+- **A high-entropy cluster is a fork in the road.** The developer is
+  multitasking or context-switching after this cluster. These are the
+  zones where **AI assistance pays off most** — the LLM helps the human
+  pick the next thread.
+
+**The trend over time matters too.** Computed release-by-release, the
+*average row entropy* shows whether the project is becoming **more
+routine** (entropy decreasing → mature, repeatable workflow) or **more
+exploratory** (entropy increasing → genuine R\&D phase). It is a maturity
+signal orthogonal to the cluster-drift chart: drift shows *what* you
+work on, entropy shows *how predictable* the work is.
+
+```{r markov-entropy, fig.height=3.0, fig.width=6.5, fig.align="center"}
+if (exists("trans_counts")) {
+  ent <- trans_counts |>
+    dplyr::group_by(from) |>
+    dplyr::summarise(
+      H = -sum(ifelse(prob > 0, prob * log2(prob), 0)),
+      .groups = "drop"
+    ) |>
+    dplyr::mutate(
+      label   = unname(markov_labels[as.character(from)]),
+      H_max   = log2(6),
+      H_norm  = H / H_max  # normalised 0..1 share of maximum entropy
+    ) |>
+    dplyr::arrange(H)
+
+  ggplot(ent, aes(x = reorder(label, H), y = H, fill = H_norm)) +
+    geom_col(width = 0.55, colour = "white", linewidth = 0.3) +
+    geom_hline(yintercept = log2(6), linetype = "dashed",
+               colour = "grey50", linewidth = 0.4) +
+    annotate("text", x = 0.6, y = log2(6) - 0.05, hjust = 0,
+             label = "Maximum uncertainty (uniform over 6 clusters) ≈ 2.58 bits",
+             size = 2.7, colour = "grey45", fontface = "italic") +
+    geom_text(aes(label = sprintf("%.2f bit  ·  %.0f%% of max", H, H_norm * 100)),
+              hjust = -0.05, size = 2.7, colour = "grey20") +
+    coord_flip() +
+    scale_y_continuous(limits = c(0, log2(6) + 0.6),
+                       expand = c(0, 0)) +
+    scale_fill_gradient(low = "#0f766e", high = "#dc2626", guide = "none") +
+    labs(
+      title    = "Workflow entropy — predictability of the next commit",
+      subtitle = "Lower = routine (next step is scripted) · Higher = exploratory (next step is uncertain)",
+      x = NULL, y = "Shannon entropy of next-cluster distribution (bits)"
+    ) +
+    theme_minimal(base_size = 9) +
+    theme(panel.grid.major.y = element_blank(),
+          panel.grid.minor   = element_blank(),
+          axis.text.y = element_text(face = "bold", size = 8))
+}
+```
+
+The most *routine* clusters are the ones with the lowest bars — the
+developer almost always knows what comes next. The most *exploratory*
+clusters have bars approaching the dashed line (the theoretical maximum
+for a 6-cluster system). On Aquavena, the spread between the lowest and
+highest entropies tells how varied the workflow actually is.
+
+### Burnout window detection — friction signals from the AI telemetry
+
+**The idea.** A long Claude Code session leaves a trail of measurable
+signals: tokens consumed, cache-hit ratio, time between commits.
+Specific *patterns* in those signals are physiologically meaningful:
+
+- **Output tokens per minute spikes** → the developer is asking the model
+  for a lot of generation, often a sign of stuck-and-iterating
+- **Cache-hit ratio drops below baseline** → the conversation is
+  constantly bringing in new files instead of reusing context: the
+  developer is searching, not refining
+- **Inter-commit gap stretches** while the session stays active → fewer
+  successful commits per unit of session time: friction, not flow
+
+**Why it matters.** Together, these three signals form a **data-driven
+proxy for cognitive friction** — what one would loosely call a *burnout
+window* or a *struggle period*. Nothing about subjective mood is
+measured directly; only objective telemetry from the AI tool. But the
+combination is meaningful: when all three signals deviate together,
+something hard is going on.
+
+**What it is for.**
+
+- **For the developer**: post-hoc retrospective — *"on day X around
+  17h I was stuck for 90 min on the WCAG fixes cluster"*. A coachable
+  signal.
+- **For the team**: capacity planning. If burnout windows correlate
+  with certain clusters, those clusters are objectively heavier and
+  deserve more time or smaller chunks.
+- **For the assistant itself**: a future Claude could detect the
+  pattern in real time and proactively suggest *"let's pause and
+  reset"* or *"would a different angle help?"*.
+
+```{r burnout-detection, fig.height=3.4, fig.width=7.0, fig.align="center"}
+# Pull per-session output-rate, cache-hit ratio, and elapsed minutes
+sessions <- dbGetQuery(con, "
+  SELECT cs.session,
+         cs.started_at,
+         cs.ended_at,
+         cs.user_messages,
+         SUM(cu.output_tokens)  AS output_tokens,
+         SUM(cu.cache_read)     AS cache_read,
+         SUM(cu.cache_write)    AS cache_write,
+         SUM(cu.input_tokens)   AS input_tokens
+  FROM claude_sessions cs
+  JOIN claude_usage    cu USING (session)
+  GROUP BY cs.session, cs.started_at, cs.ended_at, cs.user_messages
+")
+
+if (nrow(sessions) >= 3) {
+  sessions$started_at <- as.POSIXct(sessions$started_at, tz = "UTC")
+  sessions$ended_at   <- as.POSIXct(sessions$ended_at,   tz = "UTC")
+  attr(sessions$started_at, "tzone") <- "Pacific/Noumea"
+  attr(sessions$ended_at,   "tzone") <- "Pacific/Noumea"
+  sessions$duration_min <- pmax(1,
+    as.numeric(difftime(sessions$ended_at, sessions$started_at, units = "mins")))
+
+  sessions <- sessions |>
+    dplyr::mutate(
+      output_per_min = output_tokens / duration_min,
+      cache_hit_pct  = cache_read /
+                        pmax(1, cache_read + cache_write + input_tokens) * 100
+    )
+
+  # Friction proxy: high output-rate AND low cache-hit (z-score combined)
+  z <- function(x) (x - mean(x, na.rm = TRUE)) / pmax(sd(x, na.rm = TRUE), 1e-9)
+  sessions$friction <- z(sessions$output_per_min) - z(sessions$cache_hit_pct)
+
+  # Sort sessions chronologically
+  sessions <- sessions[order(sessions$started_at), ]
+  sessions$idx <- seq_len(nrow(sessions))
+
+  threshold <- median(sessions$friction, na.rm = TRUE) +
+               1.0 * sd(sessions$friction, na.rm = TRUE)
+
+  ggplot(sessions, aes(x = started_at, y = friction)) +
+    geom_hline(yintercept = threshold, linetype = "dashed",
+               colour = "#dc2626", linewidth = 0.4) +
+    geom_segment(aes(xend = started_at, yend = 0, colour = friction >= threshold),
+                 linewidth = 1.5, alpha = 0.85) +
+    geom_point(aes(colour = friction >= threshold), size = 2.5) +
+    geom_text(data = subset(sessions, friction >= threshold),
+              aes(label = sprintf("%.0f tok/min · %.0f%% cache",
+                                  output_per_min, cache_hit_pct)),
+              hjust = -0.1, vjust = -0.4, size = 2.4, colour = "#7f1d1d") +
+    annotate("text", x = min(sessions$started_at), y = threshold + 0.18,
+             hjust = 0, size = 2.6, colour = "#dc2626",
+             label = "friction threshold (median + 1 σ)",
+             fontface = "italic") +
+    scale_colour_manual(values = c(`FALSE` = "#0f766e", `TRUE` = "#dc2626"),
+                        guide = "none") +
+    scale_x_datetime(date_labels = "%d %b\n%H:%M") +
+    labs(
+      title    = "Burnout-window detector — friction signal across Claude sessions",
+      subtitle = "friction = z(output tokens/min) – z(cache-hit %) · red = above threshold",
+      x = NULL, y = "Friction (σ units)"
+    ) +
+    theme_minimal(base_size = 9) +
+    theme(panel.grid.minor = element_blank())
+} else {
+  cat("*(Need ≥ 3 sessions to compute a friction baseline. Pipeline will populate this chart as session history grows.)*")
+}
+```
+
+**How to read it.** Each vertical bar is one Claude Code session. The
+red dashed line is the *friction threshold* — median plus one standard
+deviation. Bars in red exceed it: those sessions show the combined
+signature *high output rate + low cache reuse*. Labels next to each red
+bar give the raw rates so the reader can sanity-check the call.
+
+**Honest caveat.** This is a *proxy*, not a diagnosis. A red bar on a
+day where the developer was deliberately exploring a new library is
+*expected*, not pathological. The signal is most useful in aggregate:
+clusters of red bars across consecutive days indicate sustained
+friction; a single red bar is just a hard session. The pipeline records
+the data; **the interpretation stays with the human**.
+
 ### BUILD vs RUN — hackathon intensity over time
 
 The chart below answers three questions at once: **when** was effort delivered,
@@ -2207,6 +2536,7 @@ commits_br <- dbGetQuery(con, "
          END AS activity
   FROM git_commits gc
   JOIN commit_classification cc USING (git_sha)
+  WHERE gc.commit_ts IS NOT NULL
   ORDER BY gc.commit_ts
 ")
 commits_br$commit_ts <- as.POSIXct(commits_br$commit_ts, tz = "UTC")
@@ -2228,7 +2558,7 @@ commits_br$time_bin <- as.POSIXct(
 )
 intensity <- commits_br |>
   dplyr::group_by(activity, time_bin) |>
-  dplyr::summarise(active_min = sum(time_secs) / 60, .groups = "drop") |>
+  dplyr::summarise(active_min = sum(time_secs, na.rm = TRUE) / 60, .groups = "drop") |>
   dplyr::mutate(active_signed = ifelse(activity == "BUILD", active_min, -active_min))
 
 # Sequential bin index — removes empty days between bursts
@@ -2253,7 +2583,7 @@ x_lbl <- format(all_bins[day_first_idx], "%d %b")
 # Summary totals for direct labels
 totals <- commits_br |>
   dplyr::group_by(activity) |>
-  dplyr::summarise(total_min = round(sum(time_secs) / 60), .groups = "drop")
+  dplyr::summarise(total_min = round(sum(time_secs, na.rm = TRUE) / 60), .groups = "drop")
 build_min <- totals$total_min[totals$activity == "BUILD"]
 run_min   <- totals$total_min[totals$activity == "RUN"]
 
