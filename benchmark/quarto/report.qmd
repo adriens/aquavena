@@ -3115,6 +3115,25 @@ like *"when did distributed tracing first appear in this repo?"* or
 *"in what commit did the team first talk about chaos engineering?"*
 without any documentation effort.
 
+#### Public-friendly storyboard
+
+The timeline above is precise but technical. The figure below is the
+same story re-rendered as a **three-column roadmap** for a general
+audience: each column is one life-phase, each card is one idea, dates
+are explicit, no similarity scores. This is the version to show in a
+slide deck.
+
+```{=latex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{concept_storyboard.png}
+\caption{Roadmap-style storyboard of the same data shown in the
+  preceding timeline. Three columns, one per life-phase; each card is
+  the first commit in which the idea is visible. Designed to be read
+  by non-technical stakeholders.}
+\end{figure}
+```
+
 ### BUILD vs RUN — hackathon intensity over time
 
 The chart below answers three questions at once: **when** was effort delivered,
