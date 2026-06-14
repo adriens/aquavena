@@ -72,8 +72,9 @@ format:
 
           {\fontsize{32}{36}\selectfont\bfseries\color{coverteal}
             Accessibility Benchmark}\\[0.3em]
-          {\fontsize{18}{22}\selectfont\itshape\color{white}
-            Aquavena for the Visually Impaired}
+          {\fontsize{16}{20}\selectfont\itshape\color{white}
+            From low-vision accessibility\\
+            to universal agentic interfaces}
 
           \vspace{0.4cm}
           {\color{coverteal}\rule{0.30\textwidth}{0.8pt}}\\[0.3em]
@@ -112,8 +113,10 @@ format:
           \vspace{1.2cm}
 
           {\color{teal700}\fontsize{24}{30}\selectfont\bfseries
-            Accessibility Benchmark\\[0.4em]
-            Aquavena for the Visually Impaired}
+            Accessibility Benchmark}\\[0.3em]
+          {\color{teal700}\fontsize{16}{20}\selectfont\itshape
+            From low-vision accessibility\\
+            to universal agentic interfaces}
 
           \vspace{0.6cm}
           {\color{teal700}\rule{0.6\textwidth}{1.5pt}}
@@ -121,7 +124,7 @@ format:
 
           {\large\color{gray!60!black}
             Comparing \texttt{adriens.github.io/aquavena} vs \texttt{aquavena.nc}\\[0.3em]
-            Web Accessibility~·~Low Vision~·~WCAG 2.1 AA~·~New Caledonia}
+            WebMCP~·~MCP server~·~WCAG 2.1 AA~·~agentic accessibility~·~New Caledonia}
 
           \vspace{2cm}
 
@@ -1028,8 +1031,16 @@ every checkpoint — the cleanest possible EVM trace for a PMI committee.
 evm_df <- dbGetQuery(con, "
   SELECT tag, lh_score
   FROM score_history
-  ORDER BY CASE WHEN tag = 'aquavena.nc' THEN 0 ELSE 1 END, tag
-") |> dplyr::mutate(idx = dplyr::row_number())
+")
+# Sort: aquavena.nc baseline first, then real releases by semver
+evm_df <- evm_df |>
+  dplyr::mutate(
+    base   = ifelse(tag == "aquavena.nc", 0L, 1L),
+    ver    = ifelse(tag == "aquavena.nc", "0.0.0", sub("^v", "", tag))
+  ) |>
+  dplyr::arrange(base, numeric_version(ver, strict = FALSE)) |>
+  dplyr::select(-base, -ver) |>
+  dplyr::mutate(idx = dplyr::row_number())
 
 n_rel       <- nrow(evm_df)
 evm_df$pv   <- 91 + (100 - 91) * (evm_df$idx - 1) / (n_rel - 1)
@@ -1204,12 +1215,15 @@ vel <- dbGetQuery(con, "
   SELECT tag, lines_delta
   FROM score_history
   WHERE tag != 'aquavena.nc' AND lines_delta IS NOT NULL
-  ORDER BY tag
 ")
 # Exclude the v0.1.1 scaffold (initial commit dominates everything visually)
-vel       <- vel |> dplyr::filter(tag != "v0.1.1")
+vel <- vel |> dplyr::filter(tag != "v0.1.1")
+# Sort releases by semver components (v1.4.0 < v1.5.0 < v1.10.0 < v1.11.0 …)
+vel <- vel[order(numeric_version(sub("^v", "", vel$tag), strict = FALSE)), ]
 vel$cum   <- cumsum(vel$lines_delta)
 vel$idx   <- seq_len(nrow(vel))
+# Lock the x-axis factor order to the now-correct chronology
+vel$tag   <- factor(vel$tag, levels = vel$tag)
 avg_v     <- round(mean(vel$lines_delta), 0)
 scale_factor <- max(vel$lines_delta) / max(vel$cum)
 
@@ -1362,8 +1376,13 @@ ggplot(grid, aes(x = date, y = hour)) +
            label = "day", size = 2.2, colour = "#94a3b8", hjust = -0.1) +
   annotate("text", x = min(grid$date), y = 21,
            label = "night", size = 2.2, colour = "#94a3b8", hjust = -0.1) +
-  scale_x_date(breaks = unique(grid$date),
-               labels = format(unique(grid$date), "%a\n%d %b"),
+  scale_x_date(breaks = (function(d) {
+                 # Show ~10 labels max, evenly spaced; always include first and last
+                 step  <- max(1, ceiling(length(d) / 10))
+                 picks <- unique(c(d[seq(1, length(d), by = step)], d[length(d)]))
+                 picks
+               })(unique(grid$date)),
+               labels = function(x) format(x, "%a %d %b"),
                expand = c(0.01, 0)) +
   scale_y_reverse(breaks = c(0, 6, 12, 18, 23),
                   labels = c("00h","06h","12h","18h","23h"),
@@ -1789,7 +1808,7 @@ section *to* the About page (a11y + About). These are the **integration
 commits** — the ones a knowledge-graph would surface as architecturally
 critical.
 
-**Why this matters at scale.** With 82 commits the graph is small, but the
+**Why this matters at scale.** With 146 commits the graph is small, but the
 *technique scales linearly with commit count*. Applied to a 1000-commit
 codebase, PageRank surfaces the commits that anchor each subsystem;
 betweenness surfaces the integration commits whose removal would *fracture*
@@ -1882,8 +1901,11 @@ if (nrow(cdrift_commits) > 0 && nrow(cdrift_releases) >= 3) {
   counts <- cdrift_commits |>
     dplyr::count(tag, cluster_id, name = "n")
 
-  # Build chronological factor for x-axis (only keep releases that have commits)
+  # Sort releases by semver for the x-axis (so v1.4.0 < v1.5.0 < v1.10.0 < v1.14.0).
+  # Bucketing above used the real published_at_ts so commit→release attribution
+  # is still correct; here we only reorder the display.
   used_tags <- intersect(rel_tag, unique(counts$tag))
+  used_tags <- used_tags[order(numeric_version(sub("^v", "", used_tags), strict = FALSE))]
   counts$tag <- factor(counts$tag, levels = used_tags)
 
   # Friendly cluster labels
@@ -2052,8 +2074,13 @@ releases_br$bin_idx <- ts_to_idx(releases_br$published_at_ts)
 
 key_tags <- c("v0.1.1", "v0.1.5", "v1.4.0", "v1.7.0", "v1.12.0", "v1.14.0")
 releases_key <- releases_br[releases_br$tag %in% key_tags, ]
-releases_key <- releases_key[order(releases_key$bin_idx), ]
-# Alternating heights to avoid label overlap
+# Group key tags sharing the same 2-hour bin into a single concatenated label
+# so multiple tags published the same hour don't overlap visually
+releases_key <- releases_key |>
+  dplyr::group_by(bin_idx) |>
+  dplyr::summarise(tag = paste(tag, collapse = " · "), .groups = "drop") |>
+  dplyr::arrange(bin_idx)
+# Alternating heights to avoid label overlap on adjacent bins
 releases_key$y_mult <- ifelse(seq_len(nrow(releases_key)) %% 2 == 1, 1.08, 1.22)
 
 swim_pal <- c(BUILD = "#0f766e", RUN = "#dc2626")
@@ -2377,6 +2404,16 @@ ai_lev <- dbGetQuery(con, "
   ORDER BY cc.cluster_id, ct.model
 ")
 
+# True unique commit count per cluster (some commits use both Sonnet and Opus,
+# so summing per-model counts would double-count).
+n_commits_per_cluster <- dbGetQuery(con, "
+  SELECT cc.cluster_id,
+         COUNT(DISTINCT cc.git_sha) AS n_unique
+  FROM commit_classification cc
+  JOIN commit_tokens ct USING (git_sha)
+  GROUP BY cc.cluster_id
+")
+
 cluster_lbl <- c(
   "0" = "Site features & About",
   "1" = "Style & dark mode",
@@ -2391,17 +2428,18 @@ ai_lev$cluster_label <- factor(
 )
 ai_lev$model_short <- ifelse(grepl("opus", ai_lev$model), "Opus 4.7", "Sonnet 4.6")
 
-# Per-cluster totals (across models)
+# Per-cluster totals (across models) — uses unique commit count, not per-model
 clu_totals <- ai_lev |>
   dplyr::group_by(cluster_id, cluster_label) |>
   dplyr::summarise(
     total_tokens = sum(tokens, na.rm = TRUE),
     total_usd    = sum(usd,    na.rm = TRUE),
-    n_commits    = max(n_commits, na.rm = TRUE),
     opus_tokens  = sum(tokens[model_short == "Opus 4.7"],    na.rm = TRUE),
     sonn_tokens  = sum(tokens[model_short == "Sonnet 4.6"], na.rm = TRUE),
     .groups = "drop"
   ) |>
+  dplyr::left_join(n_commits_per_cluster, by = "cluster_id") |>
+  dplyr::rename(n_commits = n_unique) |>
   dplyr::mutate(
     tokens_per_commit_M = total_tokens / n_commits / 1e6,
     usd_per_commit      = total_usd    / n_commits,
@@ -2410,26 +2448,30 @@ clu_totals <- ai_lev |>
 ```
 
 ```{r ai-leverage-chart-1, fig.height=3.0, fig.width=7.0, fig.align="center"}
-# Stacked bar: tokens per commit by cluster, split Sonnet/Opus
+# Stacked bar: tokens per commit by cluster, split Sonnet/Opus.
+# Divide by the cluster's UNIQUE commit count so the stack sums to the right total.
 mix_bar <- ai_lev |>
-  dplyr::group_by(cluster_label, model_short) |>
+  dplyr::left_join(n_commits_per_cluster, by = "cluster_id") |>
+  dplyr::group_by(cluster_id, cluster_label, model_short) |>
   dplyr::summarise(
-    tokens_per_commit_M = sum(tokens, na.rm = TRUE) / max(n_commits) / 1e6,
+    tokens_per_commit_M = sum(tokens, na.rm = TRUE) / max(n_unique) / 1e6,
     .groups = "drop"
   )
 
 ggplot(mix_bar, aes(x = reorder(cluster_label, tokens_per_commit_M),
                     y = tokens_per_commit_M, fill = model_short)) +
   geom_col(width = 0.6, colour = "white", linewidth = 0.2) +
+  # Label placed CLEARLY past the bar (right side) — never overlaps the stack
   geom_text(data = clu_totals,
             aes(x = cluster_label,
                 y = tokens_per_commit_M,
-                label = sprintf("%.1f M/commit  ·  %d commits  ·  %.0f%% Opus",
+                label = sprintf("  %.1f M/commit  ·  %d commits  ·  %.0f%% Opus",
                                 tokens_per_commit_M, n_commits, opus_pct)),
-            hjust = -0.05, size = 2.7, colour = "grey20",
+            hjust = 0, size = 2.7, colour = "grey20",
             inherit.aes = FALSE) +
   coord_flip() +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.55)),
+  # Reserve 70% extra horizontal room on the right for the labels
+  scale_y_continuous(expand = expansion(mult = c(0, 0.7)),
                      labels = function(x) paste0(x, " M")) +
   scale_fill_manual(values = c("Sonnet 4.6" = "#0f766e", "Opus 4.7" = "#7c3aed"),
                     name = "Model") +
