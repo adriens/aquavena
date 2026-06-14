@@ -1,6 +1,6 @@
 ---
-title: "Accessibility Benchmark — Aquavena for the Visually Impaired"
-subtitle: "Comparing adriens.github.io/aquavena vs aquavena.nc"
+title: "Accessibility Benchmark — Aquavena"
+subtitle: "From low-vision accessibility to universal agentic interfaces · adriens.github.io/aquavena vs aquavena.nc"
 author: "Adrien SALES"
 date: today
 lang: en
@@ -1597,7 +1597,7 @@ p
 
 ## Semantic analysis of commit messages
 
-All **83 commit messages** were embedded with the
+All **146 commit messages** were embedded with the
 `BAAI/bge-m3` model (1024-dimensional **multilingual** embeddings — handles
 the project's mix of French and English commit messages),
 clustered with K-Means into 6 groups, and projected to 2D with PCA. The
@@ -4364,12 +4364,60 @@ be attributed to a specific simulation profile and retested in isolation.
 |---|---|---|
 | Site clustering | ~30 sites | 2 |
 | Co-failure community detection | ~50 sites | 2 |
-| Embedding-based effort prediction | ~500 commits | 83 |
-| Time-series forecasting | ~50 releases | 9 |
+| Embedding-based effort prediction | ~500 commits | 146 |
+| Time-series forecasting | ~50 releases | 26 |
 | Anomaly detection (regressions) | ~20 weekly audits | 1 |
 
 The architecture is correct. **Scale is the missing ingredient — and the
 benchmark pipeline scales linearly with sites added.**
+
+## New perspectives unlocked by the 146-commit dataset
+
+With 146 commits across 6 semantic clusters, 26 release tags, and a
+now-complete agentic interface layer, the dataset opens directions that were
+not viable at 83 commits:
+
+**Commit-level accessibility prediction (supervised ML)**
+: The join `commit_classification ↔ score_history` now has 26 labelled rows
+  (commit embedding → Lighthouse delta). Still small, but the cluster
+  distribution across 146 commits is rich enough to train a lightweight
+  regressor that maps *commit semantic type* to *expected score impact* —
+  flagging "colour/contrast" commits as high-risk before they merge.
+
+**Agent profile fine-tuning from human verbatim (NLP)**
+: Each RC-stage human verbatim is a natural-language annotation of a
+  disability-specific UX failure. At 10+ verbatim entries, a small
+  fine-tuning dataset emerges: `(verbatim, agent_profile) → WCAG rule`.
+  This closes the loop: humans annotate once, agents learn the pattern,
+  future builds catch the same failure automatically.
+
+**Cross-site transfer learning**
+: The 6 semantic clusters (accessibility, report, UX, deps, merge,
+  custom) are domain-agnostic — they will appear on any web project. A
+  model trained on Aquavena's `(cluster, lines_delta) → score` mapping
+  can be fine-tuned for any other New Caledonia public-service site with
+  as few as 5 audited releases, dramatically reducing cold-start cost.
+
+**Cluster drift as a project maturity signal**
+: Cluster 1 (report/WebMCP, 32 commits) emerged only in the second phase
+  of the project. Tracking the cluster-mix ratio release-over-release gives
+  a *maturity index*: early-stage projects are dominated by accessibility
+  and UX clusters; mature projects shift toward docs, deps, and tooling.
+  This is a zero-label signal — no human annotation required.
+
+**Graph neural network on the FK schema**
+: `gh_releases → score_history → git_commits ← ci_runs ← pa11y_issues`
+  is a heterogeneous knowledge graph. With 26 releases and 146 commits, a
+  small GNN can learn node embeddings that predict *which WCAG rule is most
+  likely to regress on the next release* given the current commit cluster
+  and the co-failure graph from `pa11y_issues`.
+
+**Multi-agent orchestration benchmark**
+: The 5 specialised agents + Custom X composition define a natural
+  **multi-agent benchmark**: given a new site, which agent detects the most
+  regressions first? Tracking *detection latency per agent* and
+  *recall per WCAG category* across releases produces agent-level DORA
+  metrics — a novel contribution to the accessibility-engineering literature.
 
 # \faBookOpen\ Further Reading
 
@@ -4410,6 +4458,46 @@ Compared to aquavena.nc (91/100, 67 WCAG errors), this site delivers significant
 better accessibility, and adds features absent from the source site: text-to-speech,
 dark mode, adjustable text size, PWA support, RSS feeds, and iCal calendars — all
 designed to give visually impaired users full autonomy.
+
+But this project has grown beyond its original scope. What started as a
+weekend hack to help one visually impaired person read her menus has become
+a **proof of concept for universal agentic accessibility**:
+
+- The same five canonical tools (`list_regimes`, `get_week_menu`,
+  `search_dish`, `get_today_menus`, `get_contact`) are now queryable by
+  \textbf{any agent, on any device, through any transport} — a browser
+  extension via WebMCP, a voice assistant via the MCP server, a refreshable
+  braille display, or a companion robot.
+
+- \textbf{Reachy Mini} (HuggingFace / Pollen Robotics) has already called
+  the Aquavena MCP tools in a live demonstration, reading the menus aloud
+  through its speaker. A physical robot, a Python MCP client, the same five
+  tools — the architecture holds.
+
+```{=latex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth]{reachy-mini-demo.png}
+\caption{Reachy Mini (HuggingFace / Pollen Robotics) calling the Aquavena MCP
+  server in a live demo. Left: the Claude terminal shows \texttt{list\_regimes()}
+  being called and the regime list returned. Right: Reachy Mini in its 3D
+  environment, about to read the menus aloud. The same five canonical tools —
+  no code change — serve both the browser and the robot.}
+\end{figure}
+```
+
+- **AI agents replace human testers in CI** — the Universal Accessibility
+  Pipeline runs specialised agents (blind, dyslexic, low-vision, colourblind,
+  composed) on every commit, producing WCAG KPIs in seconds without scheduling
+  a single human. Human verbatim is reserved for release-candidate validation,
+  not the daily build loop.
+
+The lesson is architectural: **expose your content as structured tools, not as
+HTML to be scraped**. The five tools we defined are the contract. Every
+transport — browser, HTTP, robot bus, braille display — consumes that contract
+unchanged. This is what makes the pipeline transferable: any service that
+publishes its content as MCP tools inherits the same agentic accessibility
+stack for free.
 
 ---
 

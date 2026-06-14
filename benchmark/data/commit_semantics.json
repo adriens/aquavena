@@ -1,17 +1,836 @@
 {
   "commits": [
     {
+      "sha": "b02e25e",
+      "subject": "feat(report): Universal Accessibility Pipeline — diagramme v3, données au 14 juin 2026",
+      "ts": "2026-06-14T14:31:35+11:00",
+      "type": "feat",
+      "scope": "report",
+      "cluster": 1,
+      "x": 0.10226180404424667,
+      "y": -0.1268826127052307,
+      "pagerank": 0.003252114361568701,
+      "betweenness": 7.465251852505066e-05,
+      "degree": 6
+    },
+    {
+      "sha": "d84bfb0",
+      "subject": "Merge pull request #18 from adriens/feat/report-pipeline-clarity",
+      "ts": "2026-06-14T10:00:59+11:00",
+      "type": "other",
+      "scope": null,
+      "cluster": 5,
+      "x": -0.2635476887226105,
+      "y": -0.3824019432067871,
+      "pagerank": 0.006612684504393448,
+      "betweenness": 0.023672001529975336,
+      "degree": 8
+    },
+    {
+      "sha": "255c650",
+      "subject": "feat(report): refonte du diagramme Universal Accessibility Pipeline",
+      "ts": "2026-06-14T10:00:10+11:00",
+      "type": "feat",
+      "scope": "report",
+      "cluster": 1,
+      "x": 0.09099069982767105,
+      "y": -0.06344418227672577,
+      "pagerank": 0.015146407423327391,
+      "betweenness": 0.07748294916724778,
+      "degree": 36
+    },
+    {
+      "sha": "8e41ccc",
+      "subject": "Merge pull request #17 from adriens/feat/report-webmcp",
+      "ts": "2026-06-14T09:35:37+11:00",
+      "type": "other",
+      "scope": null,
+      "cluster": 5,
+      "x": -0.2371409386396408,
+      "y": -0.442043274641037,
+      "pagerank": 0.006484051525841629,
+      "betweenness": 0.0,
+      "degree": 7
+    },
+    {
+      "sha": "9b0a086",
+      "subject": "fix(report): couleurs TikZ compatibles xcolor (amber→orange, rose→red)",
+      "ts": "2026-06-14T09:35:01+11:00",
+      "type": "fix",
+      "scope": "report",
+      "cluster": 3,
+      "x": -0.155695378780365,
+      "y": 0.08532319217920303,
+      "pagerank": 0.0015069794870322655,
+      "betweenness": 0.0,
+      "degree": 1
+    },
+    {
+      "sha": "ee5e34a",
+      "subject": "feat(report): section WebMCP + pipeline AI-Actual Test dans Future Work",
+      "ts": "2026-06-14T09:11:40+11:00",
+      "type": "feat",
+      "scope": "report",
+      "cluster": 1,
+      "x": 0.23260344564914703,
+      "y": -0.17943671345710754,
+      "pagerank": 0.006495696457578729,
+      "betweenness": 0.005918489008950998,
+      "degree": 15
+    },
+    {
+      "sha": "abdde8d",
+      "subject": "Merge pull request #16 from adriens/feat/webmcp-origin-trial",
+      "ts": "2026-06-14T08:50:53+11:00",
+      "type": "other",
+      "scope": null,
+      "cluster": 5,
+      "x": -0.27671751379966736,
+      "y": -0.44117772579193115,
+      "pagerank": 0.006906636759490286,
+      "betweenness": 0.0024988156005644573,
+      "degree": 8
+    },
+    {
+      "sha": "2e63b6f",
+      "subject": "feat(webmcp): Origin Trial token WebMCP Chrome 149+",
+      "ts": "2026-06-14T08:50:11+11:00",
+      "type": "feat",
+      "scope": "webmcp",
+      "cluster": 1,
+      "x": 0.08315315842628479,
+      "y": -0.17254364490509033,
+      "pagerank": 0.002790121681564791,
+      "betweenness": 0.003758792165051132,
+      "degree": 4
+    },
+    {
+      "sha": "deefe64",
+      "subject": "Merge pull request #15 from adriens/feat/webmcp",
+      "ts": "2026-06-14T08:36:18+11:00",
+      "type": "other",
+      "scope": null,
+      "cluster": 5,
+      "x": -0.2828955352306366,
+      "y": -0.43698152899742126,
+      "pagerank": 0.006423489519561699,
+      "betweenness": 0.0,
+      "degree": 7
+    },
+    {
+      "sha": "f372e53",
+      "subject": "feat(webmcp): ajout outil get_contact avec horaires, email et coordonnées complètes",
+      "ts": "2026-06-14T08:35:42+11:00",
+      "type": "feat",
+      "scope": "webmcp",
+      "cluster": 1,
+      "x": 0.10626111924648285,
+      "y": -0.21961380541324615,
+      "pagerank": 0.00664239543658528,
+      "betweenness": 0.016523276751906835,
+      "degree": 14
+    },
+    {
+      "sha": "1eb14a1",
+      "subject": "feat(webmcp): enregistrement des outils WebMCP pour agents IA",
+      "ts": "2026-06-14T08:30:35+11:00",
+      "type": "feat",
+      "scope": "webmcp",
+      "cluster": 1,
+      "x": 0.19876426458358765,
+      "y": -0.25916752219200134,
+      "pagerank": 0.00475161305121254,
+      "betweenness": 0.0026296148536677846,
+      "degree": 10
+    },
+    {
+      "sha": "4933006",
+      "subject": "Merge pull request #10 from adriens/feat/report-git-sha",
+      "ts": "2026-06-14T08:19:51+11:00",
+      "type": "other",
+      "scope": null,
+      "cluster": 5,
+      "x": -0.22652208805084229,
+      "y": -0.4199603199958801,
+      "pagerank": 0.006218011819164221,
+      "betweenness": 0.0,
+      "degree": 7
+    },
+    {
+      "sha": "fc0c06d",
+      "subject": "merge: résolution conflit menus.json — conservation version main (semaines juin 8 et 15)",
+      "ts": "2026-06-14T08:19:08+11:00",
+      "type": "merge",
+      "scope": null,
+      "cluster": 2,
+      "x": -0.14577291905879974,
+      "y": -0.02084319293498993,
+      "pagerank": 0.002995232163925185,
+      "betweenness": 0.0,
+      "degree": 1
+    },
+    {
+      "sha": "ffdecc0",
+      "subject": "Merge pull request #14 from adriens/dependabot/npm_and_yarn/site/astro-6.4.4",
+      "ts": "2026-06-14T08:11:36+11:00",
+      "type": "other",
+      "scope": null,
+      "cluster": 5,
+      "x": -0.3070833384990692,
+      "y": -0.33016490936279297,
+      "pagerank": 0.007907624174322194,
+      "betweenness": 0.013432891027452282,
+      "degree": 10
+    },
+    {
+      "sha": "05ffba4",
+      "subject": "chore(deps): bump astro from 6.4.2 to 6.4.4 in /site",
+      "ts": "2026-06-07T19:03:43Z",
+      "type": "chore",
+      "scope": "deps",
+      "cluster": 2,
+      "x": -0.22665376961231232,
+      "y": 0.023822253569960594,
+      "pagerank": 0.00946027425823881,
+      "betweenness": 0.04297959742536224,
+      "degree": 13
+    },
+    {
+      "sha": "2176514",
+      "subject": "Merge pull request #13 from adriens/feat/render-entrees-desserts-vege",
+      "ts": "2026-06-05T10:17:25+11:00",
+      "type": "other",
+      "scope": null,
+      "cluster": 5,
+      "x": -0.34806665778160095,
+      "y": -0.3501741290092468,
+      "pagerank": 0.007375612548387939,
+      "betweenness": 0.02513473006108562,
+      "degree": 10
+    },
+    {
+      "sha": "fdc7943",
+      "subject": "feat(site): afficher Entrée, Dessert, Végé, Fresh et Enfants dans le template",
+      "ts": "2026-06-05T10:16:46+11:00",
+      "type": "feat",
+      "scope": "site",
+      "cluster": 1,
+      "x": 0.038737259805202484,
+      "y": -0.04663959518074989,
+      "pagerank": 0.010946532343956823,
+      "betweenness": 0.049486147623131374,
+      "degree": 25
+    },
+    {
+      "sha": "d2082f9",
+      "subject": "Merge pull request #12 from adriens/fix/scraper-entrees-meal-time",
+      "ts": "2026-06-05T10:11:31+11:00",
+      "type": "other",
+      "scope": null,
+      "cluster": 5,
+      "x": -0.37924590706825256,
+      "y": -0.2664853036403656,
+      "pagerank": 0.007179475185210415,
+      "betweenness": 0.004539148828219531,
+      "degree": 9
+    },
+    {
+      "sha": "4993c04",
+      "subject": "feat(scraper): parser les sections Entrée et Dessert",
+      "ts": "2026-06-05T10:09:08+11:00",
+      "type": "feat",
+      "scope": "scraper",
+      "cluster": 1,
+      "x": -0.004065783694386482,
+      "y": -0.04243050888180733,
+      "pagerank": 0.006271825179132698,
+      "betweenness": 0.030021889455621793,
+      "degree": 12
+    },
+    {
+      "sha": "7a83e02",
+      "subject": "fix(scraper): reconnaître les meal_time du régime Bien Être Family",
+      "ts": "2026-06-05T10:05:52+11:00",
+      "type": "fix",
+      "scope": "scraper",
+      "cluster": 2,
+      "x": -0.158912792801857,
+      "y": 0.08657209575176239,
+      "pagerank": 0.0020906049246860103,
+      "betweenness": 0.0,
+      "degree": 2
+    },
+    {
+      "sha": "1288141",
+      "subject": "data: régénérer menus.json au 05/06/2026 (semaines du 8 et 15 juin)",
+      "ts": "2026-06-05T10:01:02+11:00",
+      "type": "data",
+      "scope": null,
+      "cluster": 2,
+      "x": -0.12691719830036163,
+      "y": -0.0026693004183471203,
+      "pagerank": 0.004297953725048643,
+      "betweenness": 0.013793103448275862,
+      "degree": 2
+    },
+    {
+      "sha": "1ea7413",
+      "subject": "docs(benchmark): ajout 'Start With Why' (Sinek) dans les références",
+      "ts": "2026-05-31T21:52:17+11:00",
+      "type": "docs",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.20058715343475342,
+      "y": 0.04460146278142929,
+      "pagerank": 0.00808485036254145,
+      "betweenness": 0.010339604300669776,
+      "degree": 20
+    },
+    {
+      "sha": "7d49424",
+      "subject": "fix(benchmark): panel scope séparé — 12 scopes lisibles sans chevauchement",
+      "ts": "2026-05-31T20:31:53+11:00",
+      "type": "fix",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.10939657688140869,
+      "y": 0.1647845059633255,
+      "pagerank": 0.00717158425119975,
+      "betweenness": 0.002991110650208731,
+      "degree": 18
+    },
+    {
+      "sha": "04be61f",
+      "subject": "refactor(benchmark): BUILD/RUN chart — suppression des jours vides + labels non superposés",
+      "ts": "2026-05-31T20:27:18+11:00",
+      "type": "refactor",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.21689057350158691,
+      "y": 0.08110350370407104,
+      "pagerank": 0.009912667815219576,
+      "betweenness": 0.006232313465731722,
+      "degree": 25
+    },
+    {
+      "sha": "8746cd1",
+      "subject": "feat(benchmark): BUILD vs RUN chart — hackathon intensity par swimlane",
+      "ts": "2026-05-31T18:34:28+11:00",
+      "type": "feat",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.27206486463546753,
+      "y": -0.1311653107404709,
+      "pagerank": 0.004673678477205279,
+      "betweenness": 1.2971961482001878e-05,
+      "degree": 11
+    },
+    {
+      "sha": "3ad68f5",
+      "subject": "feat(benchmark): cluster-split panels — 6 small multiples galactiques",
+      "ts": "2026-05-31T18:24:15+11:00",
+      "type": "feat",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.2685551047325134,
+      "y": -0.021482132375240326,
+      "pagerank": 0.004985780398493046,
+      "betweenness": 4.9449342182008105e-05,
+      "degree": 12
+    },
+    {
+      "sha": "f0f40f2",
+      "subject": "style(benchmark): graphe galactique dans le corps du rapport (couverture → inline)",
+      "ts": "2026-05-31T18:19:22+11:00",
+      "type": "style",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.2587973475456238,
+      "y": 0.20678849518299103,
+      "pagerank": 0.010551171421043462,
+      "betweenness": 0.013019435616165989,
+      "degree": 26
+    },
+    {
+      "sha": "b788e3b",
+      "subject": "docs(benchmark): explication TF-IDF + comptages commits 81 → 83",
+      "ts": "2026-05-31T18:16:59+11:00",
+      "type": "docs",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.24194487929344177,
+      "y": -0.011155347339808941,
+      "pagerank": 0.003975695517061793,
+      "betweenness": 8.552271483305965e-06,
+      "degree": 9
+    },
+    {
+      "sha": "5ec8c91",
+      "subject": "fix(benchmark): MTTR restauré dans le panneau DORA (26 min, mesuré via timestamps réels)",
+      "ts": "2026-05-31T18:12:52+11:00",
+      "type": "fix",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.12073644250631332,
+      "y": 0.06856722384691238,
+      "pagerank": 0.002633669498044654,
+      "betweenness": 4.409171075837742e-05,
+      "degree": 4
+    },
+    {
+      "sha": "2e4de3f",
+      "subject": "fix(benchmark): tri semver avec package_version() — v1.4.0 avant v1.14.0",
+      "ts": "2026-05-31T18:07:00+11:00",
+      "type": "fix",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.025138862431049347,
+      "y": 0.05787460505962372,
+      "pagerank": 0.00287235837429681,
+      "betweenness": 0.0,
+      "degree": 5
+    },
+    {
+      "sha": "903f372",
+      "subject": "fix(benchmark): NA supprimé + annotation Tailwind v4 + labels hors barres",
+      "ts": "2026-05-31T17:53:29+11:00",
+      "type": "fix",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.1338391900062561,
+      "y": 0.18169069290161133,
+      "pagerank": 0.012080337525793978,
+      "betweenness": 0.027364090813579326,
+      "degree": 29
+    },
+    {
+      "sha": "cf7472a",
+      "subject": "refactor(benchmark): heatmap plus compacte et lisible",
+      "ts": "2026-05-31T17:49:52+11:00",
+      "type": "refactor",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.22475597262382507,
+      "y": 0.1352442502975464,
+      "pagerank": 0.011458884275801225,
+      "betweenness": 0.017911289310893332,
+      "degree": 29
+    },
+    {
+      "sha": "b62b11a",
+      "subject": "feat(benchmark): annotations Tailwind v4 sur velocity chart + ref DORA 2023",
+      "ts": "2026-05-31T17:47:11+11:00",
+      "type": "feat",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.35100415349006653,
+      "y": -0.08965063840150833,
+      "pagerank": 0.007998946841282377,
+      "betweenness": 0.011491881339748135,
+      "degree": 18
+    },
+    {
+      "sha": "c03b4d6",
+      "subject": "docs(benchmark): explication Lead Time for Changes sous le panneau DORA",
+      "ts": "2026-05-31T17:43:05+11:00",
+      "type": "docs",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.25410667061805725,
+      "y": 0.06636013090610504,
+      "pagerank": 0.007100831027233044,
+      "betweenness": 0.0044555926254133335,
+      "degree": 17
+    },
+    {
+      "sha": "33685b3",
+      "subject": "fix(benchmark): suppression CFR et MTTR du panneau DORA",
+      "ts": "2026-05-31T17:41:45+11:00",
+      "type": "fix",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.09617845714092255,
+      "y": 0.16713504493236542,
+      "pagerank": 0.007991381783865163,
+      "betweenness": 0.009911090288028744,
+      "degree": 18
+    },
+    {
+      "sha": "98c34c4",
+      "subject": "fix(benchmark): lignes source correctes pour toutes les releases",
+      "ts": "2026-05-31T17:38:50+11:00",
+      "type": "fix",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.06172281503677368,
+      "y": 0.1629285216331482,
+      "pagerank": 0.009881319373522008,
+      "betweenness": 0.011559836779635848,
+      "degree": 24
+    },
+    {
+      "sha": "6c8c0a3",
+      "subject": "fix(benchmark): keywords en pills teal sur la page abstract",
+      "ts": "2026-05-31T17:30:51+11:00",
+      "type": "fix",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.09996804594993591,
+      "y": 0.16692346334457397,
+      "pagerank": 0.009918143578870265,
+      "betweenness": 0.011562397512964638,
+      "degree": 24
+    },
+    {
+      "sha": "438659e",
+      "subject": "feat(benchmark): révision git dans le rapport + page abstract dédiée",
+      "ts": "2026-05-31T17:28:27+11:00",
+      "type": "feat",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.3712441325187683,
+      "y": -0.07008050382137299,
+      "pagerank": 0.017206846005204068,
+      "betweenness": 0.05071068721377996,
+      "degree": 42
+    },
+    {
+      "sha": "308cd78",
+      "subject": "feat(ux): A+ / A− sous le titre Aquavena",
+      "ts": "2026-05-31T17:03:49+11:00",
+      "type": "feat",
+      "scope": "ux",
+      "cluster": 4,
+      "x": -0.10166908800601959,
+      "y": -0.24665257334709167,
+      "pagerank": 0.008996230988104773,
+      "betweenness": 0.012858709162225264,
+      "degree": 17
+    },
+    {
+      "sha": "908ba55",
+      "subject": "feat(ux): déplacer A+ / A− sous le titre Aquavena",
+      "ts": "2026-05-31T17:03:03+11:00",
+      "type": "feat",
+      "scope": "ux",
+      "cluster": 4,
+      "x": -0.15444813668727875,
+      "y": -0.20261450111865997,
+      "pagerank": 0.009179810154962963,
+      "betweenness": 0.012858709162225264,
+      "degree": 17
+    },
+    {
+      "sha": "805481b",
+      "subject": "feat(ux): navigation circulaire + onglets raccourcis",
+      "ts": "2026-05-31T16:58:08+11:00",
+      "type": "feat",
+      "scope": "ux",
+      "cluster": 2,
+      "x": -0.004244916141033173,
+      "y": -0.1073194146156311,
+      "pagerank": 0.005178598177785974,
+      "betweenness": 0.002075338033783124,
+      "degree": 9
+    },
+    {
+      "sha": "0b36b03",
+      "subject": "feat(ux): retirer le préfixe \"Aqua\" dans les onglets",
+      "ts": "2026-05-31T16:56:46+11:00",
+      "type": "feat",
+      "scope": "ux",
+      "cluster": 2,
+      "x": -0.14540797472000122,
+      "y": 0.03733674809336662,
+      "pagerank": 0.005884975213919215,
+      "betweenness": 0.005023257314132545,
+      "degree": 11
+    },
+    {
+      "sha": "b4679c2",
+      "subject": "feat(ux): navigation circulaire entre les onglets (←/→ et swipe)",
+      "ts": "2026-05-31T16:54:57+11:00",
+      "type": "feat",
+      "scope": "ux",
+      "cluster": 2,
+      "x": -0.018206102773547173,
+      "y": -0.12784115970134735,
+      "pagerank": 0.009442796190416256,
+      "betweenness": 0.018673100949040893,
+      "degree": 18
+    },
+    {
+      "sha": "6b3a9ea",
+      "subject": "fix(csp): désactiver CSP — bug Astro v6 bloque le JS",
+      "ts": "2026-05-31T16:50:09+11:00",
+      "type": "fix",
+      "scope": "csp",
+      "cluster": 2,
+      "x": -0.2518236041069031,
+      "y": 0.1663251668214798,
+      "pagerank": 0.004357439419033269,
+      "betweenness": 0.0,
+      "degree": 4
+    },
+    {
+      "sha": "7f81d0f",
+      "subject": "fix(csp): désactivation CSP — bug Astro v6 avec define:vars",
+      "ts": "2026-05-31T16:47:49+11:00",
+      "type": "fix",
+      "scope": "csp",
+      "cluster": 2,
+      "x": -0.22901438176631927,
+      "y": 0.13282185792922974,
+      "pagerank": 0.004328771541378593,
+      "betweenness": 0.0,
+      "degree": 4
+    },
+    {
+      "sha": "2d44915",
+      "subject": "feat(deps): migration Tailwind CSS v3 → v4 (#5)",
+      "ts": "2026-05-31T16:28:27+11:00",
+      "type": "feat",
+      "scope": "deps",
+      "cluster": 0,
+      "x": 0.021472077816724777,
+      "y": -0.09405588358640671,
+      "pagerank": 0.0038815877179040883,
+      "betweenness": 0.001575026271072726,
+      "degree": 5
+    },
+    {
+      "sha": "52fc47b",
+      "subject": "feat(deps): migration Tailwind CSS v3 → v4",
+      "ts": "2026-05-31T16:26:48+11:00",
+      "type": "feat",
+      "scope": "deps",
+      "cluster": 0,
+      "x": 0.022592049092054367,
+      "y": -0.08856848627328873,
+      "pagerank": 0.0039392732080851985,
+      "betweenness": 0.001575026271072726,
+      "degree": 5
+    },
+    {
+      "sha": "f900b48",
+      "subject": "docs(readme): ajout badge licence AGPL v3",
+      "ts": "2026-05-31T16:20:31+11:00",
+      "type": "docs",
+      "scope": "readme",
+      "cluster": 4,
+      "x": -0.02464611828327179,
+      "y": 0.025759434327483177,
+      "pagerank": 0.004902102511524893,
+      "betweenness": 0.013793103448275862,
+      "degree": 3
+    },
+    {
+      "sha": "919f36a",
+      "subject": "chore(legal): ajout licence AGPL v3",
+      "ts": "2026-05-31T16:19:04+11:00",
+      "type": "chore",
+      "scope": "legal",
+      "cluster": 2,
+      "x": -0.14793060719966888,
+      "y": -0.03052305057644844,
+      "pagerank": 0.0026582948478466027,
+      "betweenness": 0.0,
+      "degree": 1
+    },
+    {
+      "sha": "98e65f8",
+      "subject": "feat(security): activation CSP via Astro v6",
+      "ts": "2026-05-31T16:14:26+11:00",
+      "type": "feat",
+      "scope": "security",
+      "cluster": 2,
+      "x": -0.11373860388994217,
+      "y": -0.056320518255233765,
+      "pagerank": 0.006297709223427153,
+      "betweenness": 0.0037319191341740124,
+      "degree": 7
+    },
+    {
+      "sha": "326b2af",
+      "subject": "fix(ux): suppression page noire au swipe sur mobile",
+      "ts": "2026-05-31T16:10:03+11:00",
+      "type": "fix",
+      "scope": "ux",
+      "cluster": 2,
+      "x": -0.2652477025985718,
+      "y": 0.1633855551481247,
+      "pagerank": 0.003766171097357841,
+      "betweenness": 0.0001209676500597356,
+      "degree": 6
+    },
+    {
+      "sha": "50922d3",
+      "subject": "fix(ux): swipe horizontal corrigé sur écran tactile laptop",
+      "ts": "2026-05-31T16:07:11+11:00",
+      "type": "fix",
+      "scope": "ux",
+      "cluster": 2,
+      "x": -0.1719789355993271,
+      "y": 0.16747531294822693,
+      "pagerank": 0.005640122694481017,
+      "betweenness": 0.0029522542526586966,
+      "degree": 10
+    },
+    {
+      "sha": "138caa8",
+      "subject": "fix(ux): suppression du code formule (MD, VG, LC…) dans les cartes menu",
+      "ts": "2026-05-31T16:04:04+11:00",
+      "type": "fix",
+      "scope": "ux",
+      "cluster": 2,
+      "x": -0.15361975133419037,
+      "y": 0.21647435426712036,
+      "pagerank": 0.006461762094508583,
+      "betweenness": 0.010931786208025086,
+      "degree": 12
+    },
+    {
+      "sha": "cd352ba",
+      "subject": "fix(ux): label \"Lire semaine\" (était \"Lire toute la semaine\")",
+      "ts": "2026-05-31T15:59:45+11:00",
+      "type": "fix",
+      "scope": "ux",
+      "cluster": 2,
+      "x": -0.1277717500925064,
+      "y": 0.21492646634578705,
+      "pagerank": 0.005684383353899886,
+      "betweenness": 0.007755563769965965,
+      "degree": 11
+    },
+    {
+      "sha": "589ab14",
+      "subject": "fix(ux): recherche alignée sur la même ligne que le titre dans le header",
+      "ts": "2026-05-31T15:57:35+11:00",
+      "type": "fix",
+      "scope": "ux",
+      "cluster": 2,
+      "x": -0.1011398434638977,
+      "y": 0.20487399399280548,
+      "pagerank": 0.007109126701892908,
+      "betweenness": 0.01076002053669427,
+      "degree": 14
+    },
+    {
+      "sha": "ad1732a",
+      "subject": "fix(ux): titre header simplifié — \"Aquavena\" avec icône malvoyants",
+      "ts": "2026-05-31T15:55:04+11:00",
+      "type": "fix",
+      "scope": "ux",
+      "cluster": 4,
+      "x": -0.24922716617584229,
+      "y": 0.0973244234919548,
+      "pagerank": 0.008238255833487022,
+      "betweenness": 0.017125247179571593,
+      "degree": 15
+    },
+    {
+      "sha": "43a85b0",
+      "subject": "fix(ci): node 22 + --legacy-peer-deps pour Astro v6",
+      "ts": "2026-05-31T15:51:34+11:00",
+      "type": "fix",
+      "scope": "ci",
+      "cluster": 2,
+      "x": -0.2358729988336563,
+      "y": 0.012424533255398273,
+      "pagerank": 0.005790875050470445,
+      "betweenness": 0.00561562307152628,
+      "degree": 7
+    },
+    {
+      "sha": "56e8c1c",
+      "subject": "feat(core): migration Astro v6 + refonte header + nettoyage UI",
+      "ts": "2026-05-31T15:50:16+11:00",
+      "type": "feat",
+      "scope": "core",
+      "cluster": 2,
+      "x": -0.06119092181324959,
+      "y": -0.05525245517492294,
+      "pagerank": 0.0051428504870194075,
+      "betweenness": 0.007799433900458166,
+      "degree": 7
+    },
+    {
+      "sha": "e7fd200",
+      "subject": "fix(ux): suppression description régime + correction flèches clavier PC",
+      "ts": "2026-05-31T15:40:22+11:00",
+      "type": "fix",
+      "scope": "ux",
+      "cluster": 2,
+      "x": -0.1271016001701355,
+      "y": 0.15150058269500732,
+      "pagerank": 0.007245645169900119,
+      "betweenness": 0.00947885970694366,
+      "degree": 13
+    },
+    {
+      "sha": "d4b70eb",
+      "subject": "chore(ci): activer Dependabot pour npm et pip",
+      "ts": "2026-05-31T15:34:56+11:00",
+      "type": "chore",
+      "scope": "ci",
+      "cluster": 2,
+      "x": -0.1363244205713272,
+      "y": -0.05875271186232567,
+      "pagerank": 0.003487272497461356,
+      "betweenness": 0.0017436125029402715,
+      "degree": 4
+    },
+    {
+      "sha": "6f5334f",
+      "subject": "feat(ux): navigation horizontale entre régimes — flèches clavier et swipe tactile",
+      "ts": "2026-05-31T15:31:17+11:00",
+      "type": "feat",
+      "scope": "ux",
+      "cluster": 2,
+      "x": 0.004157796502113342,
+      "y": -0.10631220787763596,
+      "pagerank": 0.008827170409854415,
+      "betweenness": 0.014348338484387822,
+      "degree": 18
+    },
+    {
+      "sha": "a5d9ba7",
+      "subject": "feat(ux): n'afficher que les menus commandables selon le jour de consultation",
+      "ts": "2026-05-31T15:27:22+11:00",
+      "type": "feat",
+      "scope": "ux",
+      "cluster": 2,
+      "x": -0.028992556035518646,
+      "y": 0.0639992281794548,
+      "pagerank": 0.00527405710381062,
+      "betweenness": 0.004515106483330542,
+      "degree": 10
+    },
+    {
+      "sha": "20393c6",
+      "subject": "chore(benchmark): refresh data after v1.9.0 tag",
+      "ts": "2026-05-31T05:49:15+11:00",
+      "type": "chore",
+      "scope": "benchmark",
+      "cluster": 0,
+      "x": 0.03776722401380539,
+      "y": 0.09235347807407379,
+      "pagerank": 0.0076598401623950395,
+      "betweenness": 0.028200142417208758,
+      "degree": 16
+    },
+    {
       "sha": "dd2a22b",
       "subject": "feat(benchmark): ML graph DS, retro Gantt, edge bundling & artistic cover",
       "ts": "2026-05-31T05:45:08+11:00",
       "type": "feat",
       "scope": "benchmark",
-      "cluster": 2,
-      "x": 0.17933572828769684,
-      "y": -0.3202928602695465,
-      "pagerank": 0.010553853526912398,
-      "betweenness": 9.425901476488649e-05,
-      "degree": 10
+      "cluster": 0,
+      "x": 0.3221222460269928,
+      "y": -0.0026177975814789534,
+      "pagerank": 0.0068618256422489626,
+      "betweenness": 0.00025370252411395164,
+      "degree": 17
     },
     {
       "sha": "9dc1a0b",
@@ -19,12 +838,12 @@
       "ts": "2026-05-31T04:49:08+11:00",
       "type": "feat",
       "scope": "benchmark",
-      "cluster": 2,
-      "x": 0.30048510432243347,
-      "y": -0.3295285403728485,
-      "pagerank": 0.016094425006868945,
-      "betweenness": 0.014041888820991612,
-      "degree": 15
+      "cluster": 0,
+      "x": 0.41381844878196716,
+      "y": -0.0532001256942749,
+      "pagerank": 0.013438647857778447,
+      "betweenness": 0.013724435816275785,
+      "degree": 34
     },
     {
       "sha": "2e5e47e",
@@ -32,12 +851,12 @@
       "ts": "2026-05-30T15:25:49+11:00",
       "type": "feat",
       "scope": "benchmark",
-      "cluster": 2,
-      "x": 0.2958129048347473,
-      "y": -0.2789512872695923,
-      "pagerank": 0.02355215812129944,
-      "betweenness": 0.05604891362179783,
-      "degree": 23
+      "cluster": 0,
+      "x": 0.41291239857673645,
+      "y": -0.02660396322607994,
+      "pagerank": 0.017360093728349724,
+      "betweenness": 0.04273549636552589,
+      "degree": 44
     },
     {
       "sha": "534854c",
@@ -45,12 +864,12 @@
       "ts": "2026-05-30T14:52:13+11:00",
       "type": "feat",
       "scope": "benchmark",
-      "cluster": 2,
-      "x": 0.3167497515678406,
-      "y": -0.2581568956375122,
-      "pagerank": 0.012351760930819767,
-      "betweenness": 0.005536298355428938,
-      "degree": 11
+      "cluster": 0,
+      "x": 0.3900641202926636,
+      "y": -0.07979710400104523,
+      "pagerank": 0.011024835881520978,
+      "betweenness": 0.006551151245333163,
+      "degree": 27
     },
     {
       "sha": "be98344",
@@ -58,12 +877,12 @@
       "ts": "2026-05-30T14:34:08+11:00",
       "type": "feat",
       "scope": "benchmark",
-      "cluster": 2,
-      "x": 0.19394339621067047,
-      "y": -0.2502031922340393,
-      "pagerank": 0.01600032840030524,
-      "betweenness": 0.013065542687128978,
-      "degree": 15
+      "cluster": 0,
+      "x": 0.32958367466926575,
+      "y": -0.0036830559838563204,
+      "pagerank": 0.011726041641504203,
+      "betweenness": 0.016395142771785245,
+      "degree": 28
     },
     {
       "sha": "fc37360",
@@ -71,12 +890,12 @@
       "ts": "2026-05-30T14:32:31+11:00",
       "type": "feat",
       "scope": "benchmark",
-      "cluster": 2,
-      "x": 0.21818400919437408,
-      "y": -0.24007895588874817,
-      "pagerank": 0.018008291458197642,
-      "betweenness": 0.024855832152620872,
-      "degree": 17
+      "cluster": 0,
+      "x": 0.33544617891311646,
+      "y": 0.0022048226092010736,
+      "pagerank": 0.01464625675523332,
+      "betweenness": 0.03846613198406514,
+      "degree": 36
     },
     {
       "sha": "feb7cfa",
@@ -84,12 +903,12 @@
       "ts": "2026-05-30T14:30:48+11:00",
       "type": "feat",
       "scope": "benchmark",
-      "cluster": 2,
-      "x": 0.26114246249198914,
-      "y": -0.2636294662952423,
-      "pagerank": 0.02608438025152186,
-      "betweenness": 0.06792944235573423,
-      "degree": 25
+      "cluster": 0,
+      "x": 0.38135799765586853,
+      "y": -0.003117843996733427,
+      "pagerank": 0.017862122900705338,
+      "betweenness": 0.04635010267920884,
+      "degree": 44
     },
     {
       "sha": "c67b70f",
@@ -97,12 +916,12 @@
       "ts": "2026-05-30T14:29:31+11:00",
       "type": "feat",
       "scope": "benchmark",
-      "cluster": 2,
-      "x": 0.1789105385541916,
-      "y": -0.2593158185482025,
-      "pagerank": 0.014750945217823748,
-      "betweenness": 0.0062024981438378955,
-      "degree": 14
+      "cluster": 0,
+      "x": 0.2900456488132477,
+      "y": -0.016760017722845078,
+      "pagerank": 0.012055093526287315,
+      "betweenness": 0.012975424645340516,
+      "degree": 30
     },
     {
       "sha": "0be8016",
@@ -110,12 +929,12 @@
       "ts": "2026-05-30T14:27:24+11:00",
       "type": "style",
       "scope": "benchmark",
-      "cluster": 2,
-      "x": -0.020615864545106888,
-      "y": -0.2031555026769638,
-      "pagerank": 0.012664013368916786,
-      "betweenness": 0.004912530675583491,
-      "degree": 12
+      "cluster": 0,
+      "x": 0.15162409842014313,
+      "y": 0.16623763740062714,
+      "pagerank": 0.009242957377571717,
+      "betweenness": 0.004613354905940029,
+      "degree": 23
     },
     {
       "sha": "d4d440b",
@@ -123,12 +942,12 @@
       "ts": "2026-05-30T14:26:31+11:00",
       "type": "style",
       "scope": "benchmark",
-      "cluster": 2,
-      "x": -0.1343068778514862,
-      "y": -0.2158178985118866,
-      "pagerank": 0.012208954222180064,
-      "betweenness": 0.014608391306852441,
-      "degree": 11
+      "cluster": 0,
+      "x": 0.11824429780244827,
+      "y": 0.31475985050201416,
+      "pagerank": 0.008432812326344803,
+      "betweenness": 0.00793978555397124,
+      "degree": 20
     },
     {
       "sha": "2c0e7fa",
@@ -136,12 +955,12 @@
       "ts": "2026-05-30T14:25:44+11:00",
       "type": "style",
       "scope": "benchmark",
-      "cluster": 1,
-      "x": -0.07045519351959229,
-      "y": -0.2728416323661804,
-      "pagerank": 0.0074037233985224825,
-      "betweenness": 0.005371874759760833,
-      "degree": 6
+      "cluster": 3,
+      "x": 0.1964646875858307,
+      "y": 0.20508235692977905,
+      "pagerank": 0.004332546163330254,
+      "betweenness": 0.0014267475884222928,
+      "degree": 9
     },
     {
       "sha": "df7ef90",
@@ -149,12 +968,12 @@
       "ts": "2026-05-30T14:20:52+11:00",
       "type": "feat",
       "scope": "benchmark",
-      "cluster": 2,
-      "x": 0.31923240423202515,
-      "y": -0.267645001411438,
-      "pagerank": 0.014346225797223743,
-      "betweenness": 0.006594839548433882,
-      "degree": 13
+      "cluster": 0,
+      "x": 0.4210537075996399,
+      "y": -0.0477813221514225,
+      "pagerank": 0.011596811386738508,
+      "betweenness": 0.006856311316095582,
+      "degree": 29
     },
     {
       "sha": "7b30003",
@@ -162,12 +981,12 @@
       "ts": "2026-05-30T14:11:20+11:00",
       "type": "feat",
       "scope": "benchmark",
-      "cluster": 2,
-      "x": 0.35685649514198303,
-      "y": -0.1494690626859665,
-      "pagerank": 0.012137072656756205,
-      "betweenness": 0.0032066090314514795,
-      "degree": 11
+      "cluster": 0,
+      "x": 0.34768974781036377,
+      "y": -0.11680426448583603,
+      "pagerank": 0.009895216960231934,
+      "betweenness": 0.003614393240163907,
+      "degree": 25
     },
     {
       "sha": "df22695",
@@ -175,12 +994,12 @@
       "ts": "2026-05-30T11:46:18+11:00",
       "type": "refactor",
       "scope": "benchmark",
-      "cluster": 3,
-      "x": 0.1672070324420929,
-      "y": 0.10436434298753738,
-      "pagerank": 0.012218825988423474,
-      "betweenness": 0.03102119890118133,
-      "degree": 10
+      "cluster": 0,
+      "x": 0.0818929597735405,
+      "y": -0.05748983100056648,
+      "pagerank": 0.008051188117314714,
+      "betweenness": 0.019078554499792195,
+      "degree": 18
     },
     {
       "sha": "eccabc3",
@@ -188,12 +1007,12 @@
       "ts": "2026-05-30T11:43:15+11:00",
       "type": "fix",
       "scope": "a11y",
-      "cluster": 4,
-      "x": -0.08237621188163757,
-      "y": -0.14044247567653656,
-      "pagerank": 0.01076335301115588,
-      "betweenness": 0.00464446241304933,
-      "degree": 7
+      "cluster": 0,
+      "x": 0.004552168305963278,
+      "y": 0.12350135296583176,
+      "pagerank": 0.0070595985141072405,
+      "betweenness": 0.009740722241157886,
+      "degree": 13
     },
     {
       "sha": "a59d12d",
@@ -201,12 +1020,12 @@
       "ts": "2026-05-30T11:21:10+11:00",
       "type": "feat",
       "scope": "a11y",
-      "cluster": 4,
-      "x": 0.08680412173271179,
-      "y": -0.11193429678678513,
-      "pagerank": 0.01170006270786112,
-      "betweenness": 0.024756391523651933,
-      "degree": 9
+      "cluster": 0,
+      "x": 0.09540930390357971,
+      "y": -0.06686238199472427,
+      "pagerank": 0.006769453534325419,
+      "betweenness": 0.01728329624442505,
+      "degree": 14
     },
     {
       "sha": "81fba2b",
@@ -214,12 +1033,12 @@
       "ts": "2026-05-30T11:17:07+11:00",
       "type": "fix",
       "scope": "a11y",
-      "cluster": 4,
-      "x": -0.12814858555793762,
-      "y": -0.11591113358736038,
-      "pagerank": 0.008075061210520854,
-      "betweenness": 0.00021998813486140122,
-      "degree": 5
+      "cluster": 2,
+      "x": -0.04217490926384926,
+      "y": 0.12839758396148682,
+      "pagerank": 0.004056170386133318,
+      "betweenness": 0.0005696948315547502,
+      "degree": 6
     },
     {
       "sha": "9a5ca91",
@@ -227,10 +1046,10 @@
       "ts": "2026-05-30T11:12:58+11:00",
       "type": "feat",
       "scope": "a11y",
-      "cluster": 4,
-      "x": 0.11106784641742706,
-      "y": -0.09677785634994507,
-      "pagerank": 0.006813859265874423,
+      "cluster": 0,
+      "x": 0.06671606749296188,
+      "y": -0.12248966842889786,
+      "pagerank": 0.003023968300221709,
       "betweenness": 0.0,
       "degree": 4
     },
@@ -240,12 +1059,12 @@
       "ts": "2026-05-30T11:02:04+11:00",
       "type": "fix",
       "scope": "a11y",
-      "cluster": 4,
-      "x": -0.22698765993118286,
-      "y": -0.11552844941616058,
-      "pagerank": 0.012065170360248782,
-      "betweenness": 0.01850711289425514,
-      "degree": 9
+      "cluster": 2,
+      "x": -0.11639047414064407,
+      "y": 0.15076056122779846,
+      "pagerank": 0.0067205489979627825,
+      "betweenness": 0.0092209451701365,
+      "degree": 12
     },
     {
       "sha": "0fdeff3",
@@ -253,12 +1072,12 @@
       "ts": "2026-05-30T10:52:51+11:00",
       "type": "fix",
       "scope": "a11y",
-      "cluster": 4,
-      "x": -0.24125368893146515,
-      "y": 0.02455717697739601,
-      "pagerank": 0.011846695740394125,
-      "betweenness": 0.026807540587368568,
-      "degree": 8
+      "cluster": 3,
+      "x": -0.1592286229133606,
+      "y": 0.17055925726890564,
+      "pagerank": 0.005660192060707352,
+      "betweenness": 0.010076625857394774,
+      "degree": 9
     },
     {
       "sha": "ce78cf0",
@@ -266,12 +1085,12 @@
       "ts": "2026-05-25T07:30:24+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.0748387947678566,
-      "y": 0.08889342844486237,
-      "pagerank": 0.015126939097280818,
-      "betweenness": 0.013624549396908915,
-      "degree": 14
+      "cluster": 1,
+      "x": -0.04034581407904625,
+      "y": -0.13305819034576416,
+      "pagerank": 0.008958104283224917,
+      "betweenness": 0.008999772699627361,
+      "degree": 20
     },
     {
       "sha": "d9f8982",
@@ -279,12 +1098,12 @@
       "ts": "2026-05-25T07:10:43+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.10627058893442154,
-      "y": -0.0836603119969368,
-      "pagerank": 0.007516045609520631,
-      "betweenness": 0.0009119757713334605,
-      "degree": 6
+      "cluster": 1,
+      "x": 0.11516685038805008,
+      "y": -0.057306673377752304,
+      "pagerank": 0.0045691575716054166,
+      "betweenness": 0.0014833274581232988,
+      "degree": 9
     },
     {
       "sha": "5f72d4e",
@@ -292,11 +1111,11 @@
       "ts": "2026-05-25T07:08:24+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.13846653699874878,
-      "y": 0.036005038768053055,
-      "pagerank": 0.0070383075472645,
-      "betweenness": 0.002448168066897831,
+      "cluster": 1,
+      "x": 0.0242448840290308,
+      "y": -0.12499073892831802,
+      "pagerank": 0.003248805693256146,
+      "betweenness": 0.0006239534593116186,
       "degree": 5
     },
     {
@@ -305,10 +1124,10 @@
       "ts": "2026-05-25T07:03:28+11:00",
       "type": "feat",
       "scope": "about",
-      "cluster": 5,
-      "x": 0.22093838453292847,
-      "y": 0.09924382716417313,
-      "pagerank": 0.004505511742109461,
+      "cluster": 1,
+      "x": 0.13341282308101654,
+      "y": -0.12472574412822723,
+      "pagerank": 0.002175010515900753,
       "betweenness": 0.0,
       "degree": 2
     },
@@ -318,12 +1137,12 @@
       "ts": "2026-05-25T06:58:48+11:00",
       "type": "feat",
       "scope": "about",
-      "cluster": 0,
-      "x": 0.03572327643632889,
-      "y": -0.06774580478668213,
-      "pagerank": 0.01897543744600423,
-      "betweenness": 0.03596757447143676,
-      "degree": 17
+      "cluster": 1,
+      "x": 0.08144927769899368,
+      "y": 0.030106114223599434,
+      "pagerank": 0.009381096758983964,
+      "betweenness": 0.018921215839547777,
+      "degree": 19
     },
     {
       "sha": "31f83fc",
@@ -331,12 +1150,12 @@
       "ts": "2026-05-25T06:57:30+11:00",
       "type": "feat",
       "scope": "about",
-      "cluster": 0,
-      "x": 0.10174412280321121,
-      "y": -0.08688841015100479,
-      "pagerank": 0.007089263597233304,
-      "betweenness": 0.003743131194615477,
-      "degree": 5
+      "cluster": 1,
+      "x": 0.11679121851921082,
+      "y": -0.040381867438554764,
+      "pagerank": 0.003845411083256018,
+      "betweenness": 0.0029024852784208213,
+      "degree": 6
     },
     {
       "sha": "5ab7d88",
@@ -344,10 +1163,10 @@
       "ts": "2026-05-25T06:54:28+11:00",
       "type": "feat",
       "scope": "about",
-      "cluster": 2,
-      "x": 0.15708565711975098,
-      "y": -0.06363929808139801,
-      "pagerank": 0.004029609939636513,
+      "cluster": 1,
+      "x": 0.08601309359073639,
+      "y": -0.09596806764602661,
+      "pagerank": 0.0020294339808318096,
       "betweenness": 0.0,
       "degree": 2
     },
@@ -357,12 +1176,12 @@
       "ts": "2026-05-25T06:52:38+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.1443229615688324,
-      "y": 0.08493777364492416,
-      "pagerank": 0.008318680065573552,
-      "betweenness": 0.005158223745081207,
-      "degree": 7
+      "cluster": 1,
+      "x": 0.050944019109010696,
+      "y": -0.10736338049173355,
+      "pagerank": 0.00451840939395482,
+      "betweenness": 0.0029748330994432207,
+      "degree": 9
     },
     {
       "sha": "88d02d4",
@@ -370,12 +1189,12 @@
       "ts": "2026-05-25T06:50:48+11:00",
       "type": "feat",
       "scope": "about",
-      "cluster": 0,
-      "x": 0.19977381825447083,
-      "y": 0.020294494926929474,
-      "pagerank": 0.009198279263533471,
-      "betweenness": 0.005687607007919845,
-      "degree": 8
+      "cluster": 1,
+      "x": 0.14406940340995789,
+      "y": -0.11249525845050812,
+      "pagerank": 0.005103323681056045,
+      "betweenness": 0.0020187357349014173,
+      "degree": 11
     },
     {
       "sha": "bfc5c61",
@@ -383,12 +1202,12 @@
       "ts": "2026-05-25T06:46:28+11:00",
       "type": "fix",
       "scope": "about",
-      "cluster": 1,
-      "x": -0.23823349177837372,
-      "y": -0.06107255443930626,
-      "pagerank": 0.015319298055023248,
-      "betweenness": 0.038382128335098735,
-      "degree": 13
+      "cluster": 3,
+      "x": -0.07588306069374084,
+      "y": 0.2750336825847626,
+      "pagerank": 0.00764713732289801,
+      "betweenness": 0.01395419627325203,
+      "degree": 15
     },
     {
       "sha": "b91b255",
@@ -396,12 +1215,12 @@
       "ts": "2026-05-25T06:44:39+11:00",
       "type": "fix",
       "scope": "about",
-      "cluster": 1,
-      "x": -0.2377430945634842,
-      "y": 0.02016594260931015,
-      "pagerank": 0.013209704018973648,
-      "betweenness": 0.00893062571795731,
-      "degree": 11
+      "cluster": 3,
+      "x": -0.10229858756065369,
+      "y": 0.24371641874313354,
+      "pagerank": 0.007645872507808356,
+      "betweenness": 0.017752784938773913,
+      "degree": 13
     },
     {
       "sha": "5079572",
@@ -409,12 +1228,12 @@
       "ts": "2026-05-25T06:41:51+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 3,
-      "x": 0.2724490463733673,
-      "y": 0.41959407925605774,
-      "pagerank": 0.012722872440495666,
-      "betweenness": 0.009743551499755128,
-      "degree": 8
+      "cluster": 4,
+      "x": -0.05231613665819168,
+      "y": -0.31094595789909363,
+      "pagerank": 0.007126337715515545,
+      "betweenness": 0.008826057811753722,
+      "degree": 12
     },
     {
       "sha": "a1bbaf4",
@@ -422,12 +1241,12 @@
       "ts": "2026-05-25T06:41:26+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 3,
-      "x": 0.29070693254470825,
-      "y": 0.42347797751426697,
-      "pagerank": 0.010176619929960936,
-      "betweenness": 0.0003450880144647083,
-      "degree": 6
+      "cluster": 4,
+      "x": -0.07977773994207382,
+      "y": -0.3303939402103424,
+      "pagerank": 0.005978875385110145,
+      "betweenness": 0.0017714207812362204,
+      "degree": 10
     },
     {
       "sha": "47136f5",
@@ -435,11 +1254,11 @@
       "ts": "2026-05-25T06:35:54+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": -0.15218184888362885,
-      "y": -0.0015713548054918647,
-      "pagerank": 0.004245791823253044,
-      "betweenness": 0.0019578283805926078,
+      "cluster": 2,
+      "x": -0.09115404635667801,
+      "y": 0.08555512130260468,
+      "pagerank": 0.002173426640283476,
+      "betweenness": 0.001373351731372354,
       "degree": 2
     },
     {
@@ -448,12 +1267,12 @@
       "ts": "2026-05-25T06:32:58+11:00",
       "type": "feat",
       "scope": "about",
-      "cluster": 3,
-      "x": 0.275739461183548,
-      "y": 0.3561832308769226,
-      "pagerank": 0.01293886095041065,
-      "betweenness": 0.026525465807271446,
-      "degree": 9
+      "cluster": 4,
+      "x": -0.030921436846256256,
+      "y": -0.25960177183151245,
+      "pagerank": 0.006651687045730755,
+      "betweenness": 0.003669576649918449,
+      "degree": 12
     },
     {
       "sha": "6ec9faa",
@@ -461,12 +1280,12 @@
       "ts": "2026-05-25T06:32:30+11:00",
       "type": "feat",
       "scope": "about",
-      "cluster": 3,
-      "x": 0.3126339614391327,
-      "y": 0.27847057580947876,
-      "pagerank": 0.010840118818213422,
-      "betweenness": 0.03013814598512731,
-      "degree": 8
+      "cluster": 4,
+      "x": 0.07334282249212265,
+      "y": -0.24452513456344604,
+      "pagerank": 0.005471769272073104,
+      "betweenness": 0.004653622187522278,
+      "degree": 10
     },
     {
       "sha": "b92954d",
@@ -474,11 +1293,11 @@
       "ts": "2026-05-25T06:26:12+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 5,
-      "x": 0.1348837912082672,
-      "y": 0.06791220605373383,
-      "pagerank": 0.010688003336243068,
-      "betweenness": 0.03990120638183863,
+      "cluster": 1,
+      "x": 0.07305333018302917,
+      "y": -0.05531919747591019,
+      "pagerank": 0.004967594520492705,
+      "betweenness": 0.01080526491481935,
       "degree": 8
     },
     {
@@ -487,12 +1306,12 @@
       "ts": "2026-05-25T01:32:52+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": -0.06878280639648438,
-      "y": 0.024380214512348175,
-      "pagerank": 0.002730485686867394,
-      "betweenness": 0.0,
-      "degree": 1
+      "cluster": 2,
+      "x": -0.09879224747419357,
+      "y": 0.013883613981306553,
+      "pagerank": 0.0022722863147524646,
+      "betweenness": 0.00030559035819194985,
+      "degree": 3
     },
     {
       "sha": "3009840",
@@ -500,12 +1319,12 @@
       "ts": "2026-05-25T01:29:00+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.09424823522567749,
-      "y": 0.053050730377435684,
-      "pagerank": 0.022029303504327042,
-      "betweenness": 0.06349225769191398,
-      "degree": 19
+      "cluster": 1,
+      "x": 0.009143626317381859,
+      "y": -0.08581539988517761,
+      "pagerank": 0.010916286609562093,
+      "betweenness": 0.03338405629065964,
+      "degree": 23
     },
     {
       "sha": "0eab040",
@@ -513,12 +1332,12 @@
       "ts": "2026-05-25T01:14:31+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": -0.11477295309305191,
-      "y": -0.022671163082122803,
-      "pagerank": 0.02869717618921055,
-      "betweenness": 0.1140416937590455,
-      "degree": 26
+      "cluster": 3,
+      "x": -0.005374830216169357,
+      "y": 0.10317280888557434,
+      "pagerank": 0.01412169963261703,
+      "betweenness": 0.05460545352049303,
+      "degree": 29
     },
     {
       "sha": "7204fa7",
@@ -526,12 +1345,12 @@
       "ts": "2026-05-25T01:12:39+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.09798094630241394,
-      "y": -0.04996694624423981,
-      "pagerank": 0.029564443142806797,
-      "betweenness": 0.08838704184853588,
-      "degree": 28
+      "cluster": 1,
+      "x": 0.1272551715373993,
+      "y": 0.004946083761751652,
+      "pagerank": 0.014347947551555808,
+      "betweenness": 0.034050594791599484,
+      "degree": 32
     },
     {
       "sha": "66453b8",
@@ -539,12 +1358,12 @@
       "ts": "2026-05-25T01:09:13+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.0676928162574768,
-      "y": -0.013799388892948627,
-      "pagerank": 0.024732305290169218,
-      "betweenness": 0.049580623419279615,
-      "degree": 23
+      "cluster": 1,
+      "x": 0.09269442409276962,
+      "y": -0.010767254047095776,
+      "pagerank": 0.012368917061478982,
+      "betweenness": 0.024664642605554295,
+      "degree": 27
     },
     {
       "sha": "94949a4",
@@ -552,12 +1371,12 @@
       "ts": "2026-05-25T01:01:45+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.09334021806716919,
-      "y": 0.04824564605951309,
-      "pagerank": 0.022142169356146584,
-      "betweenness": 0.04232054712124666,
-      "degree": 20
+      "cluster": 1,
+      "x": 0.06261985003948212,
+      "y": -0.060148935765028,
+      "pagerank": 0.011212588731431931,
+      "betweenness": 0.02030564285333087,
+      "degree": 24
     },
     {
       "sha": "d7377cc",
@@ -565,10 +1384,10 @@
       "ts": "2026-05-25T00:55:47+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 5,
-      "x": 0.12915007770061493,
-      "y": -0.009339649230241776,
-      "pagerank": 0.004426315818795372,
+      "cluster": 1,
+      "x": 0.055007945746183395,
+      "y": -0.15249909460544586,
+      "pagerank": 0.0022802236407980874,
       "betweenness": 0.0,
       "degree": 2
     },
@@ -578,12 +1397,12 @@
       "ts": "2026-05-25T00:55:09+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.0811459943652153,
-      "y": -0.023399125784635544,
-      "pagerank": 0.014015680811165889,
-      "betweenness": 0.025607447242944663,
-      "degree": 11
+      "cluster": 1,
+      "x": 0.055622123181819916,
+      "y": -0.07202823460102081,
+      "pagerank": 0.007031704724418926,
+      "betweenness": 0.014929016309453945,
+      "degree": 12
     },
     {
       "sha": "4912599",
@@ -591,11 +1410,11 @@
       "ts": "2026-05-25T00:53:45+11:00",
       "type": "docs",
       "scope": null,
-      "cluster": 0,
-      "x": -0.01535533182322979,
-      "y": -0.005150930490344763,
-      "pagerank": 0.007580680918019219,
-      "betweenness": 0.0051459605281158815,
+      "cluster": 1,
+      "x": 0.024989059194922447,
+      "y": 0.016739729791879654,
+      "pagerank": 0.0037526675527431697,
+      "betweenness": 0.0027948895225145616,
       "degree": 5
     },
     {
@@ -604,11 +1423,11 @@
       "ts": "2026-05-25T00:41:16+11:00",
       "type": "fix",
       "scope": null,
-      "cluster": 1,
-      "x": -0.2791069447994232,
-      "y": -0.008576777763664722,
-      "pagerank": 0.013368939880686504,
-      "betweenness": 0.01236371987615811,
+      "cluster": 3,
+      "x": -0.1109660267829895,
+      "y": 0.2639840841293335,
+      "pagerank": 0.0062865611672511396,
+      "betweenness": 0.005448693733917806,
       "degree": 11
     },
     {
@@ -617,12 +1436,12 @@
       "ts": "2026-05-25T00:32:40+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.053338877856731415,
-      "y": 0.02039681188762188,
-      "pagerank": 0.01468910734910468,
-      "betweenness": 0.007203256421682682,
-      "degree": 13
+      "cluster": 1,
+      "x": -0.021701760590076447,
+      "y": -0.10744791477918625,
+      "pagerank": 0.008456447361944366,
+      "betweenness": 0.014687825228827276,
+      "degree": 18
     },
     {
       "sha": "3f6c3bc",
@@ -630,12 +1449,12 @@
       "ts": "2026-05-25T00:29:53+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.128752201795578,
-      "y": 0.004829710815101862,
-      "pagerank": 0.02467536716726638,
-      "betweenness": 0.08908222851263498,
-      "degree": 22
+      "cluster": 1,
+      "x": 0.11952280253171921,
+      "y": -0.07525759190320969,
+      "pagerank": 0.012768624242454639,
+      "betweenness": 0.03084112922161065,
+      "degree": 27
     },
     {
       "sha": "b8263b3",
@@ -643,12 +1462,12 @@
       "ts": "2026-05-25T00:27:59+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.005340351723134518,
-      "y": -0.028682181611657143,
-      "pagerank": 0.013666521146268514,
-      "betweenness": 0.010422627267911872,
-      "degree": 12
+      "cluster": 1,
+      "x": -0.007987799122929573,
+      "y": 0.001773549010977149,
+      "pagerank": 0.008050227920854948,
+      "betweenness": 0.007532392934839467,
+      "degree": 17
     },
     {
       "sha": "d725d1e",
@@ -656,12 +1475,12 @@
       "ts": "2026-05-25T00:20:41+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.043532270938158035,
-      "y": -0.03589540719985962,
-      "pagerank": 0.019201778019522216,
-      "betweenness": 0.06091059443104069,
-      "degree": 17
+      "cluster": 1,
+      "x": 0.032391708344221115,
+      "y": -0.009690328501164913,
+      "pagerank": 0.010605583119854718,
+      "betweenness": 0.02685057011531793,
+      "degree": 23
     },
     {
       "sha": "aee5397",
@@ -669,12 +1488,12 @@
       "ts": "2026-05-25T00:00:12+11:00",
       "type": "fix",
       "scope": null,
-      "cluster": 1,
-      "x": -0.29436859488487244,
-      "y": 0.027950173243880272,
-      "pagerank": 0.005719701697933621,
-      "betweenness": 0.0019086542701394432,
-      "degree": 4
+      "cluster": 3,
+      "x": -0.158498153090477,
+      "y": 0.2566949129104614,
+      "pagerank": 0.0031684098782360113,
+      "betweenness": 0.0009824278682667028,
+      "degree": 5
     },
     {
       "sha": "ea01af7",
@@ -682,12 +1501,12 @@
       "ts": "2026-05-24T23:53:46+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": -0.004521430004388094,
-      "y": 0.0441245399415493,
-      "pagerank": 0.015405108838003716,
-      "betweenness": 0.011055068914176718,
-      "degree": 13
+      "cluster": 1,
+      "x": -0.04179791361093521,
+      "y": -0.03185496851801872,
+      "pagerank": 0.00782019132748766,
+      "betweenness": 0.006742086283935631,
+      "degree": 16
     },
     {
       "sha": "412f000",
@@ -695,12 +1514,12 @@
       "ts": "2026-05-24T23:53:28+11:00",
       "type": "fix",
       "scope": null,
-      "cluster": 0,
-      "x": -0.256645530462265,
-      "y": 0.13203254342079163,
-      "pagerank": 0.009144680602166408,
-      "betweenness": 0.006315776662755819,
-      "degree": 7
+      "cluster": 2,
+      "x": -0.24568676948547363,
+      "y": 0.1936025470495224,
+      "pagerank": 0.0053080561056584215,
+      "betweenness": 0.0048345997896455245,
+      "degree": 10
     },
     {
       "sha": "80955b7",
@@ -708,12 +1527,12 @@
       "ts": "2026-05-24T23:49:05+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.15792278945446014,
-      "y": -0.06857326626777649,
-      "pagerank": 0.009599428643039932,
-      "betweenness": 0.0038765130060595294,
-      "degree": 8
+      "cluster": 3,
+      "x": -0.04634580761194229,
+      "y": 0.12262623757123947,
+      "pagerank": 0.005140733586893177,
+      "betweenness": 0.0019965790173325526,
+      "degree": 10
     },
     {
       "sha": "bed31bc",
@@ -721,12 +1540,12 @@
       "ts": "2026-05-24T23:48:17+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.29684802889823914,
-      "y": 0.09774064272642136,
-      "pagerank": 0.0065401037759217975,
-      "betweenness": 0.0005646834146557316,
-      "degree": 4
+      "cluster": 3,
+      "x": -0.1578919142484665,
+      "y": 0.232332244515419,
+      "pagerank": 0.00367916960261461,
+      "betweenness": 0.0009470236028887964,
+      "degree": 5
     },
     {
       "sha": "19ff411",
@@ -734,12 +1553,12 @@
       "ts": "2026-05-24T23:46:34+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 2,
-      "x": 0.04187597706913948,
-      "y": -0.09844791889190674,
-      "pagerank": 0.015303808387165812,
-      "betweenness": 0.029082356481990517,
-      "degree": 14
+      "cluster": 3,
+      "x": 0.04890088737010956,
+      "y": -0.0574067048728466,
+      "pagerank": 0.007549390152450774,
+      "betweenness": 0.011641855341055607,
+      "degree": 16
     },
     {
       "sha": "7659d78",
@@ -747,12 +1566,12 @@
       "ts": "2026-05-24T23:41:46+11:00",
       "type": "fix",
       "scope": null,
-      "cluster": 1,
-      "x": -0.16588038206100464,
-      "y": 0.14308331906795502,
-      "pagerank": 0.016187204943200063,
-      "betweenness": 0.05640746193073327,
-      "degree": 13
+      "cluster": 4,
+      "x": -0.1397949457168579,
+      "y": 0.13186122477054596,
+      "pagerank": 0.00987331224628904,
+      "betweenness": 0.03467478983576165,
+      "degree": 19
     },
     {
       "sha": "ab66299",
@@ -760,12 +1579,12 @@
       "ts": "2026-05-24T23:39:55+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.07387581467628479,
-      "y": -0.1067838966846466,
-      "pagerank": 0.016286038424458926,
-      "betweenness": 0.024693221924526703,
-      "degree": 15
+      "cluster": 3,
+      "x": 0.043632883578538895,
+      "y": 0.08905964344739914,
+      "pagerank": 0.0076333628625440625,
+      "betweenness": 0.009827188300089213,
+      "degree": 16
     },
     {
       "sha": "434b475",
@@ -773,10 +1592,10 @@
       "ts": "2026-05-24T23:37:10+11:00",
       "type": "fix",
       "scope": null,
-      "cluster": 4,
-      "x": -0.05943530052900314,
-      "y": 0.0029197356197983027,
-      "pagerank": 0.0039024683921987696,
+      "cluster": 2,
+      "x": -0.11587610095739365,
+      "y": 0.06303321570158005,
+      "pagerank": 0.001701567970130059,
       "betweenness": 0.0,
       "degree": 1
     },
@@ -786,12 +1605,12 @@
       "ts": "2026-05-24T23:35:56+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.2596668303012848,
-      "y": 0.05658160150051117,
-      "pagerank": 0.01580315342609619,
-      "betweenness": 0.021620776209058366,
-      "degree": 13
+      "cluster": 3,
+      "x": -0.11563307046890259,
+      "y": 0.21109677851200104,
+      "pagerank": 0.00828325457761743,
+      "betweenness": 0.011024247526509741,
+      "degree": 15
     },
     {
       "sha": "52cdfed",
@@ -799,11 +1618,11 @@
       "ts": "2026-05-24T23:34:16+11:00",
       "type": "fix",
       "scope": null,
-      "cluster": 4,
-      "x": -0.31525495648384094,
-      "y": -0.02439366839826107,
-      "pagerank": 0.0065471289098264105,
-      "betweenness": 9.67866821525358e-05,
+      "cluster": 3,
+      "x": -0.1539563089609146,
+      "y": 0.2519265115261078,
+      "pagerank": 0.0029861435567945143,
+      "betweenness": 2.9932950191570883e-05,
       "degree": 4
     },
     {
@@ -812,12 +1631,12 @@
       "ts": "2026-05-24T23:31:40+11:00",
       "type": "fix",
       "scope": null,
-      "cluster": 0,
-      "x": -0.1946176141500473,
-      "y": 0.09488862752914429,
-      "pagerank": 0.007878326598681495,
-      "betweenness": 0.002797526830153431,
-      "degree": 6
+      "cluster": 2,
+      "x": -0.20577076077461243,
+      "y": 0.11229319125413895,
+      "pagerank": 0.003939181969355221,
+      "betweenness": 0.0016720469117350954,
+      "degree": 7
     },
     {
       "sha": "1e3ad26",
@@ -825,12 +1644,12 @@
       "ts": "2026-05-24T23:27:12+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.0004213888314552605,
-      "y": 0.11742740869522095,
-      "pagerank": 0.013612035560039808,
-      "betweenness": 0.021659018452715905,
-      "degree": 11
+      "cluster": 1,
+      "x": -0.07010333240032196,
+      "y": -0.05540637671947479,
+      "pagerank": 0.008584881368722895,
+      "betweenness": 0.017973063710874385,
+      "degree": 17
     },
     {
       "sha": "4edb9d3",
@@ -838,11 +1657,11 @@
       "ts": "2026-05-24T23:24:45+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.21674898266792297,
-      "y": -0.06401735544204712,
-      "pagerank": 0.007701005710811783,
-      "betweenness": 0.0016212776471040578,
+      "cluster": 3,
+      "x": -0.030986763536930084,
+      "y": 0.15978674590587616,
+      "pagerank": 0.003729437215454712,
+      "betweenness": 0.0006930740396661412,
       "degree": 5
     },
     {
@@ -851,11 +1670,11 @@
       "ts": "2026-05-24T23:22:06+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.33537667989730835,
-      "y": 0.011106870137155056,
-      "pagerank": 0.007049914817130378,
-      "betweenness": 0.0022473922636928405,
+      "cluster": 3,
+      "x": -0.1842344105243683,
+      "y": 0.2936422526836395,
+      "pagerank": 0.0033109113797626924,
+      "betweenness": 0.0006288509719360945,
       "degree": 5
     },
     {
@@ -864,11 +1683,11 @@
       "ts": "2026-05-24T23:20:36+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.05856246128678322,
-      "y": 0.11218120902776718,
-      "pagerank": 0.008097106522152155,
-      "betweenness": 0.007305298269736927,
+      "cluster": 4,
+      "x": -0.006972115952521563,
+      "y": 0.09312643110752106,
+      "pagerank": 0.0037566618680464764,
+      "betweenness": 0.0028514271503259853,
       "degree": 5
     },
     {
@@ -877,10 +1696,10 @@
       "ts": "2026-05-24T23:19:33+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.12386344373226166,
-      "y": 0.22019359469413757,
-      "pagerank": 0.002843225425430412,
+      "cluster": 4,
+      "x": -0.14030925929546356,
+      "y": 0.08772208541631699,
+      "pagerank": 0.0014583902109750182,
       "betweenness": 0.0,
       "degree": 1
     },
@@ -890,12 +1709,12 @@
       "ts": "2026-05-24T23:18:31+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.30786076188087463,
-      "y": 0.024291567504405975,
-      "pagerank": 0.008048389552250467,
-      "betweenness": 0.0028104549350952013,
-      "degree": 6
+      "cluster": 3,
+      "x": -0.15892185270786285,
+      "y": 0.25498366355895996,
+      "pagerank": 0.004226674207185568,
+      "betweenness": 0.0016294878370875085,
+      "degree": 7
     },
     {
       "sha": "ebeb837",
@@ -903,12 +1722,12 @@
       "ts": "2026-05-24T23:17:46+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.262095183134079,
-      "y": -0.057724662125110626,
-      "pagerank": 0.01547976280542481,
-      "betweenness": 0.016454650561374455,
-      "degree": 12
+      "cluster": 3,
+      "x": -0.07100080698728561,
+      "y": 0.22233697772026062,
+      "pagerank": 0.008642354208291004,
+      "betweenness": 0.020475641908041055,
+      "degree": 16
     },
     {
       "sha": "7984b83",
@@ -916,12 +1735,12 @@
       "ts": "2026-05-24T23:17:04+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.11292854696512222,
-      "y": 0.057572830468416214,
-      "pagerank": 0.00556513297810554,
-      "betweenness": 0.001456653503508175,
-      "degree": 3
+      "cluster": 4,
+      "x": -0.004216777626425028,
+      "y": 0.14554935693740845,
+      "pagerank": 0.0030348487700350853,
+      "betweenness": 0.0008233678928749561,
+      "degree": 4
     },
     {
       "sha": "52e6e41",
@@ -929,12 +1748,12 @@
       "ts": "2026-05-24T23:13:12+11:00",
       "type": "chore",
       "scope": null,
-      "cluster": 3,
-      "x": 0.09315365552902222,
-      "y": 0.5113200545310974,
-      "pagerank": 0.009654082219798495,
-      "betweenness": 0.0006441285890587245,
-      "degree": 6
+      "cluster": 4,
+      "x": -0.18695439398288727,
+      "y": -0.16939175128936768,
+      "pagerank": 0.005246246507771087,
+      "betweenness": 0.0003891648671539536,
+      "degree": 9
     },
     {
       "sha": "41c416c",
@@ -942,12 +1761,12 @@
       "ts": "2026-05-24T23:11:08+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.2734505832195282,
-      "y": -0.10764864087104797,
-      "pagerank": 0.010413350791336373,
-      "betweenness": 0.008181340457973155,
-      "degree": 8
+      "cluster": 3,
+      "x": -0.06922218948602676,
+      "y": 0.24219055473804474,
+      "pagerank": 0.005213647946719258,
+      "betweenness": 0.0041916540551993784,
+      "degree": 9
     },
     {
       "sha": "c9e202f",
@@ -955,10 +1774,10 @@
       "ts": "2026-05-24T23:08:04+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.19635851681232452,
-      "y": -0.0746535137295723,
-      "pagerank": 0.00328909643267631,
+      "cluster": 3,
+      "x": -0.06818446516990662,
+      "y": 0.1447003185749054,
+      "pagerank": 0.0017755460956200338,
       "betweenness": 0.0,
       "degree": 1
     },
@@ -968,12 +1787,12 @@
       "ts": "2026-05-24T23:06:18+11:00",
       "type": "chore",
       "scope": null,
-      "cluster": 1,
-      "x": -0.14887645840644836,
-      "y": 0.12916935980319977,
-      "pagerank": 0.0073477181729844875,
-      "betweenness": 0.028348163159741268,
-      "degree": 3
+      "cluster": 2,
+      "x": -0.21040888130664825,
+      "y": 0.06166675314307213,
+      "pagerank": 0.008102222935904443,
+      "betweenness": 0.05718460755075285,
+      "degree": 10
     },
     {
       "sha": "a2c898b",
@@ -981,11 +1800,11 @@
       "ts": "2026-05-24T23:05:38+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.2622022330760956,
-      "y": -0.050977058708667755,
-      "pagerank": 0.010811958239784022,
-      "betweenness": 0.030924046015942924,
+      "cluster": 3,
+      "x": -0.12841296195983887,
+      "y": 0.15168455243110657,
+      "pagerank": 0.005458927960634093,
+      "betweenness": 0.016091361750600414,
       "degree": 6
     },
     {
@@ -994,12 +1813,12 @@
       "ts": "2026-05-24T23:04:17+11:00",
       "type": "style",
       "scope": null,
-      "cluster": 1,
-      "x": -0.3158589005470276,
-      "y": -0.05464845523238182,
-      "pagerank": 0.025341736149142317,
-      "betweenness": 0.09724552433510095,
-      "degree": 22
+      "cluster": 3,
+      "x": -0.07498596608638763,
+      "y": 0.28657659888267517,
+      "pagerank": 0.011883075271020865,
+      "betweenness": 0.03773934421562291,
+      "degree": 23
     },
     {
       "sha": "dab55b1",
@@ -1007,12 +1826,12 @@
       "ts": "2026-05-24T23:01:39+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 0,
-      "x": 0.13996754586696625,
-      "y": 0.09463514387607574,
-      "pagerank": 0.00822644830385547,
-      "betweenness": 0.00925714917372743,
-      "degree": 6
+      "cluster": 1,
+      "x": 0.002660141559317708,
+      "y": -0.09695073962211609,
+      "pagerank": 0.006656034889174827,
+      "betweenness": 0.031154938170765333,
+      "degree": 11
     },
     {
       "sha": "ffda59a",
@@ -1020,12 +1839,12 @@
       "ts": "2026-05-24T22:37:41+11:00",
       "type": "docs",
       "scope": null,
-      "cluster": 1,
-      "x": -0.1314028948545456,
-      "y": 0.06887265294790268,
-      "pagerank": 0.004388941861437208,
-      "betweenness": 0.00047604708851321326,
-      "degree": 2
+      "cluster": 4,
+      "x": -0.07176853716373444,
+      "y": 0.11381698399782181,
+      "pagerank": 0.003490282051658158,
+      "betweenness": 0.005486096106578024,
+      "degree": 3
     },
     {
       "sha": "54fb877",
@@ -1033,12 +1852,12 @@
       "ts": "2026-05-24T22:36:40+11:00",
       "type": "chore",
       "scope": null,
-      "cluster": 3,
-      "x": 0.06618671864271164,
-      "y": 0.5490843057632446,
-      "pagerank": 0.013040726925839302,
-      "betweenness": 0.017197769196855606,
-      "degree": 8
+      "cluster": 4,
+      "x": -0.2650226056575775,
+      "y": -0.15961384773254395,
+      "pagerank": 0.007423487830428988,
+      "betweenness": 0.026420018512947452,
+      "degree": 13
     },
     {
       "sha": "5b545fb",
@@ -1046,12 +1865,12 @@
       "ts": "2026-05-24T22:32:26+11:00",
       "type": "docs",
       "scope": null,
-      "cluster": 1,
-      "x": -0.130766823887825,
-      "y": 0.04800225421786308,
-      "pagerank": 0.010244152944336586,
-      "betweenness": 0.01835907670955053,
-      "degree": 7
+      "cluster": 4,
+      "x": -0.023400478065013885,
+      "y": 0.1452721208333969,
+      "pagerank": 0.0066786289484442,
+      "betweenness": 0.02707352050034049,
+      "degree": 9
     },
     {
       "sha": "893f411",
@@ -1059,12 +1878,12 @@
       "ts": "2026-05-24T22:30:19+11:00",
       "type": "ci",
       "scope": null,
-      "cluster": 0,
-      "x": 0.09389127790927887,
-      "y": 0.10652051866054535,
-      "pagerank": 0.006833275100086724,
-      "betweenness": 0.0100050688291121,
-      "degree": 4
+      "cluster": 4,
+      "x": 0.01013699360191822,
+      "y": -0.09170420467853546,
+      "pagerank": 0.003574966541016415,
+      "betweenness": 0.005759190726392094,
+      "degree": 5
     },
     {
       "sha": "691560d",
@@ -1072,167 +1891,167 @@
       "ts": "2026-05-24T22:29:35+11:00",
       "type": "feat",
       "scope": null,
-      "cluster": 3,
-      "x": 0.2843823730945587,
-      "y": 0.3349059820175171,
-      "pagerank": 0.010596008245770772,
-      "betweenness": 0.0009892166035234328,
-      "degree": 7
+      "cluster": 4,
+      "x": -0.017249250784516335,
+      "y": -0.28362351655960083,
+      "pagerank": 0.005261793986909578,
+      "betweenness": 0.00034761788867876533,
+      "degree": 9
     }
   ],
   "clusters": [
     {
       "id": 0,
-      "size": 26,
-      "terms": [
-        "feat",
-        "add",
-        "feat add",
-        "about",
-        "rss"
-      ],
-      "exemplar": "feat: add RSS and iCal sections to About page"
-    },
-    {
-      "id": 1,
-      "size": 24,
-      "terms": [
-        "style",
-        "pour",
-        "html",
-        "de",
-        "header"
-      ],
-      "exemplar": "style: agrandir la taille du texte pour meilleure lisibilité"
-    },
-    {
-      "id": 2,
-      "size": 14,
+      "size": 36,
       "terms": [
         "benchmark",
         "feat benchmark",
         "feat",
-        "section",
-        "ml"
+        "fix benchmark",
+        "fix"
       ],
-      "exemplar": "feat(benchmark): section 'Site Architecture' (stack, principes, accessibilité)"
+      "exemplar": "feat(benchmark): révision git dans le rapport + page abstract dédiée"
+    },
+    {
+      "id": 1,
+      "size": 32,
+      "terms": [
+        "feat",
+        "feat add",
+        "add",
+        "about",
+        "webmcp"
+      ],
+      "exemplar": "feat: add RSS and iCal sections to About page"
+    },
+    {
+      "id": 2,
+      "size": 30,
+      "terms": [
+        "fix",
+        "ux",
+        "astro",
+        "feat",
+        "menus"
+      ],
+      "exemplar": "fix(ux): suppression description régime + correction flèches clavier PC"
     },
     {
       "id": 3,
-      "size": 8,
+      "size": 22,
       "terms": [
-        "aquavena",
-        "aquavena-sdk",
-        "de contact",
-        "contact",
-        "feat"
+        "style",
+        "fix",
+        "mode",
+        "header",
+        "pour"
       ],
-      "exemplar": "feat: infos de contact Aquavena (adresse, tél, FB, Instagram, Play Store)"
+      "exemplar": "style: agrandir la taille du texte pour meilleure lisibilité"
     },
     {
       "id": 4,
-      "size": 8,
+      "size": 18,
       "terms": [
-        "fix",
-        "contraste",
-        "fix contraste",
-        "wcag",
-        "npm"
+        "aquavena",
+        "github",
+        "de",
+        "feat",
+        "aquavena-sdk"
       ],
-      "exemplar": "fix(a11y): corrige toutes violations contraste restantes + structure benchmark/"
+      "exemplar": "feat(ux): déplacer A+ / A− sous le titre Aquavena"
     },
     {
       "id": 5,
-      "size": 3,
+      "size": 8,
       "terms": [
-        "section valentin",
-        "valentin",
-        "lien",
-        "dans",
-        "section"
+        "request from",
+        "request",
+        "pull",
+        "pull request",
+        "from adriens"
       ],
-      "exemplar": "feat(about): lien site AVH comité Nouvelle-Calédonie dans section Valentin Haüy"
+      "exemplar": "Merge pull request #17 from adriens/feat/report-webmcp"
     }
   ],
   "explained_variance": [
-    0.07153838872909546,
-    0.057714443653821945
+    0.05698687955737114,
+    0.05223116651177406
   ],
   "n_clusters": 6,
-  "n_commits": 83,
+  "n_commits": 146,
   "model": "BAAI/bge-m3",
   "embedding_dim": 1024,
   "graph": {
     "similarity_threshold": 0.55,
-    "edges": 403,
+    "edges": 967,
     "anchors": [
       {
         "cluster": 0,
-        "sha": "7204fa7",
-        "subject": "feat: move accessibility score section to top of About page",
-        "pagerank": 0.029564443142806797
+        "sha": "feb7cfa",
+        "subject": "feat(benchmark): section 'Site Architecture' (stack, principes, accessibilité)",
+        "pagerank": 0.017862122900705338
       },
       {
         "cluster": 1,
-        "sha": "2a85d56",
-        "subject": "style: agrandir la taille du texte pour meilleure lisibilité",
-        "pagerank": 0.025341736149142317
+        "sha": "255c650",
+        "subject": "feat(report): refonte du diagramme Universal Accessibility Pipeline",
+        "pagerank": 0.015146407423327391
       },
       {
         "cluster": 2,
-        "sha": "feb7cfa",
-        "subject": "feat(benchmark): section 'Site Architecture' (stack, principes, accessibilité)",
-        "pagerank": 0.02608438025152186
+        "sha": "05ffba4",
+        "subject": "chore(deps): bump astro from 6.4.2 to 6.4.4 in /site",
+        "pagerank": 0.00946027425823881
       },
       {
         "cluster": 3,
-        "sha": "54fb877",
-        "subject": "chore: update repo URLs after GitHub rename to aquavena-sdk",
-        "pagerank": 0.013040726925839302
+        "sha": "0eab040",
+        "subject": "feat: add A+/A- and dark mode to About page header",
+        "pagerank": 0.01412169963261703
       },
       {
         "cluster": 4,
-        "sha": "76658ae",
-        "subject": "fix(a11y): contraste onglets régimes en mode nuit",
-        "pagerank": 0.012065170360248782
+        "sha": "7659d78",
+        "subject": "fix: structure de titres HTML pour WAVE/accessibilité",
+        "pagerank": 0.00987331224628904
       },
       {
         "cluster": 5,
-        "sha": "b92954d",
-        "subject": "feat: bouton menu du jour, lien À propos dans header, section Valentin Haüy",
-        "pagerank": 0.010688003336243068
+        "sha": "ffdecc0",
+        "subject": "Merge pull request #14 from adriens/dependabot/npm_and_yarn/site/astro-6.4.4",
+        "pagerank": 0.007907624174322194
       }
     ],
     "bridges": [
       {
+        "sha": "255c650",
+        "subject": "feat(report): refonte du diagramme Universal Accessibility Pipeline",
+        "cluster": 1,
+        "betweenness": 0.07748294916724778
+      },
+      {
+        "sha": "c18a884",
+        "subject": "chore: refresh menus data",
+        "cluster": 2,
+        "betweenness": 0.05718460755075285
+      },
+      {
         "sha": "0eab040",
         "subject": "feat: add A+/A- and dark mode to About page header",
-        "cluster": 0,
-        "betweenness": 0.1140416937590455
+        "cluster": 3,
+        "betweenness": 0.05460545352049303
       },
       {
-        "sha": "2a85d56",
-        "subject": "style: agrandir la taille du texte pour meilleure lisibilité",
+        "sha": "438659e",
+        "subject": "feat(benchmark): révision git dans le rapport + page abstract dédiée",
+        "cluster": 0,
+        "betweenness": 0.05071068721377996
+      },
+      {
+        "sha": "fdc7943",
+        "subject": "feat(site): afficher Entrée, Dessert, Végé, Fresh et Enfants dans le template",
         "cluster": 1,
-        "betweenness": 0.09724552433510095
-      },
-      {
-        "sha": "3f6c3bc",
-        "subject": "feat: add About page explaining the accessibility approach",
-        "cluster": 0,
-        "betweenness": 0.08908222851263498
-      },
-      {
-        "sha": "7204fa7",
-        "subject": "feat: move accessibility score section to top of About page",
-        "cluster": 0,
-        "betweenness": 0.08838704184853588
-      },
-      {
-        "sha": "feb7cfa",
-        "subject": "feat(benchmark): section 'Site Architecture' (stack, principes, accessibilité)",
-        "cluster": 2,
-        "betweenness": 0.06792944235573423
+        "betweenness": 0.049486147623131374
       }
     ]
   }
