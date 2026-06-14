@@ -1275,17 +1275,52 @@ ggplot(vel, aes(x = idx)) +
 
 ## DORA metrics — elite performance
 
-The **DORA** acronym used throughout this report stands for **DevOps Research
-and Assessment** — the Google research programme that defines the four key
-software-delivery metrics (Deployment Frequency, Lead Time for Changes, Change
-Failure Rate, MTTR). This is distinct from the EU financial regulation of the
-same acronym (Digital Operational Resilience Act, 2022/2554).
+### Origin
 
-The DORA metrics (DevOps Research and Assessment) are computed from the timestamps
-stored in `gh_releases.published_at_ts` and from the `ci_runs` table.
-Results land in the **Elite** tier as defined by Forsgren et al.,
-*Accelerate State of DevOps Report 2023* (Google Cloud / DORA,
-\href{https://dora.dev/research/2023/dora-report/}{dora.dev/research/2023}).
+**DORA = DevOps Research and Assessment**. Founded in 2013 by **Nicole
+Forsgren**, **Jez Humble** and **Gene Kim** as an independent research
+programme initially published with Puppet, then spun out as an autonomous
+company. **Acquired by Google Cloud in 2018**, where it continues to publish
+the annual *Accelerate State of DevOps Report*. The programme is the
+empirical foundation of modern DevOps benchmarking and the source of the
+four metrics used in this section.
+
+\textbf{Note on the homonymy.} The acronym DORA is also widely used in
+another context: the \textbf{Digital Operational Resilience Act}, a European
+Union regulatory framework (Regulation EU 2022/2554) designed to fortify the
+\textbf{financial sector} against information and communication technology
+(ICT) threats. It is unrelated to the software-delivery metrics used in this
+report. For the EU regulation see
+\href{https://www.eiopa.europa.eu/digital-operational-resilience-act-dora_en}{eiopa.europa.eu/digital-operational-resilience-act-dora}.
+
+### The four metrics
+
+| Metric | Definition |
+|---|---|
+| **Deployment Frequency** | How often a team successfully releases to production |
+| **Lead Time for Changes** | Time from code commit to running in production |
+| **Change Failure Rate** | \% of deployments causing a production failure (rollback, hotfix) |
+| **Mean Time to Recovery (MTTR)** | Average time to restore service after a production incident |
+
+### Performance tiers (Accelerate State of DevOps Report 2023)
+
+The four metrics are mapped to four performance tiers. Aquavena lands in the
+**Elite** column on all three measured indicators:
+
+| Metric | **Elite** | High | Medium | Low |
+|---|---|---|---|---|
+| Deployment Frequency | **On-demand** (multiple/day) | 1/day to 1/week | 1/week to 1/month | < 1/month |
+| Lead Time for Changes | **< 1 day** | 1 day to 1 week | 1 week to 1 month | > 1 month |
+| Change Failure Rate | **0–5\%** | 10–15\% | 16–30\% | 64–75\% |
+| MTTR / Recovery time | **< 1 hour** | < 1 day | < 1 week | > 1 week |
+
+Note: the 2025 DORA report moved away from tier ranking in favour of seven
+\emph{team archetypes} that integrate human factors (burnout, friction,
+perceived value). The Elite/High/Medium/Low grid above remains the canonical
+reference for cross-team benchmarking.
+
+The DORA metrics in this report are computed from the timestamps stored in
+`gh_releases.published_at_ts` and from the `ci_runs` table.
 
 ```{r dora-panel, results="asis"}
 ts <- dbGetQuery(con, "
@@ -1337,6 +1372,24 @@ Measured here as the median gap between release timestamps.
 A short lead time means fixes and features reach users quickly.
 \end{minipage}
 \end{center}
+
+### Verifiable references
+
+For independent verification of the DORA framework and the Elite-tier
+thresholds used above:
+
+- **Foundational book** — Forsgren, Humble, Kim. *Accelerate: The Science
+  of Lean Software and DevOps: Building and Scaling High Performing
+  Technology Organizations.* IT Revolution, 2018. ISBN 978-1942788331.
+- **Official site** —
+  \href{https://dora.dev/}{dora.dev}
+  (current research programme home).
+- **2023 report — Infographic PDF (canonical Elite/High/Medium/Low table)** —
+  \href{https://dora.dev/research/2023/2023-DORA-Report-Infographic.v10.pdf}{dora.dev/research/2023/2023-DORA-Report-Infographic.v10.pdf}.
+- **2023 report — Google Cloud announcement** —
+  \href{https://cloud.google.com/blog/products/devops-sre/announcing-the-2023-state-of-devops-report}{cloud.google.com/blog/products/devops-sre/announcing-the-2023-state-of-devops-report}.
+- **Wikipedia (history and acquisitions)** —
+  \href{https://en.wikipedia.org/wiki/DevOps_Research_and_Assessment}{en.wikipedia.org/wiki/DevOps\_Research\_and\_Assessment}.
 
 ## Development intensity
 
