@@ -31,7 +31,7 @@ tasks:
     desc: "Install Node.js dependencies (pa11y-ci, lighthouse, serve) globally"
     dir: "{{.SITE_DIR}}"
     cmds:
-      - npm install
+      - bun install
 
   setup:
     desc: "Install all dependencies (R packages + Node.js)"
@@ -53,7 +53,7 @@ tasks:
     desc: "Build the Astro static site"
     dir: "{{.SITE_DIR}}"
     cmds:
-      - npm run build
+      - bun run build
 
   # ── Accessibility audits ──────────────────────────────────────────────────
 
@@ -62,9 +62,9 @@ tasks:
     dir: "{{.SITE_DIR}}"
     cmds:
       - mkdir -p ../benchmark/{{.REPORTS_DIR}}
-      - npx serve dist -p {{.PORT}} &
+      - bunx serve dist -p {{.PORT}} &
       - sleep 3
-      - npx pa11y-ci --config .pa11yci.json --json > ../benchmark/{{.REPORTS_DIR}}/pa11y.json 2>/dev/null || true
+      - bunx pa11y-ci --config .pa11yci.json --json > ../benchmark/{{.REPORTS_DIR}}/pa11y.json 2>/dev/null || true
       - kill %1 2>/dev/null || true
 
   audit:lighthouse:our-site:
@@ -72,10 +72,10 @@ tasks:
     dir: "{{.SITE_DIR}}"
     cmds:
       - mkdir -p ../benchmark/{{.REPORTS_DIR}}
-      - npx serve dist -p {{.PORT}} &
+      - bunx serve dist -p {{.PORT}} &
       - sleep 3
       - >
-        npx lighthouse "http://localhost:{{.PORT}}/#aqua-m%C3%A9diterran%C3%A9en"
+        bunx lighthouse "http://localhost:{{.PORT}}/#aqua-m%C3%A9diterran%C3%A9en"
         --only-categories=accessibility
         --output=json,html
         --output-path="../benchmark/{{.REPORTS_DIR}}/lighthouse"
@@ -89,7 +89,7 @@ tasks:
     cmds:
       - mkdir -p ../benchmark/{{.REPORTS_DIR}}
       - >
-        npx lighthouse "https://www.aquavena.nc/formules/aqua-m%C3%A9diterran%C3%A9en"
+        bunx lighthouse "https://www.aquavena.nc/formules/aqua-m%C3%A9diterran%C3%A9en"
         --only-categories=accessibility
         --output=json
         --output-path="../benchmark/{{.REPORTS_DIR}}/lighthouse-aquavena-nc.report.json"

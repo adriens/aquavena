@@ -6,7 +6,7 @@
 #   { "aquavena.nc": {"errors": N, "warnings": M, "bytes": N},
 #     "our-site":    {"errors": N, "warnings": M, "bytes": N} }
 #
-# Requirements: curl, jq, node, npx (lighthouse). Site built (site/dist).
+# Requirements: curl, jq, node, bunx (lighthouse). Site built (site/dist).
 
 set -uo pipefail
 
@@ -32,7 +32,7 @@ echo "  errors=$nc_e  warnings=$nc_w"
 # ── Our site (serve dist, fetch HTML, POST to validator) ──────────────────
 echo "Starting local server for our site ..."
 PORT=4321
-(cd "$ROOT/site" && npx serve dist -p $PORT > /dev/null 2>&1) &
+(cd "$ROOT/site" && bunx serve dist -p $PORT > /dev/null 2>&1) &
 SERVE_PID=$!
 trap "kill $SERVE_PID 2>/dev/null || true" EXIT
 sleep 3
@@ -58,7 +58,7 @@ extract_bytes() {
 
 echo "Measuring aquavena.nc page weight (Lighthouse performance) ..."
 NC_PERF_JSON="/tmp/lh_perf_nc.json"
-npx lighthouse "$NC_URL" \
+bunx lighthouse "$NC_URL" \
   --only-categories=performance \
   --output=json --output-path="$NC_PERF_JSON" \
   --chrome-flags="--no-sandbox --headless" \
@@ -68,7 +68,7 @@ echo "  bytes=$nc_bytes"
 
 echo "Measuring our site page weight ..."
 OUR_PERF_JSON="/tmp/lh_perf_ours.json"
-npx lighthouse "http://localhost:$PORT/" \
+bunx lighthouse "http://localhost:$PORT/" \
   --only-categories=performance \
   --output=json --output-path="$OUR_PERF_JSON" \
   --chrome-flags="--no-sandbox --headless" \
