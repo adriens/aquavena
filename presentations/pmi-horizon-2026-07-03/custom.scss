@@ -1,0 +1,86 @@
+/*-- scss:defaults --*/
+
+// Aquavena teal palette
+$body-bg: #f8fafc;
+$body-color: #1f2937;
+$link-color: #0f766e;
+$selection-bg: #14b8a6;
+
+$presentation-heading-color: #0f766e;
+$presentation-heading-font: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+$presentation-font-size-root: 32px;
+
+/*-- scss:rules --*/
+
+.reveal {
+  font-family: "Atkinson Hyperlegible", "Helvetica Neue", "Helvetica", sans-serif;
+  letter-spacing: 0.005em;
+}
+
+.reveal h1, .reveal h2, .reveal h3 {
+  color: #0f766e;
+  text-transform: none;
+}
+
+.reveal h1 {
+  font-size: 1.6em;
+  border-bottom: 2px solid #14b8a6;
+  padding-bottom: 0.2em;
+  margin-bottom: 0.6em;
+}
+
+.reveal blockquote {
+  border-left: 4px solid #14b8a6;
+  background: #ecfdf5;
+  padding: 0.5em 1em;
+  font-style: italic;
+  color: #0f766e;
+}
+
+.reveal table {
+  font-size: 0.8em;
+}
+
+.reveal table th {
+  background: #0f766e;
+  color: white;
+  padding: 0.4em 0.8em;
+}
+
+.reveal table td {
+  padding: 0.35em 0.8em;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.reveal pre code {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 6px;
+  padding: 0.8em;
+  font-size: 0.7em;
+}
+
+// Dark cover slides
+.reveal [data-background-color="#0f172a"] h1,
+.reveal [data-background-color="#0f172a"] h2,
+.reveal [data-background-color="#0f172a"] p,
+.reveal [data-background-color="#0f172a"] li {
+  color: #f1f5f9 !important;
+}
+.reveal [data-background-color="#0f172a"] blockquote {
+  background: rgba(20, 184, 166, 0.15);
+  color: #5eead4;
+  border-left-color: #14b8a6;
+}
+
+.reveal .slide-number {
+  color: #64748b;
+}
+
+.reveal a {
+  text-decoration: none;
+  border-bottom: 1px solid #14b8a6;
+}
+.reveal a:hover {
+  color: #14b8a6;
+}
