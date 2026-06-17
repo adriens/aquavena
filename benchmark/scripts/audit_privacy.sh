@@ -21,7 +21,7 @@ mkdir -p "$(dirname "$OUT")"
 
 # Start local server for our site
 echo "Starting local server ..."
-(cd "$ROOT/site" && npx serve dist -p $PORT > /dev/null 2>&1) &
+(cd "$ROOT/site" && bunx serve dist -p $PORT > /dev/null 2>&1) &
 SERVE_PID=$!
 trap "kill $SERVE_PID 2>/dev/null || true" EXIT
 sleep 3
@@ -29,7 +29,7 @@ sleep 3
 # Install puppeteer locally if needed
 if [ ! -d "$ROOT/benchmark/scripts/node_modules/puppeteer" ]; then
   echo "Installing puppeteer (one-time) ..."
-  ( cd "$ROOT/benchmark/scripts" && npm install --silent --no-audit --no-fund > /dev/null 2>&1 )
+  ( cd "$ROOT/benchmark/scripts" && bun install --silent --no-audit --no-fund > /dev/null 2>&1 )
 fi
 
 echo "Running privacy audit (puppeteer) ..."

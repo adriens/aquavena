@@ -23,7 +23,7 @@ Pour générer les rapports :
 
 ```bash
 cd aquavena-sdk/site
-npm run report   # build + pa11y-ci + Lighthouse → benchmark/reports/
+bun run report   # build + pa11y-ci + Lighthouse → benchmark/reports/
 ```
 
 ---
@@ -189,23 +189,23 @@ en mode clair et sombre.
 cd aquavena-sdk && python scripts/fetch_data.py
 
 # 2. Build + rapport complet (pa11y-ci + Lighthouse)
-cd site && npm run report
+cd site && bun run report
 # → benchmark/reports/pa11y.json
 # → benchmark/reports/lighthouse.report.json
 # → benchmark/reports/lighthouse.report.html
 
 # 3. Audit pa11y interactif uniquement
-npm run a11y
+bun run a11y
 ```
 
 ### Test avec axe-cli (live ou local)
 
 ```bash
 # Sur le site déployé
-npx axe https://adriens.github.io/aquavena/ --chromedriver-path ~/.browser-driver-manager/chromedriver/linux-149.0.7827.54/chromedriver-linux64/chromedriver
+bunx axe https://adriens.github.io/aquavena/ --chromedriver-path ~/.browser-driver-manager/chromedriver/linux-149.0.7827.54/chromedriver-linux64/chromedriver
 
-# Sur le site local (après npm run build + npx serve dist -p 4321)
-npx axe http://localhost:4321/ --chromedriver-path ~/.browser-driver-manager/chromedriver/linux-149.0.7827.54/chromedriver-linux64/chromedriver
+# Sur le site local (après bun run build + bunx serve dist -p 4321)
+bunx axe http://localhost:4321/ --chromedriver-path ~/.browser-driver-manager/chromedriver/linux-149.0.7827.54/chromedriver-linux64/chromedriver
 ```
 
 ### Validation HTML W3C
@@ -219,7 +219,7 @@ curl -s -H "Content-Type: text/html; charset=utf-8" \
 ### Audit webhint (site distant)
 
 ```bash
-npx hint https://adriens.github.io/aquavena/
+bunx hint https://adriens.github.io/aquavena/
 ```
 
 ---
@@ -243,7 +243,7 @@ benchmark/
 Pipeline envisagé :
 
 ```
-npm run report  →  pa11y.json + lighthouse.json
+bun run report  →  pa11y.json + lighthouse.json
       ↓
 CSV export (script Node.js ou Python)
       ↓

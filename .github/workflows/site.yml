@@ -33,16 +33,16 @@ jobs:
       - name: Fetch menu data
         run: uv run python scripts/fetch_data.py
 
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: '22'
+          bun-version: latest
 
       - name: Install Astro deps
-        run: npm install --legacy-peer-deps
+        run: bun install --frozen-lockfile
         working-directory: site
 
       - name: Build site
-        run: npm run build
+        run: bun run build
         working-directory: site
 
       - uses: actions/upload-pages-artifact@v3

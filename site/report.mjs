@@ -20,7 +20,7 @@ try {
   // --- pa11y-ci ---
   console.log('\n📋 pa11y-ci — audit WCAG2AA\n');
   try {
-    execSync(`npx pa11y-ci --config .pa11yci.json --json > "${REPORTS}/pa11y.json" 2>/dev/null`, { stdio: 'inherit' });
+    execSync(`bunx pa11y-ci --config .pa11yci.json --json > "${REPORTS}/pa11y.json" 2>/dev/null`, { stdio: 'inherit' });
   } catch {
     // pa11y-ci exits non-zero when issues found — check the JSON anyway
   }
@@ -41,7 +41,7 @@ try {
   // --- Lighthouse ---
   console.log('\n🔦 Lighthouse — score accessibilité\n');
   execSync(
-    `npx lighthouse "${BASE}/${HASH}" ` +
+    `bunx lighthouse "${BASE}/${HASH}" ` +
     `--only-categories=accessibility ` +
     `--output=json,html ` +
     `--output-path="${REPORTS}/lighthouse" ` +
