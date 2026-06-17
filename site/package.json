@@ -15,7 +15,7 @@
     "@tailwindcss/vite": "^4.3.1",
     "@vite-pwa/astro": "^1.2.0",
     "astro": "^6.4.8",
-    "tailwindcss": "^4.3.0"
+    "tailwindcss": "^4.3.1"
   },
   "devDependencies": {
     "pa11y": "^9.1.1",
