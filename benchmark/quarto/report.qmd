@@ -1598,6 +1598,13 @@ idx_tw  <- vel$idx[vel$tag == "v1.14.0"]
 idx_fix <- vel$idx[vel$tag == "v1.4.0"]
 max_y   <- max(vel$lines_delta)
 
+# Thin the x-axis tag labels (~46 releases overlap otherwise): keep ~1 in 16,
+# evenly spaced, plus the last tag, and render them vertically.
+n_v        <- nrow(vel)
+lab_step_v <- max(1L, ceiling(n_v / 16))
+keep_v     <- ((vel$idx - 1L) %% lab_step_v == 0L) | (vel$idx == n_v)
+x_lab_v    <- ifelse(keep_v, as.character(vel$tag), "")
+
 ggplot(vel, aes(x = idx)) +
   geom_col(aes(y = lines_delta, fill = bar_fill), width = 0.55) +
   scale_fill_manual(values = c(normal = "#0f766e", tailwind = "#f59e0b", fix = "#6366f1"),
@@ -1619,7 +1626,7 @@ ggplot(vel, aes(x = idx)) +
            label = paste0("Avg throughput: ", format(avg_v, big.mark = ","),
                           " lines / release"),
            size = 2.7, colour = "grey40", fontface = "italic") +
-  scale_x_continuous(breaks = vel$idx, labels = vel$tag) +
+  scale_x_continuous(breaks = vel$idx, labels = x_lab_v) +
   scale_y_continuous(name = "Lines changed per release",
                      labels = scales::label_comma(),
                      sec.axis = sec_axis(~ . / scale_factor,
@@ -1630,7 +1637,7 @@ ggplot(vel, aes(x = idx)) +
        x = NULL) +
   theme_minimal(base_size = 9) +
   theme(panel.grid.minor = element_blank(),
-        axis.text.x = element_text(angle = 35, hjust = 1),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6),
         axis.title.y.right = element_text(colour = "#f59e0b"))
 ```
 
