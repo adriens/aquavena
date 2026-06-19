@@ -97,7 +97,7 @@ Montrer le site live. Lecture vocale. Mode nuit. Démontrer A+/A−.
 | **Score AIM** | — | **10 / 10** |
 
 ::: {.fragment}
-**Pas un effet d'annonce :** 26 releases consécutives ont maintenu le score 100/100.
+**Pas un effet d'annonce :** 47 releases consécutives ont maintenu le score 100/100.
 :::
 
 ---
@@ -234,9 +234,9 @@ Le projet a délivré **Earned Value ≥ Planned Value** sur **100 % des release
 ::: {.column width="50%"}
 **La question :** peut-on classer un commit **sans lire son texte**, juste à partir de sa position dans le graphe ?
 
-**Le résultat :** **73 % d'accuracy** (vs **6.7 %** baseline).
+**Le résultat :** **86.5 % d'accuracy** (vs **21.6 %** baseline).
 
-**Lift de +66 points.**
+**Lift de +65 points.**
 
 **Implication :** la structure du graphe **encode la sémantique**.
 :::

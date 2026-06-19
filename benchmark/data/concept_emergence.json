@@ -1,5 +1,5 @@
 {
-  "n_commits_searched": 145,
+  "n_commits_searched": 178,
   "n_concepts": 15,
   "similarity_floor": 0.55,
   "model": "BAAI/bge-m3 (normalised, cosine)",
@@ -13,7 +13,7 @@
       "similarity": 0.6553103923797607,
       "matches_above_floor": 8,
       "flag": "ok",
-      "cluster_id": 4
+      "cluster_id": 2
     },
     {
       "concept": "Benchmark report",
@@ -22,9 +22,9 @@
       "first_sha": "df7ef90",
       "first_subject": "feat(benchmark): rapport en anglais, page de titre LaTeX, diagramme TikZ, schéma DB, Taskfile",
       "similarity": 0.5716273784637451,
-      "matches_above_floor": 3,
+      "matches_above_floor": 4,
       "flag": "ok",
-      "cluster_id": 2
+      "cluster_id": 1
     },
     {
       "concept": "Tailwind v4",
@@ -33,9 +33,9 @@
       "first_sha": "52fc47b",
       "first_subject": "feat(deps): migration Tailwind CSS v3 → v4",
       "similarity": 0.8188769817352295,
-      "matches_above_floor": 4,
+      "matches_above_floor": 6,
       "flag": "ok",
-      "cluster_id": 0
+      "cluster_id": 4
     },
     {
       "concept": "MCP / Claude skill",
@@ -79,73 +79,73 @@
       "similarity": 0.5610803365707397,
       "matches_above_floor": 1,
       "flag": "ok",
-      "cluster_id": 3
+      "cluster_id": 5
     },
     {
       "concept": "Causal Impact BSTS",
       "description": "Bayesian structural time series CausalImpact for intervention effects",
-      "first_ts": "2026-05-31T17:43:05+11:00",
-      "first_sha": "c03b4d6",
-      "first_subject": "docs(benchmark): explication Lead Time for Changes sous le panneau DORA",
-      "similarity": 0.47005385160446167,
-      "matches_above_floor": 0,
-      "flag": "below-floor",
-      "cluster_id": 0
+      "first_ts": "2026-06-14T22:04:08+11:00",
+      "first_sha": "fb3bf28",
+      "first_subject": "feat(report): Causal impact analysis via CausalImpact (Google BSTS)",
+      "similarity": 0.6565816402435303,
+      "matches_above_floor": 1,
+      "flag": "ok",
+      "cluster_id": 1
     },
     {
       "concept": "GraphSAGE GNN",
       "description": "GraphSAGE graph neural network predicting commit clusters",
-      "first_ts": "2026-05-31T18:24:15+11:00",
-      "first_sha": "3ad68f5",
-      "first_subject": "feat(benchmark): cluster-split panels — 6 small multiples galactiques",
-      "similarity": 0.5058363080024719,
-      "matches_above_floor": 0,
-      "flag": "below-floor",
-      "cluster_id": 0
+      "first_ts": "2026-06-14T15:28:57+11:00",
+      "first_sha": "5c097f6",
+      "first_subject": "feat(report): nouveau chart \"Cluster drift — project maturity signal\"",
+      "similarity": 0.5816143155097961,
+      "matches_above_floor": 3,
+      "flag": "ok",
+      "cluster_id": 1
     },
     {
       "concept": "Cluster drift",
       "description": "Cluster drift maturity signal across release timeline",
-      "first_ts": "2026-05-30T14:52:13+11:00",
-      "first_sha": "534854c",
-      "first_subject": "feat(benchmark): pipeline flow chart, improvement cycle with score bars, release discipline",
-      "similarity": 0.4896814227104187,
-      "matches_above_floor": 0,
-      "flag": "below-floor",
-      "cluster_id": 2
+      "first_ts": "2026-06-14T15:28:57+11:00",
+      "first_sha": "5c097f6",
+      "first_subject": "feat(report): nouveau chart \"Cluster drift — project maturity signal\"",
+      "similarity": 0.7102153301239014,
+      "matches_above_floor": 1,
+      "flag": "ok",
+      "cluster_id": 1
     },
     {
       "concept": "Markov chain",
       "description": "Markov transition matrix between commit semantic clusters",
-      "first_ts": "2026-05-31T18:24:15+11:00",
-      "first_sha": "3ad68f5",
-      "first_subject": "feat(benchmark): cluster-split panels — 6 small multiples galactiques",
-      "similarity": 0.4768948554992676,
-      "matches_above_floor": 0,
-      "flag": "below-floor",
-      "cluster_id": 0
+      "first_ts": "2026-06-14T18:48:42+11:00",
+      "first_sha": "013c9d4",
+      "first_subject": "feat(report): Markov transition matrix — empirical workflow fingerprint",
+      "similarity": 0.6067181825637817,
+      "matches_above_floor": 1,
+      "flag": "ok",
+      "cluster_id": 1
     },
     {
       "concept": "Burnout detector",
       "description": "Burnout window detector friction signal from token telemetry",
-      "first_ts": "2026-05-30T15:25:49+11:00",
-      "first_sha": "2e5e47e",
-      "first_subject": "feat(benchmark): FK schema, tools section, glossary, score trend chart + lines panel",
-      "similarity": 0.4761822819709778,
-      "matches_above_floor": 0,
-      "flag": "below-floor",
-      "cluster_id": 2
+      "first_ts": "2026-06-14T19:01:32+11:00",
+      "first_sha": "e4cb02b",
+      "first_subject": "feat(report): Markov graph + Workflow entropy + Burnout detector + fix BUILD/RUN NA",
+      "similarity": 0.5593708753585815,
+      "matches_above_floor": 1,
+      "flag": "ok",
+      "cluster_id": 1
     },
     {
       "concept": "Causal DAG",
       "description": "Causal DAG discovery via PC algorithm conditional independence",
-      "first_ts": "2026-05-31T15:34:56+11:00",
-      "first_sha": "d4b70eb",
-      "first_subject": "chore(ci): activer Dependabot pour npm et pip",
-      "similarity": 0.47364541888237,
-      "matches_above_floor": 0,
-      "flag": "below-floor",
-      "cluster_id": 2
+      "first_ts": "2026-06-14T22:04:08+11:00",
+      "first_sha": "fb3bf28",
+      "first_subject": "feat(report): Causal impact analysis via CausalImpact (Google BSTS)",
+      "similarity": 0.5598927140235901,
+      "matches_above_floor": 2,
+      "flag": "ok",
+      "cluster_id": 1
     },
     {
       "concept": "Origin Trial",
@@ -164,7 +164,7 @@
       "first_ts": "2026-06-14T10:00:10+11:00",
       "first_sha": "255c650",
       "first_subject": "feat(report): refonte du diagramme Universal Accessibility Pipeline",
-      "similarity": 0.5825687646865845,
+      "similarity": 0.5825687050819397,
       "matches_above_floor": 2,
       "flag": "ok",
       "cluster_id": 1
