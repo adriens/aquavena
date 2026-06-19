@@ -1663,6 +1663,16 @@ the annual *Accelerate State of DevOps Report*. The programme is the
 empirical foundation of modern DevOps benchmarking and the source of the
 four metrics used in this section.
 
+**Official sources.**
+
+- [dora.dev](https://dora.dev/) — the programme's home: research, the four
+  keys, and the DORA Quick Check.
+- [*Accelerate State of DevOps Report 2024*](https://dora.dev/research/2024/dora-report/2024-dora-accelerate-state-of-devops-report.pdf)
+  (PDF) — the most recent full report.
+- [*The ROI of AI-assisted Software Development*, 2026](https://services.google.com/fh/files/misc/dora-roi-of-ai-assisted-software-development-2026.pdf)
+  (PDF, Google/DORA) — directly relevant to this report's AI-delivery and
+  token-economics analysis.
+
 \textbf{Note on the homonymy.} The acronym DORA is also widely used in
 another context: the \textbf{Digital Operational Resilience Act}, a European
 Union regulatory framework (Regulation EU 2022/2554) designed to fortify the
