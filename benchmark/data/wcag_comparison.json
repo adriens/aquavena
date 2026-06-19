@@ -1,0 +1,38 @@
+{
+  "url": "https://www.aquavena.nc/formules/aqua-méditerranéen",
+  "audit_date_pa11y": {},
+  "standard": "WCAG 2.1 AA",
+  "tools": [
+    "pa11y (HTML_CodeSniffer, WCAG2AA)",
+    "Lighthouse accessibility"
+  ],
+  "summary": {
+    "nc_lighthouse": 91,
+    "ours_lighthouse": 100,
+    "nc_pa11y_errors": 31,
+    "ours_pa11y_errors": 0,
+    "nc_contrast_nodes_lighthouse": 26
+  },
+  "criteria": [
+    {
+      "sc": "1.4.3",
+      "name": "Contrast (Minimum)",
+      "level": "AA",
+      "low_vision_impact": "Critical",
+      "consequence": "Text and buttons fall below the 4.5:1 ratio — washed out and unreadable for ageing eyes and low contrast sensitivity.",
+      "nc_errors": 31,
+      "ours_errors": 0,
+      "evidence": "31 pa11y errors on aquavena.nc; 26 failing nodes confirmed by Lighthouse."
+    },
+    {
+      "sc": "1.4.4",
+      "name": "Resize Text",
+      "level": "AA",
+      "low_vision_impact": "Critical",
+      "consequence": "Pinch-zoom is disabled, so the page cannot be enlarged on a phone — the single most common low-vision coping strategy.",
+      "nc_errors": 1,
+      "ours_errors": 0,
+      "evidence": "meta viewport sets user-scalable=no and maximum-scale=1.0 on aquavena.nc — pinch-zoom disabled."
+    }
+  ]
+}

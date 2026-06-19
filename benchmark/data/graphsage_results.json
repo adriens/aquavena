@@ -1,6 +1,6 @@
 {
-  "n_nodes": 146,
-  "n_edges": 967,
+  "n_nodes": 179,
+  "n_edges": 1443,
   "n_features": 13,
   "feature_names": [
     "pagerank",
@@ -20,53 +20,53 @@
   "n_classes": 6,
   "model": "GraphSAGE-2layer-h32",
   "epochs": 200,
-  "train_acc": 0.9195402264595032,
-  "val_acc": 0.7586206793785095,
-  "test_acc": 0.7333333333333333,
-  "test_balanced_acc": 0.6736111111111112,
-  "test_macro_f1": 0.6690416065416066,
-  "majority_baseline": 0.06666667014360428,
-  "lift_over_baseline": 0.666666663189729,
+  "train_acc": 0.9439252614974976,
+  "val_acc": 0.800000011920929,
+  "test_acc": 0.8648648648648649,
+  "test_balanced_acc": 0.836038961038961,
+  "test_macro_f1": 0.820909645909646,
+  "majority_baseline": 0.21621622145175934,
+  "lift_over_baseline": 0.6486486434131056,
   "best_confused_pair": {
-    "true": "WCAG fixes",
-    "predicted": "Project identity & links",
-    "count": 2
+    "true": "Site features & About",
+    "predicted": "WCAG fixes",
+    "count": 1
   },
   "per_class_recall": [
     {
       "cluster": "Site features & About",
-      "recall": 0.5,
-      "support": 2
-    },
-    {
-      "cluster": "Style & dark mode",
-      "recall": 0.8333333333333334,
-      "support": 12
-    },
-    {
-      "cluster": "Benchmark & ML report",
-      "recall": 0.875,
+      "recall": 0.75,
       "support": 8
     },
     {
+      "cluster": "Style & dark mode",
+      "recall": 0.9090909090909091,
+      "support": 11
+    },
+    {
+      "cluster": "Benchmark & ML report",
+      "recall": 0.8571428571428571,
+      "support": 7
+    },
+    {
       "cluster": "Project identity & links",
-      "recall": 0.5,
-      "support": 4
+      "recall": 1.0,
+      "support": 5
     },
     {
       "cluster": "WCAG fixes",
-      "recall": 0.3333333333333333,
-      "support": 3
+      "recall": 1.0,
+      "support": 4
     },
     {
       "cluster": "Links & merges",
-      "recall": 1.0,
-      "support": 1
+      "recall": 0.5,
+      "support": 2
     }
   ],
   "split_sizes": {
-    "train": 87,
-    "val": 29,
-    "test": 30
+    "train": 107,
+    "val": 35,
+    "test": 37
   }
 }

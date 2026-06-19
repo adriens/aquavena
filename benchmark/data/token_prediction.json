@@ -1,0 +1,86 @@
+{
+  "n_commits": 172,
+  "n_train": 120,
+  "n_test": 52,
+  "test_size": 0.3,
+  "random_state": 42,
+  "target": "log1p(total tokens per commit)",
+  "features": [
+    "PageRank",
+    "Betweenness",
+    "Degree",
+    "is_feat",
+    "is_fix",
+    "has_scope",
+    "Hour",
+    "Weekend"
+  ],
+  "leakage_note": "No token-derived or message-text feature is used as input.",
+  "median_tokens": 1919079.3414634147,
+  "mean_tokens": 6402089.523255814,
+  "results": [
+    {
+      "model": "Mean baseline (Dummy)",
+      "r2_log": -0.009120313166151028,
+      "mae_tokens": 5564484.47413,
+      "mae_tokens_millions": 5.56448447413
+    },
+    {
+      "model": "Linear regression",
+      "r2_log": 0.6558468181434234,
+      "mae_tokens": 3728390.206146827,
+      "mae_tokens_millions": 3.728390206146827
+    },
+    {
+      "model": "Gradient boosting",
+      "r2_log": 0.7657876986886767,
+      "mae_tokens": 2355655.568251281,
+      "mae_tokens_millions": 2.355655568251281
+    }
+  ],
+  "best_model": "Gradient boosting",
+  "best_r2_log": 0.7657876986886767,
+  "best_mae_tokens": 2355655.568251281,
+  "permutation_importance": [
+    {
+      "feature": "Weekend",
+      "importance": 0.6031938017830215,
+      "std": 0.127856739232334
+    },
+    {
+      "feature": "Hour",
+      "importance": 0.5866016730221401,
+      "std": 0.09741847660239022
+    },
+    {
+      "feature": "Degree",
+      "importance": 0.44118974515806636,
+      "std": 0.09758092665665687
+    },
+    {
+      "feature": "Betweenness",
+      "importance": 0.2035129009637343,
+      "std": 0.0645803710344592
+    },
+    {
+      "feature": "PageRank",
+      "importance": 0.1198836615726174,
+      "std": 0.046462680609576805
+    },
+    {
+      "feature": "has_scope",
+      "importance": 0.013249310846959064,
+      "std": 0.013571819996965082
+    },
+    {
+      "feature": "is_feat",
+      "importance": 0.00913270365318062,
+      "std": 0.00410271588384231
+    },
+    {
+      "feature": "is_fix",
+      "importance": 0.005524607842455469,
+      "std": 0.003459887734508657
+    }
+  ]
+}

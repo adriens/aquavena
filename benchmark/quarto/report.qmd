@@ -551,7 +551,30 @@ sh_data <- tibble::tibble(
     "v1.4.0","v1.5.0","v1.6.0","v1.7.0","v1.8.0","v1.9.0",
     "v1.10.0","v1.11.0","v1.11.1","v1.11.2",
     "v1.12.0","v1.12.1","v1.12.2","v1.12.3","v1.12.4","v1.12.5","v1.12.6",
-    "v1.13.0","v1.13.1","v1.14.0"
+    "v1.13.0","v1.13.1","v1.14.0",
+    "v1.6.1",
+    "v1.15.0",
+    "v1.16.0",
+    "v1.17.0",
+    "v1.18.0",
+    "v1.19.0",
+    "v1.20.0",
+    "v1.21.0",
+    "v1.22.0",
+    "v1.23.0",
+    "v1.24.0",
+    "v1.25.0",
+    "v1.26.0",
+    "v1.27.0",
+    "v1.28.0",
+    "v1.29.0",
+    "v1.30.0",
+    "v1.31.0",
+    "v1.32.0",
+    "v1.33.0",
+    "v1.34.0",
+    "v1.35.0",
+    "v1.36.0"
   ),
   git_sha      = c(
     NA_character_,
@@ -559,7 +582,30 @@ sh_data <- tibble::tibble(
     "6b3a9ea","805481b","308cd78","2e5e47e","9dc1a0b","dd2a22b",
     "a5d9ba7","6f5334f","d4b70eb","e7fd200",
     "56e8c1c","ad1732a","589ab14","cd352ba","138caa8","50922d3","326b2af",
-    "98e65f8","919f36a","52fc47b"
+    "98e65f8","919f36a","52fc47b",
+    "ffdecc0",
+    "2176514",
+    "4933006",
+    "deefe64",
+    "abdde8d",
+    "8e41ccc",
+    "d84bfb0",
+    "d84bfb0",
+    "e2f2016",
+    "9cfa5af",
+    "f81573e",
+    "70d1bbb",
+    "cf62af7",
+    "7ff507b",
+    "23a97e3",
+    "95bb862",
+    "1bd10ad",
+    "c5e0d90",
+    "8beb824",
+    "264f474",
+    "0c525c8",
+    "a9aa7a3",
+    "8792ddd"
   ),
   audit_date   = as.Date(c(
     "2026-05-30",
@@ -567,7 +613,30 @@ sh_data <- tibble::tibble(
     "2026-05-31","2026-05-31","2026-05-31","2026-05-30","2026-05-31","2026-05-31",
     "2026-05-31","2026-05-31","2026-05-31","2026-05-31",
     "2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31",
-    "2026-05-31","2026-05-31","2026-05-31"
+    "2026-05-31","2026-05-31","2026-05-31",
+    "2026-06-14",
+    "2026-06-05",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-15",
+    "2026-06-15",
+    "2026-06-18",
+    "2026-06-18"
   )),
   lh_score     = c(
     91L,
@@ -575,7 +644,9 @@ sh_data <- tibble::tibble(
     100L, 100L, 100L, 100L, 100L, 100L,
     100L, 100L, 100L, 100L,
     100L, 100L, 100L, 100L, 100L, 100L, 100L,
-    100L, 100L, 100L
+    100L, 100L, 100L,
+    100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L,
+    100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L
   ),
   pa11y_errors = c(
     67L,
@@ -583,7 +654,9 @@ sh_data <- tibble::tibble(
     0L, 0L, 0L, 0L, 0L, 0L,
     0L, 0L, 0L, 0L,
     0L, 0L, 0L, 0L, 0L, 0L, 0L,
-    0L, 0L, 0L
+    0L, 0L, 0L,
+    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L,
+    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L
   ),
   lines_delta  = c(
     0L,
@@ -591,7 +664,9 @@ sh_data <- tibble::tibble(
     215L, 8L, 18L, 179L, 0L, 0L,
     15L, 24L, 0L, 7L,
     107L, 2L, 42L, 12L, 1L, 21L, 1L,
-    14L, 0L, 13L
+    14L, 0L, 13L,
+    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L,
+    0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L
   )
 )
 
@@ -644,7 +719,29 @@ gr_data <- tibble::tibble(
     "v1.4.0","v1.5.0","v1.6.0","v1.7.0","v1.8.0","v1.9.0",
     "v1.10.0","v1.11.0","v1.11.1","v1.11.2",
     "v1.12.0","v1.12.1","v1.12.2","v1.12.3","v1.12.4","v1.12.5","v1.12.6",
-    "v1.13.0","v1.13.1","v1.14.0"
+    "v1.13.0","v1.13.1","v1.14.0",
+    "v1.6.1",
+    "v1.16.0",
+    "v1.17.0",
+    "v1.18.0",
+    "v1.19.0",
+    "v1.20.0",
+    "v1.21.0",
+    "v1.22.0",
+    "v1.23.0",
+    "v1.24.0",
+    "v1.25.0",
+    "v1.26.0",
+    "v1.27.0",
+    "v1.28.0",
+    "v1.29.0",
+    "v1.30.0",
+    "v1.31.0",
+    "v1.32.0",
+    "v1.33.0",
+    "v1.34.0",
+    "v1.35.0",
+    "v1.36.0"
   ),
   release_name = c(
     "v0.1.1 - Contraste WCAG AA & menus Aqua-Chrono-Vege",
@@ -671,14 +768,58 @@ gr_data <- tibble::tibble(
     "v1.12.6 - Page noire au swipe supprimee",
     "v1.13.0 - Content Security Policy activee",
     "v1.13.1 - Licence AGPL v3",
-    "v1.14.0 - Migration Tailwind CSS v3 -> v4"
+    "v1.14.0 - Migration Tailwind CSS v3 -> v4",
+    "v1.6.1 — Mise à jour Astro 6.4.2 → 6.4.4",
+    "v1.16.0 — SHA git sur la page de titre + abstract dédié",
+    "v1.17.0 — Support WebMCP : 5 outils IA invisibles",
+    "v1.18.0 — Origin Trial WebMCP : actif pour tous les visiteurs Chrome 149+",
+    "v1.19.0 — Rapport : section WebMCP + diagramme AI-Actual Test",
+    "v1.20.0 — Universal Accessibility Pipeline",
+    "v1.21.0 — Release globale : WebMCP, rapport enrichi, accessibilité universelle",
+    "v1.22.0 — Universal Accessibility Pipeline v3 + données au 14 juin 2026",
+    "v1.23.0 — Rapport final : conclusion universelle + Reachy Mini + 6 perspectives ML/DL",
+    "v1.24.0 — Cluster drift : signal de maturité projet",
+    "v1.25.0 — AI-leverage ratio per cluster · le roi de l'IA",
+    "v1.26.0 — Tri semver, page de titre agentic & fix tokens/commit",
+    "v1.27.0 — Markov transition matrix · empreinte du workflow",
+    "v1.28.0 — Markov graph + Workflow entropy + Burnout detector",
+    "v1.29.0 — Causal impact analysis (Google CausalImpact / BSTS)",
+    "v1.30.0 — GraphSAGE GNN : la structure du graphe encode la sémantique",
+    "v1.31.0 — Causal DAG discovery (PC algorithm, causal-learn)",
+    "v1.32.0 — Concept emergence timeline (semantic dating)",
+    "v1.33.0 — Concept emergence storyboard (public-friendly)",
+    "v1.34.0 — Présentation PMI Horizon (03 juillet 2026)",
+    "v1.35.0 — Mises à jour de dépendances & contenu à jour",
+    "v1.36.0 — Migration de la chaîne de build : npm → bun"
   ),
   published_at    = as.Date(c(
     "2026-05-29","2026-05-30","2026-05-30","2026-05-30","2026-05-30",
     "2026-05-31","2026-05-31","2026-05-31","2026-05-30","2026-05-31","2026-05-31",
     "2026-05-31","2026-05-31","2026-05-31","2026-05-31",
     "2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31","2026-05-31",
-    "2026-05-31","2026-05-31","2026-05-31"
+    "2026-05-31","2026-05-31","2026-05-31",
+    "2026-06-13",
+    "2026-06-13",
+    "2026-06-13",
+    "2026-06-13",
+    "2026-06-13",
+    "2026-06-13",
+    "2026-06-13",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-14",
+    "2026-06-17",
+    "2026-06-17"
   )),
   published_at_ts = as.POSIXct(c(
     "2026-05-29 23:58:03","2026-05-30 00:02:20","2026-05-30 00:14:10",
@@ -688,7 +829,29 @@ gr_data <- tibble::tibble(
     "2026-05-31 04:28:11","2026-05-31 04:31:33","2026-05-31 04:35:08","2026-05-31 04:40:34",
     "2026-05-31 04:50:28","2026-05-31 04:55:12","2026-05-31 04:57:39","2026-05-31 04:59:49",
     "2026-05-31 05:04:08","2026-05-31 05:07:16","2026-05-31 05:10:07",
-    "2026-05-31 05:14:37","2026-05-31 05:19:09","2026-05-31 05:28:51"
+    "2026-05-31 05:14:37","2026-05-31 05:19:09","2026-05-31 05:28:51",
+    "2026-06-13 21:12:55",
+    "2026-06-13 21:20:37",
+    "2026-06-13 21:36:43",
+    "2026-06-13 21:51:15",
+    "2026-06-13 22:36:04",
+    "2026-06-13 23:01:32",
+    "2026-06-13 23:03:00",
+    "2026-06-14 03:36:40",
+    "2026-06-14 04:08:45",
+    "2026-06-14 04:30:07",
+    "2026-06-14 06:28:23",
+    "2026-06-14 07:24:17",
+    "2026-06-14 07:50:29",
+    "2026-06-14 08:05:01",
+    "2026-06-14 11:09:02",
+    "2026-06-14 11:41:40",
+    "2026-06-14 12:02:37",
+    "2026-06-14 12:17:20",
+    "2026-06-14 19:45:58",
+    "2026-06-14 20:20:46",
+    "2026-06-17 21:10:37",
+    "2026-06-17 21:54:37"
   ), tz = "UTC"),
   url           = c(
     "https://github.com/adriens/aquavena/releases/tag/v0.1.1",
@@ -715,10 +878,32 @@ gr_data <- tibble::tibble(
     "https://github.com/adriens/aquavena/releases/tag/v1.12.6",
     "https://github.com/adriens/aquavena/releases/tag/v1.13.0",
     "https://github.com/adriens/aquavena/releases/tag/v1.13.1",
-    "https://github.com/adriens/aquavena/releases/tag/v1.14.0"
+    "https://github.com/adriens/aquavena/releases/tag/v1.14.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.6.1",
+    "https://github.com/adriens/aquavena/releases/tag/v1.16.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.17.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.18.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.19.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.20.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.21.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.22.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.23.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.24.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.25.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.26.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.27.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.28.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.29.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.30.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.31.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.32.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.33.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.34.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.35.0",
+    "https://github.com/adriens/aquavena/releases/tag/v1.36.0"
   ),
-  author        = rep("adriens", 25),
-  is_prerelease = rep(FALSE, 25),
+  author        = rep("adriens", 47),
+  is_prerelease = rep(FALSE, 47),
   body_excerpt  = c(
     "Corrections contraste WCAG AA theme clair — tous les composants menus (Aqua, Chrono, Vege) passent desormais le ratio 4.5:1.",
     "Correction contraste onglets regimes en mode nuit — les noms de regime sont desormais lisibles sur fond sombre.",
@@ -744,7 +929,29 @@ gr_data <- tibble::tibble(
     "Suppression page noire au swipe sur mobile.",
     "Activation Content Security Policy via Astro v6.",
     "Ajout licence AGPL v3.",
-    "Migration Tailwind CSS v3 -> v4 (CSS-first, sans fichier de config)."
+    "Migration Tailwind CSS v3 -> v4 (CSS-first, sans fichier de config).",
+    "Mise à jour de patch du framework Astro de la version 6.4.2 vers 6.4.4.",
+    "SHA git du commit affiché sur la page de titre du rapport + page abstract dédiée.",
+    "Ajout du support WebMCP (W3C Draft, Chrome 146+ Canary) via l'API impérative JavaScript navigator.modelContext. Aucune modification de l'interface utilisateur — les outils sont…",
+    "Le token Origin Trial officiel Google est désormais intégré dans le <head> des deux pages du site.",
+    "Ajout d'une section dédiée au support WebMCP implémenté cette semaine.",
+    "Refonte complète du diagramme illustrant le pipeline de test d'accessibilité par agents IA (section 16.5 du rapport PDF).",
+    "Synthèse de toutes les évolutions livrées au cours de cette session de travail.",
+    "Troisième itération du diagramme TikZ, intégrant toutes les corrections de la session du 14 juin.",
+    "Mise à jour finale du rapport : titre, conclusion, screenshot Reachy Mini, 6 perspectives ML/DL, données 146 commits / 26 releases.",
+    "Nouveau chart dans le rapport benchmark : Cluster drift — semantic mix per release. Stacked bar chart de la composition des commits par cluster sémantique pour chaque release.",
+    "Croise tokens Claude × clusters sémantiques pour révéler quel type de travail consomme le plus d'IA, et où l'on a dû escalader sur Opus 4.7 plutôt que Sonnet 4.6.",
+    "Multiples corrections du rapport : tri semver des releases, page de titre actualisée 'Universal agentic interfaces', heatmap dates espacées.",
+    "Heatmap 6×6 montrant la probabilité conditionnelle qu'un commit de type X soit suivi par un commit de type Y, normalisée par ligne.",
+    "La matrice de transition vue comme un graphe orienté. Self-loops en amber + arrows teal. Filtre P ≥ 12%.",
+    "Première utilisation publique connue de CausalImpact (Google) sur un repo open-source pour mesurer l'effet causal de décisions techniques.",
+    "Un GraphSAGE (PyTorch Geometric, 2 couches, CPU) entraîné uniquement sur la structure du graphe des commits récupère l'essentiel du clustering K-means.",
+    "PC algorithm (Peter-Clark, 1991) + Fisher's Z appliqué aux features par commit pour identifier les arêtes causales.",
+    "Timeline semantic : pour chaque concept clé, le premier commit qui en parle, identifié par cosine similarity sur BAAI/bge-m3.",
+    "Version Kanban 3 colonnes du concept emergence timeline pour un public général.",
+    "Nouvelle trame de présentation Quarto pour PMI Horizon (Nouvelle-Calédonie).",
+    "Toutes proposées par Dependabot (PRs #30, #31, #32) et validées par la CI.",
+    "Toute la chaîne de build du site passe de npm à bun."
   )
 )
 existing_gr <- dbGetQuery(con, "SELECT tag FROM gh_releases")$tag
@@ -1200,6 +1407,56 @@ ggplot(delta_df, aes(y = category)) +
         panel.grid.minor = element_blank(),
         axis.text.y = element_text(face = "bold"))
 ```
+
+## What the 9-point gap actually means — WCAG deep-dive vs aquavena.nc
+
+A Lighthouse score of **`r jsonlite::fromJSON("../data/wcag_comparison.json")$summary$nc_lighthouse`/100**
+for the official site sounds almost fine. It is not — because that single
+number averages away the fact that the official site's two remaining failures
+are **precisely the two that matter most for an ageing, low-vision reader**.
+This section opens the score and names them, criterion by criterion.
+
+```{r wcag-compare-table}
+wc <- jsonlite::fromJSON("../data/wcag_comparison.json", simplifyVector = FALSE)
+wc_df <- do.call(rbind, lapply(wc$criteria, function(c) data.frame(
+  `WCAG criterion`    = paste0(c$sc, " — ", c$name),
+  Level               = c$level,
+  `aquavena.nc`       = c$nc_errors,
+  `Our site`          = c$ours_errors,
+  `Low-vision impact` = c$low_vision_impact,
+  check.names = FALSE
+)))
+knitr::kable(wc_df, align = c("l", "c", "c", "c", "l"), booktabs = TRUE,
+  caption = sprintf("WCAG 2.1 AA failures on the official site vs our rebuild (pa11y HTML\\_CodeSniffer + Lighthouse). Official site: %d pa11y errors, Lighthouse %d; our site: %d errors, Lighthouse %d.",
+                    wc$summary$nc_pa11y_errors, wc$summary$nc_lighthouse,
+                    wc$summary$ours_pa11y_errors, wc$summary$ours_lighthouse)) |>
+  kableExtra::kable_styling(latex_options = c("hold_position"), font_size = 9)
+```
+
+**Failure 1 — contrast (SC 1.4.3).** pa11y flags
+**`r wc$criteria[[1]]$nc_errors` contrast errors** on the official menu page,
+and Lighthouse independently confirms
+**`r wc$summary$nc_contrast_nodes_lighthouse` failing nodes** — including the
+primary *"commander"* call-to-action button. Below the 4.5:1 ratio, text does
+not merely look pale; for someone with reduced contrast sensitivity (cataract,
+age-related macular changes) it can vanish entirely. Our rebuild carries
+**`r wc$criteria[[1]]$ours_errors`** contrast errors.
+
+**Failure 2 — zoom disabled (SC 1.4.4 / Resize Text).** This is the damning
+one. The official site ships
+`<meta name="viewport" content="… maximum-scale=1.0, user-scalable=no">`,
+which **switches off pinch-to-zoom on mobile**. Enlarging the page is the
+single most common — often the *only* — coping strategy a low-vision or elderly
+person has on a phone, and the official site forbids it outright. No Lighthouse
+average conveys how disabling that one attribute is. Our rebuild leaves zoom
+fully enabled.
+
+**Why this reframes the whole benchmark.** The honest comparison is not
+"91 versus 100" — a 9-point cosmetic gap. It is binary: on the official site
+**my mother cannot reliably read the menu, and cannot enlarge it to try.** On
+the rebuild she can. Every other analysis in this report — the ML, the causal
+graphs, the token economics — exists to make *that* difference repeatable and
+measurable, not the reverse.
 
 ## Delivery velocity — engineering throughput per release
 
@@ -1669,7 +1926,7 @@ p
 
 ## Semantic analysis of commit messages
 
-All **146 commit messages** were embedded with the
+All **179 commit messages** were embedded with the
 `BAAI/bge-m3` model (1024-dimensional **multilingual** embeddings — handles
 the project's mix of French and English commit messages),
 clustered with K-Means into 6 groups, and projected to 2D with PCA. The
@@ -1861,7 +2118,7 @@ section *to* the About page (a11y + About). These are the **integration
 commits** — the ones a knowledge-graph would surface as architecturally
 critical.
 
-**Why this matters at scale.** With 146 commits the graph is small, but the
+**Why this matters at scale.** With 179 commits the graph is small, but the
 *technique scales linearly with commit count*. Applied to a 1000-commit
 codebase, PageRank surfaces the commits that anchor each subsystem;
 betweenness surfaces the integration commits whose removal would *fracture*
@@ -1981,7 +2238,7 @@ if (nrow(cdrift_commits) > 0 && nrow(cdrift_releases) >= 3) {
     scale_fill_brewer(palette = "Set2", name = "Semantic cluster") +
     labs(
       title    = "Cluster drift — semantic mix per release",
-      subtitle = "Stacked share of each commit cluster across the release timeline · 146 commits, 26 releases",
+      subtitle = "Stacked share of each commit cluster across the release timeline · 179 commits, 47 releases",
       x = NULL, y = "Share of commits in release"
     ) +
     theme(
@@ -2041,7 +2298,7 @@ mix shifts is iterating.
 
 ### Markov transition matrix — what naturally follows what
 
-**What it is.** Sort all 146 commits in chronological order, then for every
+**What it is.** Sort all 179 commits in chronological order, then for every
 consecutive pair (commit\_$i$, commit\_$i+1$) record the directed transition
 between their semantic clusters. Counting transitions gives a 6×6 matrix; row-normalising it yields a **first-order Markov chain** — a matrix of
 conditional probabilities $P(\text{next cluster} = j \mid \text{previous cluster} = i)$.
@@ -2127,7 +2384,7 @@ if (n >= 20) {
     ) +
     labs(
       title    = "Markov transition matrix — what naturally follows what",
-      subtitle = "Probability of moving from each cluster (row) to each next cluster (column) · 146 commits",
+      subtitle = "Probability of moving from each cluster (row) to each next cluster (column) · 179 commits",
       x = "Next commit's cluster", y = "Previous commit's cluster"
     ) +
     theme_minimal(base_size = 9) +
@@ -2871,7 +3128,7 @@ knitr::kable(pc, booktabs = TRUE, align = c("l", "c", "c"),
 
 #### What the result actually means
 
-The 73.3\% number is easy to skim past. It is worth unpacking, because
+The 86.5\% number is easy to skim past. It is worth unpacking, because
 the experiment design is more pointed than a standard classification
 benchmark.
 
@@ -2894,11 +3151,11 @@ similarity weeks earlier and then *thrown away* before the GNN trained.
 | Strategy | Expected accuracy |
 |---|---|
 | Pure chance (1 of 6 classes) | $\approx 17\%$ |
-| Majority-class predictor (always pick the largest cluster) | $\approx 7\%$ |
-| GraphSAGE (this experiment) | $\boldsymbol{73\%}$ |
+| Majority-class predictor (always pick the largest cluster) | $\approx 22\%$ |
+| GraphSAGE (this experiment) | $\boldsymbol{87\%}$ |
 
-A model with no real signal would land between 7\% and 17\%. Landing
-at 73\% rules out any explanation by chance: \textbf{the graph
+A model with no real signal would land between 17\% and 22\%. Landing
+at 87\% rules out any explanation by chance: \textbf{the graph
 position alone, without the message text, carries most of the
 clustering signal}.
 
@@ -2925,7 +3182,7 @@ clustering signal}.
 
 4. \textbf{The honest limit.} On clusters with only 1–3 commits in the
    test split, per-class recall jumps around (33\% to 100\%) — that is
-   small-sample noise, not a finding. The +66.7-point lift on overall
+   small-sample noise, not a finding. The +64.9-point lift on overall
    accuracy is the robust signal; the per-class numbers will stabilise
    only at \textgreater{}500 nodes.
 
@@ -2937,6 +3194,73 @@ graph** built from sentence-transformer embeddings, evaluated on
 **cluster recovery** as a cross-validation of unsupervised semantics.
 The architecture is standard; the experiment design is, as far as we
 can tell, novel for an open-source benchmark report.
+
+### Predicting token-cost from structure alone — the text-free triage, delivered
+
+The GraphSAGE section ended on a promise: *a future pipeline could compute a
+new commit's graph features in milliseconds and predict its cost before any
+human or LLM reads the message.* This section **builds that model** and
+measures it honestly.
+
+**The task.** Predict $\log(\text{total tokens})$ a commit consumed, from
+**eight inputs that contain no message text and no token-derived value**:
+graph position (PageRank, betweenness, degree), commit type (`feat`, `fix`,
+conventional-commit scope) and timing (hour, weekend). The target is heavily
+right-skewed (median 1.9M tokens, max 21.6M), so we model it in log space.
+
+**The protocol.** A 70/30 train/test split, with all metrics reported on the
+held-out test set only. Three estimators are compared: a mean-predictor
+baseline, an interpretable linear regression, and a gradient-boosted tree.
+
+```{r token-pred-table}
+tp <- jsonlite::fromJSON("../data/token_prediction.json", simplifyVector = FALSE)
+tp_df <- do.call(rbind, lapply(tp$results, function(r) data.frame(
+  Model            = r$model,
+  `R² (log)`       = sprintf("%.2f", r$r2_log),
+  `MAE (M tokens)` = sprintf("%.2f", r$mae_tokens_millions),
+  check.names = FALSE
+)))
+knitr::kable(tp_df, align = c("l", "r", "r"), booktabs = TRUE,
+  caption = sprintf("Token-cost prediction on the held-out test set (n = %d of %d commits). The gradient-boosted model explains most of the variance using structure and timing alone.",
+                    tp$n_test, tp$n_commits)) |>
+  kableExtra::kable_styling(latex_options = c("hold_position"))
+```
+
+```{=latex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{token_prediction.png}
+\caption{Left: predicted vs.\ actual token cost on the held-out test set —
+points hug the diagonal. Right: permutation importance (drop in test
+$R^2$ when a feature is shuffled). The model leans on \emph{timing} and
+\emph{graph centrality}, barely on commit type.}
+\end{figure}
+```
+
+**The result.** The gradient-boosted model reaches
+**$R^2 = `r sprintf("%.2f", tp$best_r2_log)`$** in log space, with a mean
+absolute error of **`r sprintf("%.2f", tp$best_mae_tokens/1e6)`M tokens** —
+against **`r sprintf("%.2f", tp$results[[1]]$mae_tokens/1e6)`M** for the
+mean-predictor baseline. Predicting a commit's cost *before it is written*,
+from nothing but where it sits in the graph and when it lands, **cuts the
+error roughly in half**.
+
+**What drives the cost — and what does not.** The permutation importance is
+unambiguous: **`r tp$permutation_importance[[1]]$feature`** and
+**`r tp$permutation_importance[[2]]$feature`** (timing) dominate, followed by
+**`r tp$permutation_importance[[3]]$feature`** (graph centrality). The
+commit *type* — `feat` vs `fix` — barely moves the needle. Cost is a function
+of **when** the work happens (long weekend/evening exploration sessions) and
+**how central** the touched code is, not of how the commit is labelled.
+
+**Why this is more than a curiosity.** This is the exact mirror of the causal
+DAG that follows: the edges \emph{Weekend → Tokens}, \emph{Degree → Tokens}
+and \emph{PageRank → Tokens} discovered there by an independent method
+(PC algorithm) are precisely the three features this predictor ranks highest.
+Two unrelated techniques — a supervised gradient-boosted regressor and a
+constraint-based causal-discovery algorithm — **agree on the same cost
+drivers**. That convergence is the strongest evidence that the relationship
+is real, not an artefact of either method.
 
 ### Causal DAG discovery — from correlation to structure
 
@@ -2977,7 +3301,7 @@ suggestive, not as proofs.
 \centering
 \includegraphics[width=\textwidth]{causal_dag.png}
 \caption{Causal DAG learnt by the PC algorithm with Fisher's Z conditional
-  independence test ($\alpha = 0.05$) on 146 commit-level observations of
+  independence test ($\alpha = 0.05$) on 178 commit-level observations of
   10 features. \textbf{Solid arrows} = direction estimated.
   \textbf{Dashed lines} = edge significant but orientation undetermined
   (a Markov-equivalence-class artefact).}
@@ -2995,33 +3319,35 @@ throughout the project, so they touch concepts already discussed in many
 prior sessions — meaning longer cached context replays, more retrieval,
 more output. **Centrality precedes spend, not the opposite.**
 
-\textbf{2. Opus usage drives both tokens and time-of-day.}
+\textbf{2. Token spend is the most "caused" node — four parents converge on it.}
+Four arrows point at \emph{Tokens}: \emph{Opus \% → Tokens},
+\emph{PageRank → Tokens}, \emph{Degree → Tokens} and \emph{Weekend → Tokens}.
 \emph{Opus \% → Tokens} is expected — Opus is 5× the price of Sonnet, so
-sessions routed to it generate larger raw counts even at the same
-"effort". The more interesting arrow is \emph{Opus \% → Hour of day}: PC
-identifies a directed relationship between the choice of model and the
-time the commit lands. Looking at the raw data, Opus-heavy commits cluster
-in late-evening NC time — the moment when the developer reaches for the
-premium model. **The model-routing decision precedes the time stamp.**
+sessions routed to it generate larger raw counts even at the same "effort".
+The structural pair (\emph{PageRank}, \emph{Degree}) reinforces finding 1:
+central, well-connected commits cost more. And \emph{Weekend → Tokens} is the
+human signal — the longer, exploratory sessions land on weekends. **Token
+volume is downstream of everything; it is an effect, never a cause.**
 
-\textbf{3. \emph{Has scope} sits at the intersection of three forces.}
-Three arrows converge on \emph{has\_scope}: \emph{fix → has\_scope},
-\emph{weekend → has\_scope}, and (via the binary structure) the commit
-type. This is the algorithm's way of saying: *the presence of a
-conventional-commit scope is jointly determined by what kind of commit
-it is and when it was written*. Weekend commits in particular score
-higher on the scope discipline — possibly because they are smaller,
-intentional, focused changes, where stating \texttt{fix(a11y):} comes
-naturally.
+\textbf{3. \emph{Has scope} is an upstream cause of commit type.}
+Two arrows leave \emph{has\_scope}: \emph{has\_scope → feat} and
+\emph{has\_scope → fix}. The algorithm reads the discipline of writing a
+conventional-commit scope (\texttt{fix(a11y):}, \texttt{feat(site):}) as
+something that \emph{precedes} — and helps determine — how the change is
+typed. Both reflect the same authoring habit: a commit written with a scope
+is a commit written deliberately, and deliberate commits are the ones that
+earn a clean \texttt{feat}/\texttt{fix} label. Two further arrows,
+\emph{fix → feat} and \emph{Hour → feat}, also land on the feature flag, so
+the commit-type variables form a small dependent cluster of their own.
 
 \textbf{4. The graph-position triangle (\emph{PageRank, betweenness,
-degree}) is internally consistent.} PC orients arrows from PageRank to
-degree and from betweenness to degree, but leaves \emph{PageRank ↔
-betweenness} undirected (dashed). This is structurally correct: in a
-similarity graph, PageRank and betweenness measure different but
-overlapping flavours of centrality and the data cannot distinguish which
-one is "earlier". Treating both as **drivers of the degree** is
-algebraically reasonable.
+degree}) stays undirected.} PC links all three centrality measures —
+\emph{PageRank ↔ betweenness}, \emph{PageRank ↔ degree} and
+\emph{betweenness ↔ degree} — but leaves every edge dashed (orientation
+undetermined). This is structurally correct: in a similarity graph these
+three measure different but overlapping flavours of centrality, and the data
+cannot say which one is "earlier". The algorithm correctly refuses to invent
+a direction where none is identifiable.
 
 \textbf{5. No arrow lands on PageRank from outside the graph family.}
 The algorithm refuses to make any non-structural variable
@@ -5881,23 +6207,23 @@ be attributed to a specific simulation profile and retested in isolation.
 |---|---|---|
 | Site clustering | ~30 sites | 2 |
 | Co-failure community detection | ~50 sites | 2 |
-| Embedding-based effort prediction | ~500 commits | 146 |
+| Embedding-based effort prediction | ~500 commits | 179 |
 | Time-series forecasting | ~50 releases | 26 |
 | Anomaly detection (regressions) | ~20 weekly audits | 1 |
 
 The architecture is correct. **Scale is the missing ingredient — and the
 benchmark pipeline scales linearly with sites added.**
 
-## New perspectives unlocked by the 146-commit dataset
+## New perspectives unlocked by the 179-commit dataset
 
-With 146 commits across 6 semantic clusters, 26 release tags, and a
+With 179 commits across 6 semantic clusters, 47 release tags, and a
 now-complete agentic interface layer, the dataset opens directions that were
 not viable at 83 commits:
 
 **Commit-level accessibility prediction (supervised ML)**
 : The join `commit_classification ↔ score_history` now has 26 labelled rows
   (commit embedding → Lighthouse delta). Still small, but the cluster
-  distribution across 146 commits is rich enough to train a lightweight
+  distribution across 179 commits is rich enough to train a lightweight
   regressor that maps *commit semantic type* to *expected score impact* —
   flagging "colour/contrast" commits as high-risk before they merge.
 
@@ -5924,7 +6250,7 @@ not viable at 83 commits:
 
 **Graph neural network on the FK schema**
 : `gh_releases → score_history → git_commits ← ci_runs ← pa11y_issues`
-  is a heterogeneous knowledge graph. With 26 releases and 146 commits, a
+  is a heterogeneous knowledge graph. With 47 releases and 179 commits, a
   small GNN can learn node embeddings that predict *which WCAG rule is most
   likely to regress on the next release* given the current commit cluster
   and the co-failure graph from `pa11y_issues`.

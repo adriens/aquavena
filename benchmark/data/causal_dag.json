@@ -1,5 +1,5 @@
 {
-  "n_samples": 153,
+  "n_samples": 178,
   "n_features": 10,
   "features": [
     {
@@ -69,64 +69,64 @@
       "to_label": "Tokens"
     },
     {
+      "from": "degree",
+      "to": "tokens_M",
+      "from_label": "Degree",
+      "to_label": "Tokens"
+    },
+    {
+      "from": "is_weekend",
+      "to": "tokens_M",
+      "from_label": "Weekend",
+      "to_label": "Tokens"
+    },
+    {
       "from": "opus_pct",
-      "to": "hour",
+      "to": "is_fix",
       "from_label": "Opus %",
-      "to_label": "Hour"
+      "to_label": "fix"
     },
     {
-      "from": "pagerank",
-      "to": "degree",
-      "from_label": "PageRank",
-      "to_label": "Degree"
-    },
-    {
-      "from": "pagerank",
+      "from": "is_fix",
       "to": "is_feat",
-      "from_label": "PageRank",
+      "from_label": "fix",
       "to_label": "feat"
-    },
-    {
-      "from": "betweenness",
-      "to": "degree",
-      "from_label": "Between-\nness",
-      "to_label": "Degree"
     },
     {
       "from": "has_scope",
-      "to": "degree",
-      "from_label": "has\nscope",
-      "to_label": "Degree"
-    },
-    {
-      "from": "is_fix",
       "to": "is_feat",
-      "from_label": "fix",
+      "from_label": "has\nscope",
       "to_label": "feat"
     },
     {
-      "from": "is_fix",
-      "to": "has_scope",
-      "from_label": "fix",
-      "to_label": "has\nscope"
+      "from": "hour",
+      "to": "is_feat",
+      "from_label": "Hour",
+      "to_label": "feat"
     },
     {
-      "from": "is_weekend",
-      "to": "has_scope",
-      "from_label": "Weekend",
-      "to_label": "has\nscope"
-    },
-    {
-      "from": "is_weekend",
-      "to": "hour",
-      "from_label": "Weekend",
-      "to_label": "Hour"
+      "from": "has_scope",
+      "to": "is_fix",
+      "from_label": "has\nscope",
+      "to_label": "fix"
     }
   ],
   "edges_undirected": [
     {
       "a": "pagerank",
       "b": "betweenness"
+    },
+    {
+      "a": "pagerank",
+      "b": "degree"
+    },
+    {
+      "a": "betweenness",
+      "b": "degree"
+    },
+    {
+      "a": "hour",
+      "b": "is_weekend"
     }
   ]
 }

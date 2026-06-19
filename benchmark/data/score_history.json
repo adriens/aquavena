@@ -56,6 +56,13 @@
     "pa11y_errors": null
   },
   {
+    "tag": "v1.6.1",
+    "sha": "ffdecc0",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
     "tag": "v1.7.0",
     "sha": "2e5e47e",
     "date": "2026-05-30",
@@ -175,9 +182,149 @@
     "pa11y_errors": null
   },
   {
-    "tag": "1ea7413",
-    "sha": "1ea7413",
+    "tag": "v1.15.0",
+    "sha": "2176514",
+    "date": "2026-06-05",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.16.0",
+    "sha": "4933006",
     "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.17.0",
+    "sha": "deefe64",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.18.0",
+    "sha": "abdde8d",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.19.0",
+    "sha": "8e41ccc",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.21.0",
+    "sha": "d84bfb0",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.22.0",
+    "sha": "e2f2016",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.23.0",
+    "sha": "9cfa5af",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.24.0",
+    "sha": "f81573e",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.25.0",
+    "sha": "70d1bbb",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.26.0",
+    "sha": "cf62af7",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.27.0",
+    "sha": "7ff507b",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.28.0",
+    "sha": "23a97e3",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.29.0",
+    "sha": "95bb862",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.30.0",
+    "sha": "1bd10ad",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.31.0",
+    "sha": "c5e0d90",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.32.0",
+    "sha": "8beb824",
+    "date": "2026-06-14",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.33.0",
+    "sha": "264f474",
+    "date": "2026-06-15",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.34.0",
+    "sha": "0c525c8",
+    "date": "2026-06-15",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.35.0",
+    "sha": "a9aa7a3",
+    "date": "2026-06-18",
+    "score": null,
+    "pa11y_errors": null
+  },
+  {
+    "tag": "v1.36.0",
+    "sha": "8792ddd",
+    "date": "2026-06-18",
     "score": 100,
     "pa11y_errors": 0
   }
