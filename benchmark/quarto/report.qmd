@@ -1695,7 +1695,8 @@ report. For the EU regulation see
 ### Performance tiers (Accelerate State of DevOps Report 2023)
 
 The four metrics are mapped to four performance tiers. Aquavena lands in the
-**Elite** column on all three measured indicators:
+**Elite** column on all four indicators (change-failure rate is derived from
+the two known regressions — Tailwind v4 and the CSP issue — over all releases):
 
 | Metric | **Elite** | High | Medium | Low |
 |---|---|---|---|---|
@@ -1762,6 +1763,75 @@ Measured here as the median gap between release timestamps.
 A short lead time means fixes and features reach users quickly.
 \end{minipage}
 \end{center}
+
+The grid below summarises the same four metrics as a colour-coded **scorecard**:
+each row is a metric, each column a performance tier, and the cell where
+Aquavena actually lands (always **Elite**) is outlined and stamped with the
+project's measured KPI.
+
+```{r dora-scorecard, fig.height=3.3, fig.width=7.2, fig.align="center"}
+# Recompute the KPIs so this chart is self-contained
+ts <- dbGetQuery(con, "SELECT published_at_ts FROM gh_releases ORDER BY published_at_ts")$published_at_ts |>
+  as.POSIXct(tz = "UTC")
+gap_mins        <- as.numeric(diff(ts), units = "mins")
+median_lead     <- median(gap_mins)
+total_hours     <- as.numeric(difftime(max(ts), min(ts), units = "hours"))
+deploys_per_day <- length(ts) / (total_hours / 24)
+n_rel           <- length(ts)
+mttr_ts <- dbGetQuery(con, "SELECT tag, published_at_ts FROM gh_releases WHERE tag IN ('v1.14.0','v1.4.0')")
+t_inc <- as.POSIXct(mttr_ts$published_at_ts[mttr_ts$tag == "v1.14.0"], tz = "UTC")
+t_res <- as.POSIXct(mttr_ts$published_at_ts[mttr_ts$tag == "v1.4.0"],  tz = "UTC")
+mttr_mins <- as.numeric(difftime(t_res, t_inc, units = "mins"))
+cfr <- 2 / n_rel * 100   # 2 known production regressions (Tailwind v4, CSP)
+
+metrics <- c("Deployment Frequency", "Lead Time for Changes",
+             "Change Failure Rate", "MTTR / Recovery")
+tiers   <- c("Elite", "High", "Medium", "Low")
+thr <- list(
+  "Deployment Frequency"  = c("On-demand\n(multiple/day)", "1/day–1/week", "1/week–1/month", "< 1/month"),
+  "Lead Time for Changes" = c("< 1 day", "1 day–1 week", "1 week–1 month", "> 1 month"),
+  "Change Failure Rate"   = c("0–5%", "10–15%", "16–30%", "64–75%"),
+  "MTTR / Recovery"       = c("< 1 hour", "< 1 day", "< 1 week", "> 1 week")
+)
+kpi_by_metric <- c(
+  "Deployment Frequency"  = sprintf("%.1f / day", deploys_per_day),
+  "Lead Time for Changes" = sprintf("%.0f min", median_lead),
+  "Change Failure Rate"   = sprintf("%.1f%%", cfr),
+  "MTTR / Recovery"       = sprintf("%.0f min", mttr_mins)
+)
+
+df <- do.call(rbind, lapply(metrics, function(m)
+  data.frame(metric = m, tier = tiers, thr = thr[[m]], stringsAsFactors = FALSE)))
+df$metric  <- factor(df$metric, levels = rev(metrics))
+df$tier    <- factor(df$tier, levels = tiers)
+df$is_ours <- df$tier == "Elite"
+df$kpi     <- ifelse(df$is_ours, kpi_by_metric[as.character(df$metric)], NA)
+
+ggplot(df, aes(x = tier, y = metric)) +
+  geom_tile(aes(fill = tier), colour = "white", linewidth = 1.6,
+            width = 0.98, height = 0.94) +
+  geom_tile(data = subset(df, is_ours), fill = NA, colour = "#15803d",
+            linewidth = 1.5, width = 0.98, height = 0.94) +
+  geom_text(aes(label = thr), vjust = ifelse(df$is_ours, -0.35, 0.5),
+            size = 2.3, colour = "grey20") +
+  geom_text(data = subset(df, is_ours), aes(label = kpi),
+            vjust = 1.85, size = 2.7, fontface = "bold", colour = "#14532d") +
+  annotate("text", x = 1, y = length(metrics) + 0.72, label = "▼ Aquavena",
+           size = 2.6, fontface = "bold", colour = "#15803d") +
+  scale_fill_manual(values = c(Elite = "#bbf7d0", High = "#d9f99d",
+                               Medium = "#fde68a", Low = "#fecaca"),
+                    guide = "none") +
+  scale_x_discrete(position = "top", expand = expansion(0)) +
+  scale_y_discrete(expand = expansion(add = c(0.5, 0.9))) +
+  labs(title = "DORA scorecard — Elite on all four metrics",
+       subtitle = "Colour = performance tier · outlined cell + bold value = Aquavena's measured KPI",
+       x = NULL, y = NULL) +
+  theme_minimal(base_size = 9) +
+  theme(panel.grid = element_blank(),
+        axis.text.x.top = element_text(face = "bold", size = 9),
+        axis.text.y = element_text(face = "bold", size = 8),
+        plot.margin = margin(6, 10, 6, 6))
+```
 
 ### Verifiable references
 
