@@ -1362,19 +1362,28 @@ elderly reader:
   (`html-*`, `document-title`, `heading-order`, `meta-viewport`). Good
   structure gives a screen reader a navigable outline and lets *everyone*
   enlarge the page on a phone.
-- **Content names** — Whether every meaningful element carries an accessible
-  name: alt text on images, labels on form fields, discernible names on
-  buttons and links (`image-alt`, `button-name`, `link-name`, `label*`).
-  Without it, a screen reader can only announce "button, button, button".
+- **Content names** — Whether every meaningful element carries an
+  [**accessible name**](https://developer.mozilla.org/en-US/docs/Glossary/Accessible_name):
+  the short piece of text a screen reader reads aloud to identify the element,
+  computed from its alt text, `<label>`, `aria-label` or visible text. This
+  category checks each one actually has it — alt text on images, labels on form
+  fields, discernible names on buttons and links (`image-alt`, `button-name`,
+  `link-name`, `label*`). Without it, a screen reader can only announce
+  "button, button, button" — the user hears that controls exist but not what
+  they do.
 - **Keyboard & focus** — Whether the whole interface is operable without a
   mouse: sensible focus order, visible focus, skip links, and large-enough
   touch targets (`tabindex`, `target-size`, `bypass`, `skip-link`, `focus-*`).
   Essential for keyboard, switch and motor-impaired users — and for anyone
   with an unsteady hand.
-- **ARIA semantics** — Whether ARIA roles, states and properties are used
-  correctly so assistive technology announces widgets accurately (the
-  `aria-*` audits). Mis-used ARIA is worse than none — it actively misleads
-  the screen reader.
+- **ARIA semantics** — [**ARIA**](https://www.w3.org/TR/wai-aria-1.2/)
+  (*Accessible Rich Internet Applications*) is a W3C standard set of HTML
+  attributes that describe dynamic widgets — menus, dialogs, tabs, sliders —
+  so a screen reader can announce their **role** (what it is), **state**
+  (e.g. expanded/collapsed) and **properties**, in cases where plain HTML is
+  not expressive enough. This category checks those attributes are used
+  correctly (the `aria-*` audits). Mis-used ARIA is worse than none — it
+  actively misleads the screen reader (e.g. announcing a button as a checkbox).
 
 ```{r impact-radar, fig.height=5, fig.width=7.2, fig.align="center"}
 audits <- dbGetQuery(con, "
