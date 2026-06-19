@@ -1302,6 +1302,19 @@ patchwork::wrap_plots(p_evm, p_spi, ncol = 1, heights = c(2, 1))
 
 ## Strategic impact — multi-axis radar
 
+**What is Lighthouse?** [**Lighthouse**](https://developer.chrome.com/docs/lighthouse/overview/)
+is Google's open-source auditing engine, built into Chrome DevTools and
+shipped as a CLI ([github.com/GoogleChrome/lighthouse](https://github.com/GoogleChrome/lighthouse)).
+Its **accessibility category** runs the [axe-core](https://github.com/dequelabs/axe-core)
+rule engine (by Deque Systems) against a page and returns a 0–100 score that is
+a *weighted pass rate* over several dozen individual audits — `color-contrast`,
+`image-alt`, `aria-*`, `meta-viewport`, and so on — each mapped to a
+[WCAG 2.1](https://www.w3.org/TR/WCAG21/) success criterion. We capture the
+full JSON report (not just the headline number), which is what lets us break
+the score down by category below and per release tag elsewhere. Like pa11y, it
+only checks the machine-testable subset of WCAG — a useful floor, not a
+complete accessibility verdict.
+
 Each Lighthouse audit is classified into one of five accessibility categories,
 and the **pass rate per category** is computed per site. The radar makes the
 strategic gap immediately readable: where the source site falls short, where it
@@ -1374,6 +1387,20 @@ ggplot(radar_df, aes(x = category, y = rate, group = site, colour = site, fill =
 ```
 
 ## Category delta — gap closed per accessibility dimension
+
+**What is pa11y?** Alongside Lighthouse, this report relies on
+[**pa11y**](https://pa11y.org/) — a free, open-source command-line
+accessibility tester ([github.com/pa11y/pa11y](https://github.com/pa11y/pa11y)).
+pa11y loads each page in a headless Chromium and runs it through the
+[HTML\_CodeSniffer](https://squizlabs.github.io/HTML_CodeSniffer/) ruleset
+against the [**WCAG 2.1 AA**](https://www.w3.org/TR/WCAG21/) standard,
+returning one *error* per element that fails a success criterion. We run it on
+every page in CI (`pa11y-ci`), so **"0 pa11y errors" means every audited
+element passed the automated WCAG 2.1 AA checks**. It complements Lighthouse
+rather than duplicating it: the two engines overlap on contrast but each
+catches rules the other misses. The usual caveat applies — automated testing
+only covers the machine-checkable subset of WCAG, so it is a reliable *floor*,
+not a replacement for manual and assistive-technology testing.
 
 The replay shows our site at **100/100 Lighthouse, 0 pa11y errors** across every
 tag, while `aquavena.nc` sits at 91/67. Instead of an iterative burndown, the
