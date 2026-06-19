@@ -1376,7 +1376,7 @@ elderly reader:
   `aria-*` audits). Mis-used ARIA is worse than none — it actively misleads
   the screen reader.
 
-```{r impact-radar, fig.height=5, fig.width=6.5, fig.align="center"}
+```{r impact-radar, fig.height=5, fig.width=7.2, fig.align="center"}
 audits <- dbGetQuery(con, "
   SELECT site, audit_id, score
   FROM lighthouse_audits
@@ -1399,20 +1399,32 @@ radar_df <- audits |>
   dplyr::summarise(rate = mean(score) * 100, .groups = "drop")
 
 ggplot(radar_df, aes(x = category, y = rate, group = site, colour = site, fill = site)) +
-  geom_polygon(alpha = 0.25, linewidth = 0.9) +
-  geom_point(size = 2.2) +
-  coord_polar() +
-  scale_y_continuous(limits = c(0, 105), breaks = c(50, 75, 100)) +
+  # Emphasise the three reference rings so the radial scale is readable
+  geom_hline(yintercept = c(50, 75, 100), colour = "grey80", linewidth = 0.35) +
+  geom_polygon(alpha = 0.22, linewidth = 0.9) +
+  geom_point(size = 2.3) +
+  # Value labels on the series that actually varies (aquavena.nc)
+  geom_text(data = subset(radar_df, site == "aquavena.nc"),
+            aes(label = paste0(round(rate), "%")),
+            colour = "#374151", size = 2.5, fontface = "bold",
+            vjust = -0.8, show.legend = FALSE) +
+  coord_polar(clip = "off") +
+  scale_y_continuous(limits = c(0, 112), breaks = c(50, 75, 100),
+                     labels = c("50%", "75%", "100%")) +
   scale_colour_manual(values = c("our-site" = "#0f766e", "aquavena.nc" = "#9ca3af"),
                       labels = c("our-site" = "Our site", "aquavena.nc" = "aquavena.nc")) +
   scale_fill_manual(values = c("our-site" = "#0f766e", "aquavena.nc" = "#9ca3af"),
                     labels = c("our-site" = "Our site", "aquavena.nc" = "aquavena.nc")) +
   labs(title = "Strategic impact — pass rate by accessibility category",
-       subtitle = "% of Lighthouse audits passed per category, per site",
+       subtitle = "Rings = 50 / 75 / 100% · our site reaches 100% on all five (outer ring); % labels show aquavena.nc",
        x = NULL, y = NULL, colour = NULL, fill = NULL) +
   theme_minimal(base_size = 9) +
   theme(legend.position = "bottom",
-        axis.text.x = element_text(size = 8))
+        axis.text.x = element_text(size = 8),
+        axis.text.y = element_text(size = 7, colour = "grey25", face = "bold"),
+        panel.grid.major = element_line(colour = "grey85", linewidth = 0.3),
+        panel.grid.minor = element_blank(),
+        plot.margin = margin(t = 6, r = 55, b = 6, l = 55))
 ```
 
 ## Category delta — gap closed per accessibility dimension
