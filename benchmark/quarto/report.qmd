@@ -1307,6 +1307,33 @@ and the **pass rate per category** is computed per site. The radar makes the
 strategic gap immediately readable: where the source site falls short, where it
 does well, and where our rebuild closes the gap entirely.
 
+The five categories — and why each one matters, especially for a low-vision or
+elderly reader:
+
+- **Color & contrast** — Whether text and interface elements meet the WCAG
+  contrast ratios (4.5:1 for normal text) and stay distinguishable without
+  relying on colour alone (audits `color-contrast`, `link-in-text-block`).
+  This is the make-or-break dimension for ageing eyes and reduced contrast
+  sensitivity — a pale button that "looks fine" can be invisible.
+- **Doc structure** — The page's structural scaffolding: a declared language,
+  a page title, a logical heading order, and a viewport that permits zoom
+  (`html-*`, `document-title`, `heading-order`, `meta-viewport`). Good
+  structure gives a screen reader a navigable outline and lets *everyone*
+  enlarge the page on a phone.
+- **Content names** — Whether every meaningful element carries an accessible
+  name: alt text on images, labels on form fields, discernible names on
+  buttons and links (`image-alt`, `button-name`, `link-name`, `label*`).
+  Without it, a screen reader can only announce "button, button, button".
+- **Keyboard & focus** — Whether the whole interface is operable without a
+  mouse: sensible focus order, visible focus, skip links, and large-enough
+  touch targets (`tabindex`, `target-size`, `bypass`, `skip-link`, `focus-*`).
+  Essential for keyboard, switch and motor-impaired users — and for anyone
+  with an unsteady hand.
+- **ARIA semantics** — Whether ARIA roles, states and properties are used
+  correctly so assistive technology announces widgets accurately (the
+  `aria-*` audits). Mis-used ARIA is worse than none — it actively misleads
+  the screen reader.
+
 ```{r impact-radar, fig.height=5, fig.width=6.5, fig.align="center"}
 audits <- dbGetQuery(con, "
   SELECT site, audit_id, score
