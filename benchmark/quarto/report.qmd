@@ -1571,6 +1571,16 @@ after the initial scaffold (`v0.1.1`), the project sustained a steady cadence of
 small surgical sprints early on (`v0.1.2–v0.1.5`), then larger investment
 releases for tooling and reporting (`v1.5.0–v1.7.0`).
 
+**The two highlighted bars** mark the project's only regressions. The indigo
+bar (`v1.4.0`) is the **CSP regression fix**: a
+[Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP)
+— the HTTP header that restricts which scripts and resources a page may load, a
+standard defence against cross-site-scripting (XSS) — had been enabled but was
+too strict and blocked the site's *own* JavaScript under Astro v6, hiding every
+menu; this release relaxed the policy so the page rendered again. The amber bar
+(`v1.14.0`) is the **Tailwind CSS v4 migration**, the other notable refactor of
+the period.
+
 ```{r velocity-bars, fig.height=4.0, fig.width=6.5, fig.align="center"}
 vel <- dbGetQuery(con, "
   SELECT tag, lines_delta
