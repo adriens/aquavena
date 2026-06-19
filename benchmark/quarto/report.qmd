@@ -1657,8 +1657,10 @@ ggplot(vel, aes(x = idx)) +
 
 **DORA = DevOps Research and Assessment**. Founded in 2013 by **Nicole
 Forsgren**, **Jez Humble** and **Gene Kim** as an independent research
-programme initially published with Puppet, then spun out as an autonomous
-company. **Acquired by Google Cloud in 2018**, where it continues to publish
+programme initially published with [Puppet](https://www.puppet.com/) — the
+infrastructure-automation company behind the open-source configuration-management
+tool of the same name, which sponsored the early *State of DevOps* surveys —
+then spun out as an autonomous company. **Acquired by Google Cloud in 2018**, where it continues to publish
 the annual *Accelerate State of DevOps Report*. The programme is the
 empirical foundation of modern DevOps benchmarking and the source of the
 four metrics used in this section.
