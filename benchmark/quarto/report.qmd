@@ -2172,6 +2172,48 @@ if (length(tw_idx) > 0) {
              label = "Tailwind v4\nmigration", hjust = 0,
              size = 2.2, colour = "#b45309", fontface = "bold", lineheight = 0.9)
 }
+
+# Annotate the tallest bar so its cause is explicit
+v18_idx <- which(tag_chron == "v1.8.0")
+if (length(v18_idx) > 0) {
+  p <- p +
+    annotate("curve", x = v18_idx + 7, y = max_bar * 0.84,
+             xend = v18_idx + 0.45, yend = max_bar * 0.99,
+             curvature = -0.25, linewidth = 0.4, colour = "#7c3aed",
+             arrow = arrow(length = unit(0.15, "cm"))) +
+    annotate("label", x = v18_idx + 7, y = max_bar * 0.84,
+             label = "v1.8.0 — Executive Dashboard,\nML semantic analysis & full audit replay\n(one very long session)",
+             hjust = 0, vjust = 0.5, size = 2.1, colour = "#7c3aed",
+             fill = "white", label.size = 0.25, lineheight = 0.9)
+}
+
+# Annotate the 2nd tallest bar (v1.33.0)
+v33_idx <- which(tag_chron == "v1.33.0")
+if (length(v33_idx) > 0) {
+  p <- p +
+    annotate("curve", x = v33_idx - 6, y = max_bar * 0.80,
+             xend = v33_idx - 0.3, yend = max_bar * 0.50,
+             curvature = 0.2, linewidth = 0.35, colour = "#475569",
+             arrow = arrow(length = unit(0.12, "cm"))) +
+    annotate("label", x = v33_idx - 6, y = max_bar * 0.80,
+             label = "v1.33.0 — Concept\nemergence storyboard",
+             hjust = 1, vjust = 0.5, size = 2.0, colour = "#475569",
+             fill = "white", label.size = 0.2, lineheight = 0.9)
+}
+
+# Annotate the 92M bar (v1.22.0)
+v22_idx <- which(tag_chron == "v1.22.0")
+if (length(v22_idx) > 0) {
+  p <- p +
+    annotate("curve", x = v22_idx - 5, y = max_bar * 0.56,
+             xend = v22_idx - 0.3, yend = max_bar * 0.32,
+             curvature = 0.2, linewidth = 0.35, colour = "#475569",
+             arrow = arrow(length = unit(0.12, "cm"))) +
+    annotate("label", x = v22_idx - 5, y = max_bar * 0.56,
+             label = "v1.22.0 — Universal\nAccessibility Pipeline v3",
+             hjust = 1, vjust = 0.5, size = 2.0, colour = "#475569",
+             fill = "white", label.size = 0.2, lineheight = 0.9)
+}
 p
 ```
 
