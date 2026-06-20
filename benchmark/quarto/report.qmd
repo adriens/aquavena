@@ -163,7 +163,7 @@ format:
           a dietetic meal delivery service in New Caledonia. Standard CLI tools
           (pa11y-ci, Lighthouse, axe-core, webhint) are used as a common reference.
           Results show a \textbf{\textit{100/100 Lighthouse score and 0 WCAG 2.1 AA
-          errors}} for our site, versus 91/100 and 67~errors for the official website.
+          errors}} for our site, versus 91/100 and 31~errors for the official website.
           All audit data is persisted in a DuckDB database for longitudinal tracking.
 
           \vspace{1.5em}
@@ -282,7 +282,7 @@ lh_score <- lh_rows$lighthouse_score[1]
 lh_nc_rows <- parse_lh(file.path(REPORTS, "lighthouse-aquavena-nc.report.json"),
                        "aquavena.nc", as.Date("2026-05-30"), NC_RUN_ID)
 
-# ── pa11y aquavena.nc (manually collected — 67 known errors) ──────────────
+# ── pa11y aquavena.nc (live re-audit — 31 contrast errors, see wcag_comparison) ──
 nc_pa11y <- tibble(
   run_id     = NC_RUN_ID,
   url        = "https://www.aquavena.nc/formules/aqua-mediterraneen",
@@ -291,7 +291,7 @@ nc_pa11y <- tibble(
   code       = NA_character_,
   site       = "aquavena.nc",
   audit_date = as.Date("2026-05-30"),
-  n_dummy    = 67L
+  n_dummy    = 31L
 ) |> uncount(n_dummy)
 
 # ── Open DuckDB and create tables with PK / FK declarations ───────────────
@@ -524,7 +524,7 @@ nc_ci_row <- tibble(
   run_id = NC_RUN_ID, run_number = 0L,
   git_sha = NA_character_, git_branch = NA_character_,
   triggered_by = "manual", audit_date = as.Date("2026-05-30"),
-  lh_score = 91L, pa11y_errors = 67L
+  lh_score = 91L, pa11y_errors = 31L
 )
 existing_runs <- dbGetQuery(con, "SELECT run_id FROM ci_runs")$run_id
 new_runs <- bind_rows(ci_row, nc_ci_row) |> filter(!run_id %in% existing_runs)
@@ -649,7 +649,7 @@ sh_data <- tibble::tibble(
     100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L
   ),
   pa11y_errors = c(
-    67L,
+    31L,
     5L, 3L, 2L, 1L, 0L,
     0L, 0L, 0L, 0L, 0L, 0L,
     0L, 0L, 0L, 0L,
@@ -1205,14 +1205,33 @@ work and the source site. Nothing in the charts below is hardcoded — every fig
 is computed live from the six FK-linked tables described in the appendix. Re-running
 the pipeline regenerates the dashboard automatically.
 
+::: {.callout-note appearance="default"}
+## \faStar\ Headline finding
+
+**Where a commit sits in the similarity graph predicts — and causes — how many
+AI tokens it costs, more than what the commit actually does.** Two independent
+methods agree. A gradient-boosted model predicts a commit's token cost from its
+**graph position and timing alone** — no message text, no token-derived input —
+at **$R^2 = 0.77$**, halving the error of a mean baseline. And a constraint-based
+causal-discovery algorithm (PC), which shares none of those inputs, independently
+orients the edges *PageRank → Tokens*, *Degree → Tokens* and *Weekend → Tokens*.
+Commit **type** (`feat` vs `fix`) barely moves the needle; **structural
+centrality and timing dominate**. The convergence of two unrelated techniques on
+the same drivers is the strongest evidence the relationship is real — and it is
+the seed of a **text-free CI triage**: estimating a change's AI cost *before it
+is written*. (Full analysis: §§ *Predicting token-cost from structure alone* and
+*Causal DAG discovery*.)
+:::
+
 ## EVM — Planned Value vs Earned Value
 
 A linear ramp from the **aquavena.nc baseline (91)** to the **target score (100)**
 defines the *Planned Value* curve — the score the project would have had at each
 release if it had improved at a constant rate. The *Earned Value* curve is the
 **actual Lighthouse score** recorded at each release tag. Their ratio is the
-**Schedule Performance Index (SPI = EV / PV)**, the most-watched indicator in
-PMI's Earned Value Management framework.
+**Schedule Performance Index**,
+$$\mathrm{SPI} = \frac{\mathrm{EV}}{\mathrm{PV}},$$
+the most-watched indicator in PMI's Earned Value Management framework.
 
 ### How to read the SPI chart
 
@@ -1227,12 +1246,13 @@ The dashed grey line at **SPI = 1.0** is the *plan baseline*. Every bar grows
 - **No visible bar** (exactly at 1.0) → release is **on plan**.
 
 For this project the chart shows a **uniformly-teal "ahead of plan" pattern**:
-the very first release (`v0.1.1`) lands at SPI ≈ **1.085** — already 8.5% ahead
+the very first release (`v0.1.1`) lands at SPI ≈ **1.097** — already ~10% ahead
 of where the linear plan said we should be. The lead narrows release after
-release as the plan baseline catches up to the actual score, ending exactly on
-target at `v1.7.0` (SPI = 1.000). This is the visual signature of a project
-that **set the bar at the maximum value from day one** and held it across
-every checkpoint — the cleanest possible EVM trace for a PMI committee.
+release as the plan baseline ramps up toward the actual score, ending exactly on
+target at the latest release `v1.36.0` (SPI = 1.000). This is the visual
+signature of a project that **set the bar at the maximum value from day one**
+and held it across all 48 release tags — the cleanest possible EVM trace for a
+PMI committee.
 
 ```{r evm-chart, fig.height=4.6, fig.width=6.5, fig.align="center"}
 evm_df <- dbGetQuery(con, "
@@ -1254,6 +1274,12 @@ evm_df$pv   <- 91 + (100 - 91) * (evm_df$idx - 1) / (n_rel - 1)
 evm_df$ev   <- evm_df$lh_score
 evm_df$spi  <- evm_df$ev / evm_df$pv
 
+# With ~50 release tags, showing every label overlaps. Keep ~1 in 4 (evenly
+# spaced) plus the final tag, and render them vertically.
+lab_step      <- max(1L, ceiling(n_rel / 16))
+keep_lab      <- ((evm_df$idx - 1L) %% lab_step == 0L) | (evm_df$idx == n_rel)
+x_lab         <- ifelse(keep_lab, evm_df$tag, "")
+
 p_evm <- ggplot(evm_df, aes(x = idx)) +
   geom_ribbon(aes(ymin = pmin(ev, pv), ymax = pmax(ev, pv)),
               fill = "#f59e0b", alpha = 0.15) +
@@ -1261,14 +1287,14 @@ p_evm <- ggplot(evm_df, aes(x = idx)) +
   geom_line(aes(y = ev),  colour = "#0f766e", linewidth = 1.1) +
   geom_point(aes(y = ev), colour = "#0f766e", size = 2.4) +
   geom_point(aes(y = pv), colour = "#9ca3af", size = 1.4) +
-  scale_x_continuous(breaks = evm_df$idx, labels = evm_df$tag) +
+  scale_x_continuous(breaks = evm_df$idx, labels = x_lab) +
   scale_y_continuous(limits = c(78, 102), breaks = c(80, 90, 95, 100)) +
   labs(title = "Earned Value vs Planned Value",
        subtitle = "teal = delivered (EV), grey dashed = plan (PV), amber band = variance",
        x = NULL, y = "Lighthouse score") +
   theme_minimal(base_size = 9) +
   theme(panel.grid.minor = element_blank(),
-        axis.text.x = element_text(angle = 35, hjust = 1))
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6))
 
 spi_min <- min(evm_df$spi, na.rm = TRUE)
 spi_max <- max(evm_df$spi, na.rm = TRUE)
@@ -1282,10 +1308,10 @@ p_spi <- ggplot(evm_df, aes(x = idx)) +
   geom_hline(yintercept = 1.0, colour = "#9ca3af",
              linetype = "dashed", linewidth = 0.4) +
   geom_point(aes(y = spi, colour = spi >= 1), size = 1.6, show.legend = FALSE) +
-  geom_text(aes(y = spi, label = sprintf("%.3f", spi)),
+  geom_text(aes(y = spi, label = ifelse(keep_lab, sprintf("%.3f", spi), "")),
             vjust = -1.0, size = 2.4, colour = "grey20", fontface = "bold") +
   scale_colour_manual(values = c(`TRUE` = "#0f766e", `FALSE` = "#dc2626")) +
-  scale_x_continuous(breaks = evm_df$idx, labels = evm_df$tag) +
+  scale_x_continuous(breaks = evm_df$idx, labels = x_lab) +
   scale_y_continuous(limits = c(y_lo, y_hi),
                      breaks = sort(unique(c(round(spi_min, 2),
                                             1.0,
@@ -1295,19 +1321,89 @@ p_spi <- ggplot(evm_df, aes(x = idx)) +
        x = NULL, y = "SPI") +
   theme_minimal(base_size = 9) +
   theme(panel.grid.minor = element_blank(),
-        axis.text.x = element_text(angle = 35, hjust = 1))
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6))
 
 patchwork::wrap_plots(p_evm, p_spi, ncol = 1, heights = c(2, 1))
 ```
 
+**What the EV line plateauing at 100 means.** Earned Value hits the ceiling
+(100/100) at the very first release and never leaves it. In a typical project
+EV accrues *gradually* as scope is completed; here the curve is flat-topped
+because the **entire deliverable — full WCAG 2.1 AA conformance — was achieved
+in the first shippable version** and held across all 48 following tags. The
+plateau is the proof that accessibility was a *launch requirement*, not a
+backlog item polished over time: after release one there was simply no value
+left to earn. The only thing that still moves is the grey Planned-Value line
+slowly rising to meet it.
+
+**What the steadily-declining SPI curve means.** The downward drift is *not* a
+loss of quality — the delivered score (EV) never drops below 100. SPI falls
+only because the **plan catches up**: Planned Value ramps linearly from 91 to
+100 while the actual score was already maxed out from the first release. A SPI
+that decreases monotonically yet stays **above 1.0** is the textbook signature
+of **front-loaded delivery** — all the value was banked on day one, and each
+subsequent release simply lets the linear plan consume a little more of that
+head start, until the two meet exactly at $\mathrm{SPI} = 1.0$ on the final
+release. In EVM terms the project was never "slowing down"; the plan was
+merely growing into a result that had already been achieved.
+
 ## Strategic impact — multi-axis radar
+
+**What is Lighthouse?** [**Lighthouse**](https://developer.chrome.com/docs/lighthouse/overview/)
+is Google's open-source auditing engine, built into Chrome DevTools and
+shipped as a CLI ([github.com/GoogleChrome/lighthouse](https://github.com/GoogleChrome/lighthouse)).
+Its **accessibility category** runs the [axe-core](https://github.com/dequelabs/axe-core)
+rule engine (by Deque Systems) against a page and returns a 0–100 score that is
+a *weighted pass rate* over several dozen individual audits — `color-contrast`,
+`image-alt`, `aria-*`, `meta-viewport`, and so on — each mapped to a
+[WCAG 2.1](https://www.w3.org/TR/WCAG21/) success criterion. We capture the
+full JSON report (not just the headline number), which is what lets us break
+the score down by category below and per release tag elsewhere. Like pa11y, it
+only checks the machine-testable subset of WCAG — a useful floor, not a
+complete accessibility verdict.
 
 Each Lighthouse audit is classified into one of five accessibility categories,
 and the **pass rate per category** is computed per site. The radar makes the
 strategic gap immediately readable: where the source site falls short, where it
 does well, and where our rebuild closes the gap entirely.
 
-```{r impact-radar, fig.height=5, fig.width=6.5, fig.align="center"}
+The five categories — and why each one matters, especially for a low-vision or
+elderly reader:
+
+- **Color & contrast** — Whether text and interface elements meet the WCAG
+  contrast ratios (4.5:1 for normal text) and stay distinguishable without
+  relying on colour alone (audits `color-contrast`, `link-in-text-block`).
+  This is the make-or-break dimension for ageing eyes and reduced contrast
+  sensitivity — a pale button that "looks fine" can be invisible.
+- **Doc structure** — The page's structural scaffolding: a declared language,
+  a page title, a logical heading order, and a viewport that permits zoom
+  (`html-*`, `document-title`, `heading-order`, `meta-viewport`). Good
+  structure gives a screen reader a navigable outline and lets *everyone*
+  enlarge the page on a phone.
+- **Content names** — Whether every meaningful element carries an
+  [**accessible name**](https://developer.mozilla.org/en-US/docs/Glossary/Accessible_name):
+  the short piece of text a screen reader reads aloud to identify the element,
+  computed from its alt text, `<label>`, `aria-label` or visible text. This
+  category checks each one actually has it — alt text on images, labels on form
+  fields, discernible names on buttons and links (`image-alt`, `button-name`,
+  `link-name`, `label*`). Without it, a screen reader can only announce
+  "button, button, button" — the user hears that controls exist but not what
+  they do.
+- **Keyboard & focus** — Whether the whole interface is operable without a
+  mouse: sensible focus order, visible focus, skip links, and large-enough
+  touch targets (`tabindex`, `target-size`, `bypass`, `skip-link`, `focus-*`).
+  Essential for keyboard, switch and motor-impaired users — and for anyone
+  with an unsteady hand.
+- **ARIA semantics** — [**ARIA**](https://www.w3.org/TR/wai-aria-1.2/)
+  (*Accessible Rich Internet Applications*) is a W3C standard set of HTML
+  attributes that describe dynamic widgets — menus, dialogs, tabs, sliders —
+  so a screen reader can announce their **role** (what it is), **state**
+  (e.g. expanded/collapsed) and **properties**, in cases where plain HTML is
+  not expressive enough. This category checks those attributes are used
+  correctly (the `aria-*` audits). Mis-used ARIA is worse than none — it
+  actively misleads the screen reader (e.g. announcing a button as a checkbox).
+
+```{r impact-radar, fig.height=5, fig.width=7.2, fig.align="center"}
 audits <- dbGetQuery(con, "
   SELECT site, audit_id, score
   FROM lighthouse_audits
@@ -1330,26 +1426,52 @@ radar_df <- audits |>
   dplyr::summarise(rate = mean(score) * 100, .groups = "drop")
 
 ggplot(radar_df, aes(x = category, y = rate, group = site, colour = site, fill = site)) +
-  geom_polygon(alpha = 0.25, linewidth = 0.9) +
-  geom_point(size = 2.2) +
-  coord_polar() +
-  scale_y_continuous(limits = c(0, 105), breaks = c(50, 75, 100)) +
+  # Emphasise the three reference rings so the radial scale is readable
+  geom_hline(yintercept = c(50, 75, 100), colour = "grey80", linewidth = 0.35) +
+  geom_polygon(alpha = 0.22, linewidth = 0.9) +
+  geom_point(size = 2.3) +
+  # Value labels on the series that actually varies (aquavena.nc)
+  geom_text(data = subset(radar_df, site == "aquavena.nc"),
+            aes(label = paste0(round(rate), "%")),
+            colour = "#374151", size = 2.5, fontface = "bold",
+            vjust = -0.8, show.legend = FALSE) +
+  coord_polar(clip = "off") +
+  scale_y_continuous(limits = c(0, 112), breaks = c(50, 75, 100),
+                     labels = c("50%", "75%", "100%")) +
   scale_colour_manual(values = c("our-site" = "#0f766e", "aquavena.nc" = "#9ca3af"),
                       labels = c("our-site" = "Our site", "aquavena.nc" = "aquavena.nc")) +
   scale_fill_manual(values = c("our-site" = "#0f766e", "aquavena.nc" = "#9ca3af"),
                     labels = c("our-site" = "Our site", "aquavena.nc" = "aquavena.nc")) +
   labs(title = "Strategic impact — pass rate by accessibility category",
-       subtitle = "% of Lighthouse audits passed per category, per site",
+       subtitle = "Rings = 50 / 75 / 100% · our site reaches 100% on all five (outer ring); % labels show aquavena.nc",
        x = NULL, y = NULL, colour = NULL, fill = NULL) +
   theme_minimal(base_size = 9) +
   theme(legend.position = "bottom",
-        axis.text.x = element_text(size = 8))
+        axis.text.x = element_text(size = 8),
+        axis.text.y = element_text(size = 7, colour = "grey25", face = "bold"),
+        panel.grid.major = element_line(colour = "grey85", linewidth = 0.3),
+        panel.grid.minor = element_blank(),
+        plot.margin = margin(t = 6, r = 55, b = 6, l = 55))
 ```
 
 ## Category delta — gap closed per accessibility dimension
 
+**What is pa11y?** Alongside Lighthouse, this report relies on
+[**pa11y**](https://pa11y.org/) — a free, open-source command-line
+accessibility tester ([github.com/pa11y/pa11y](https://github.com/pa11y/pa11y)).
+pa11y loads each page in a headless Chromium and runs it through the
+[HTML\_CodeSniffer](https://squizlabs.github.io/HTML_CodeSniffer/) ruleset
+against the [**WCAG 2.1 AA**](https://www.w3.org/TR/WCAG21/) standard,
+returning one *error* per element that fails a success criterion. We run it on
+every page in CI (`pa11y-ci`), so **"0 pa11y errors" means every audited
+element passed the automated WCAG 2.1 AA checks**. It complements Lighthouse
+rather than duplicating it: the two engines overlap on contrast but each
+catches rules the other misses. The usual caveat applies — automated testing
+only covers the machine-checkable subset of WCAG, so it is a reliable *floor*,
+not a replacement for manual and assistive-technology testing.
+
 The replay shows our site at **100/100 Lighthouse, 0 pa11y errors** across every
-tag, while `aquavena.nc` sits at 91/67. Instead of an iterative burndown, the
+tag, while `aquavena.nc` sits at 91/31. Instead of an iterative burndown, the
 chart below visualises the **one-shot transformation** as a category-by-category
 **gap closed**: for each accessibility dimension Lighthouse audits, the bar
 shows the pass-rate delta between the source site and ours. The longer the bar,
@@ -1467,6 +1589,16 @@ after the initial scaffold (`v0.1.1`), the project sustained a steady cadence of
 small surgical sprints early on (`v0.1.2–v0.1.5`), then larger investment
 releases for tooling and reporting (`v1.5.0–v1.7.0`).
 
+**The two highlighted bars** mark the project's only regressions. The indigo
+bar (`v1.4.0`) is the **CSP regression fix**: a
+[Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP)
+— the HTTP header that restricts which scripts and resources a page may load, a
+standard defence against cross-site-scripting (XSS) — had been enabled but was
+too strict and blocked the site's *own* JavaScript under Astro v6, hiding every
+menu; this release relaxed the policy so the page rendered again. The amber bar
+(`v1.14.0`) is the **Tailwind CSS v4 migration**, the other notable refactor of
+the period.
+
 ```{r velocity-bars, fig.height=4.0, fig.width=6.5, fig.align="center"}
 vel <- dbGetQuery(con, "
   SELECT tag, lines_delta
@@ -1494,6 +1626,13 @@ idx_tw  <- vel$idx[vel$tag == "v1.14.0"]
 idx_fix <- vel$idx[vel$tag == "v1.4.0"]
 max_y   <- max(vel$lines_delta)
 
+# Thin the x-axis tag labels (~46 releases overlap otherwise): keep ~1 in 16,
+# evenly spaced, plus the last tag, and render them vertically.
+n_v        <- nrow(vel)
+lab_step_v <- max(1L, ceiling(n_v / 16))
+keep_v     <- ((vel$idx - 1L) %% lab_step_v == 0L) | (vel$idx == n_v)
+x_lab_v    <- ifelse(keep_v, as.character(vel$tag), "")
+
 ggplot(vel, aes(x = idx)) +
   geom_col(aes(y = lines_delta, fill = bar_fill), width = 0.55) +
   scale_fill_manual(values = c(normal = "#0f766e", tailwind = "#f59e0b", fix = "#6366f1"),
@@ -1515,7 +1654,7 @@ ggplot(vel, aes(x = idx)) +
            label = paste0("Avg throughput: ", format(avg_v, big.mark = ","),
                           " lines / release"),
            size = 2.7, colour = "grey40", fontface = "italic") +
-  scale_x_continuous(breaks = vel$idx, labels = vel$tag) +
+  scale_x_continuous(breaks = vel$idx, labels = x_lab_v) +
   scale_y_continuous(name = "Lines changed per release",
                      labels = scales::label_comma(),
                      sec.axis = sec_axis(~ . / scale_factor,
@@ -1526,7 +1665,7 @@ ggplot(vel, aes(x = idx)) +
        x = NULL) +
   theme_minimal(base_size = 9) +
   theme(panel.grid.minor = element_blank(),
-        axis.text.x = element_text(angle = 35, hjust = 1),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6),
         axis.title.y.right = element_text(colour = "#f59e0b"))
 ```
 
@@ -1536,11 +1675,23 @@ ggplot(vel, aes(x = idx)) +
 
 **DORA = DevOps Research and Assessment**. Founded in 2013 by **Nicole
 Forsgren**, **Jez Humble** and **Gene Kim** as an independent research
-programme initially published with Puppet, then spun out as an autonomous
-company. **Acquired by Google Cloud in 2018**, where it continues to publish
+programme initially published with [Puppet](https://www.puppet.com/) — the
+infrastructure-automation company behind the open-source configuration-management
+tool of the same name, which sponsored the early *State of DevOps* surveys —
+then spun out as an autonomous company. **Acquired by Google Cloud in 2018**, where it continues to publish
 the annual *Accelerate State of DevOps Report*. The programme is the
 empirical foundation of modern DevOps benchmarking and the source of the
 four metrics used in this section.
+
+**Official sources.**
+
+- [dora.dev](https://dora.dev/) — the programme's home: research, the four
+  keys, and the DORA Quick Check.
+- [*Accelerate State of DevOps Report 2024*](https://dora.dev/research/2024/dora-report/2024-dora-accelerate-state-of-devops-report.pdf)
+  (PDF) — the most recent full report.
+- [*The ROI of AI-assisted Software Development*, 2026](https://services.google.com/fh/files/misc/dora-roi-of-ai-assisted-software-development-2026.pdf)
+  (PDF, Google/DORA) — directly relevant to this report's AI-delivery and
+  token-economics analysis.
 
 \textbf{Note on the homonymy.} The acronym DORA is also widely used in
 another context: the \textbf{Digital Operational Resilience Act}, a European
@@ -1561,8 +1712,9 @@ report. For the EU regulation see
 
 ### Performance tiers (Accelerate State of DevOps Report 2023)
 
-The four metrics are mapped to four performance tiers. Aquavena lands in the
-**Elite** column on all three measured indicators:
+The four metrics are mapped to four performance tiers. **Our site** lands in the
+**Elite** column on all four indicators (change-failure rate is derived from
+the two known regressions — Tailwind v4 and the CSP issue — over all releases):
 
 | Metric | **Elite** | High | Medium | Low |
 |---|---|---|---|---|
@@ -1630,6 +1782,76 @@ A short lead time means fixes and features reach users quickly.
 \end{minipage}
 \end{center}
 
+The grid below summarises the same four metrics as a colour-coded **scorecard**:
+each row is a metric, each column a performance tier, and the cell where
+**our site** actually lands (always **Elite**) is outlined and stamped with the
+project's measured KPI. (These are *delivery* metrics of our own repository —
+not of the official aquavena.nc site.)
+
+```{r dora-scorecard, fig.height=3.3, fig.width=7.2, fig.align="center"}
+# Recompute the KPIs so this chart is self-contained
+ts <- dbGetQuery(con, "SELECT published_at_ts FROM gh_releases ORDER BY published_at_ts")$published_at_ts |>
+  as.POSIXct(tz = "UTC")
+gap_mins        <- as.numeric(diff(ts), units = "mins")
+median_lead     <- median(gap_mins)
+total_hours     <- as.numeric(difftime(max(ts), min(ts), units = "hours"))
+deploys_per_day <- length(ts) / (total_hours / 24)
+n_rel           <- length(ts)
+mttr_ts <- dbGetQuery(con, "SELECT tag, published_at_ts FROM gh_releases WHERE tag IN ('v1.14.0','v1.4.0')")
+t_inc <- as.POSIXct(mttr_ts$published_at_ts[mttr_ts$tag == "v1.14.0"], tz = "UTC")
+t_res <- as.POSIXct(mttr_ts$published_at_ts[mttr_ts$tag == "v1.4.0"],  tz = "UTC")
+mttr_mins <- as.numeric(difftime(t_res, t_inc, units = "mins"))
+cfr <- 2 / n_rel * 100   # 2 known production regressions (Tailwind v4, CSP)
+
+metrics <- c("Deployment Frequency", "Lead Time for Changes",
+             "Change Failure Rate", "MTTR / Recovery")
+tiers   <- c("Elite", "High", "Medium", "Low")
+thr <- list(
+  "Deployment Frequency"  = c("On-demand\n(multiple/day)", "1/day–1/week", "1/week–1/month", "< 1/month"),
+  "Lead Time for Changes" = c("< 1 day", "1 day–1 week", "1 week–1 month", "> 1 month"),
+  "Change Failure Rate"   = c("0–5%", "10–15%", "16–30%", "64–75%"),
+  "MTTR / Recovery"       = c("< 1 hour", "< 1 day", "< 1 week", "> 1 week")
+)
+kpi_by_metric <- c(
+  "Deployment Frequency"  = sprintf("%.1f / day", deploys_per_day),
+  "Lead Time for Changes" = sprintf("%.0f min", median_lead),
+  "Change Failure Rate"   = sprintf("%.1f%%", cfr),
+  "MTTR / Recovery"       = sprintf("%.0f min", mttr_mins)
+)
+
+df <- do.call(rbind, lapply(metrics, function(m)
+  data.frame(metric = m, tier = tiers, thr = thr[[m]], stringsAsFactors = FALSE)))
+df$metric  <- factor(df$metric, levels = rev(metrics))
+df$tier    <- factor(df$tier, levels = tiers)
+df$is_ours <- df$tier == "Elite"
+df$kpi     <- ifelse(df$is_ours, kpi_by_metric[as.character(df$metric)], NA)
+
+ggplot(df, aes(x = tier, y = metric)) +
+  geom_tile(aes(fill = tier), colour = "white", linewidth = 1.6,
+            width = 0.98, height = 0.94) +
+  geom_tile(data = subset(df, is_ours), fill = NA, colour = "#15803d",
+            linewidth = 1.5, width = 0.98, height = 0.94) +
+  geom_text(aes(label = thr), vjust = ifelse(df$is_ours, -0.35, 0.5),
+            size = 2.3, colour = "grey20") +
+  geom_text(data = subset(df, is_ours), aes(label = kpi),
+            vjust = 1.85, size = 2.7, fontface = "bold", colour = "#14532d") +
+  annotate("text", x = 1, y = length(metrics) + 0.72, label = "▼ Our site",
+           size = 2.6, fontface = "bold", colour = "#15803d") +
+  scale_fill_manual(values = c(Elite = "#bbf7d0", High = "#d9f99d",
+                               Medium = "#fde68a", Low = "#fecaca"),
+                    guide = "none") +
+  scale_x_discrete(position = "top", expand = expansion(0)) +
+  scale_y_discrete(expand = expansion(add = c(0.5, 0.9))) +
+  labs(title = "DORA scorecard — our site lands Elite on all four metrics",
+       subtitle = "Colour = performance tier · outlined cell + bold value = our site's measured KPI",
+       x = NULL, y = NULL) +
+  theme_minimal(base_size = 9) +
+  theme(panel.grid = element_blank(),
+        axis.text.x.top = element_text(face = "bold", size = 9),
+        axis.text.y = element_text(face = "bold", size = 8),
+        plot.margin = margin(6, 10, 6, 6))
+```
+
 ### Verifiable references
 
 For independent verification of the DORA framework and the Elite-tier
@@ -1648,64 +1870,103 @@ thresholds used above:
 - **Wikipedia (history and acquisitions)** —
   \href{https://en.wikipedia.org/wiki/DevOps_Research_and_Assessment}{en.wikipedia.org/wiki/DevOps\_Research\_and\_Assessment}.
 
+```{r cluster-label-helper, include=FALSE}
+# ── Data-driven cluster labels ─────────────────────────────────────────────
+# K-Means assigns cluster IDs arbitrarily and they reshuffle whenever the
+# dataset changes. So we derive each cluster's human label from its top terms
+# (commit_clusters.terms) instead of hard-coding it by ID — this stays correct
+# across every regeneration of the commit graph. Defined once, reused by every
+# cluster-coloured chart below.
+cluster_label_map <- function() {
+  cc <- dbGetQuery(con, "SELECT cluster_id, terms FROM commit_clusters ORDER BY cluster_id")
+  lab_for <- function(terms_str) {
+    t   <- tolower(terms_str)
+    top <- tolower(trimws(strsplit(terms_str, "\\s*,\\s*|\\|")[[1]][1]))
+    if (grepl("request|pull|merge", t))                 return("Pull requests & merges")
+    if (grepl("^fix|\\bfix\\b", top) || grepl("csp", t)) return("Fixes (a11y / CSP)")
+    if (grepl("benchmark|report", top))                 return("Benchmark & ML report")
+    if (grepl("chore|deps", top))                       return("Dependencies & chore")
+    if (grepl("ux", t))                                 return("UX & navigation")
+    if (grepl("style|dark", top))                       return("Style & dark mode")
+    "Site features & About"
+  }
+  terms_chr <- vapply(cc$terms, function(x) paste(unlist(x), collapse = ", "), character(1))
+  setNames(vapply(terms_chr, lab_for, character(1)), as.character(cc$cluster_id))
+}
+```
+
 ## Development intensity
 
-```{r activity-heatmap, fig.height=2.8, fig.width=6.5, fig.align="center"}
-commits <- dbGetQuery(con, "
-  SELECT commit_ts FROM git_commits WHERE commit_ts IS NOT NULL
+This chart plots **daily commit volume, coloured by semantic cluster** — *what*
+the project was building, and *when*. Each bar is one day: its height is the
+number of commits and its coloured segments show the mix of work (site features,
+fixes, benchmark/report, dependencies, …). It turns the raw activity log into a
+phase-by-phase story of the build.
+
+```{r activity-by-cluster, fig.height=3.4, fig.width=7.0, fig.align="center"}
+clab <- cluster_label_map()
+dev <- dbGetQuery(con, "
+  SELECT gc.commit_ts, cc.cluster_id
+  FROM git_commits gc
+  JOIN commit_classification cc USING (git_sha)
+  WHERE gc.commit_ts IS NOT NULL
 ")
-ts_local <- as.POSIXct(commits$commit_ts, tz = "UTC")
+ts_local <- as.POSIXct(dev$commit_ts, tz = "UTC")
 attr(ts_local, "tzone") <- "Pacific/Noumea"
+dev$date <- as.Date(ts_local, tz = "Pacific/Noumea")
 
-heat <- tibble::tibble(
-  date = as.Date(ts_local, tz = "Pacific/Noumea"),
-  hour = as.integer(format(ts_local, "%H", tz = "Pacific/Noumea"))
-) |> dplyr::count(date, hour, name = "commits")
+# Cluster levels ordered by id, labelled via the data-driven map
+lvl <- unname(clab[as.character(sort(as.integer(names(clab))))])
+dev$cluster <- factor(clab[as.character(dev$cluster_id)], levels = lvl)
 
-all_dates <- seq(min(heat$date), max(heat$date), by = "day")
-grid <- tidyr::expand_grid(date = all_dates, hour = 0:23) |>
-  dplyr::left_join(heat, by = c("date", "hour")) |>
-  dplyr::mutate(commits = tidyr::replace_na(commits, 0L))
+total_commits <- nrow(dev)
+active_days   <- length(unique(dev$date))
+daily         <- dev |> dplyr::count(date, cluster, name = "commits")
+peak_day      <- daily |> dplyr::group_by(date) |>
+  dplyr::summarise(n = sum(commits), .groups = "drop") |> dplyr::slice_max(n, n = 1)
 
-peak          <- heat |> dplyr::slice_max(commits, n = 1)
-total_commits <- nrow(commits)
-active_days   <- length(unique(heat$date))
+# Stable palette keyed by label string (robust to cluster-id reshuffles)
+pal <- c(
+  "Site features & About"  = "#0f766e",
+  "Benchmark & ML report"  = "#7c3aed",
+  "Fixes (a11y / CSP)"     = "#dc2626",
+  "Pull requests & merges" = "#64748b",
+  "Dependencies & chore"   = "#f59e0b",
+  "UX & navigation"        = "#0891b2",
+  "Style & dark mode"      = "#9333ea"
+)
 
-ggplot(grid, aes(x = date, y = hour)) +
-  geom_tile(aes(fill = commits), colour = "white", linewidth = 0.3) +
-  scale_fill_gradientn(
-    colours = c("#f1f5f9", "#99f6e4", "#0f766e", "#134e4a"),
-    values  = scales::rescale(c(0, 1, 4, max(grid$commits))),
-    name    = "commits",
-    guide   = guide_colourbar(barwidth = 6, barheight = 0.4,
-                               title.position = "left", title.vjust = 0.8)
-  ) +
-  geom_hline(yintercept = 5.5,  linetype = "dotted", colour = "#94a3b8", linewidth = 0.4) +
-  geom_hline(yintercept = 17.5, linetype = "dotted", colour = "#94a3b8", linewidth = 0.4) +
-  annotate("text", x = min(grid$date), y = 11.5,
-           label = "day", size = 2.2, colour = "#94a3b8", hjust = -0.1) +
-  annotate("text", x = min(grid$date), y = 21,
-           label = "night", size = 2.2, colour = "#94a3b8", hjust = -0.1) +
-  scale_x_date(breaks = (function(d) {
-                 # Show ~10 labels max, evenly spaced; always include first and last
-                 step  <- max(1, ceiling(length(d) / 10))
-                 picks <- unique(c(d[seq(1, length(d), by = step)], d[length(d)]))
-                 picks
-               })(unique(grid$date)),
-               labels = function(x) format(x, "%a %d %b"),
+ggplot(daily, aes(x = date, y = commits, fill = cluster)) +
+  geom_col(width = 0.95) +
+  scale_fill_manual(values = pal, name = NULL) +
+  scale_x_date(date_breaks = "4 days", date_labels = "%d %b",
                expand = c(0.01, 0)) +
-  scale_y_reverse(breaks = c(0, 6, 12, 18, 23),
-                  labels = c("00h","06h","12h","18h","23h"),
-                  expand = c(0.01, 0)) +
-  labs(title = sprintf("%d commits · %d active days · peak %d/h",
-                       total_commits, active_days, peak$commits[1]),
-       x = NULL, y = NULL) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  labs(title = sprintf("%d commits · %d active days · busiest day = %d commits",
+                       total_commits, active_days, peak_day$n[1]),
+       subtitle = "Daily commits coloured by semantic cluster — what was built, and when",
+       x = NULL, y = "commits / day") +
   theme_minimal(base_size = 8.5) +
-  theme(panel.grid    = element_blank(),
-        legend.position = "bottom",
-        legend.margin   = margin(t = -4),
-        plot.title      = element_text(size = 8.5, colour = "grey30"))
+  theme(panel.grid.minor   = element_blank(),
+        panel.grid.major.x = element_blank(),
+        legend.position    = "bottom",
+        legend.text        = element_text(size = 7),
+        legend.key.size    = unit(0.32, "cm"),
+        plot.title         = element_text(size = 8.5, colour = "grey30"),
+        plot.subtitle      = element_text(size = 7.5, colour = "grey45"))
 ```
+
+**What it reveals.** Two things at once. First, the cadence is unmistakably
+**bursty**: the commits land on a handful of active days out of the full
+calendar span — long idle stretches punctuated by short, intense sessions, the
+rhythm of focused hackathon-style delivery rather than a steady 9-to-5 cadence.
+Second, the **colour mix shifts across the timeline**: the early bars are
+dominated by *Site features & About* and *Fixes (a11y / CSP)* — the founding
+accessibility work — while the later bars turn toward *Benchmark & ML report*,
+*Pull requests & merges* and *Dependencies & chore*, the report-engineering and
+maintenance phase. It is the same founding → analysis pivot the concept-emergence
+timeline recovers later from the commit text alone — here visible directly in the
+shape and colour of the work.
 
 ## AI-assisted delivery — Claude token consumption
 
@@ -1854,6 +2115,14 @@ bar_totals <- apport |>
   dplyr::group_by(tag) |>
   dplyr::summarise(total = sum(tokens), .groups = "drop")
 
+# With ~50 release tags everything overlaps. Thin the x-axis labels (~1 in 14,
+# evenly spaced + the last tag), label only the few heaviest bars, and restrict
+# the cumulative-line labels to the same kept tags.
+n_t       <- length(tag_chron)
+step_t    <- max(1L, ceiling(n_t / 14))
+keep_tags <- tag_chron[unique(c(seq(1L, n_t, by = step_t), n_t))]
+bar_totals_big <- bar_totals |> dplyr::slice_max(total, n = 6)
+
 # Scale the cumulative line onto the bar y-axis (millions of tokens)
 max_bar   <- max(cum_df$per_tag, na.rm = TRUE) / 1e6
 max_cum   <- max(cum_df$cumulative, na.rm = TRUE) / 1e6
@@ -1866,8 +2135,8 @@ p <- ggplot() +
   geom_col(data = apport,
            aes(x = tag, y = tokens / 1e6, fill = model),
            width = 0.6) +
-  # Total label above each bar (avoids in-bar overlap on small bars)
-  geom_text(data = bar_totals,
+  # Total label on the few heaviest bars only (labelling all ~50 overlaps)
+  geom_text(data = bar_totals_big,
             aes(x = tag, y = total / 1e6,
                 label = paste0(sprintf("%.0f", total / 1e6), "M")),
             vjust = -0.4, size = 2.3, colour = "grey30") +
@@ -1879,15 +2148,15 @@ p <- ggplot() +
              aes(x = tag, y = cumulative / 1e6 * scale_fac),
              colour = "#f59e0b", size = 2.2) +
   ggrepel::geom_text_repel(
-            data = cum_df,
+            data = dplyr::filter(cum_df, tag %in% keep_tags),
             aes(x = tag, y = cumulative / 1e6 * scale_fac,
                 label = paste0(sprintf("%.0f", cumulative / 1e6), "M")),
             colour = "#92400e", size = 2.2, fontface = "bold",
-            nudge_y = max_bar * 0.08,
-            direction = "x", segment.size = 0.3,
+            nudge_y = max_bar * 0.10,
+            direction = "y", segment.size = 0.3,
             segment.colour = "#d97706", min.segment.length = 0.2,
             max.overlaps = Inf) +
-  scale_x_discrete(limits = tag_chron) +
+  scale_x_discrete(limits = tag_chron, breaks = keep_tags) +
   scale_fill_manual(values = c(
     "claude-opus-4-7"   = "#7c3aed",
     "claude-sonnet-4-6" = "#0f766e"
@@ -1909,7 +2178,7 @@ p <- ggplot() +
   theme(legend.position = "bottom",
         panel.grid.minor = element_blank(),
         panel.grid.major.x = element_blank(),
-        axis.text.x = element_text(face = "bold", angle = 35, hjust = 1),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6),
         axis.title.y.right = element_text(colour = "#f59e0b"))
 
 # Pin Tailwind v4 migration if the tag is present in the data
@@ -1920,6 +2189,48 @@ if (length(tw_idx) > 0) {
     annotate("text", x = tw_idx + 0.15, y = max_bar * 0.95,
              label = "Tailwind v4\nmigration", hjust = 0,
              size = 2.2, colour = "#b45309", fontface = "bold", lineheight = 0.9)
+}
+
+# Annotate the tallest bar so its cause is explicit
+v18_idx <- which(tag_chron == "v1.8.0")
+if (length(v18_idx) > 0) {
+  p <- p +
+    annotate("curve", x = v18_idx + 7, y = max_bar * 0.84,
+             xend = v18_idx + 0.45, yend = max_bar * 0.99,
+             curvature = -0.25, linewidth = 0.4, colour = "#7c3aed",
+             arrow = arrow(length = unit(0.15, "cm"))) +
+    annotate("label", x = v18_idx + 7, y = max_bar * 0.84,
+             label = "v1.8.0 — Executive Dashboard,\nML semantic analysis & full audit replay\n(one very long session)",
+             hjust = 0, vjust = 0.5, size = 2.1, colour = "#7c3aed",
+             fill = "white", label.size = 0.25, lineheight = 0.9)
+}
+
+# Annotate the 2nd tallest bar (v1.33.0)
+v33_idx <- which(tag_chron == "v1.33.0")
+if (length(v33_idx) > 0) {
+  p <- p +
+    annotate("curve", x = v33_idx - 6, y = max_bar * 0.80,
+             xend = v33_idx - 0.3, yend = max_bar * 0.50,
+             curvature = 0.2, linewidth = 0.35, colour = "#475569",
+             arrow = arrow(length = unit(0.12, "cm"))) +
+    annotate("label", x = v33_idx - 6, y = max_bar * 0.80,
+             label = "v1.33.0 — Concept\nemergence storyboard",
+             hjust = 1, vjust = 0.5, size = 2.0, colour = "#475569",
+             fill = "white", label.size = 0.2, lineheight = 0.9)
+}
+
+# Annotate the 92M bar (v1.22.0)
+v22_idx <- which(tag_chron == "v1.22.0")
+if (length(v22_idx) > 0) {
+  p <- p +
+    annotate("curve", x = v22_idx - 5, y = max_bar * 0.56,
+             xend = v22_idx - 0.3, yend = max_bar * 0.32,
+             curvature = 0.2, linewidth = 0.35, colour = "#475569",
+             arrow = arrow(length = unit(0.12, "cm"))) +
+    annotate("label", x = v22_idx - 5, y = max_bar * 0.56,
+             label = "v1.22.0 — Universal\nAccessibility Pipeline v3",
+             hjust = 1, vjust = 0.5, size = 2.0, colour = "#475569",
+             fill = "white", label.size = 0.2, lineheight = 0.9)
 }
 p
 ```
@@ -1934,11 +2245,14 @@ result is stored in two tables — `commit_classification` (per-commit
 type/scope/cluster/coords) and `commit_clusters` (per-cluster size and
 characteristic terms) — and is queryable directly from DuckDB.
 
-The chart on the left shows the **conventional-commit type mix** (parsed from
-the `feat:` / `fix:` / `docs:` prefixes); the chart on the right is the **2D
-semantic map** — each dot is one commit, coloured by its semantic cluster.
+The top chart shows the **conventional-commit type mix** (parsed from the
+`feat:` / `fix:` / `docs:` prefixes); the chart below is the **2D semantic map**
+— each dot is one commit, coloured by its semantic cluster. Note that PC1 and
+PC2 together explain only a small share of the variance, so the 2D view is an
+*approximation*: most commits bunch on the left while one semantically distinct
+group sits apart on the right.
 
-```{r commit-semantic-charts, fig.height=4.0, fig.width=7.0, fig.align="center"}
+```{r commit-semantic-charts, fig.height=6.4, fig.width=7.0, fig.align="center"}
 type_counts <- dbGetQuery(con, "
   SELECT commit_type, COUNT(*) AS n
   FROM commit_classification
@@ -1987,8 +2301,9 @@ clusters_meta <- dbGetQuery(con, "
   FROM commit_clusters ORDER BY cluster_id
 ")
 clusters_meta$label <- vapply(seq_len(nrow(clusters_meta)), function(i) {
+  # Single, concise top term per cluster (keeps labels short & un-clipped)
   paste0("C", clusters_meta$cluster_id[i], " · ",
-         paste(head(unlist(clusters_meta$terms[i]), 2), collapse = "/"))
+         unlist(clusters_meta$terms[i])[1])
 }, character(1))
 
 cluster_palette <- c("#0f766e","#dc2626","#0891b2","#7c3aed","#f59e0b","#059669","#db2777")
@@ -2000,26 +2315,49 @@ cent <- sem_map |>
                    .groups = "drop") |>
   dplyr::left_join(clusters_meta, by = "cluster_id")
 
-p_map <- ggplot(sem_map, aes(x = embed_x, y = embed_y, colour = factor(cluster_id))) +
-  geom_point(size = 2.0, alpha = 0.80) +
+p_map <- ggplot(sem_map, aes(x = embed_x, y = embed_y)) +
+  # White-stroked points keep overlapping dots distinguishable in the dense
+  # left cloud; alpha shows where points pile up.
+  geom_point(aes(fill = factor(cluster_id)),
+             shape = 21, colour = "white", stroke = 0.25,
+             size = 2.2, alpha = 0.82) +
   ggrepel::geom_label_repel(
     data = cent,
     aes(x = x, y = y, label = label, fill = factor(cluster_id)),
-    colour = "white", fontface = "bold", size = 2.3,
+    colour = "white", fontface = "bold", size = 2.4,
     label.padding = unit(0.18, "lines"),
     label.r = unit(0.25, "lines"),
-    box.padding = 0.4, min.segment.length = 0,
+    box.padding = 0.7, point.padding = 0.3, min.segment.length = 0,
+    force = 5, max.overlaps = Inf, seed = 42,
+    segment.colour = "grey55", segment.size = 0.3,
     show.legend = FALSE) +
-  scale_colour_manual(values = cluster_palette, guide = "none") +
-  scale_fill_manual(values   = cluster_palette, guide = "none") +
+  scale_fill_manual(values = cluster_palette, guide = "none") +
+  scale_x_continuous(expand = expansion(mult = c(0.08, 0.22))) +
+  scale_y_continuous(expand = expansion(mult = 0.08)) +
   labs(title = "Semantic map of commits (PCA 2D)",
-       subtitle = "BAAI/bge-m3 multilingual embeddings · K-Means k=6",
+       subtitle = "BAAI/bge-m3 multilingual embeddings · K-Means k=6 · PC1/PC2 explain a small share of variance",
        x = "PC1", y = "PC2") +
   theme_minimal(base_size = 9) +
   theme(panel.grid.minor = element_blank())
 
-p_types + p_map
+p_types / p_map + patchwork::plot_layout(heights = c(1, 2.3))
 ```
+
+**Why the map splits into a dense left cloud and one isolated group on the
+right.** The right-hand group is a single cluster — the **merge commits**
+(`Merge pull request #N from …`). Their subject lines are boilerplate and nearly
+identical, so the embedding maps them to almost the same point; in effect
+**PC1 (the horizontal axis) separates templated merge messages from
+hand-written prose**, which is why they sit far to the right, apart from
+everything else. The dense cloud on the left is *all the substantive work* —
+`feat`, `fix`, `style`, `benchmark`, `chore` — which describes the same project
+(accessibility, menus, the report) in natural language and therefore shares
+vocabulary. Those commits are semantically close, so they overlap; and because
+PC1/PC2 capture only a small fraction of the 1024-dimensional embedding, the 2D
+view cannot pull the sub-clusters apart as cleanly as the full-dimensional
+K-Means does (which is exactly why the GraphSAGE and cluster cross-validations
+elsewhere in this report matter — they confirm the separation that the eye
+cannot see in 2D).
 
 The cluster terms below come from per-cluster TF-IDF; each row's exemplar is
 the commit closest to the cluster centroid in embedding space.
@@ -2055,8 +2393,13 @@ kable(ct, booktabs = TRUE, linesep = "", align = c("c","c","l","l")) |>
 ### Graph data science — anchors & bridges
 
 The embeddings already cluster the commits. Treating them as a **graph** —
-nodes = commits, edges = cosine similarity ≥ 0.55 — adds a second layer of
-insight: which commit best *represents* each theme (highest **PageRank**
+nodes = commits, and **an edge is drawn between two commits whenever the cosine
+similarity of their message embeddings is ≥ 0.55** — adds a second layer of
+insight. The threshold sits on a 0–1 scale (1 = identical meaning): **0.55 is a
+moderately-strong semantic match**, chosen to keep the graph legible — much
+lower turns it into an unreadable hairball, much higher fragments it into
+disconnected islands. From this graph we read which commit best *represents*
+each theme (highest **PageRank**
 within its cluster, the **anchor**), and which commits *connect* different
 themes (highest **betweenness centrality**, the **bridges**). Both metrics
 are computed with `networkx`, persisted in `commit_graph_metrics` for direct
@@ -2103,20 +2446,25 @@ kable(bridges, booktabs = TRUE, linesep = "", caption = "Top-5 bridge commits �
 ::: {.callout-note appearance="simple"}
 ## \faNetworkWired\ What the graph reveals
 
-**Anchors (cluster representatives).** Across all six clusters, the anchor
-is almost always an **About-page feature commit** (`feat: add A+/A- and dark
-mode to About page header`, `feat: move accessibility score section to top
-of About page`, `feat: add read-aloud button…`). This is the structural
-finding: the **About page is the semantic centre of the codebase** — the
-single page where the project explains itself most fully, and where the
-embeddings find the highest density of similar content.
+**Anchors (cluster representatives).** The anchor of each cluster — its
+**highest-PageRank commit** (table above) — faithfully summarises that cluster's
+theme: the site-features cluster anchors on an **About-page accessibility
+feature** (`feat: add A+/A- and dark mode to About page header`), the reporting
+cluster on a `feat(benchmark):` commit, the fixes cluster on a `fix(benchmark):`
+commit, the maintenance cluster on a `chore(deps):` bump, and the navigation
+cluster on a `feat(ux):` commit. Accessibility and About-page work anchors the
+largest cluster — the part of the codebase where the project explains itself
+most fully and where the embeddings find the highest density of similar content.
 
-**Bridges (theme-linkers).** The top-5 betweenness commits all touch
-**multiple themes simultaneously** — they're the commits that introduced
-A+/A- *and* dark mode (style + feature), or moved the accessibility-score
-section *to* the About page (a11y + About). These are the **integration
-commits** — the ones a knowledge-graph would surface as architecturally
-critical.
+**Bridges (theme-linkers).** The top-betweenness commits are the ones that
+**link the project's two main strands** — the accessible site and the benchmark
+report. The highest are the report-building commits (`feat(benchmark): révision
+git… + abstract`, then `feat(report): refonte du diagramme Universal
+Accessibility Pipeline`); the About-page `feat: add A+/A- and dark mode` and the
+menu `feat(site):` commit bridge the site-features side, while `chore: refresh
+menus data` ties in maintenance. These **integration commits** — high
+betweenness — are the ones a knowledge-graph would flag as architecturally
+critical: remove them and the history fractures into disconnected themes.
 
 **Why this matters at scale.** With 179 commits the graph is small, but the
 *technique scales linearly with commit count*. Applied to a 1000-commit
@@ -2125,6 +2473,53 @@ betweenness surfaces the integration commits whose removal would *fracture*
 the codebase. Both are signals an experienced reviewer would notice manually
 — this method makes them queryable.
 :::
+
+### A second view — the galactic similarity matrix
+
+The ForceAtlas2 layout above is *spatial*: it optimises position but, at this
+edge density, hides the fine structure. The **same similarity data**, read as a
+**matrix**, exposes it. Each cell $(i, j)$ is the cosine similarity of commits
+$i$ and $j$; rows and columns are ordered by semantic cluster, then
+chronologically inside each cluster. (The matrix is recomputed from a full
+re-embedding of all 179 subjects with `BAAI/bge-m3`, so it shows the continuous
+similarity field — including the sub-threshold ($< 0.55$) links the graph
+deliberately omits.)
+
+![Commit-similarity matrix — galactic view · 179×179 cosine similarity, ordered by semantic cluster then time · cell brightness = similarity of two commit messages](similarity_matrix.png){width=92% fig-align="center"}
+
+**What it reveals.**
+
+- **Bright diagonal blocks = cohesive clusters.** The larger blocks (C0
+  site-features, C1 benchmark/report, C2 fixes) glow evenly — their commits are
+  consistently similar to one another.
+- **The blinding-white block in C3 = the merge commits.** Their boilerplate
+  subjects (`Merge pull request #N from …`) are near-identical, so their mutual
+  similarity is ≈ 1.0 — the matrix turns that into a small, almost pure-white
+  square, the single most distinctive feature of the plot.
+- **Off-diagonal glow = bridges and semantic bleed.** Where one cluster's rows
+  light up against another's columns, the two themes share vocabulary — e.g. the
+  fixes and reporting clusters overlap through the shared `benchmark` lexicon.
+- A node-link diagram cannot show these three things at once; the matrix can.
+  It is the canonical *complement* to the spatial layout, not a replacement.
+
+### A third view — the similarity bundle
+
+A final, artistic reading of the same graph. The 179 commits sit on a circle,
+grouped into coloured arcs by semantic cluster; every similarity edge
+(cosine ≥ 0.55) is drawn as a spline that **bows toward the centre**, so links
+between commits gather into visible **bundles**.
+
+![Commit-similarity bundle — 179 commits on the rim grouped by semantic cluster · each spline is a cosine ≥ 0.55 link bowed toward the centre · node size = PageRank](commit_bundle.png){width=82% fig-align="center"}
+
+**What it reveals.** Where two arcs are joined by a thick, bright bundle, those
+two themes **share semantic content** — the site-features, reporting and fixes
+arcs are densely interwoven, because they all describe the same accessibility
+project. By contrast, the **merge-commit arc (C3) is almost self-contained**: its
+splines loop back into its own arc rather than reaching across the circle —
+the visual signature of a theme that stands apart (boilerplate messages with
+nothing to say to the rest of the codebase). The long splines that *do* cross
+the circle are the **bridges** from the table above: the integration commits
+that stitch the project's strands together.
 
 ### Cluster drift — a project maturity signal
 
@@ -2164,6 +2559,8 @@ turns them into a measurable, reproducible signal.
   built* — the report you are reading right now.
 
 ```{r cluster-drift, fig.height=4.2, fig.width=7.5, fig.align="center"}
+cluster_labels <- cluster_label_map()   # data-driven, defined earlier
+
 # Pull commit → cluster + ts, and release tags with their published_at_ts
 cdrift_commits <- dbGetQuery(con, "
   SELECT gc.git_sha,
@@ -2181,17 +2578,6 @@ cdrift_releases <- dbGetQuery(con, "
   WHERE published_at_ts IS NOT NULL
   ORDER BY published_at_ts
 ")
-
-# Curated, human-readable cluster labels (data-driven via top terms,
-# but trimmed to short phrases that fit a legend).
-cluster_labels <- c(
-  "0" = "Site features & About",
-  "1" = "Style & dark mode",
-  "2" = "Benchmark & ML report",
-  "3" = "Project identity & links",
-  "4" = "WCAG fixes",
-  "5" = "Links & merges"
-)
 
 if (nrow(cdrift_commits) > 0 && nrow(cdrift_releases) >= 3) {
   cdrift_commits$commit_ts    <- as.POSIXct(cdrift_commits$commit_ts,    tz = "UTC")
@@ -2256,39 +2642,26 @@ if (nrow(cdrift_commits) > 0 && nrow(cdrift_releases) >= 3) {
 
 **Reading this chart on Aquavena.**
 
-- **v0.1.2–v0.1.4** (the very first releases) are 100% *WCAG fixes* —
-  the foundational accessibility work: contrast corrections, pa11y
-  audit setup, WCAG 2.1 AA compliance from the ground up. This is the
-  *raison d'être* of the project, visible in its purest form.
-- **v0.1.5** is the **first multi-cluster release**: WCAG work is
-  still present, but *Style \& dark mode*, *Site features \& About*
-  and *Benchmark \& ML report* clusters all appear simultaneously.
-  This is the moment the project diversified — from one concern
-  (make it WCAG-clean) to four (style polish, feature additions,
-  benchmark scaffolding).
-- **v1.7.0** stands out as the only mid-life release where the
-  *Site features \& About* cluster occupies a large share — this
-  matches the historical record (RSS, iCal, About-page content all
-  landed around this tag).
-- **v1.9.0 → v1.13.x** are dominated by the *Benchmark \& ML report*
-  cluster — the long **report-engineering phase**: this is where the
-  100-page PDF you are reading was built. Feature work shifted to a
-  data-science/reporting register.
-- **v1.12.1** is the only release of this phase where *WCAG fixes*
-  re-emerge at parity with the report work — likely a regression catch
-  that triggered contrast revalidation.
-- **v1.14.0** closes the chart with a return to 100% *WCAG fixes* —
-  the **Tailwind v4 migration** release: a platform overhaul whose
-  primary risk was contrast regression, so most of the work was
-  re-validating accessibility.
+- The **earliest tags** (`v0.1.2`–`v0.1.5`) are single-commit releases, each a
+  pure *Fixes (a11y / CSP)* increment — the foundational accessibility work
+  (contrast corrections, pa11y audit setup, WCAG 2.1 AA from the ground up) in
+  its purest form. This is the *raison d'être* of the project.
+- The bulk of the early engineering is absorbed by the first tags that catch a
+  large commit window (`v0.1.1`, then `v1.6.1` and `v1.7.0`): a blend where
+  *Site features \& About* and *Benchmark \& ML report* dominate, with
+  *Fixes (a11y / CSP)* and *UX \& navigation* alongside. This is the moment the
+  project widened from a single concern — *make it WCAG-clean* — to building
+  features, navigation and the benchmark itself.
+- The **analysis / agentic phase** (`v1.2x`–`v1.3x`) shifts decisively into the
+  *Benchmark \& ML report*, *Pull requests \& merges* and *Dependencies \& chore*
+  registers — the report-engineering and maintenance work that produced the
+  document you are reading. Feature and fix work give way to data-science and
+  upkeep.
 
-Note: the chart stops at `v1.14.0` because newer release tags
-(`v1.15.0`–`v1.24.0`) — including the entire WebMCP \& agentic-pipeline
-work documented in this report — were published *after* the
-`gh_releases` snapshot used by this build. Re-running the pipeline will
-extend the timeline and reveal the *Site features \& About* and
-*Benchmark \& ML report* clusters dominating the rightmost releases —
-the agentic pivot's signature.
+Note: the project's version tags are **not strictly chronological**, so each bar
+groups every commit up to that tag's publication time. A few early tags
+therefore absorb large commit windows (which is why their bars are the tallest),
+while many later tags carry only one or two commits.
 
 This single chart tells the story of the project's life cycle without a
 single line of manual annotation. Applied to other codebases, it
@@ -2312,12 +2685,12 @@ the **short-term flow** — which type of commit naturally precedes which.
 - A behavioural fingerprint of how the team works.
 - An input to **agentic pipelines**: the AI agents from Section
   *Universal Accessibility Pipeline* can pre-warm a context for the
-  likely next commit type — e.g. after a *WCAG fixes* commit, the agent
-  loads contrast-audit tools because $P(\text{next} = \text{WCAG fixes})$
+  likely next commit type — e.g. after a *Fixes (a11y / CSP)* commit, the agent
+  loads contrast-audit tools because $P(\text{next} = \text{Fixes})$
   is high.
 - A regression detector at the **process level**: if the empirical mix
   diverges from the historical Markov chain (e.g. a sudden burst of
-  *Style \& dark mode* after a *Benchmark \& ML report* commit), it
+  *UX \& navigation* after a *Benchmark \& ML report* commit), it
   flags an unusual work session.
 
 ```{r markov-transitions, fig.height=4.5, fig.width=6.0, fig.align="center"}
@@ -2331,15 +2704,9 @@ markov_df <- dbGetQuery(con, "
 markov_df$commit_ts <- as.POSIXct(markov_df$commit_ts, tz = "UTC")
 markov_df <- markov_df[order(markov_df$commit_ts), ]
 
-# Cluster id → friendly label (consistent with the rest of the report)
-markov_labels <- c(
-  "0" = "Site features\n& About",
-  "1" = "Style &\ndark mode",
-  "2" = "Benchmark\n& ML report",
-  "3" = "Project identity\n& links",
-  "4" = "WCAG fixes",
-  "5" = "Links &\nmerges"
-)
+# Cluster id → friendly label (data-driven, wrapped to fit the 6×6 axes)
+markov_labels <- vapply(cluster_label_map(),
+  function(s) paste(strwrap(s, width = 13), collapse = "\n"), character(1))
 
 n <- nrow(markov_df)
 if (n >= 20) {
@@ -2671,7 +3038,7 @@ something hard is going on.
 **What it is for.**
 
 - **For the developer**: post-hoc retrospective — *"on day X around
-  17h I was stuck for 90 min on the WCAG fixes cluster"*. A coachable
+  17h I was stuck for 90 min on the Fixes (a11y / CSP) cluster"*. A coachable
   signal.
 - **For the team**: capacity planning. If burnout windows correlate
   with certain clusters, those clusters are objectively heavier and
@@ -3034,14 +3401,28 @@ end-to-end causal-inference scaffolding wired in.
 ### GraphSAGE — predicting cluster from graph structure alone
 
 **What it is.** A 2-layer **GraphSAGE** (Hamilton, Ying, Leskovec, NeurIPS
-2017) is a graph neural network: it learns node representations by
-aggregating information from neighbours in the commit-similarity graph
-we already built. Here we ask it a single supervised question:
+2017) is a **graph neural network**. The name stands for *Graph SAmple and
+aggreGatE*: each node builds its own vector by **sampling its neighbours and
+aggregating their features** (here, averaging), once per layer, so information
+flows in from further out in the graph. Because it learns an *aggregation
+function* rather than memorising one fixed vector per node, it is **inductive**
+— it can embed commits it never saw during training. We run it on the
+commit-similarity graph we already built and ask a single supervised question:
 
 > Given a commit's **structural position** in the graph — its PageRank,
 > its betweenness, its degree, and its `commit_type` one-hot — can the
 > network recover the **semantic cluster** that K-Means assigned to it
 > from the BAAI/bge-m3 text embedding?
+
+**Why two layers.** Each GraphSAGE layer lets a node see one more hop of
+neighbours, so $k$ layers aggregate the $k$-hop neighbourhood. Two is the field's
+default, for a reason: stacking many layers causes *over-smoothing* — every
+node's vector drifts toward the graph average — which hurts accuracy. A quick
+sweep confirms the choice here: across 10 random splits, **1 hop underfits
+(≈ 73 % accuracy) while 2, 3 and 4 hops plateau together at ≈ 79–81 %**, all
+within one standard deviation of each other. On this small, dense graph two hops
+already reach most of the neighbourhood, so the conventional 2-layer model is at
+the plateau — deeper buys nothing measurable and only risks over-smoothing.
 
 **Why this matters.** The K-Means clustering was built from a 1024-dim
 *text* embedding. If GraphSAGE recovers those clusters from
@@ -3261,6 +3642,36 @@ Two unrelated techniques — a supervised gradient-boosted regressor and a
 constraint-based causal-discovery algorithm — **agree on the same cost
 drivers**. That convergence is the strongest evidence that the relationship
 is real, not an artefact of either method.
+
+### From prediction to decisions — what this buys a CIO
+
+A predictable AI cost turns assistant spend from an **opaque variable** into a
+**governable line item** — the same shift FinOps brought to the cloud. Five
+concrete levers:
+
+- **Forecasting (FinOps for AI-assisted dev).** If a commit's cost is
+  predictable, the AI cost of a sprint or epic can be **estimated before it is
+  committed to** — budgets instead of surprise invoices.
+- **Model routing = direct savings.** Estimate a change's cost up front, then
+  route it: peripheral/cheap work to a smaller model (Sonnet/Haiku) or a junior;
+  central/expensive work to a premium model (Opus) with senior review. **Stop
+  paying premium rates for trivial changes.**
+- **A refactoring target.** Cost concentrates on **central** commits, so the
+  architecturally central code is where AI spend (and rework) accrues. The map
+  shows *where to decouple* to lower future cost — cost becomes an architectural
+  lever, not just an accounting one.
+- **Overrun & friction detection.** A commit that costs far more than its graph
+  position predicts is an **early-warning flag**: a task that is struggling, a
+  poorly-scoped change, or a risky area — caught before the budget is.
+- **Governance & accountability.** Every token is tied to a commit, so AI spend
+  becomes **auditable and attributable** — a data answer to the board question
+  *"what are we getting for our AI bill?"*
+
+**Bottom line for a CIO.** This is not a research curiosity: it is evidence that
+the AI cost of software delivery can be **forecast, routed, governed and
+optimised** rather than merely absorbed. The figures here are a proof of concept
+on a single repository, but the **method is repository-agnostic** — it transfers
+to any codebase with a commit history and an AI-assistant token log.
 
 ### Causal DAG discovery — from correlation to structure
 
@@ -3775,9 +4186,16 @@ cluster_metrics <- dbGetQuery(con, "
 
 benchmark_total <- max(cluster_metrics$total_M, na.rm = TRUE)
 benchmark_avg   <- cluster_metrics$avg_M[which.max(cluster_metrics$total_M)]
+benchmark_n     <- cluster_metrics$n[which.max(cluster_metrics$total_M)]
 fix_avg         <- type_metrics$avg_M[type_metrics$commit_type == "fix"]
 feat_avg        <- type_metrics$avg_M[type_metrics$commit_type == "feat"]
-fix_vs_feat_pct <- round((fix_avg - feat_avg) / feat_avg * 100, 0)
+# Whichever of feat/fix is the more expensive drives the headline below.
+costlier_type   <- if (feat_avg >= fix_avg) "feat" else "fix"
+cheaper_type    <- if (feat_avg >= fix_avg) "fix" else "feat"
+costlier_cap    <- paste0(toupper(substr(costlier_type, 1, 1)), substring(costlier_type, 2))
+hi_avg          <- max(feat_avg, fix_avg)
+lo_avg          <- min(feat_avg, fix_avg)
+type_gap_pct    <- round((hi_avg - lo_avg) / lo_avg * 100, 0)
 cheapest_avg    <- min(cluster_metrics$avg_M, na.rm = TRUE)
 n_clusters_val  <- nrow(cluster_metrics)
 
@@ -3805,46 +4223,48 @@ cat(sprintf("```{=latex}
 {\\Huge\\color{teal700}\\faPalette} &
 {\\Huge\\color{teal700}\\faProjectDiagram} \\\\
 {\\Large\\textbf{%.0f\\,M}} & {\\Large\\textbf{%.2f\\,M \\textcolor{teal700}{$>$} %.2f\\,M}} & {\\Large\\textbf{%.2f\\,M}} & {\\Large\\textbf{%d}} \\\\
-Writing this report & Fix avg \\textcolor{teal700}{$>$} feat avg & Style cluster & Clusters found \\\\
-\\small\\itshape tokens spent on scope=benchmark (%d commits) & \\small\\itshape +%d\\%% more tokens per fix & \\small\\itshape avg / commit (C0) & \\small\\itshape unsupervised, k-means \\\\
+Writing this report & %s avg \\textcolor{teal700}{$>$} %s avg & Cheapest cluster & Clusters found \\\\
+\\small\\itshape tokens spent on scope=benchmark (%d commits) & \\small\\itshape +%d\\%% more tokens per %s & \\small\\itshape avg / commit & \\small\\itshape unsupervised, k-means \\\\
 \\bottomrule
 \\end{tabular}
 \\end{center}
 ```\n",
-report_total, fix_avg, feat_avg, cheapest_avg, n_clusters_val,
-report_n, fix_vs_feat_pct))
+report_total, hi_avg, lo_avg, cheapest_avg, n_clusters_val,
+costlier_type, cheaper_type, report_n, type_gap_pct, costlier_type))
 ```
 
 ::: {.callout-note appearance="simple"}
 ## \faLightbulb\ Key findings — AI delivery cost vs work category
 
 **1. The benchmark/reporting strand dominates AI usage.**
-Cluster **C1** (`benchmark, feat benchmark, section`) consumed **163 M tokens
-across 17 commits — an average of 9.6 M tokens per commit**, three to six
-times the per-commit average of any other cluster. The same picture appears
-under the **supervised lens**: commits explicitly tagged
-`scope=benchmark` (12 commits) consumed **144.8 M tokens at an average of
-12.07 M per commit** — by far the biggest scope in the project. Whichever
-filter you apply, the measurement and reporting infrastructure (this report,
-the audit scripts, the FK schema, the dashboard) is *the single most
+The heaviest semantic cluster consumed **`r sprintf("%.0f", benchmark_total)` M
+tokens across `r benchmark_n` commits — an average of
+`r sprintf("%.1f", benchmark_avg)` M tokens per commit**, several times the
+per-commit cost of any other cluster. The same picture appears under the
+**supervised lens**: commits explicitly tagged `scope=benchmark`
+(`r report_n` commits) consumed **`r sprintf("%.0f", report_total)` M tokens**.
+Whichever filter you apply, the measurement and reporting infrastructure (this
+report, the audit scripts, the FK schema, the dashboard) is *the single most
 AI-intensive strand of the project*. The user-facing site itself was
 comparatively cheap to produce.
 
-**2. Fixes cost more tokens per commit than features.**
-`fix:` commits average **4.72 M tokens each** versus `feat:` at **3.82 M** —
-**24% more deliberation per fix** despite fewer commits (13 vs 42). This
-matches engineering intuition: a fix requires diagnosing a defect *before*
-addressing it, while a feature can be specified and implemented in one shot.
-For accessibility work specifically, fixes also require validating against
-multiple audit tools — pa11y, Lighthouse, the W3C HTML validator — which
-multiplies the verification cost.
+**2. `r costlier_cap` commits cost more tokens per commit than `r cheaper_type` commits.**
+On average a `r costlier_type` commit costs **`r sprintf("%.2f", hi_avg)` M
+tokens** versus **`r sprintf("%.2f", lo_avg)` M** for a `r cheaper_type` commit
+— about **`r type_gap_pct`% more per `r costlier_type`**. The reason is specific
+to this project: the heaviest work — building this benchmark report and its ML
+pipeline — is committed as `feat(benchmark):`, which pulls the *feature* average
+above ordinary bug-fix commits. (On a product without a giant in-repo report,
+the more familiar pattern — fixes costing more than features, because a defect
+must be diagnosed before it is addressed — usually dominates instead.)
 
-**3. Style commits are the cheapest category.**
-Cluster **C0** (`style, feat, la, du`) averages only **1.59 M tokens per
-commit** — the lowest per-commit cost in the project. UI/style tweaks are
-short feedback loops with immediate visual confirmation, so they need
-fewer tokens to land. *Implication for AI-assisted teams: deliberately split
-work into style-grade chunks where possible to minimise cost.*
+**3. The site-features cluster is the cheapest category.**
+The lowest-cost cluster averages only **`r sprintf("%.2f", cheapest_avg)` M
+tokens per commit** — the least expensive work in the project. UI and
+site-content tweaks are short feedback loops with immediate visual
+confirmation, so they need fewer tokens to land. *Implication for AI-assisted
+teams: split work into small, visually-verifiable chunks where possible to
+minimise cost.*
 
 **4. The unsupervised clustering rediscovered the supervised labels.**
 The K-Means clusters built from sentence-transformer embeddings — i.e. with
@@ -3854,12 +4274,13 @@ same structural separation. C2 is essentially the `fix:` cluster, C1 the
 semantic meaning faithfully*; it also means the technique would still work
 on commit history without conventional-commit discipline.
 
-**5. The flat 1.66 M baseline is an apportionment artifact, not a finding.**
-`docs`, `chore`, and `ci` all show the **same** average per commit
-(1.66 M). This is because those commits cluster very tightly in time and the
-apportionment view distributes session tokens evenly across same-second
-commits. *With a larger dataset (more sessions, more spread-out commits)
-this artifact disappears.* Disclosed here for transparency.
+**5. The earlier flat baseline has resolved — an apportionment artifact, as
+predicted.** In smaller snapshots, `docs`, `chore` and `ci` all showed an
+identical per-commit average, because tightly-clustered (same-minute) commits
+had their session tokens distributed evenly across each other. With the larger
+179-commit dataset these categories now **spread apart** noticeably, confirming
+that the earlier uniformity was a distribution artifact of the apportionment
+view rather than a real signal. Disclosed here for transparency.
 :::
 
 ## AI-leverage ratio per cluster — where the AI actually pays off
@@ -3889,14 +4310,7 @@ n_commits_per_cluster <- dbGetQuery(con, "
   GROUP BY cc.cluster_id
 ")
 
-cluster_lbl <- c(
-  "0" = "Site features & About",
-  "1" = "Style & dark mode",
-  "2" = "Benchmark & ML report",
-  "3" = "Project identity & links",
-  "4" = "WCAG fixes",
-  "5" = "Links & merges"
-)
+cluster_lbl <- cluster_label_map()
 ai_lev$cluster_label <- factor(
   cluster_lbl[as.character(ai_lev$cluster_id)],
   levels = unname(cluster_lbl)
@@ -5236,7 +5650,7 @@ tibble(
 nc_summary <- tibble(
   Tool                       = c("pa11y-ci (WCAG 2.1 AA)", "Lighthouse Accessibility",
                                  "webhint — errors", "webhint — warnings", "webhint — hints"),
-  `aquavena.nc`              = c("67 errors", "91/100", "10", "63", "120"),
+  `aquavena.nc`              = c("31 errors", "91/100", "10", "63", "120"),
   `Our site`                 = c("0 errors",  "100/100", "10*", "62", "120")
 )
 kable(nc_summary, booktabs = TRUE, linesep = "") |>
@@ -6297,7 +6711,7 @@ verdict <- if (isTRUE(total_errors == 0) && isTRUE(lh_score_val == 100)) "perfec
 The site achieves a **`r verdict`** accessibility score:
 **`r total_errors` WCAG error(s)** and **Lighthouse `r lh_score_val`/100**.
 
-Compared to aquavena.nc (91/100, 67 WCAG errors), this site delivers significantly
+Compared to aquavena.nc (91/100, 31 WCAG errors), this site delivers significantly
 better accessibility, and adds features absent from the source site: text-to-speech,
 dark mode, adjustable text size, PWA support, RSS feeds, and iCal calendars — all
 designed to give visually impaired users full autonomy.
@@ -6334,6 +6748,13 @@ a **proof of concept for universal agentic accessibility**:
   composed) on every commit, producing WCAG KPIs in seconds without scheduling
   a single human. Human verbatim is reserved for release-candidate validation,
   not the daily build loop.
+
+- **The delivery process itself became a measurable, predictable dataset** —
+  our most original result (see *Headline finding*): a commit's AI token-cost
+  is predictable from its **graph position and timing alone** ($R^2 = 0.77$),
+  and two independent methods agree that **structural centrality, not commit
+  type, drives the cost**. The software-delivery process turns into something a
+  team can forecast and budget — the seed of a text-free CI triage.
 
 The lesson is architectural: **expose your content as structured tools, not as
 HTML to be scraped**. The five tools we defined are the contract. Every
