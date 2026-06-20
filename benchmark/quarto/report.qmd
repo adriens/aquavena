@@ -2423,22 +2423,25 @@ kable(bridges, booktabs = TRUE, linesep = "", caption = "Top-5 bridge commits �
 ::: {.callout-note appearance="simple"}
 ## \faNetworkWired\ What the graph reveals
 
-**Anchors (cluster representatives).** Each cluster's anchor — the commit
-closest to its centroid — faithfully summarises that cluster's theme: the
-site-features cluster anchors on an **About-page accessibility commit**
-(`feat: move accessibility score section to top of About page`), the reporting
+**Anchors (cluster representatives).** The anchor of each cluster — its
+**highest-PageRank commit** (table above) — faithfully summarises that cluster's
+theme: the site-features cluster anchors on an **About-page accessibility
+feature** (`feat: add A+/A- and dark mode to About page header`), the reporting
 cluster on a `feat(benchmark):` commit, the fixes cluster on a `fix(benchmark):`
-commit, the maintenance cluster on a `chore(deps):` bump, and so on. The
-**About-page and accessibility work sits at the centre of the largest cluster**
-— the part of the codebase where the project explains itself most fully and
-where the embeddings find the highest density of similar content.
+commit, the maintenance cluster on a `chore(deps):` bump, and the navigation
+cluster on a `feat(ux):` commit. Accessibility and About-page work anchors the
+largest cluster — the part of the codebase where the project explains itself
+most fully and where the embeddings find the highest density of similar content.
 
-**Bridges (theme-linkers).** The top-5 betweenness commits all touch
-**multiple themes simultaneously** — they're the commits that introduced
-A+/A- *and* dark mode (style + feature), or moved the accessibility-score
-section *to* the About page (a11y + About). These are the **integration
-commits** — the ones a knowledge-graph would surface as architecturally
-critical.
+**Bridges (theme-linkers).** The top-betweenness commits are the ones that
+**link the project's two main strands** — the accessible site and the benchmark
+report. The highest are the report-building commits (`feat(benchmark): révision
+git… + abstract`, then `feat(report): refonte du diagramme Universal
+Accessibility Pipeline`); the About-page `feat: add A+/A- and dark mode` and the
+menu `feat(site):` commit bridge the site-features side, while `chore: refresh
+menus data` ties in maintenance. These **integration commits** — high
+betweenness — are the ones a knowledge-graph would flag as architecturally
+critical: remove them and the history fractures into disconnected themes.
 
 **Why this matters at scale.** With 179 commits the graph is small, but the
 *technique scales linearly with commit count*. Applied to a 1000-commit
