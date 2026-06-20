@@ -2097,6 +2097,14 @@ bar_totals <- apport |>
   dplyr::group_by(tag) |>
   dplyr::summarise(total = sum(tokens), .groups = "drop")
 
+# With ~50 release tags everything overlaps. Thin the x-axis labels (~1 in 14,
+# evenly spaced + the last tag), label only the few heaviest bars, and restrict
+# the cumulative-line labels to the same kept tags.
+n_t       <- length(tag_chron)
+step_t    <- max(1L, ceiling(n_t / 14))
+keep_tags <- tag_chron[unique(c(seq(1L, n_t, by = step_t), n_t))]
+bar_totals_big <- bar_totals |> dplyr::slice_max(total, n = 6)
+
 # Scale the cumulative line onto the bar y-axis (millions of tokens)
 max_bar   <- max(cum_df$per_tag, na.rm = TRUE) / 1e6
 max_cum   <- max(cum_df$cumulative, na.rm = TRUE) / 1e6
@@ -2109,8 +2117,8 @@ p <- ggplot() +
   geom_col(data = apport,
            aes(x = tag, y = tokens / 1e6, fill = model),
            width = 0.6) +
-  # Total label above each bar (avoids in-bar overlap on small bars)
-  geom_text(data = bar_totals,
+  # Total label on the few heaviest bars only (labelling all ~50 overlaps)
+  geom_text(data = bar_totals_big,
             aes(x = tag, y = total / 1e6,
                 label = paste0(sprintf("%.0f", total / 1e6), "M")),
             vjust = -0.4, size = 2.3, colour = "grey30") +
@@ -2122,15 +2130,15 @@ p <- ggplot() +
              aes(x = tag, y = cumulative / 1e6 * scale_fac),
              colour = "#f59e0b", size = 2.2) +
   ggrepel::geom_text_repel(
-            data = cum_df,
+            data = dplyr::filter(cum_df, tag %in% keep_tags),
             aes(x = tag, y = cumulative / 1e6 * scale_fac,
                 label = paste0(sprintf("%.0f", cumulative / 1e6), "M")),
             colour = "#92400e", size = 2.2, fontface = "bold",
-            nudge_y = max_bar * 0.08,
-            direction = "x", segment.size = 0.3,
+            nudge_y = max_bar * 0.10,
+            direction = "y", segment.size = 0.3,
             segment.colour = "#d97706", min.segment.length = 0.2,
             max.overlaps = Inf) +
-  scale_x_discrete(limits = tag_chron) +
+  scale_x_discrete(limits = tag_chron, breaks = keep_tags) +
   scale_fill_manual(values = c(
     "claude-opus-4-7"   = "#7c3aed",
     "claude-sonnet-4-6" = "#0f766e"
@@ -2152,7 +2160,7 @@ p <- ggplot() +
   theme(legend.position = "bottom",
         panel.grid.minor = element_blank(),
         panel.grid.major.x = element_blank(),
-        axis.text.x = element_text(face = "bold", angle = 35, hjust = 1),
+        axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6),
         axis.title.y.right = element_text(colour = "#f59e0b"))
 
 # Pin Tailwind v4 migration if the tag is present in the data
