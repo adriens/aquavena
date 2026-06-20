@@ -2227,11 +2227,14 @@ result is stored in two tables — `commit_classification` (per-commit
 type/scope/cluster/coords) and `commit_clusters` (per-cluster size and
 characteristic terms) — and is queryable directly from DuckDB.
 
-The chart on the left shows the **conventional-commit type mix** (parsed from
-the `feat:` / `fix:` / `docs:` prefixes); the chart on the right is the **2D
-semantic map** — each dot is one commit, coloured by its semantic cluster.
+The top chart shows the **conventional-commit type mix** (parsed from the
+`feat:` / `fix:` / `docs:` prefixes); the chart below is the **2D semantic map**
+— each dot is one commit, coloured by its semantic cluster. Note that PC1 and
+PC2 together explain only a small share of the variance, so the 2D view is an
+*approximation*: most commits bunch on the left while one semantically distinct
+group sits apart on the right.
 
-```{r commit-semantic-charts, fig.height=4.0, fig.width=7.0, fig.align="center"}
+```{r commit-semantic-charts, fig.height=6.4, fig.width=7.0, fig.align="center"}
 type_counts <- dbGetQuery(con, "
   SELECT commit_type, COUNT(*) AS n
   FROM commit_classification
@@ -2280,8 +2283,9 @@ clusters_meta <- dbGetQuery(con, "
   FROM commit_clusters ORDER BY cluster_id
 ")
 clusters_meta$label <- vapply(seq_len(nrow(clusters_meta)), function(i) {
+  # Single, concise top term per cluster (keeps labels short & un-clipped)
   paste0("C", clusters_meta$cluster_id[i], " · ",
-         paste(head(unlist(clusters_meta$terms[i]), 2), collapse = "/"))
+         unlist(clusters_meta$terms[i])[1])
 }, character(1))
 
 cluster_palette <- c("#0f766e","#dc2626","#0891b2","#7c3aed","#f59e0b","#059669","#db2777")
@@ -2293,26 +2297,49 @@ cent <- sem_map |>
                    .groups = "drop") |>
   dplyr::left_join(clusters_meta, by = "cluster_id")
 
-p_map <- ggplot(sem_map, aes(x = embed_x, y = embed_y, colour = factor(cluster_id))) +
-  geom_point(size = 2.0, alpha = 0.80) +
+p_map <- ggplot(sem_map, aes(x = embed_x, y = embed_y)) +
+  # White-stroked points keep overlapping dots distinguishable in the dense
+  # left cloud; alpha shows where points pile up.
+  geom_point(aes(fill = factor(cluster_id)),
+             shape = 21, colour = "white", stroke = 0.25,
+             size = 2.2, alpha = 0.82) +
   ggrepel::geom_label_repel(
     data = cent,
     aes(x = x, y = y, label = label, fill = factor(cluster_id)),
-    colour = "white", fontface = "bold", size = 2.3,
+    colour = "white", fontface = "bold", size = 2.4,
     label.padding = unit(0.18, "lines"),
     label.r = unit(0.25, "lines"),
-    box.padding = 0.4, min.segment.length = 0,
+    box.padding = 0.7, point.padding = 0.3, min.segment.length = 0,
+    force = 5, max.overlaps = Inf, seed = 42,
+    segment.colour = "grey55", segment.size = 0.3,
     show.legend = FALSE) +
-  scale_colour_manual(values = cluster_palette, guide = "none") +
-  scale_fill_manual(values   = cluster_palette, guide = "none") +
+  scale_fill_manual(values = cluster_palette, guide = "none") +
+  scale_x_continuous(expand = expansion(mult = c(0.08, 0.22))) +
+  scale_y_continuous(expand = expansion(mult = 0.08)) +
   labs(title = "Semantic map of commits (PCA 2D)",
-       subtitle = "BAAI/bge-m3 multilingual embeddings · K-Means k=6",
+       subtitle = "BAAI/bge-m3 multilingual embeddings · K-Means k=6 · PC1/PC2 explain a small share of variance",
        x = "PC1", y = "PC2") +
   theme_minimal(base_size = 9) +
   theme(panel.grid.minor = element_blank())
 
-p_types + p_map
+p_types / p_map + patchwork::plot_layout(heights = c(1, 2.3))
 ```
+
+**Why the map splits into a dense left cloud and one isolated group on the
+right.** The right-hand group is a single cluster — the **merge commits**
+(`Merge pull request #N from …`). Their subject lines are boilerplate and nearly
+identical, so the embedding maps them to almost the same point; in effect
+**PC1 (the horizontal axis) separates templated merge messages from
+hand-written prose**, which is why they sit far to the right, apart from
+everything else. The dense cloud on the left is *all the substantive work* —
+`feat`, `fix`, `style`, `benchmark`, `chore` — which describes the same project
+(accessibility, menus, the report) in natural language and therefore shares
+vocabulary. Those commits are semantically close, so they overlap; and because
+PC1/PC2 capture only a small fraction of the 1024-dimensional embedding, the 2D
+view cannot pull the sub-clusters apart as cleanly as the full-dimensional
+K-Means does (which is exactly why the GraphSAGE and cluster cross-validations
+elsewhere in this report matter — they confirm the separation that the eye
+cannot see in 2D).
 
 The cluster terms below come from per-cluster TF-IDF; each row's exemplar is
 the commit closest to the cluster centroid in embedding space.
