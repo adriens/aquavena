@@ -2375,8 +2375,13 @@ kable(ct, booktabs = TRUE, linesep = "", align = c("c","c","l","l")) |>
 ### Graph data science — anchors & bridges
 
 The embeddings already cluster the commits. Treating them as a **graph** —
-nodes = commits, edges = cosine similarity ≥ 0.55 — adds a second layer of
-insight: which commit best *represents* each theme (highest **PageRank**
+nodes = commits, and **an edge is drawn between two commits whenever the cosine
+similarity of their message embeddings is ≥ 0.55** — adds a second layer of
+insight. The threshold sits on a 0–1 scale (1 = identical meaning): **0.55 is a
+moderately-strong semantic match**, chosen to keep the graph legible — much
+lower turns it into an unreadable hairball, much higher fragments it into
+disconnected islands. From this graph we read which commit best *represents*
+each theme (highest **PageRank**
 within its cluster, the **anchor**), and which commits *connect* different
 themes (highest **betweenness centrality**, the **bridges**). Both metrics
 are computed with `networkx`, persisted in `commit_graph_metrics` for direct
@@ -2450,6 +2455,34 @@ betweenness surfaces the integration commits whose removal would *fracture*
 the codebase. Both are signals an experienced reviewer would notice manually
 — this method makes them queryable.
 :::
+
+### A second view — the galactic similarity matrix
+
+The ForceAtlas2 layout above is *spatial*: it optimises position but, at this
+edge density, hides the fine structure. The **same similarity data**, read as a
+**matrix**, exposes it. Each cell $(i, j)$ is the cosine similarity of commits
+$i$ and $j$; rows and columns are ordered by semantic cluster, then
+chronologically inside each cluster. (The matrix is recomputed from a full
+re-embedding of all 179 subjects with `BAAI/bge-m3`, so it shows the continuous
+similarity field — including the sub-threshold ($< 0.55$) links the graph
+deliberately omits.)
+
+![Commit-similarity matrix — galactic view · 179×179 cosine similarity, ordered by semantic cluster then time · cell brightness = similarity of two commit messages](similarity_matrix.png){width=92% fig-align="center"}
+
+**What it reveals.**
+
+- **Bright diagonal blocks = cohesive clusters.** The larger blocks (C0
+  site-features, C1 benchmark/report, C2 fixes) glow evenly — their commits are
+  consistently similar to one another.
+- **The blinding-white block in C3 = the merge commits.** Their boilerplate
+  subjects (`Merge pull request #N from …`) are near-identical, so their mutual
+  similarity is ≈ 1.0 — the matrix turns that into a small, almost pure-white
+  square, the single most distinctive feature of the plot.
+- **Off-diagonal glow = bridges and semantic bleed.** Where one cluster's rows
+  light up against another's columns, the two themes share vocabulary — e.g. the
+  fixes and reporting clusters overlap through the shared `benchmark` lexicon.
+- A node-link diagram cannot show these three things at once; the matrix can.
+  It is the canonical *complement* to the spatial layout, not a replacement.
 
 ### Cluster drift — a project maturity signal
 
