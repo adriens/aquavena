@@ -1694,7 +1694,7 @@ report. For the EU regulation see
 
 ### Performance tiers (Accelerate State of DevOps Report 2023)
 
-The four metrics are mapped to four performance tiers. Aquavena lands in the
+The four metrics are mapped to four performance tiers. **Our site** lands in the
 **Elite** column on all four indicators (change-failure rate is derived from
 the two known regressions — Tailwind v4 and the CSP issue — over all releases):
 
@@ -1766,8 +1766,9 @@ A short lead time means fixes and features reach users quickly.
 
 The grid below summarises the same four metrics as a colour-coded **scorecard**:
 each row is a metric, each column a performance tier, and the cell where
-Aquavena actually lands (always **Elite**) is outlined and stamped with the
-project's measured KPI.
+**our site** actually lands (always **Elite**) is outlined and stamped with the
+project's measured KPI. (These are *delivery* metrics of our own repository —
+not of the official aquavena.nc site.)
 
 ```{r dora-scorecard, fig.height=3.3, fig.width=7.2, fig.align="center"}
 # Recompute the KPIs so this chart is self-contained
@@ -1816,15 +1817,15 @@ ggplot(df, aes(x = tier, y = metric)) +
             size = 2.3, colour = "grey20") +
   geom_text(data = subset(df, is_ours), aes(label = kpi),
             vjust = 1.85, size = 2.7, fontface = "bold", colour = "#14532d") +
-  annotate("text", x = 1, y = length(metrics) + 0.72, label = "▼ Aquavena",
+  annotate("text", x = 1, y = length(metrics) + 0.72, label = "▼ Our site",
            size = 2.6, fontface = "bold", colour = "#15803d") +
   scale_fill_manual(values = c(Elite = "#bbf7d0", High = "#d9f99d",
                                Medium = "#fde68a", Low = "#fecaca"),
                     guide = "none") +
   scale_x_discrete(position = "top", expand = expansion(0)) +
   scale_y_discrete(expand = expansion(add = c(0.5, 0.9))) +
-  labs(title = "DORA scorecard — Elite on all four metrics",
-       subtitle = "Colour = performance tier · outlined cell + bold value = Aquavena's measured KPI",
+  labs(title = "DORA scorecard — our site lands Elite on all four metrics",
+       subtitle = "Colour = performance tier · outlined cell + bold value = our site's measured KPI",
        x = NULL, y = NULL) +
   theme_minimal(base_size = 9) +
   theme(panel.grid = element_blank(),
