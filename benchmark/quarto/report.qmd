@@ -1852,78 +1852,103 @@ thresholds used above:
 - **Wikipedia (history and acquisitions)** —
   \href{https://en.wikipedia.org/wiki/DevOps_Research_and_Assessment}{en.wikipedia.org/wiki/DevOps\_Research\_and\_Assessment}.
 
-## Development intensity
-
-This heatmap plots **every commit by its local hour of day** (rows, midnight to
-23h, Pacific/Noumea) across the project's calendar (columns). Darker tiles mean
-more commits landed in that hour; the dotted lines mark the rough **day**
-(≈ 06–18h) and **night** bands.
-
-```{r activity-heatmap, fig.height=2.8, fig.width=6.5, fig.align="center"}
-commits <- dbGetQuery(con, "
-  SELECT commit_ts FROM git_commits WHERE commit_ts IS NOT NULL
-")
-ts_local <- as.POSIXct(commits$commit_ts, tz = "UTC")
-attr(ts_local, "tzone") <- "Pacific/Noumea"
-
-heat <- tibble::tibble(
-  date = as.Date(ts_local, tz = "Pacific/Noumea"),
-  hour = as.integer(format(ts_local, "%H", tz = "Pacific/Noumea"))
-) |> dplyr::count(date, hour, name = "commits")
-
-all_dates <- seq(min(heat$date), max(heat$date), by = "day")
-grid <- tidyr::expand_grid(date = all_dates, hour = 0:23) |>
-  dplyr::left_join(heat, by = c("date", "hour")) |>
-  dplyr::mutate(commits = tidyr::replace_na(commits, 0L))
-
-peak          <- heat |> dplyr::slice_max(commits, n = 1)
-total_commits <- nrow(commits)
-active_days   <- length(unique(heat$date))
-
-ggplot(grid, aes(x = date, y = hour)) +
-  geom_tile(aes(fill = commits), colour = "white", linewidth = 0.3) +
-  scale_fill_gradientn(
-    colours = c("#f1f5f9", "#99f6e4", "#0f766e", "#134e4a"),
-    values  = scales::rescale(c(0, 1, 4, max(grid$commits))),
-    name    = "commits",
-    guide   = guide_colourbar(barwidth = 6, barheight = 0.4,
-                               title.position = "left", title.vjust = 0.8)
-  ) +
-  geom_hline(yintercept = 5.5,  linetype = "dotted", colour = "#94a3b8", linewidth = 0.4) +
-  geom_hline(yintercept = 17.5, linetype = "dotted", colour = "#94a3b8", linewidth = 0.4) +
-  annotate("text", x = min(grid$date), y = 11.5,
-           label = "day", size = 2.2, colour = "#94a3b8", hjust = -0.1) +
-  annotate("text", x = min(grid$date), y = 21,
-           label = "night", size = 2.2, colour = "#94a3b8", hjust = -0.1) +
-  scale_x_date(breaks = (function(d) {
-                 # Show ~10 labels max, evenly spaced; always include first and last
-                 step  <- max(1, ceiling(length(d) / 10))
-                 picks <- unique(c(d[seq(1, length(d), by = step)], d[length(d)]))
-                 picks
-               })(unique(grid$date)),
-               labels = function(x) format(x, "%a %d %b"),
-               expand = c(0.01, 0)) +
-  scale_y_reverse(breaks = c(0, 6, 12, 18, 23),
-                  labels = c("00h","06h","12h","18h","23h"),
-                  expand = c(0.01, 0)) +
-  labs(title = sprintf("%d commits · %d active days · peak %d/h",
-                       total_commits, active_days, peak$commits[1]),
-       x = NULL, y = NULL) +
-  theme_minimal(base_size = 8.5) +
-  theme(panel.grid    = element_blank(),
-        legend.position = "bottom",
-        legend.margin   = margin(t = -4),
-        plot.title      = element_text(size = 8.5, colour = "grey30"))
+```{r cluster-label-helper, include=FALSE}
+# ── Data-driven cluster labels ─────────────────────────────────────────────
+# K-Means assigns cluster IDs arbitrarily and they reshuffle whenever the
+# dataset changes. So we derive each cluster's human label from its top terms
+# (commit_clusters.terms) instead of hard-coding it by ID — this stays correct
+# across every regeneration of the commit graph. Defined once, reused by every
+# cluster-coloured chart below.
+cluster_label_map <- function() {
+  cc <- dbGetQuery(con, "SELECT cluster_id, terms FROM commit_clusters ORDER BY cluster_id")
+  lab_for <- function(terms_str) {
+    t   <- tolower(terms_str)
+    top <- tolower(trimws(strsplit(terms_str, "\\s*,\\s*|\\|")[[1]][1]))
+    if (grepl("request|pull|merge", t))                 return("Pull requests & merges")
+    if (grepl("^fix|\\bfix\\b", top) || grepl("csp", t)) return("Fixes (a11y / CSP)")
+    if (grepl("benchmark|report", top))                 return("Benchmark & ML report")
+    if (grepl("chore|deps", top))                       return("Dependencies & chore")
+    if (grepl("ux", t))                                 return("UX & navigation")
+    if (grepl("style|dark", top))                       return("Style & dark mode")
+    "Site features & About"
+  }
+  terms_chr <- vapply(cc$terms, function(x) paste(unlist(x), collapse = ", "), character(1))
+  setNames(vapply(terms_chr, lab_for, character(1)), as.character(cc$cluster_id))
+}
 ```
 
-**What it reveals.** The cadence is unmistakably **bursty**: the commits land
-on a handful of active days out of the full calendar span — long idle stretches
-punctuated by short, intense sessions (the peak hour alone holds 20+ commits).
-Activity clusters in two waves — the late-May *founding* sprint and the mid-June
-*analysis* sprint — and spills well into the night band. This is the rhythm of
-focused, hackathon-style delivery rather than a steady 9-to-5 cadence, and it is
-the same two-wave structure the concept-emergence timeline recovers later from
-the commit text alone.
+## Development intensity
+
+This chart plots **daily commit volume, coloured by semantic cluster** — *what*
+the project was building, and *when*. Each bar is one day: its height is the
+number of commits and its coloured segments show the mix of work (site features,
+fixes, benchmark/report, dependencies, …). It turns the raw activity log into a
+phase-by-phase story of the build.
+
+```{r activity-by-cluster, fig.height=3.4, fig.width=7.0, fig.align="center"}
+clab <- cluster_label_map()
+dev <- dbGetQuery(con, "
+  SELECT gc.commit_ts, cc.cluster_id
+  FROM git_commits gc
+  JOIN commit_classification cc USING (git_sha)
+  WHERE gc.commit_ts IS NOT NULL
+")
+ts_local <- as.POSIXct(dev$commit_ts, tz = "UTC")
+attr(ts_local, "tzone") <- "Pacific/Noumea"
+dev$date <- as.Date(ts_local, tz = "Pacific/Noumea")
+
+# Cluster levels ordered by id, labelled via the data-driven map
+lvl <- unname(clab[as.character(sort(as.integer(names(clab))))])
+dev$cluster <- factor(clab[as.character(dev$cluster_id)], levels = lvl)
+
+total_commits <- nrow(dev)
+active_days   <- length(unique(dev$date))
+daily         <- dev |> dplyr::count(date, cluster, name = "commits")
+peak_day      <- daily |> dplyr::group_by(date) |>
+  dplyr::summarise(n = sum(commits), .groups = "drop") |> dplyr::slice_max(n, n = 1)
+
+# Stable palette keyed by label string (robust to cluster-id reshuffles)
+pal <- c(
+  "Site features & About"  = "#0f766e",
+  "Benchmark & ML report"  = "#7c3aed",
+  "Fixes (a11y / CSP)"     = "#dc2626",
+  "Pull requests & merges" = "#64748b",
+  "Dependencies & chore"   = "#f59e0b",
+  "UX & navigation"        = "#0891b2",
+  "Style & dark mode"      = "#9333ea"
+)
+
+ggplot(daily, aes(x = date, y = commits, fill = cluster)) +
+  geom_col(width = 0.95) +
+  scale_fill_manual(values = pal, name = NULL) +
+  scale_x_date(date_breaks = "4 days", date_labels = "%d %b",
+               expand = c(0.01, 0)) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
+  labs(title = sprintf("%d commits · %d active days · busiest day = %d commits",
+                       total_commits, active_days, peak_day$n[1]),
+       subtitle = "Daily commits coloured by semantic cluster — what was built, and when",
+       x = NULL, y = "commits / day") +
+  theme_minimal(base_size = 8.5) +
+  theme(panel.grid.minor   = element_blank(),
+        panel.grid.major.x = element_blank(),
+        legend.position    = "bottom",
+        legend.text        = element_text(size = 7),
+        legend.key.size    = unit(0.32, "cm"),
+        plot.title         = element_text(size = 8.5, colour = "grey30"),
+        plot.subtitle      = element_text(size = 7.5, colour = "grey45"))
+```
+
+**What it reveals.** Two things at once. First, the cadence is unmistakably
+**bursty**: the commits land on a handful of active days out of the full
+calendar span — long idle stretches punctuated by short, intense sessions, the
+rhythm of focused hackathon-style delivery rather than a steady 9-to-5 cadence.
+Second, the **colour mix shifts across the timeline**: the early bars are
+dominated by *Site features & About* and *Fixes (a11y / CSP)* — the founding
+accessibility work — while the later bars turn toward *Benchmark & ML report*,
+*Pull requests & merges* and *Dependencies & chore*, the report-engineering and
+maintenance phase. It is the same founding → analysis pivot the concept-emergence
+timeline recovers later from the commit text alone — here visible directly in the
+shape and colour of the work.
 
 ## AI-assisted delivery — Claude token consumption
 
@@ -2384,29 +2409,7 @@ turns them into a measurable, reproducible signal.
   built* — the report you are reading right now.
 
 ```{r cluster-drift, fig.height=4.2, fig.width=7.5, fig.align="center"}
-# ── Data-driven cluster labels ─────────────────────────────────────────────
-# K-Means assigns cluster IDs arbitrarily and they reshuffle whenever the
-# dataset changes. So we derive each cluster's human label from its top terms
-# (commit_clusters.terms) instead of hard-coding it by ID — this stays correct
-# across every regeneration of the commit graph. Defined once, reused below.
-cluster_label_map <- function() {
-  cc <- dbGetQuery(con, "SELECT cluster_id, terms FROM commit_clusters ORDER BY cluster_id")
-  lab_for <- function(terms_str) {
-    t   <- tolower(terms_str)
-    top <- tolower(trimws(strsplit(terms_str, "\\s*,\\s*|\\|")[[1]][1]))
-    if (grepl("request|pull|merge", t))            return("Pull requests & merges")
-    if (grepl("^fix|\\bfix\\b", top) || grepl("csp", t)) return("Fixes (a11y / CSP)")
-    if (grepl("benchmark|report", top))            return("Benchmark & ML report")
-    if (grepl("chore|deps", top))                  return("Dependencies & chore")
-    if (grepl("ux", t))                            return("UX & navigation")
-    if (grepl("style|dark", top))                  return("Style & dark mode")
-    "Site features & About"
-  }
-  # commit_clusters.terms may be stored as a list/array → coerce to a string
-  terms_chr <- vapply(cc$terms, function(x) paste(unlist(x), collapse = ", "), character(1))
-  setNames(vapply(terms_chr, lab_for, character(1)), as.character(cc$cluster_id))
-}
-cluster_labels <- cluster_label_map()
+cluster_labels <- cluster_label_map()   # data-driven, defined earlier
 
 # Pull commit → cluster + ts, and release tags with their published_at_ts
 cdrift_commits <- dbGetQuery(con, "
