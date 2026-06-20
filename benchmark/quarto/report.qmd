@@ -2484,6 +2484,25 @@ deliberately omits.)
 - A node-link diagram cannot show these three things at once; the matrix can.
   It is the canonical *complement* to the spatial layout, not a replacement.
 
+### A third view — the similarity bundle
+
+A final, artistic reading of the same graph. The 179 commits sit on a circle,
+grouped into coloured arcs by semantic cluster; every similarity edge
+(cosine ≥ 0.55) is drawn as a spline that **bows toward the centre**, so links
+between commits gather into visible **bundles**.
+
+![Commit-similarity bundle — 179 commits on the rim grouped by semantic cluster · each spline is a cosine ≥ 0.55 link bowed toward the centre · node size = PageRank](commit_bundle.png){width=82% fig-align="center"}
+
+**What it reveals.** Where two arcs are joined by a thick, bright bundle, those
+two themes **share semantic content** — the site-features, reporting and fixes
+arcs are densely interwoven, because they all describe the same accessibility
+project. By contrast, the **merge-commit arc (C3) is almost self-contained**: its
+splines loop back into its own arc rather than reaching across the circle —
+the visual signature of a theme that stands apart (boilerplate messages with
+nothing to say to the rest of the codebase). The long splines that *do* cross
+the circle are the **bridges** from the table above: the integration commits
+that stitch the project's strands together.
+
 ### Cluster drift — a project maturity signal
 
 **What it is.** Each commit belongs to one of six semantic clusters
