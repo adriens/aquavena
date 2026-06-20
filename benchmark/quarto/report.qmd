@@ -163,7 +163,7 @@ format:
           a dietetic meal delivery service in New Caledonia. Standard CLI tools
           (pa11y-ci, Lighthouse, axe-core, webhint) are used as a common reference.
           Results show a \textbf{\textit{100/100 Lighthouse score and 0 WCAG 2.1 AA
-          errors}} for our site, versus 91/100 and 67~errors for the official website.
+          errors}} for our site, versus 91/100 and 31~errors for the official website.
           All audit data is persisted in a DuckDB database for longitudinal tracking.
 
           \vspace{1.5em}
@@ -282,7 +282,7 @@ lh_score <- lh_rows$lighthouse_score[1]
 lh_nc_rows <- parse_lh(file.path(REPORTS, "lighthouse-aquavena-nc.report.json"),
                        "aquavena.nc", as.Date("2026-05-30"), NC_RUN_ID)
 
-# ── pa11y aquavena.nc (manually collected — 67 known errors) ──────────────
+# ── pa11y aquavena.nc (live re-audit — 31 contrast errors, see wcag_comparison) ──
 nc_pa11y <- tibble(
   run_id     = NC_RUN_ID,
   url        = "https://www.aquavena.nc/formules/aqua-mediterraneen",
@@ -291,7 +291,7 @@ nc_pa11y <- tibble(
   code       = NA_character_,
   site       = "aquavena.nc",
   audit_date = as.Date("2026-05-30"),
-  n_dummy    = 67L
+  n_dummy    = 31L
 ) |> uncount(n_dummy)
 
 # ── Open DuckDB and create tables with PK / FK declarations ───────────────
@@ -524,7 +524,7 @@ nc_ci_row <- tibble(
   run_id = NC_RUN_ID, run_number = 0L,
   git_sha = NA_character_, git_branch = NA_character_,
   triggered_by = "manual", audit_date = as.Date("2026-05-30"),
-  lh_score = 91L, pa11y_errors = 67L
+  lh_score = 91L, pa11y_errors = 31L
 )
 existing_runs <- dbGetQuery(con, "SELECT run_id FROM ci_runs")$run_id
 new_runs <- bind_rows(ci_row, nc_ci_row) |> filter(!run_id %in% existing_runs)
@@ -649,7 +649,7 @@ sh_data <- tibble::tibble(
     100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L, 100L
   ),
   pa11y_errors = c(
-    67L,
+    31L,
     5L, 3L, 2L, 1L, 0L,
     0L, 0L, 0L, 0L, 0L, 0L,
     0L, 0L, 0L, 0L,
@@ -1453,7 +1453,7 @@ only covers the machine-checkable subset of WCAG, so it is a reliable *floor*,
 not a replacement for manual and assistive-technology testing.
 
 The replay shows our site at **100/100 Lighthouse, 0 pa11y errors** across every
-tag, while `aquavena.nc` sits at 91/67. Instead of an iterative burndown, the
+tag, while `aquavena.nc` sits at 91/31. Instead of an iterative burndown, the
 chart below visualises the **one-shot transformation** as a category-by-category
 **gap closed**: for each accessibility dimension Lighthouse audits, the bar
 shows the pass-rate delta between the source site and ours. The longer the bar,
@@ -1854,6 +1854,11 @@ thresholds used above:
 
 ## Development intensity
 
+This heatmap plots **every commit by its local hour of day** (rows, midnight to
+23h, Pacific/Noumea) across the project's calendar (columns). Darker tiles mean
+more commits landed in that hour; the dotted lines mark the rough **day**
+(≈ 06–18h) and **night** bands.
+
 ```{r activity-heatmap, fig.height=2.8, fig.width=6.5, fig.align="center"}
 commits <- dbGetQuery(con, "
   SELECT commit_ts FROM git_commits WHERE commit_ts IS NOT NULL
@@ -1910,6 +1915,15 @@ ggplot(grid, aes(x = date, y = hour)) +
         legend.margin   = margin(t = -4),
         plot.title      = element_text(size = 8.5, colour = "grey30"))
 ```
+
+**What it reveals.** The cadence is unmistakably **bursty**: the commits land
+on a handful of active days out of the full calendar span — long idle stretches
+punctuated by short, intense sessions (the peak hour alone holds 20+ commits).
+Activity clusters in two waves — the late-May *founding* sprint and the mid-June
+*analysis* sprint — and spills well into the night band. This is the rhythm of
+focused, hackathon-style delivery rather than a steady 9-to-5 cadence, and it is
+the same two-wave structure the concept-emergence timeline recovers later from
+the commit text alone.
 
 ## AI-assisted delivery — Claude token consumption
 
@@ -2307,13 +2321,15 @@ kable(bridges, booktabs = TRUE, linesep = "", caption = "Top-5 bridge commits �
 ::: {.callout-note appearance="simple"}
 ## \faNetworkWired\ What the graph reveals
 
-**Anchors (cluster representatives).** Across all six clusters, the anchor
-is almost always an **About-page feature commit** (`feat: add A+/A- and dark
-mode to About page header`, `feat: move accessibility score section to top
-of About page`, `feat: add read-aloud button…`). This is the structural
-finding: the **About page is the semantic centre of the codebase** — the
-single page where the project explains itself most fully, and where the
-embeddings find the highest density of similar content.
+**Anchors (cluster representatives).** Each cluster's anchor — the commit
+closest to its centroid — faithfully summarises that cluster's theme: the
+site-features cluster anchors on an **About-page accessibility commit**
+(`feat: move accessibility score section to top of About page`), the reporting
+cluster on a `feat(benchmark):` commit, the fixes cluster on a `fix(benchmark):`
+commit, the maintenance cluster on a `chore(deps):` bump, and so on. The
+**About-page and accessibility work sits at the centre of the largest cluster**
+— the part of the codebase where the project explains itself most fully and
+where the embeddings find the highest density of similar content.
 
 **Bridges (theme-linkers).** The top-5 betweenness commits all touch
 **multiple themes simultaneously** — they're the commits that introduced
@@ -2368,6 +2384,30 @@ turns them into a measurable, reproducible signal.
   built* — the report you are reading right now.
 
 ```{r cluster-drift, fig.height=4.2, fig.width=7.5, fig.align="center"}
+# ── Data-driven cluster labels ─────────────────────────────────────────────
+# K-Means assigns cluster IDs arbitrarily and they reshuffle whenever the
+# dataset changes. So we derive each cluster's human label from its top terms
+# (commit_clusters.terms) instead of hard-coding it by ID — this stays correct
+# across every regeneration of the commit graph. Defined once, reused below.
+cluster_label_map <- function() {
+  cc <- dbGetQuery(con, "SELECT cluster_id, terms FROM commit_clusters ORDER BY cluster_id")
+  lab_for <- function(terms_str) {
+    t   <- tolower(terms_str)
+    top <- tolower(trimws(strsplit(terms_str, "\\s*,\\s*|\\|")[[1]][1]))
+    if (grepl("request|pull|merge", t))            return("Pull requests & merges")
+    if (grepl("^fix|\\bfix\\b", top) || grepl("csp", t)) return("Fixes (a11y / CSP)")
+    if (grepl("benchmark|report", top))            return("Benchmark & ML report")
+    if (grepl("chore|deps", top))                  return("Dependencies & chore")
+    if (grepl("ux", t))                            return("UX & navigation")
+    if (grepl("style|dark", top))                  return("Style & dark mode")
+    "Site features & About"
+  }
+  # commit_clusters.terms may be stored as a list/array → coerce to a string
+  terms_chr <- vapply(cc$terms, function(x) paste(unlist(x), collapse = ", "), character(1))
+  setNames(vapply(terms_chr, lab_for, character(1)), as.character(cc$cluster_id))
+}
+cluster_labels <- cluster_label_map()
+
 # Pull commit → cluster + ts, and release tags with their published_at_ts
 cdrift_commits <- dbGetQuery(con, "
   SELECT gc.git_sha,
@@ -2385,17 +2425,6 @@ cdrift_releases <- dbGetQuery(con, "
   WHERE published_at_ts IS NOT NULL
   ORDER BY published_at_ts
 ")
-
-# Curated, human-readable cluster labels (data-driven via top terms,
-# but trimmed to short phrases that fit a legend).
-cluster_labels <- c(
-  "0" = "Site features & About",
-  "1" = "Style & dark mode",
-  "2" = "Benchmark & ML report",
-  "3" = "Project identity & links",
-  "4" = "WCAG fixes",
-  "5" = "Links & merges"
-)
 
 if (nrow(cdrift_commits) > 0 && nrow(cdrift_releases) >= 3) {
   cdrift_commits$commit_ts    <- as.POSIXct(cdrift_commits$commit_ts,    tz = "UTC")
@@ -2460,39 +2489,26 @@ if (nrow(cdrift_commits) > 0 && nrow(cdrift_releases) >= 3) {
 
 **Reading this chart on Aquavena.**
 
-- **v0.1.2–v0.1.4** (the very first releases) are 100% *WCAG fixes* —
-  the foundational accessibility work: contrast corrections, pa11y
-  audit setup, WCAG 2.1 AA compliance from the ground up. This is the
-  *raison d'être* of the project, visible in its purest form.
-- **v0.1.5** is the **first multi-cluster release**: WCAG work is
-  still present, but *Style \& dark mode*, *Site features \& About*
-  and *Benchmark \& ML report* clusters all appear simultaneously.
-  This is the moment the project diversified — from one concern
-  (make it WCAG-clean) to four (style polish, feature additions,
-  benchmark scaffolding).
-- **v1.7.0** stands out as the only mid-life release where the
-  *Site features \& About* cluster occupies a large share — this
-  matches the historical record (RSS, iCal, About-page content all
-  landed around this tag).
-- **v1.9.0 → v1.13.x** are dominated by the *Benchmark \& ML report*
-  cluster — the long **report-engineering phase**: this is where the
-  100-page PDF you are reading was built. Feature work shifted to a
-  data-science/reporting register.
-- **v1.12.1** is the only release of this phase where *WCAG fixes*
-  re-emerge at parity with the report work — likely a regression catch
-  that triggered contrast revalidation.
-- **v1.14.0** closes the chart with a return to 100% *WCAG fixes* —
-  the **Tailwind v4 migration** release: a platform overhaul whose
-  primary risk was contrast regression, so most of the work was
-  re-validating accessibility.
+- The **earliest tags** (`v0.1.2`–`v0.1.5`) are single-commit releases, each a
+  pure *Fixes (a11y / CSP)* increment — the foundational accessibility work
+  (contrast corrections, pa11y audit setup, WCAG 2.1 AA from the ground up) in
+  its purest form. This is the *raison d'être* of the project.
+- The bulk of the early engineering is absorbed by the first tags that catch a
+  large commit window (`v0.1.1`, then `v1.6.1` and `v1.7.0`): a blend where
+  *Site features \& About* and *Benchmark \& ML report* dominate, with
+  *Fixes (a11y / CSP)* and *UX \& navigation* alongside. This is the moment the
+  project widened from a single concern — *make it WCAG-clean* — to building
+  features, navigation and the benchmark itself.
+- The **analysis / agentic phase** (`v1.2x`–`v1.3x`) shifts decisively into the
+  *Benchmark \& ML report*, *Pull requests \& merges* and *Dependencies \& chore*
+  registers — the report-engineering and maintenance work that produced the
+  document you are reading. Feature and fix work give way to data-science and
+  upkeep.
 
-Note: the chart stops at `v1.14.0` because newer release tags
-(`v1.15.0`–`v1.24.0`) — including the entire WebMCP \& agentic-pipeline
-work documented in this report — were published *after* the
-`gh_releases` snapshot used by this build. Re-running the pipeline will
-extend the timeline and reveal the *Site features \& About* and
-*Benchmark \& ML report* clusters dominating the rightmost releases —
-the agentic pivot's signature.
+Note: the project's version tags are **not strictly chronological**, so each bar
+groups every commit up to that tag's publication time. A few early tags
+therefore absorb large commit windows (which is why their bars are the tallest),
+while many later tags carry only one or two commits.
 
 This single chart tells the story of the project's life cycle without a
 single line of manual annotation. Applied to other codebases, it
@@ -2516,12 +2532,12 @@ the **short-term flow** — which type of commit naturally precedes which.
 - A behavioural fingerprint of how the team works.
 - An input to **agentic pipelines**: the AI agents from Section
   *Universal Accessibility Pipeline* can pre-warm a context for the
-  likely next commit type — e.g. after a *WCAG fixes* commit, the agent
-  loads contrast-audit tools because $P(\text{next} = \text{WCAG fixes})$
+  likely next commit type — e.g. after a *Fixes (a11y / CSP)* commit, the agent
+  loads contrast-audit tools because $P(\text{next} = \text{Fixes})$
   is high.
 - A regression detector at the **process level**: if the empirical mix
   diverges from the historical Markov chain (e.g. a sudden burst of
-  *Style \& dark mode* after a *Benchmark \& ML report* commit), it
+  *UX \& navigation* after a *Benchmark \& ML report* commit), it
   flags an unusual work session.
 
 ```{r markov-transitions, fig.height=4.5, fig.width=6.0, fig.align="center"}
@@ -2535,15 +2551,9 @@ markov_df <- dbGetQuery(con, "
 markov_df$commit_ts <- as.POSIXct(markov_df$commit_ts, tz = "UTC")
 markov_df <- markov_df[order(markov_df$commit_ts), ]
 
-# Cluster id → friendly label (consistent with the rest of the report)
-markov_labels <- c(
-  "0" = "Site features\n& About",
-  "1" = "Style &\ndark mode",
-  "2" = "Benchmark\n& ML report",
-  "3" = "Project identity\n& links",
-  "4" = "WCAG fixes",
-  "5" = "Links &\nmerges"
-)
+# Cluster id → friendly label (data-driven, wrapped to fit the 6×6 axes)
+markov_labels <- vapply(cluster_label_map(),
+  function(s) paste(strwrap(s, width = 13), collapse = "\n"), character(1))
 
 n <- nrow(markov_df)
 if (n >= 20) {
@@ -2875,7 +2885,7 @@ something hard is going on.
 **What it is for.**
 
 - **For the developer**: post-hoc retrospective — *"on day X around
-  17h I was stuck for 90 min on the WCAG fixes cluster"*. A coachable
+  17h I was stuck for 90 min on the Fixes (a11y / CSP) cluster"*. A coachable
   signal.
 - **For the team**: capacity planning. If burnout windows correlate
   with certain clusters, those clusters are objectively heavier and
@@ -3979,9 +3989,16 @@ cluster_metrics <- dbGetQuery(con, "
 
 benchmark_total <- max(cluster_metrics$total_M, na.rm = TRUE)
 benchmark_avg   <- cluster_metrics$avg_M[which.max(cluster_metrics$total_M)]
+benchmark_n     <- cluster_metrics$n[which.max(cluster_metrics$total_M)]
 fix_avg         <- type_metrics$avg_M[type_metrics$commit_type == "fix"]
 feat_avg        <- type_metrics$avg_M[type_metrics$commit_type == "feat"]
-fix_vs_feat_pct <- round((fix_avg - feat_avg) / feat_avg * 100, 0)
+# Whichever of feat/fix is the more expensive drives the headline below.
+costlier_type   <- if (feat_avg >= fix_avg) "feat" else "fix"
+cheaper_type    <- if (feat_avg >= fix_avg) "fix" else "feat"
+costlier_cap    <- paste0(toupper(substr(costlier_type, 1, 1)), substring(costlier_type, 2))
+hi_avg          <- max(feat_avg, fix_avg)
+lo_avg          <- min(feat_avg, fix_avg)
+type_gap_pct    <- round((hi_avg - lo_avg) / lo_avg * 100, 0)
 cheapest_avg    <- min(cluster_metrics$avg_M, na.rm = TRUE)
 n_clusters_val  <- nrow(cluster_metrics)
 
@@ -4009,46 +4026,48 @@ cat(sprintf("```{=latex}
 {\\Huge\\color{teal700}\\faPalette} &
 {\\Huge\\color{teal700}\\faProjectDiagram} \\\\
 {\\Large\\textbf{%.0f\\,M}} & {\\Large\\textbf{%.2f\\,M \\textcolor{teal700}{$>$} %.2f\\,M}} & {\\Large\\textbf{%.2f\\,M}} & {\\Large\\textbf{%d}} \\\\
-Writing this report & Fix avg \\textcolor{teal700}{$>$} feat avg & Style cluster & Clusters found \\\\
-\\small\\itshape tokens spent on scope=benchmark (%d commits) & \\small\\itshape +%d\\%% more tokens per fix & \\small\\itshape avg / commit (C0) & \\small\\itshape unsupervised, k-means \\\\
+Writing this report & %s avg \\textcolor{teal700}{$>$} %s avg & Cheapest cluster & Clusters found \\\\
+\\small\\itshape tokens spent on scope=benchmark (%d commits) & \\small\\itshape +%d\\%% more tokens per %s & \\small\\itshape avg / commit & \\small\\itshape unsupervised, k-means \\\\
 \\bottomrule
 \\end{tabular}
 \\end{center}
 ```\n",
-report_total, fix_avg, feat_avg, cheapest_avg, n_clusters_val,
-report_n, fix_vs_feat_pct))
+report_total, hi_avg, lo_avg, cheapest_avg, n_clusters_val,
+costlier_type, cheaper_type, report_n, type_gap_pct, costlier_type))
 ```
 
 ::: {.callout-note appearance="simple"}
 ## \faLightbulb\ Key findings — AI delivery cost vs work category
 
 **1. The benchmark/reporting strand dominates AI usage.**
-Cluster **C1** (`benchmark, feat benchmark, section`) consumed **163 M tokens
-across 17 commits — an average of 9.6 M tokens per commit**, three to six
-times the per-commit average of any other cluster. The same picture appears
-under the **supervised lens**: commits explicitly tagged
-`scope=benchmark` (12 commits) consumed **144.8 M tokens at an average of
-12.07 M per commit** — by far the biggest scope in the project. Whichever
-filter you apply, the measurement and reporting infrastructure (this report,
-the audit scripts, the FK schema, the dashboard) is *the single most
+The heaviest semantic cluster consumed **`r sprintf("%.0f", benchmark_total)` M
+tokens across `r benchmark_n` commits — an average of
+`r sprintf("%.1f", benchmark_avg)` M tokens per commit**, several times the
+per-commit cost of any other cluster. The same picture appears under the
+**supervised lens**: commits explicitly tagged `scope=benchmark`
+(`r report_n` commits) consumed **`r sprintf("%.0f", report_total)` M tokens**.
+Whichever filter you apply, the measurement and reporting infrastructure (this
+report, the audit scripts, the FK schema, the dashboard) is *the single most
 AI-intensive strand of the project*. The user-facing site itself was
 comparatively cheap to produce.
 
-**2. Fixes cost more tokens per commit than features.**
-`fix:` commits average **4.72 M tokens each** versus `feat:` at **3.82 M** —
-**24% more deliberation per fix** despite fewer commits (13 vs 42). This
-matches engineering intuition: a fix requires diagnosing a defect *before*
-addressing it, while a feature can be specified and implemented in one shot.
-For accessibility work specifically, fixes also require validating against
-multiple audit tools — pa11y, Lighthouse, the W3C HTML validator — which
-multiplies the verification cost.
+**2. `r costlier_cap` commits cost more tokens per commit than `r cheaper_type` commits.**
+On average a `r costlier_type` commit costs **`r sprintf("%.2f", hi_avg)` M
+tokens** versus **`r sprintf("%.2f", lo_avg)` M** for a `r cheaper_type` commit
+— about **`r type_gap_pct`% more per `r costlier_type`**. The reason is specific
+to this project: the heaviest work — building this benchmark report and its ML
+pipeline — is committed as `feat(benchmark):`, which pulls the *feature* average
+above ordinary bug-fix commits. (On a product without a giant in-repo report,
+the more familiar pattern — fixes costing more than features, because a defect
+must be diagnosed before it is addressed — usually dominates instead.)
 
-**3. Style commits are the cheapest category.**
-Cluster **C0** (`style, feat, la, du`) averages only **1.59 M tokens per
-commit** — the lowest per-commit cost in the project. UI/style tweaks are
-short feedback loops with immediate visual confirmation, so they need
-fewer tokens to land. *Implication for AI-assisted teams: deliberately split
-work into style-grade chunks where possible to minimise cost.*
+**3. The site-features cluster is the cheapest category.**
+The lowest-cost cluster averages only **`r sprintf("%.2f", cheapest_avg)` M
+tokens per commit** — the least expensive work in the project. UI and
+site-content tweaks are short feedback loops with immediate visual
+confirmation, so they need fewer tokens to land. *Implication for AI-assisted
+teams: split work into small, visually-verifiable chunks where possible to
+minimise cost.*
 
 **4. The unsupervised clustering rediscovered the supervised labels.**
 The K-Means clusters built from sentence-transformer embeddings — i.e. with
@@ -4058,12 +4077,13 @@ same structural separation. C2 is essentially the `fix:` cluster, C1 the
 semantic meaning faithfully*; it also means the technique would still work
 on commit history without conventional-commit discipline.
 
-**5. The flat 1.66 M baseline is an apportionment artifact, not a finding.**
-`docs`, `chore`, and `ci` all show the **same** average per commit
-(1.66 M). This is because those commits cluster very tightly in time and the
-apportionment view distributes session tokens evenly across same-second
-commits. *With a larger dataset (more sessions, more spread-out commits)
-this artifact disappears.* Disclosed here for transparency.
+**5. The earlier flat baseline has resolved — an apportionment artifact, as
+predicted.** In smaller snapshots, `docs`, `chore` and `ci` all showed an
+identical per-commit average, because tightly-clustered (same-minute) commits
+had their session tokens distributed evenly across each other. With the larger
+179-commit dataset these categories now **spread apart** noticeably, confirming
+that the earlier uniformity was a distribution artifact of the apportionment
+view rather than a real signal. Disclosed here for transparency.
 :::
 
 ## AI-leverage ratio per cluster — where the AI actually pays off
@@ -4093,14 +4113,7 @@ n_commits_per_cluster <- dbGetQuery(con, "
   GROUP BY cc.cluster_id
 ")
 
-cluster_lbl <- c(
-  "0" = "Site features & About",
-  "1" = "Style & dark mode",
-  "2" = "Benchmark & ML report",
-  "3" = "Project identity & links",
-  "4" = "WCAG fixes",
-  "5" = "Links & merges"
-)
+cluster_lbl <- cluster_label_map()
 ai_lev$cluster_label <- factor(
   cluster_lbl[as.character(ai_lev$cluster_id)],
   levels = unname(cluster_lbl)
@@ -5440,7 +5453,7 @@ tibble(
 nc_summary <- tibble(
   Tool                       = c("pa11y-ci (WCAG 2.1 AA)", "Lighthouse Accessibility",
                                  "webhint — errors", "webhint — warnings", "webhint — hints"),
-  `aquavena.nc`              = c("67 errors", "91/100", "10", "63", "120"),
+  `aquavena.nc`              = c("31 errors", "91/100", "10", "63", "120"),
   `Our site`                 = c("0 errors",  "100/100", "10*", "62", "120")
 )
 kable(nc_summary, booktabs = TRUE, linesep = "") |>
@@ -6501,7 +6514,7 @@ verdict <- if (isTRUE(total_errors == 0) && isTRUE(lh_score_val == 100)) "perfec
 The site achieves a **`r verdict`** accessibility score:
 **`r total_errors` WCAG error(s)** and **Lighthouse `r lh_score_val`/100**.
 
-Compared to aquavena.nc (91/100, 67 WCAG errors), this site delivers significantly
+Compared to aquavena.nc (91/100, 31 WCAG errors), this site delivers significantly
 better accessibility, and adds features absent from the source site: text-to-speech,
 dark mode, adjustable text size, PWA support, RSS feeds, and iCal calendars — all
 designed to give visually impaired users full autonomy.
