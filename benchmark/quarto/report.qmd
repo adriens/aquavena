@@ -1205,6 +1205,24 @@ work and the source site. Nothing in the charts below is hardcoded — every fig
 is computed live from the six FK-linked tables described in the appendix. Re-running
 the pipeline regenerates the dashboard automatically.
 
+::: {.callout-note appearance="default"}
+## \faStar\ Headline finding
+
+**Where a commit sits in the similarity graph predicts — and causes — how many
+AI tokens it costs, more than what the commit actually does.** Two independent
+methods agree. A gradient-boosted model predicts a commit's token cost from its
+**graph position and timing alone** — no message text, no token-derived input —
+at **$R^2 = 0.77$**, halving the error of a mean baseline. And a constraint-based
+causal-discovery algorithm (PC), which shares none of those inputs, independently
+orients the edges *PageRank → Tokens*, *Degree → Tokens* and *Weekend → Tokens*.
+Commit **type** (`feat` vs `fix`) barely moves the needle; **structural
+centrality and timing dominate**. The convergence of two unrelated techniques on
+the same drivers is the strongest evidence the relationship is real — and it is
+the seed of a **text-free CI triage**: estimating a change's AI cost *before it
+is written*. (Full analysis: §§ *Predicting token-cost from structure alone* and
+*Causal DAG discovery*.)
+:::
+
 ## EVM — Planned Value vs Earned Value
 
 A linear ramp from the **aquavena.nc baseline (91)** to the **target score (100)**
@@ -3383,14 +3401,28 @@ end-to-end causal-inference scaffolding wired in.
 ### GraphSAGE — predicting cluster from graph structure alone
 
 **What it is.** A 2-layer **GraphSAGE** (Hamilton, Ying, Leskovec, NeurIPS
-2017) is a graph neural network: it learns node representations by
-aggregating information from neighbours in the commit-similarity graph
-we already built. Here we ask it a single supervised question:
+2017) is a **graph neural network**. The name stands for *Graph SAmple and
+aggreGatE*: each node builds its own vector by **sampling its neighbours and
+aggregating their features** (here, averaging), once per layer, so information
+flows in from further out in the graph. Because it learns an *aggregation
+function* rather than memorising one fixed vector per node, it is **inductive**
+— it can embed commits it never saw during training. We run it on the
+commit-similarity graph we already built and ask a single supervised question:
 
 > Given a commit's **structural position** in the graph — its PageRank,
 > its betweenness, its degree, and its `commit_type` one-hot — can the
 > network recover the **semantic cluster** that K-Means assigned to it
 > from the BAAI/bge-m3 text embedding?
+
+**Why two layers.** Each GraphSAGE layer lets a node see one more hop of
+neighbours, so $k$ layers aggregate the $k$-hop neighbourhood. Two is the field's
+default, for a reason: stacking many layers causes *over-smoothing* — every
+node's vector drifts toward the graph average — which hurts accuracy. A quick
+sweep confirms the choice here: across 10 random splits, **1 hop underfits
+(≈ 73 % accuracy) while 2, 3 and 4 hops plateau together at ≈ 79–81 %**, all
+within one standard deviation of each other. On this small, dense graph two hops
+already reach most of the neighbourhood, so the conventional 2-layer model is at
+the plateau — deeper buys nothing measurable and only risks over-smoothing.
 
 **Why this matters.** The K-Means clustering was built from a 1024-dim
 *text* embedding. If GraphSAGE recovers those clusters from
@@ -6686,6 +6718,13 @@ a **proof of concept for universal agentic accessibility**:
   composed) on every commit, producing WCAG KPIs in seconds without scheduling
   a single human. Human verbatim is reserved for release-candidate validation,
   not the daily build loop.
+
+- **The delivery process itself became a measurable, predictable dataset** —
+  our most original result (see *Headline finding*): a commit's AI token-cost
+  is predictable from its **graph position and timing alone** ($R^2 = 0.77$),
+  and two independent methods agree that **structural centrality, not commit
+  type, drives the cost**. The software-delivery process turns into something a
+  team can forecast and budget — the seed of a text-free CI triage.
 
 The lesson is architectural: **expose your content as structured tools, not as
 HTML to be scraped**. The five tools we defined are the contract. Every

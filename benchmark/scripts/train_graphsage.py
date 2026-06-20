@@ -166,13 +166,28 @@ print(f"Macro F1:          {f1_macro:.3f}")
 print(f"Majority baseline: {baseline_acc:.3f}")
 
 # ── Save figure: confusion + learning curve ────────────────────────────────
+# Data-driven cluster labels: K-Means IDs reshuffle whenever the dataset
+# changes, so derive each label from the cluster's top terms (commit_clusters)
+# instead of hard-coding by id — mirrors the cluster_label_map() in report.qmd.
+import duckdb
+
+def _cluster_label(terms_str: str) -> str:
+    t = terms_str.lower()
+    top = terms_str.split(",")[0].strip().lower()
+    if any(k in t for k in ("request", "pull", "merge")): return "Pull requests\n& merges"
+    if top.startswith("fix") or "csp" in t:               return "Fixes\n(a11y / CSP)"
+    if "benchmark" in top or "report" in top:             return "Benchmark\n& ML report"
+    if "chore" in top or "deps" in top:                   return "Dependencies\n& chore"
+    if "ux" in t:                                         return "UX &\nnavigation"
+    if "style" in top or "dark" in top:                  return "Style &\ndark mode"
+    return "Site features\n& About"
+
+_con = duckdb.connect(str(GRAPH_PATH.parent / "benchmark.duckdb"), read_only=True)
+_cc = _con.execute("SELECT cluster_id, terms FROM commit_clusters ORDER BY cluster_id").fetchall()
+_con.close()
 CLUSTER_LABELS = {
-    0: "Site features\n& About",
-    1: "Style &\ndark mode",
-    2: "Benchmark\n& ML report",
-    3: "Project identity\n& links",
-    4: "WCAG fixes",
-    5: "Links &\nmerges",
+    int(cid): _cluster_label(", ".join(tm) if isinstance(tm, (list, tuple)) else str(tm))
+    for cid, tm in _cc
 }
 labels_pretty = [CLUSTER_LABELS.get(i, f"C{i}") for i in range(num_classes)]
 

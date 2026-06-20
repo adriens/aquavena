@@ -29,7 +29,7 @@
   "lift_over_baseline": 0.6486486434131056,
   "best_confused_pair": {
     "true": "Site features & About",
-    "predicted": "WCAG fixes",
+    "predicted": "Dependencies & chore",
     "count": 1
   },
   "per_class_recall": [
@@ -39,27 +39,27 @@
       "support": 8
     },
     {
-      "cluster": "Style & dark mode",
+      "cluster": "Benchmark & ML report",
       "recall": 0.9090909090909091,
       "support": 11
     },
     {
-      "cluster": "Benchmark & ML report",
+      "cluster": "Fixes (a11y / CSP)",
       "recall": 0.8571428571428571,
       "support": 7
     },
     {
-      "cluster": "Project identity & links",
+      "cluster": "Pull requests & merges",
       "recall": 1.0,
       "support": 5
     },
     {
-      "cluster": "WCAG fixes",
+      "cluster": "Dependencies & chore",
       "recall": 1.0,
       "support": 4
     },
     {
-      "cluster": "Links & merges",
+      "cluster": "UX & navigation",
       "recall": 0.5,
       "support": 2
     }
