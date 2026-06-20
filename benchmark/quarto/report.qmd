@@ -3643,6 +3643,36 @@ constraint-based causal-discovery algorithm — **agree on the same cost
 drivers**. That convergence is the strongest evidence that the relationship
 is real, not an artefact of either method.
 
+### From prediction to decisions — what this buys a CIO
+
+A predictable AI cost turns assistant spend from an **opaque variable** into a
+**governable line item** — the same shift FinOps brought to the cloud. Five
+concrete levers:
+
+- **Forecasting (FinOps for AI-assisted dev).** If a commit's cost is
+  predictable, the AI cost of a sprint or epic can be **estimated before it is
+  committed to** — budgets instead of surprise invoices.
+- **Model routing = direct savings.** Estimate a change's cost up front, then
+  route it: peripheral/cheap work to a smaller model (Sonnet/Haiku) or a junior;
+  central/expensive work to a premium model (Opus) with senior review. **Stop
+  paying premium rates for trivial changes.**
+- **A refactoring target.** Cost concentrates on **central** commits, so the
+  architecturally central code is where AI spend (and rework) accrues. The map
+  shows *where to decouple* to lower future cost — cost becomes an architectural
+  lever, not just an accounting one.
+- **Overrun & friction detection.** A commit that costs far more than its graph
+  position predicts is an **early-warning flag**: a task that is struggling, a
+  poorly-scoped change, or a risky area — caught before the budget is.
+- **Governance & accountability.** Every token is tied to a commit, so AI spend
+  becomes **auditable and attributable** — a data answer to the board question
+  *"what are we getting for our AI bill?"*
+
+**Bottom line for a CIO.** This is not a research curiosity: it is evidence that
+the AI cost of software delivery can be **forecast, routed, governed and
+optimised** rather than merely absorbed. The figures here are a proof of concept
+on a single repository, but the **method is repository-agnostic** — it transfers
+to any codebase with a commit history and an AI-assistant token log.
+
 ### Causal DAG discovery — from correlation to structure
 
 **The previous section measured *the effect of one intervention*. This
