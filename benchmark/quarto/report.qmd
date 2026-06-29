@@ -4909,7 +4909,7 @@ parts of New Caledonia — do not block access to the weekly menus.
 ```{r stack-table}
 stack <- tibble::tribble(
   ~Layer,          ~Technology,          ~Role,
-  "Framework",     "Astro 4",            "Static site generator — zero JS by default",
+  "Framework",     "Astro 6",            "Static site generator — zero JS by default",
   "Styling",       "Tailwind CSS 3",     "Utility-first CSS, WCAG-compliant colour palette",
   "Typography",    "Atkinson Hyperlegible","Typeface designed for low vision",
   "Icons",         "Font Awesome 6",     "Accessible SVG icons with aria-labels",
@@ -4944,7 +4944,7 @@ nodes <- tibble::tibble(
   x      = c(0.8, 2.45, 4.10, 5.75, 7.40),
   y      = 0,
   type   = c("SOURCE", "TOOL", "ARTIFACT", "TOOL", "TARGET"),
-  title  = c("aquavena.nc", "Python SDK", "menus.json", "Astro 4", "GitHub Pages"),
+  title  = c("aquavena.nc", "Python SDK", "menus.json", "Astro 6", "GitHub Pages"),
   sub    = c("external website",
              "fetch_data.py",
              "JSON · weekly menus",
