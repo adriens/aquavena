@@ -9,6 +9,12 @@ on:
       - 'tests/**'
       - 'src/**'
       - '*.md'
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - 'tests/**'
+      - 'src/**'
+      - '*.md'
   workflow_dispatch:
 
 permissions:
@@ -17,7 +23,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.event_name == 'pull_request' && github.ref || 'deploy' }}
   cancel-in-progress: false
 
 jobs:
@@ -45,12 +51,22 @@ jobs:
         run: bun run build
         working-directory: site
 
+      - name: Install Chrome for pa11y
+        run: node node_modules/puppeteer/install.mjs
+        working-directory: site
+
+      - name: Accessibility audit (pa11y, WCAG2AA)
+        run: bun run a11y
+        working-directory: site
+
       - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
         with:
           path: site/dist
 
   deploy:
     needs: build
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
