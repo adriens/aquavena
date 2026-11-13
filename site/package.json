@@ -7,7 +7,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "a11y": "bunx serve dist -p 4321 & SERVER_PID=$!; sleep 3 && pa11y-ci --config .pa11yci.json; kill $SERVER_PID",
+    "a11y": "astro preview --port 4321 & sleep 3 && pa11y-ci --config .pa11yci.json; STATUS=$?; astro preview stop; exit $STATUS",
     "report": "bun run build && node report.mjs"
   },
   "dependencies": {
